@@ -1,0 +1,48 @@
+
+GESTIONE MEMORIA EXECVE
+https://stackoverflow.com/questions/5429141/what-happens-to-malloced-memory-after-exec-changes-the-program-image
+
+DUP2
+https://stackoverflow.com/questions/8516823/redirecting-output-to-a-file-in-c
+
+DISPENSE
+https://www.dmi.unict.it/pappalardo/os2/pipe.pdf
+http://wpage.unina.it/alberto.finzi/didattica/LSO/materiale/processiUnix3.pdf
+
+EXECVE
+https://pubs.opengroup.org/onlinepubs/9699919799/functions/exec.html
+http://www.qnx.com/developers/docs/6.5.0/index.jsp?topic=%2Fcom.qnx.doc.neutrino_lib_ref%2Fe%2Fexecve.html	
+https://stackoverflow.com/questions/19147386/system-call-fork-and-execv-function/19151751
+https://it.wikipedia.org/wiki/Exec_(Unix)
+https://jameshfisher.com/2017/02/06/how-do-i-use-fork-in-c/
+https://jameshfisher.com/2017/02/05/how-do-i-use-execve-in-c/
+https://linux.die.net/man/2/execve
+
+REDIRECT BASH
+https://www.baeldung.com/linux/pipes-redirection
+REDIRECT ST ERROR
+https://askubuntu.com/questions/625224/how-to-redirect-stderr-to-a-file
+
+
+https://unix.stackexchange.com/questions/68523/find-and-remove-large-files-that-are-open-but-have-been-deleted
+
+https://www.gnu.org/software/libc/manual/html_node/Permission-Bits.html
+
+PERROR:
+https://en.cppreference.com/w/c/io/perror
+LISTA ERRNO
+https://unix.stackexchange.com/questions/326766/what-are-the-standard-error-codes-in-linux
+
+
+FIND LEAKS BY VALGRIND:
+gcc pipex.c -o pipex -L./libft -lft -lfreetype
+valgrind --leak-check=full --show-leak-kinds=all ./pipex ../ "ls -l"
+
+VALGRIND WITH CHILDREN PROCESS	--trace-children=yes
+VALGRIND OUTPUT IN FILE			--log-file="valgrind"
+VALGRIND WITH FDS				--track-fds=yes
+
+valgrind --leak-check=full --trace-children=yes --show-leak-kinds=all --log-file="valgrind" ./pipex pipex.c "grep p" "wc -l" outfile
+
+REDIRECT VALGRIND
+https://stackoverflow.com/questions/8355979/how-to-redirect-valgrinds-output-to-a-file
