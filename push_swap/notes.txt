@@ -1,0 +1,76 @@
+
+ESEMPI DI USO E COMPILAZIONE:
+$>ARG="4 67 3 87 23"; ./push_swap $ARG | wc -l
+$>ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker_Mac $ARG
+make re bonus && make clean && clear && ARG=$(./rand 500); ./push_swap $ARG | ./checker_linux $ARG && ./push_swap $ARG | wc -l && ./push_swap $ARG | ./checker $ARG && ./push_swap $ARG | wc -l
+
+SUBSEQUENCE
+https://www.youtube.com/watch?v=Crk2Y46o6pY
+
+RANDOM FROM SHELL
+ARG=$( jot -r 100 -999 9999 )   RANDOM NUMB
+
+LEAKS CONTROL
+leaks -atExit -- ./a.out
+
+MODALITA' DI LAVORO VISIVA:
+git clone branch "HOW IT WORKS" 
+
+CASO 3 ELEMENTI: 
+___SORT 3 ELEM:
+a. 2 4 6		IF A1 < A2 && A1 < A3 && A2 < A3	--> OK
+b. 2 6 4		IF A1 < A2 && A1 < A3 && A2 > A3	--> RRA SA o SA RA
+c. 4 2 6		IF A1 > A2 && A1 < A3 && A2 < A3	--> SA
+d. 4 6 2		IF A1 < A2 && A1 > A3 && A2 > A3	--> RRA
+e. 6 2 4		IF A1 > A2 && A1 > A3 && A2 < A3	--> RA
+f. 6 4 2		IF A1 > A2 && A1 > A3 && A2 > A3	--> SA RRA
+
+CASO 5 ELEMENTI:
+___SORT 5 ELEM:
+CASO ESEMPIO: 
+	A{25 20 50 40 30} B{}
+
+____INIZIO MOSSE GENERALI, VALIDE PER TUTTE LE SEQUENZE:________
+|a. PB PB														|
+|	A{50 40 30} B{20 25}										|
+| 																|
+|b. IL SORT 3 ELEM NELLA STACK A								|
+|	A{30 40 50} B{20 25}										|
+|																|
+|c. IL MAGGIORE PRIMA DEL MINORE NELLA STACK B					|
+|	IF(B1 < B2)													|
+|		{SB}													|
+|	A{30 40 50} B{25 20}										|
+|____FINE MOSSE GENERALI________________________________________|
+
+TEST CASI:
+d. 25 20 30 40 50 -> A{30 40 50} B{25 20} 
+	IF B1 < A1
+		{PA PA}					
+e. 35 20 30 40 50 -> A{30 40 50} B{35 20}
+	IF B1 > A1 && B1 < A2 && B2 < A1
+		{RA PA RRA PA}			
+f. 35 30 20 40 50 
+	IF B1 > A1 && B1 < A2 && B2 > A1
+		{RA PA PA RRA}			
+g. 45 20 30 40 50
+	IF B1 > A2 && B1 < A3 && B2 < A1
+		{RA RA PA RRA RRA PA}	
+h. 45 30 20 40 50
+	IF B1 > A2 && B1 < A3 && B2 > A1 && B2 < A2
+		{RA RA PA RRA PA RRA}
+i. 45 40 20 30 50
+	IF B1 > A2 && B1 < A3 && B2 > A2
+		{RA RA PA PA RRA RRA}
+l. 50 20 30 40 45
+	IF B1 > A3 && B2 < A1
+		{PA RA PA}
+m. 50 35 30 40 45
+	IF B1 > A3 && B2 > A1 && B2 < A2
+		{PA RA RA PA RRA}
+n. 50 40 30 35 45
+	IF B1 > A3 && B2 > A2 && B2 < A3
+		{PA RRA PA RA RA RA}
+o. 50 45 30 35 40
+	IF B1 > A3 && B2 > A3
+		{PA PA RA RA}
