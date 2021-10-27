@@ -6,12 +6,18 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 16:38:56 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 22:02:45 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/10/27 22:34:54 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 #define UTILS_H
+
+namespace ft
+{
+  typedef unsigned long int 	size_t;
+  typedef long int				ptrdiff_t;
+};
 
 //VECTOR////////////////////////////////////////// RIGA 457 -> ITERATOR /////////
 template <class _Tp>

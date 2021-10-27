@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:26:14 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 19:18:41 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/10/27 22:35:30 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 int main()
 {
-	// vectorTest< std::vector<int> >();
+	vectorTest< std::vector<int> >();
 	stackTest< std::stack<int, std::vector<int> > > ();
 
 	return 0;

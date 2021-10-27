@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 21:50:00 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/10/27 22:37:10 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,29 @@
 #include <stdexcept>
 #include "utils.hpp"
 
+
 namespace ft
-{
+{		//										|											|
 template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<std::pair<const Key,T> > > 
 class map
 {
 public:
-	typedef Key										key_type;		//THE TYPE OF THE KEY
-	typedef T										mapped_type;	//THE TYPE OF THE VALUES
-	typedef ft::pair<const key_type,mapped_type>	value_type;	
-	typedef Compare									key_compare;
-	//value_compare					Nested function class to compare elements													see value_comp
-	typedef Alloc									allocator_type;
-	typedef typename allocator_type::reference				reference;
-	typedef typename allocator_type::const_reference			const_reference;
-	typedef typename allocator_type::pointer					pointer;
-	typedef typename allocator_type::const_pointer			const_pointer;
-	//iterator						a bidirectional iterator to value_type														convertible to const_iterator
-	//const_iterator				a bidirectional iterator to const value_type	
-	//reverse_iterator				reverse_iterator<iterator>	
-	//const_reverse_iterator		reverse_iterator<const_iterator>	
-	//difference_type				a signed integral type, identical to: iterator_traits<iterator>::difference_type			usually the same as ptrdiff_t
-	//size_type						an unsigned integral type that can represent any non-negative value of difference_type		usually the same as size_t
+	typedef Key											key_type;		//THE TYPE OF THE KEY
+	typedef T											mapped_type;	//THE TYPE OF THE VALUES
+	typedef ft::pair<const key_type,mapped_type>		value_type;	
+	typedef Compare										key_compare;
+	// typedef ...										value_compare;
+	typedef Alloc										allocator_type;
+	typedef typename allocator_type::reference			reference;
+	typedef typename allocator_type::const_reference	const_reference;
+	typedef typename allocator_type::pointer			pointer;
+	typedef typename allocator_type::const_pointer		const_pointer;
+	//iterator											a bidirectional iterator to value_type														convertible to const_iterator
+	//const_iterator									a bidirectional iterator to const value_type	
+	//reverse_iterator									reverse_iterator<iterator>	
+	//const_reverse_iterator							reverse_iterator<const_iterator>	
+    typedef typename allocator_type::difference_type	difference_type;
+    typedef typename allocator_type::size_type		   	size_type;
 private:
 	allocator_type	_allocator;
 public:
@@ -94,5 +95,22 @@ public:
 	
 };
 };
+
+// template <class Key, class T, class Compare, class Alloc>
+// class ft::map<Key,T,Compare,Alloc>::value_compare
+// {
+//   friend class ft::map;
+// protected:
+//   Compare comp;
+//   value_compare (Compare c) : comp(c) {}
+// public:
+//   typedef bool result_type;
+//   typedef value_type first_argument_type;
+//   typedef value_type second_argument_type;
+//   bool operator() (const value_type& x, const value_type& y) const
+//   {
+//     return comp(x.first, y.first);
+//   }
+// };
 
 #endif
