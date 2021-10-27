@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 16:28:06 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 19:16:22 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/10/27 22:55:35 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ public:
     typedef typename allocator_type::difference_type		difference_type;
     typedef typename allocator_type::pointer				pointer;
     typedef typename allocator_type::const_pointer	    	const_pointer;
-	typedef myIterator<myRandom_access_iterator_tag, T >	iterator;
-	typedef myIterator<myRandom_access_iterator_tag, T >	const_iterator;
-	typedef	myRevIterator<iterator>							reverse_iterator;	
-	typedef	myRevIterator<const_iterator>					const_reverse_iterator;
+	typedef iterator<myRandom_access_iterator_tag, T >		const_iterator;
+	typedef iterator<myRandom_access_iterator_tag, T >		iterator;
+	typedef	reverse_iterator<const_iterator>				const_reverse_iterator;
+	typedef	reverse_iterator<iterator>						reverse_iterator;	
 private:
 	allocator_type	_allocator;
 	pointer			_data;
