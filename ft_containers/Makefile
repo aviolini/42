@@ -6,7 +6,7 @@
 #    By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 09:43:32 by aviolini          #+#    #+#              #
-#    Updated: 2021/10/22 14:05:08 by aviolini         ###   ########.fr        #
+#    Updated: 2021/10/27 08:28:44 by aviolini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,8 +71,9 @@ time		:	all
 				@echo "\033[1;33m\n_FT_TIME\033[0m"
 				time ./ftTest > /dev/null
 
-allall		:	re all clean test log time
-
+allall		:	cl re all clean test log time
+				$(RM) $(FTOBJS) $(STLOBJS)
+				$(RM) ftLog stlLog
 #CLEAN
 clean		:	
 				$(RM) $(FTOBJS) $(STLOBJS)
@@ -82,6 +83,9 @@ cleanft		:
 
 cleanstl	:
 				$(RM) $(STLOBJS)
+
+cl			:	
+				clear
 
 #FCLEAN
 fclean		:	clean
