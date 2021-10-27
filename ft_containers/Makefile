@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+         #
+#    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 09:43:32 by aviolini          #+#    #+#              #
-#    Updated: 2021/10/27 15:01:18 by aviolini         ###   ########.fr        #
+#    Updated: 2021/10/27 19:19:34 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ log			:	all
 				./ftTest > ftLog
 				./stlTest > stlLog
 				@echo "\033[1;34m\n_DIFF_\033[0m"
-				diff ftLog stllog
+				diff ftLog stlLog && echo "SUCCESS DIFF" || echo "ERROR DIFF"
 
 #TIME
 time		:	all

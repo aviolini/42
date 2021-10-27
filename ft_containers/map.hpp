@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 16:27:49 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/10/27 19:17:04 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ template < class Key, class T, class Compare = std::less<Key>, class Alloc = std
 class map
 {
 public:
-	typedef Key										key_type;
-	typedef T										mapped_type;
-	typedef std::pair<const key_type,mapped_type>	value_type;
+	typedef Key										key_type;		//THE TYPE OF THE KEY
+	typedef T										mapped_type;	//THE TYPE OF THE VALUES
+	typedef std::pair<const key_type,mapped_type>	value_type;	
 	typedef Compare									key_compare;
 	//value_compare					Nested function class to compare elements													see value_comp
 	typedef Alloc									allocator_type;
@@ -42,7 +42,7 @@ public:
 	//difference_type				a signed integral type, identical to: iterator_traits<iterator>::difference_type			usually the same as ptrdiff_t
 	//size_type						an unsigned integral type that can represent any non-negative value of difference_type		usually the same as size_t
 private:
-
+	allocator_type	_allocator;
 public:
 	/*CANONICAL-----------------------------------------------------------------------------------*/
 	// explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());										//EMPTY

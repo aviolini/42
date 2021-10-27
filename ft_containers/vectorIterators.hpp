@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectorIterators.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 10:44:33 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/22 12:39:39 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/10/27 19:15:55 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ public:
 protected:
 	pointer _data;
 public:	
-/*CANONICAL-----------------------------------------------------------------------------------*/		
+	/*CANONICAL-----------------------------------------------------------------------------------*/		
 	myIterator () : _data(0){}
 	myIterator (pointer initLoc) : _data(initLoc){}
 	virtual ~myIterator(){}

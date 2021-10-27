@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 16:28:06 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/22 12:42:23 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/10/27 19:16:22 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ public:
 	explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
 	: _allocator(alloc), _data(this->_allocator.allocate(n)), _size(n), _capacity(n)
 	{
-		// std::cout << "FILL CONSTRUCTOR" << std::endl;		//COMMENT
 		if (n >= this->max_size())
 			throw std::out_of_range("Error");
 		for (size_type i = 0; i < (n); i++)
@@ -60,7 +59,6 @@ public:
     vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type() ,typename myEnable_if<myHas_iterator_category<InputIterator>::value, T>::type = 0)
 	: _allocator(alloc), _data(this->_allocator.allocate(last - first))
 	{
-		// std::cout << "RANGE CONSTRUCTOR" << std::endl;		//COMMENT
 		InputIterator it = first;
 		InputIterator my = this->_data;
 		for (; it != last; ++it, ++my)
@@ -70,7 +68,6 @@ public:
 	}
 	vector (const vector& x) : _allocator(allocator_type()), _size(x.size()), _capacity(x.size())
 	{
-		// std::cout << "COPY CONSTRUCTOR" << std::endl;		//COMMENT
 		this->_data = this->_allocator.allocate(this->capacity());
 		ft::vector<T,A>::const_iterator it = x.begin();
 		iterator my = this->_data;
@@ -79,14 +76,12 @@ public:
 	}
 	~vector()
 	{
-		// std::cout << "DESTRUCTOR" << std::endl;		//COMMENT
 		this->_allocator.deallocate(this->_data, this->capacity());
 		this->_allocator.destroy(this->_data);
 		this->_data = 0;
 	}
 	vector& operator= (const vector& x)
 	{
-		// std::cout << "ASSIGNMENT OPERATOR" << std::endl;		//COMMENT
 		if (this->capacity() < x.capacity())
 		{
 			this->_allocator.deallocate(this->_data, this->capacity());
