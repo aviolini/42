@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 12:46:50 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 10:02:01 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/10/27 10:18:03 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,13 @@ protected:
 	container_type c;
 public:	
 	/*CANONICAL-----------------------------------------------------------------------------------*/
-	stack() : c(0){}
+	explicit stack (const container_type& ctnr = container_type()) : c(ctnr){}
 	stack(const stack& rhs) : c(rhs.c){}
 	stack& operator=(const stack& rhs)
 	{
 		c = rhs.c;
 		return *this;
 	}
-	explicit stack (const container_type& ctnr = container_type()) : c(ctnr){}
 	~stack(){}
 	bool empty() const						//EMPTY VECTOR
 	{

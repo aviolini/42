@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:03:25 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 10:02:44 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/10/27 10:18:25 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,13 @@ void printStack(S &s)
 template<typename S>
 void stackTest()
 {
-	// S data1;
+	S data1;
+	std::cout << data1.empty() << std::endl;
+	data1.push(1);
+	data1.push(2);
+	std::cout << data1.size() << std::endl;
+	std::cout << data1.empty() << std::endl;
+	printStack<S>(data1);
 	typename S::container_type container;
 	S data2(container);
 	printStack< S >(data2);
@@ -56,5 +62,10 @@ void stackTest()
 	data2.push(7);
 	data2.push(8);
 	printStack< S >(data2);
+	std::cout << data2.size() << std::endl;
 	std::cout << data2.top() << std::endl;
+	data2.pop();
+	printStack< S >(data2);
+	
+	// std::cout << (data1 > data2) << std::endl;
 }
