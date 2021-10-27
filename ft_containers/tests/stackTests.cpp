@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:03:25 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 10:18:25 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/10/27 10:34:32 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,11 @@ void stackTest()
 	data2.pop();
 	printStack< S >(data2);
 	
+	// std::cout << (data1 == data2) << std::endl;
+	// std::cout << (data1 != data2) << std::endl;
+	// std::cout << (data1 < data2) << std::endl;
+	// std::cout << (data1 <= data2) << std::endl;
 	// std::cout << (data1 > data2) << std::endl;
+	// std::cout << (data1 >= data2) << std::endl;
+
 }
