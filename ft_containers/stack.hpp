@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 12:46:50 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 10:34:49 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/10/27 10:47:53 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,17 @@ public:
 		c.pop_back(); 
 	}
 	// // template <class X, class Y>
-	// friend bool operator== (const stack<X,Y>& lhs, const stack<X,Y>& rhs);
+	// friend bool operator== (const stack<T,C>& lhs, const stack<T,C>& rhs);
 	// // template <class X, class Y>
-	// friend bool operator!= (const stack<X,Y>& lhs, const stack<X,Y>& rhs);
+	// friend bool operator!= (const stack<T,C>& lhs, const stack<T,C>& rhs);
 	// // template <class X, class Y>
-	// friend bool operator<  (const stack<X,Y>& lhs, const stack<X,Y>& rhs);
+	// friend bool operator<  (const stack<T,C>& lhs, const stack<T,C>& rhs);
 	// // template <class X, class Y>
-	// friend bool operator<= (const stack<X,Y>& lhs, const stack<X,Y>& rhs);
+	// friend bool operator<= (const stack<T,C>& lhs, const stack<T,C>& rhs);
 	// // template <class X, class Y>
-	// friend bool operator>  (const stack<X,Y>& lhs, const stack<X,Y>& rhs);
+	// friend bool operator>  (const stack<T,C>& lhs, const stack<T,C>& rhs);
 	// // template <class X, class Y>
-	// friend bool operator>= (const stack<X,Y>& lhs, const stack<X,Y>& rhs);
+	// friend bool operator>= (const stack<T,C>& lhs, const stack<T,C>& rhs);
 
 };
 };
@@ -82,7 +82,7 @@ public:
 template <class T, class C>
 bool operator== (const ft::stack<T,C>& lhs, const ft::stack<T,C>& rhs)
 {
-	std::cout << "CIAO" << std::endl;
+	std::cout << "CIAO IN ==" << std::endl;
 	return lhs.c == rhs.c;
 }
 template <class T, class C>
