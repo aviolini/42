@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 15:52:03 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/10/27 16:27:49 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,7 @@
 #include <limits>
 #include <stdexcept>
 #include "utils.hpp"
-// #include <utility>
 
-// template < class Key,                                     // map::key_type
-//            class T,                                       // map::mapped_type
-//            class Compare = less<Key>,                     // map::key_compare
-//            class Alloc = allocator<pair<const Key,T> >    // map::allocator_type
-//            > class map
 namespace ft
 {
 template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<std::pair<const Key,T> > > 

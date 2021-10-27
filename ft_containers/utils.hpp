@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 16:38:56 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 15:53:26 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/10/27 16:27:21 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,26 +50,23 @@ public:
 	myPair& operator= (const myPair& pr);
 	~myPair();	
 };
-
 template <class T1, class T2>
-  bool operator== (const myPair<T1,T2>& lhs, const myPair<T1,T2>& rhs);
+bool operator== (const myPair<T1,T2>& lhs, const myPair<T1,T2>& rhs);
 template <class T1, class T2>
-  bool operator!= (const myPair<T1,T2>& lhs, const myPair<T1,T2>& rhs);
+bool operator!= (const myPair<T1,T2>& lhs, const myPair<T1,T2>& rhs);
 template <class T1, class T2>
-  bool operator<  (const myPair<T1,T2>& lhs, const myPair<T1,T2>& rhs);
+bool operator<  (const myPair<T1,T2>& lhs, const myPair<T1,T2>& rhs);
 template <class T1, class T2>
-  bool operator<= (const myPair<T1,T2>& lhs, const myPair<T1,T2>& rhs);
+bool operator<= (const myPair<T1,T2>& lhs, const myPair<T1,T2>& rhs);
 template <class T1, class T2>
-  bool operator>  (const myPair<T1,T2>& lhs, const myPair<T1,T2>& rhs);
+bool operator>  (const myPair<T1,T2>& lhs, const myPair<T1,T2>& rhs);
 template <class T1, class T2>
-  bool operator>= (const myPair<T1,T2>& lhs, const myPair<T1,T2>& rhs);
-
+bool operator>= (const myPair<T1,T2>& lhs, const myPair<T1,T2>& rhs);
 ///////////////////////////////////////////////////////////////////////////////
 template <class T1, class T2>
 myPair<T1,T2> myMake_pair (T1 x, T2 y)
 {
-	(void)x;
-	(void)y;
+	return ( myPair<T1,T2>(x,y) );
 }
 /////////////////////////////////////////////////////////////////////////////////
 
