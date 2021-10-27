@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 22:37:10 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/10/27 23:23:58 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 #include <iostream>
 #include <limits>
 #include <stdexcept>
-#include "utils.hpp"
+#include "./utils.hpp"
+#include "./mapIterators.hpp"
 
 
 namespace ft
@@ -26,22 +27,22 @@ template < class Key, class T, class Compare = std::less<Key>, class Alloc = std
 class map
 {
 public:
-	typedef Key											key_type;		//THE TYPE OF THE KEY
-	typedef T											mapped_type;	//THE TYPE OF THE VALUES
-	typedef ft::pair<const key_type,mapped_type>		value_type;	
-	typedef Compare										key_compare;
-	// typedef ...										value_compare;
-	typedef Alloc										allocator_type;
-	typedef typename allocator_type::reference			reference;
-	typedef typename allocator_type::const_reference	const_reference;
-	typedef typename allocator_type::pointer			pointer;
-	typedef typename allocator_type::const_pointer		const_pointer;
-	//iterator											a bidirectional iterator to value_type														convertible to const_iterator
-	//const_iterator									a bidirectional iterator to const value_type	
-	//reverse_iterator									reverse_iterator<iterator>	
-	//const_reverse_iterator							reverse_iterator<const_iterator>	
-    typedef typename allocator_type::difference_type	difference_type;
-    typedef typename allocator_type::size_type		   	size_type;
+	typedef Key													key_type;		//THE TYPE OF THE KEY
+	typedef T													mapped_type;	//THE TYPE OF THE VALUES
+	typedef ft::pair<const key_type,mapped_type>				value_type;	
+	typedef Compare												key_compare;
+	// typedef ...												value_compare;
+	typedef Alloc												allocator_type;
+	typedef typename allocator_type::reference					reference;
+	typedef typename allocator_type::const_reference			const_reference;
+	typedef typename allocator_type::pointer					pointer;
+	typedef typename allocator_type::const_pointer				const_pointer;
+    typedef typename allocator_type::difference_type			difference_type;
+    typedef typename allocator_type::size_type		   			size_type;
+	typedef mapIterator< myBidirectional_iterator_tag, T > 		const_iterator;
+	typedef mapIterator< myBidirectional_iterator_tag, T > 		iterator;
+	typedef mapReverse_iterator<const_iterator> 				const_reverse_iterator;
+	typedef mapReverse_iterator<iterator> 						reverse_iterator;
 private:
 	allocator_type	_allocator;
 public:

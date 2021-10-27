@@ -6,12 +6,18 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 16:38:56 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 22:34:54 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/10/27 22:59:59 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 #define UTILS_H
+
+struct myInput_iterator_tag {};
+struct myOutput_iterator_tag {};
+struct myForward_iterator_tag       : public myInput_iterator_tag {};
+struct myBidirectional_iterator_tag : public myForward_iterator_tag {};
+struct myRandom_access_iterator_tag : public myBidirectional_iterator_tag {};
 
 namespace ft
 {

@@ -6,7 +6,7 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 09:43:32 by aviolini          #+#    #+#              #
-#    Updated: 2021/10/27 19:19:34 by arrigo           ###   ########.fr        #
+#    Updated: 2021/10/27 23:15:55 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ STLNAME		=	stlTest
 	
 FTSRCS		=	mainFT.cpp vectorTests.cpp stackTests.cpp
 	
-FTINC		=	vector.hpp vectorIterators.hpp stack.hpp utils.hpp map.hpp
+FTINC		=	vector.hpp vectorIterators.hpp stack.hpp utils.hpp map.hpp mapIterators.hpp
 	
 STLSRCS		=	mainSTL.cpp vectorTests.cpp stackTests.cpp mapTests.cpp
 	

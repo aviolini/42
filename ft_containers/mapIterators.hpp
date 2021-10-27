@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/27 22:30:00 by arrigo            #+#    #+#             */
-/*   Updated: 2021/10/27 22:30:11 by arrigo           ###   ########.fr       */
+/*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
+/*   Updated: 2021/10/27 23:17:16 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,8 @@
 
 #include "utils.hpp"
 
-struct myInput_iterator_tag {};
-struct myOutput_iterator_tag {};
-struct myForward_iterator_tag       : public myInput_iterator_tag {};
-struct myBidirectional_iterator_tag : public myForward_iterator_tag {};
-struct myRandom_access_iterator_tag : public myBidirectional_iterator_tag {};
-
-template <class Category, class T, class Distance = std::ptrdiff_t, class Pointer = T*, class Reference = T&>
-class myIterator
+template <class Category, class T, class Distance = ft::ptrdiff_t, class Pointer = T*, class Reference = T&>
+class mapIterator
 {
 public:
 	typedef T					value_type;
@@ -34,170 +28,61 @@ protected:
 	pointer _data;
 public:	
 	/*CANONICAL-----------------------------------------------------------------------------------*/		
-	myIterator () : _data(0){}
-	myIterator (pointer initLoc) : _data(initLoc){}
-	virtual ~myIterator(){}
-	myIterator(myIterator const & rhs) : _data(rhs._data){}
-	myIterator operator = (const myIterator & rhs)
-	{
-		this->_data = rhs._data;
-		return *this;
-	}	
+	mapIterator ();
+	mapIterator (pointer initLoc);
+	virtual ~mapIterator();
+	mapIterator(mapIterator const & rhs);
+	mapIterator operator = (const mapIterator & rhs);
 	/*MEMBER OPERATORS--------------------------------------------------*/
-	reference operator *()
-	{
-		return *this->_data;
-	}
-	myIterator operator + ( const difference_type &n ) const
-	{
-		myIterator obj(this->_data + n);
-		return obj;
-	}
-	myIterator &operator ++()				//PREFIX
-	{
-		this->_data++;
-		return *this;
-	}
-	myIterator operator ++(int)				//POSTFIX
-	{
-		myIterator temp = *this;
-		this->_data++;
-		return temp;
-	}
-	myIterator & operator += (difference_type n)
-	{
-		this->_data += n;
-		return *this;
-	}
-	myIterator operator - ( const difference_type &n ) const
-	{
-		myIterator obj(this->_data - n);
-		return obj;
-	}
-	difference_type operator - ( const myIterator &rhs) const
-	{
-		return this->_data - rhs._data;
-	}
-	myIterator &operator --()				//PREFIX
-	{
-		this->_data--;
-		return *this;
-	}
-	myIterator operator --(int)				//POSTFIX
-	{
-		myIterator temp = *this;
-		this->_data--;
-		return temp;
-	}
-	myIterator & operator -= (difference_type n)
-	{
-		this->_data -= n;
-		return *this;
-	}
-	pointer operator -> ()
-	{
-		return this->_data;
-	}
-	reference operator [] (int index)
-	{
-		return *(this->_data + index);
-	}
+	reference operator *();
+	mapIterator operator + ( const difference_type &n ) const;
+	mapIterator &operator ++();				//PREFIX
+	mapIterator operator ++(int);				//POSTFIX
+	mapIterator & operator += (difference_type n);
+	mapIterator operator - ( const difference_type &n ) const;
+	difference_type operator - ( const mapIterator &rhs) const;
+	mapIterator &operator --();				//PREFIX
+	mapIterator operator --(int);				//POSTFIX
+	mapIterator & operator -= (difference_type n);
+	pointer operator -> ();
+	reference operator [] (int index);
 	/*RELATIONAL OPERATORS--------------------------------------------------*/
-	bool operator == (const myIterator & rhs)
-	{
-		return this->_data == rhs._data;
-	}
-	bool operator != (const myIterator & rhs)
-	{
-		return !(this->_data == rhs._data);
-	}
-	bool operator > (const myIterator & rhs)
-	{
-		return (this->_data > rhs._data);
-	}
-	bool operator >= (const myIterator & rhs)
-	{
-		return (this->_data >= rhs._data);
-	}
-	bool operator < (const myIterator & rhs)
-	{
-		return (this->_data < rhs._data);
-	}
-	bool operator <= (const myIterator & rhs)
-	{
-		return (this->_data <= rhs._data);
-	}
+	bool operator == (const mapIterator & rhs);
+	bool operator != (const mapIterator & rhs);
+	bool operator > (const mapIterator & rhs);
+	bool operator >= (const mapIterator & rhs);
+	bool operator < (const mapIterator & rhs);
+	bool operator <= (const mapIterator & rhs);
 };
 
-template <class myIterator> 
-class myRevIterator : public myIterator
+template <class Iterator> 
+class mapReverse_iterator : public Iterator
 {
 public:
-	typedef myIterator									iterator_type;
+	typedef Iterator									iterator_type;
 	typedef typename iterator_type::value_type 			value_type;
 	typedef typename iterator_type::pointer				pointer;
 	typedef typename iterator_type::reference			reference;
 	typedef typename iterator_type::difference_type		difference_type;
 	typedef typename iterator_type::iterator_category	iterator_category;
 	/*CANONICAL-----------------------------------------------------------------------------------*/		
-	myRevIterator () : myIterator(0){}
-	explicit myRevIterator (iterator_type it) : myIterator(it - 1){}
+	mapReverse_iterator ();
+	explicit mapReverse_iterator (iterator_type it);
 	template <class Iter>
-  	myRevIterator (const myRevIterator<Iter>& rev_it,typename myEnable_if<myHas_iterator_category<Iter>::value, value_type>::type = 0)
-	{
-		this->_data = rev_it._data;
-	}
-	~myRevIterator(){}
-	myRevIterator(myRevIterator const & rhs)
-	{
-		this->_data = rhs._data;
-	}
-	myRevIterator operator = (const myRevIterator & rhs)
-	{
-		this->_data = rhs._data;
-		return *this;
-	}
+  	mapReverse_iterator (const mapReverse_iterator<Iter>& rev_it,typename myEnable_if<myHas_iterator_category<Iter>::value, value_type>::type = 0);
+	~mapReverse_iterator();
+	mapReverse_iterator(mapReverse_iterator const & rhs);
+	mapReverse_iterator operator = (const mapReverse_iterator & rhs);
 	/*MEMBER OPERATORS--------------------------------------------------*/
-	myRevIterator &operator ++()				//PREFIX
-	{
-		this->_data--;
-		return *this;
-	}
-	myRevIterator operator ++(int)				//POSTFIX
-	{
-		myRevIterator temp = *this;
-		this->_data--;
-		return temp;
-	}
-	myRevIterator &operator --()				//PREFIX
-	{
-		this->_data++;
-		return *this;
-	}
-	myRevIterator operator --(int)				//POSTFIX
-	{
-		myRevIterator temp = *this;
-		this->_data++;
-		return temp;
-	}
+	mapReverse_iterator &operator ++();				//PREFIX
+	mapReverse_iterator operator ++(int);				//POSTFIX
+	mapReverse_iterator &operator --();				//PREFIX
+	mapReverse_iterator operator --(int);				//POSTFIX
 	/*RELATIONAL OPERATORS--------------------------------------------------*/
-	bool operator > (const myRevIterator & rhs)
-	{
-		return (this->_data < rhs._data);
-	}
-	bool operator >= (const myRevIterator & rhs)
-	{
-		return (this->_data <= rhs._data);
-	}
-	bool operator < (const myRevIterator & rhs)
-	{
-		return (this->_data > rhs._data);
-	}
-	bool operator <= (const myRevIterator & rhs)
-	{
-		return (this->_data >= rhs._data);
-	}
+	bool operator > (const mapReverse_iterator & rhs);
+	bool operator >= (const mapReverse_iterator & rhs);
+	bool operator < (const mapReverse_iterator & rhs);
+	bool operator <= (const mapReverse_iterator & rhs);
 };
-
 
 #endif
