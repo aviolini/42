@@ -6,9 +6,11 @@
 #    By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 09:43:32 by aviolini          #+#    #+#              #
-#    Updated: 2021/10/27 08:28:44 by aviolini         ###   ########.fr        #
+#    Updated: 2021/10/27 08:41:21 by aviolini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+TESTDIR		= 	tests/
 
 FTNAME		=	ftTest
 	
@@ -30,10 +32,10 @@ CXXFLAGS	=	 -Wall -Wextra -Werror -std=c++98
 	
 RM			=	rm -rf
 
-$(FTNAME)	:	$(FTOBJS) $(FTINC) 
+$(FTNAME)	:	$(addprefix $(TESTDIR), $(FTOBJS)) $(FTINC)
 				$(CXX) $(CXXFLAGS) -o $(FTNAME) $(FTOBJS)
 
-$(STLNAME)	:	$(STLOBJS)
+$(STLNAME)	:	$(addprefix $(TESTDIR), $(STLOBJS))
 				$(CXX) $(CXXFLAGS) -o $(STLNAME) $(STLOBJS)
 
 %.o			:	%.cpp
