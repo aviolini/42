@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 19:17:04 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/10/27 21:50:00 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class map
 public:
 	typedef Key										key_type;		//THE TYPE OF THE KEY
 	typedef T										mapped_type;	//THE TYPE OF THE VALUES
-	typedef std::pair<const key_type,mapped_type>	value_type;	
+	typedef ft::pair<const key_type,mapped_type>	value_type;	
 	typedef Compare									key_compare;
 	//value_compare					Nested function class to compare elements													see value_comp
 	typedef Alloc									allocator_type;
