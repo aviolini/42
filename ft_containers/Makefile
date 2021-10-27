@@ -6,7 +6,7 @@
 #    By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 09:43:32 by aviolini          #+#    #+#              #
-#    Updated: 2021/10/27 08:44:12 by aviolini         ###   ########.fr        #
+#    Updated: 2021/10/27 15:01:18 by aviolini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,9 @@ STLNAME		=	stlTest
 	
 FTSRCS		=	mainFT.cpp vectorTests.cpp stackTests.cpp
 	
-FTINC		=	vector.hpp vectorIterators.hpp stack.hpp utils.hpp
+FTINC		=	vector.hpp vectorIterators.hpp stack.hpp utils.hpp map.hpp
 	
-STLSRCS		=	mainSTL.cpp vectorTests.cpp stackTests.cpp
+STLSRCS		=	mainSTL.cpp vectorTests.cpp stackTests.cpp mapTests.cpp
 	
 FTOBJS		=	$(FTSRCS:.cpp=.o)
 	
