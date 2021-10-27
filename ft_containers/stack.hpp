@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 12:46:50 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 10:47:53 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/10/27 13:13:04 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 namespace ft
 {
-template <class T, class C = ft::vector<T> > 
+template <class T, class C > 
 class stack
 {
 public:
@@ -27,6 +27,7 @@ public:
 	typedef typename C::const_reference	const_reference;
 	typedef typename C::size_type		size_type;
 protected:
+// public:
 	container_type c;
 public:	
 	/*CANONICAL-----------------------------------------------------------------------------------*/
@@ -62,53 +63,34 @@ public:
 	{
 		c.pop_back(); 
 	}
-	// // template <class X, class Y>
-	// friend bool operator== (const stack<T,C>& lhs, const stack<T,C>& rhs);
-	// // template <class X, class Y>
-	// friend bool operator!= (const stack<T,C>& lhs, const stack<T,C>& rhs);
-	// // template <class X, class Y>
-	// friend bool operator<  (const stack<T,C>& lhs, const stack<T,C>& rhs);
-	// // template <class X, class Y>
-	// friend bool operator<= (const stack<T,C>& lhs, const stack<T,C>& rhs);
-	// // template <class X, class Y>
-	// friend bool operator>  (const stack<T,C>& lhs, const stack<T,C>& rhs);
-	// // template <class X, class Y>
-	// friend bool operator>= (const stack<T,C>& lhs, const stack<T,C>& rhs);
-
-};
-};
 /*Non-member function overloads*/
 /*RELATIONAL OPERATOR--------------------------------------------------------------------*/
-template <class T, class C>
-bool operator== (const ft::stack<T,C>& lhs, const ft::stack<T,C>& rhs)
-{
-	std::cout << "CIAO IN ==" << std::endl;
-	return lhs.c == rhs.c;
-}
-template <class T, class C>
-bool operator!= (const ft::stack<T,C>& lhs, const ft::stack<T,C>& rhs)
-{
-	return lhs.c != rhs.c; 	  
-}
-template <class T, class C>
-bool operator<  (const ft::stack<T,C>& lhs, const ft::stack<T,C>& rhs)
-{
-	return lhs.c < rhs.c; 	  
-}
-template <class T, class C>
-bool operator<= (const ft::stack<T,C>& lhs, const ft::stack<T,C>& rhs)
-{
-	return lhs.c <= rhs.c;   
-}
-template <class T, class C>
-bool operator>  (const ft::stack<T,C>& lhs, const ft::stack<T,C>& rhs)
-{
-	return lhs.c > rhs.c; 	  
-}
-template <class T, class C>
-bool operator>= (const ft::stack<T,C>& lhs, const ft::stack<T,C>& rhs)
-{
-	return lhs.c >= rhs.c; 	  
+private:
+	friend bool operator== (const ft::stack< T, C >& lhs, const ft::stack< T, C >& rhs)
+	{
+		return lhs.c == rhs.c;
+	}
+	friend bool operator!= (const ft::stack< T, C >& lhs, const ft::stack< T, C >& rhs)
+	{
+		return lhs.c != rhs.c; 	  
+	}
+	friend bool operator<  (const ft::stack< T, C >& lhs, const ft::stack< T, C >& rhs)
+	{
+		return lhs.c < rhs.c; 	  
+	}
+	friend bool operator<= (const ft::stack< T, C >& lhs, const ft::stack< T, C >& rhs)
+	{
+		return lhs.c <= rhs.c;   
+	}
+	friend bool operator>  (const ft::stack< T, C >& lhs, const ft::stack< T, C >& rhs)
+	{
+		return lhs.c > rhs.c; 	  
+	}
+	friend bool operator>= (const ft::stack< T, C >& lhs, const ft::stack< T, C >& rhs)
+	{
+		return lhs.c >= rhs.c; 	  
+	}
+};
 }
 
 #endif
