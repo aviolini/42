@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   overallTests.cpp                                   :+:      :+:    :+:   */
+/*   vectorTests.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:27:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/22 14:03:54 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/10/28 16:28:36 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -545,6 +545,56 @@ void vectorTest()
 	typename C::const_reverse_iterator rcItB = test23.rbegin();
 	std::cout << *rcItB << std::endl;
 
+	// C test24;
+	// typename C::value_type arr[] = {1,2,3,4};
+	// test24.assign(arr, &arr[3]);
+	// printVec(test24);
+
+	// C test25;
+	// typename C::value_type *a = new typename C::value_type;
+	// *a = 5;
+	// typename C::value_type *b = new typename C::value_type;
+	// *b = 6;
+	// (void)b;
+	// typename C::value_type *c = new typename C::value_type;
+	// *c = 7;
+
+	// std::cout << "SIZE:" << (a - c) << std::endl;
+	// std::cout << "SIZE:" << (c - a) << std::endl;
+	// test25.assign(a, c);	
+	
+	// printVec(test25);
+
+	// std::cout << std::endl;	
+	// std::cout << "CHAR" << std::endl;
+
+	// C test26;
+	// char *d = new char;
+	// *d = '5';
+	// char *e = new char;
+	// *e = '6';
+	// (void)e;
+	// char *f = new char;
+	// *f = '7';
+
+	// test26.assign(d, f);	
+	// printVec(test26);
+
+	// std::cout << std::endl;	
+	// std::cout << "CHAR2" << std::endl;
+
+	// C test27;
+	// char g = '5';
+	// char h = '6';
+	// (void)h;
+	// char i = '7';
+
+	// test27.assign(&i, &g);	
+	
+	// printVec(test27);
+
+	std::cout << myIs_Pointer<char *>::value << std::endl;
+	
 	return ;
 }
 

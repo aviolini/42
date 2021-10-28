@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mainSTL.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:26:14 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 22:35:30 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/10/28 15:30:29 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <vector>
+#include "../vectorOR.hpp"
 #include <stack>
 #include <iostream>
 #include <string>
@@ -22,7 +22,7 @@
 int main()
 {
 	vectorTest< std::vector<int> >();
-	stackTest< std::stack<int, std::vector<int> > > ();
+	// stackTest< std::stack<int, std::vector<int> > > ();
 
 	return 0;
 }

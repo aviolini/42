@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
 	(void)argv;
 	
 	vectorTest< ft::vector<int> >();
-	stackTest< ft::stack<int, ft::vector<int> > > ();
+	// stackTest< ft::stack<int, ft::vector<int> > > ();
 
 
 	return (0);
