@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 16:28:06 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/29 15:58:15 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/10/29 16:23:10 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,27 @@ public:
 		for (size_type i = 0; i < (n); i++)
 			this->_data[i] = val;
 	}
-	template <class InputIterator>																				
-    vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type() ,typename myEnable_if<myHas_iterator_category<InputIterator>::value, T>::type = 0)
+	// template <class InputIterator>																		//<---|	
+    // vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type() ,		//|
+	// 		typename myEnable_if<myHas_iterator_category<InputIterator>::value, T>::type = 0)					//|
+	// : _allocator(alloc), _data(this->_allocator.allocate(last - first))										//|
+	// {																										//|
+	// 	InputIterator it = first;																				//|
+	// 	InputIterator my = this->_data;																			//|
+	// 	for (; it != last; ++it, ++my)																			//|
+	// 		*my = *it;																							//|
+	// 	this->_size = last - first;																				//|
+	// 	this->_capacity = this->size();																			//|
+	// }																										//|
+	template <class InputIterator>																				//|
+    vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type() ,			//|
+			// typename myEnable_if_false<myHas_iterator_category<InputIterator>::value, T>::type = 0,		//<---|
+			typename myEnable_if_false<myIs_integral<InputIterator>::value , T>::type = 0,
+			typename myEnable_if_false<myIs_floating_point<InputIterator>::value , T>::type = 0)
 	: _allocator(alloc), _data(this->_allocator.allocate(last - first))
 	{
+		if (last - first < 0)																								//|
+			throw std::length_error("vector");																				//|
 		InputIterator it = first;
 		InputIterator my = this->_data;
 		for (; it != last; ++it, ++my)

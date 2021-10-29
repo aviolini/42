@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:27:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/29 16:01:22 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/10/29 16:20:43 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -542,57 +542,66 @@ void vectorTest()
 	C test24;
 	typename C::value_type arr[] = {1,2,3,4};
 	
-	//ASSIGN
-	test24.assign(arr, &arr[3]);
-	printVec(test24);
+	//CONSTRUCTORS
+	std::cout << "CONSTRUCTOR" << std::endl;
+	C test32(arr, &arr[3]);
+	// C test32(&arr[3], arr);
 
-	C test25;
-	double a = 3;
-	double b = 4;
-	(void)b;
-	double c = 5;
-	test25.assign(a,c);
-	printVec(test25);
+	printVec(test32);
 
-	try
-	{
-		test25.assign(&a,&c);
-		printVec(test25);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	test25.assign(&c,&a);
-	printVec(test25);
+	// //ASSIGN
+	// std::cout << "ASSIGN" << std::endl;
+	// test24.assign(arr, &arr[3]);
+	// printVec(test24);
 
-	C test28(8,9);
-	printVec(test28);
-	C test29;
-	test29.assign(test28.begin(), test28.end());
-	printVec(test29);
+	// C test25;
+	// double a = 3;
+	// double b = 4;
+	// (void)b;
+	// double c = 5;
+	// test25.assign(a,c);
+	// printVec(test25);
 
-	C test30;
-	try
-	{
-		test30.assign(test28.end(), test28.begin());
-		printVec(test30);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
+	// try
+	// {
+	// 	test25.assign(&a,&c);
+	// 	printVec(test25);
+	// }
+	// catch(const std::exception& e)
+	// {
+	// 	std::cerr << e.what() << '\n';
+	// }
+	// test25.assign(&c,&a);
+	// printVec(test25);
 
-	//INSERT RANGE
-	typename C::pointer ptr = new typename C::value_type[4];
-	for (int i = 0; i < 4; ++i)
-		ptr[i] = i;
-	C test31;
-	printVec(test31);
-	test31.insert(test20.begin(), &ptr[3], &ptr[0]);
+	// C test28(8,9);
+	// printVec(test28);
+	// C test29;
+	// test29.assign(test28.begin(), test28.end());
+	// printVec(test29);
 
-	delete[] ptr;
-	printVec(test31);
+	// C test30;
+	// try
+	// {
+	// 	test30.assign(test28.end(), test28.begin());
+	// 	printVec(test30);
+	// }
+	// catch(const std::exception& e)
+	// {
+	// 	std::cerr << e.what() << '\n';
+	// }
+
+	// //INSERT RANGE
+	// std::cout << "INSERT" << std::endl;
+	// typename C::pointer ptr = new typename C::value_type[4];
+	// for (int i = 0; i < 4; ++i)
+	// 	ptr[i] = i;
+	// C test31;
+	// printVec(test31);
+	// test31.insert(test20.begin(), &ptr[3], &ptr[0]);
+
+	// delete[] ptr;
+	// printVec(test31);
 
 	
 	
