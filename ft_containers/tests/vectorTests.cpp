@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:27:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/29 09:46:42 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/10/29 11:01:09 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void vectorTest()
 	std::cout << "--------------DEFAULT CONSTRUCTOR" << std::endl;
 		C test1;											//DEFAULT
 		printVec(test1);
-	std::cout << "--------------FILL CONSTRUCTOR" << std::endl;					
+	std::cout << "--------------FILL CONSTRUCTOR" << std::endl;
 		C test2(10);										//FILL
 		printVec(test2);
 	std::cout << "--------------FILL CONSTRUCTOR" << std::endl;
@@ -538,44 +538,44 @@ void vectorTest()
 
 
 //////////////////////ARRAY IN A VECTOR/////////////////////////
-	// C test24;
-	// typename C::value_type arr[] = {1,2,3,4};
-	// test24.assign(arr, &arr[3]);
-	// printVec(test24);
+	C test24;
+	typename C::value_type arr[] = {1,2,3,4};
+	test24.assign(arr, &arr[3]);
+	printVec(test24);
 
-	// C test25;
-	// typename C::value_type *a = new typename C::value_type;
-	// *a = 5;
-	// typename C::value_type *b = new typename C::value_type;
-	// *b = 6;
-	// (void)b;
-	// typename C::value_type *c = new typename C::value_type;
-	// *c = 7;
-	// test25.assign(a, c);	
-	// printVec(test25);
+	C test25;
+	typename C::value_type *a = new typename C::value_type;
+	*a = 5;
+	typename C::value_type *b = new typename C::value_type;
+	*b = 6;
+	(void)b;
+	typename C::value_type *c = new typename C::value_type;
+	*c = 7;
+	test25.assign(a, c);	
+	printVec(test25);
 
-	// std::cout << std::endl;	
-	// std::cout << "CHAR" << std::endl;
-	// C test26;
-	// char *d = new char;
-	// *d = '5';
-	// char *e = new char;
-	// *e = '6';
-	// (void)e;
-	// char *f = new char;
-	// *f = '7';
-	// test26.assign(d, f);	
-	// printVec(test26);
+	std::cout << std::endl;	
+	std::cout << "CHAR" << std::endl;
+	C test26;
+	char *d = new char;
+	*d = '5';
+	char *e = new char;
+	*e = '6';
+	(void)e;
+	char *f = new char;
+	*f = '7';
+	test26.assign(d, f);	
+	printVec(test26);
 
-	// std::cout << std::endl;	
-	// std::cout << "CHAR2" << std::endl;
-	// C test27;
-	// char g = '5';
-	// char h = '6';
-	// (void)h;
-	// char i = '7';
-	// test27.assign(&i, &g);	
-	// printVec(test27);
+	std::cout << std::endl;	
+	std::cout << "CHAR2" << std::endl;
+	C test27;
+	char g = '5';
+	char h = '6';
+	(void)h;
+	char i = '7';
+	test27.assign(&i, &g);	
+	printVec(test27);
 	
 	return ;
 }

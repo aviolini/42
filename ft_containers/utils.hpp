@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 16:38:56 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 22:59:59 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/10/29 11:00:43 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,45 @@ namespace ft
   typedef unsigned long int 	size_t;
   typedef long int				ptrdiff_t;
 };
+//TYPE_TRAITS//////////////////////////////////////////////RIGA 706
+
+
+template <class _Tp, _Tp __v>
+struct myIntegral_constant
+{
+    static const _Tp      value = __v;
+    typedef _Tp           value_type;
+//     typedef integral_constant type;
+//     _LIBCPP_INLINE_VISIBILITY
+        operator value_type() const _NOEXCEPT {return value;}
+// #if _LIBCPP_STD_VER > 11
+//     _LIBCPP_INLINE_VISIBILITY
+    // constexpr value_type operator ()() const _NOEXCEPT {return value;}
+
+};
+
+// template <class _Tp, _Tp __v>
+// const _Tp myIntegral_constant<_Tp, __v>::value;
+
+
+typedef myIntegral_constant<bool, true>  true_type;
+typedef myIntegral_constant<bool, true> false_type;
+
+template <class _Tp> struct myIs_integral                     : public false_type {};
+template <>          struct myIs_integral<bool>               : public true_type {};
+template <>          struct myIs_integral<char>               : public true_type {};
+template <>          struct myIs_integral<signed char>        : public true_type {};
+template <>          struct myIs_integral<unsigned char>      : public true_type {};
+template <>          struct myIs_integral<short>              : public true_type {};
+template <>          struct myIs_integral<unsigned short>     : public true_type {};
+template <>          struct myIs_integral<int>                : public true_type {};
+template <>          struct myIs_integral<unsigned int>       : public true_type {};
+template <>          struct myIs_integral<long>               : public true_type {};
+template <>          struct myIs_integral<unsigned long>      : public true_type {};
+template <>          struct myIs_integral<long long>          : public true_type {};
+template <>          struct myIs_integral<unsigned long long> : public true_type {};
+
+
 
 //VECTOR////////////////////////////////////////// RIGA 457 -> ITERATOR /////////
 template <class _Tp>

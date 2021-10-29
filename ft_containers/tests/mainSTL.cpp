@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:26:14 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/29 09:45:58 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/10/29 09:53:02 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include <vector>
 #include <stack>
 #include <map>
+#include <iterator>
+#include <type_traits>
+
 
 #include "vectorTests.cpp"
 #include "stackTests.cpp"
