@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 23:23:58 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/10/29 16:55:23 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ public:
 	typedef T													mapped_type;	//THE TYPE OF THE VALUES
 	typedef ft::pair<const key_type,mapped_type>				value_type;	
 	typedef Compare												key_compare;
-	// typedef ...												value_compare;
 	typedef Alloc												allocator_type;
 	typedef typename allocator_type::reference					reference;
 	typedef typename allocator_type::const_reference			const_reference;
@@ -43,8 +42,45 @@ public:
 	typedef mapIterator< myBidirectional_iterator_tag, T > 		iterator;
 	typedef mapReverse_iterator<const_iterator> 				const_reverse_iterator;
 	typedef mapReverse_iterator<iterator> 						reverse_iterator;
+	
+	class value_compare
+	{
+	  friend class map;
+	protected:
+	  Compare comp;
+	  value_compare (Compare c) : comp(c) {}
+	public:
+	  typedef bool result_type;
+	  typedef value_type first_argument_type;
+	  typedef value_type second_argument_type;
+	  bool operator() (const value_type& x, const value_type& y) const
+	  {
+	    return comp(x.first, y.first);
+	  }
+	};
+	
 private:
 	allocator_type	_allocator;
+
+// private:
+//     typedef _VSTD::__value_type<key_type, mapped_type>             									__value_type;
+//     typedef __map_value_compare<key_type, __value_type, key_compare> 								__vc;
+//     typedef typename __rebind_alloc_helper<allocator_traits<allocator_type>, __value_type>::type 	__allocator_type;
+//     typedef __tree<__value_type, __vc, __allocator_type>            								__base;
+//     typedef typename __base::__node_traits                          								__node_traits;
+//     typedef allocator_traits<allocator_type>                        								__alloc_traits;
+//     __base __tree_;
+
+// public:
+//     typedef typename __alloc_traits::pointer         				pointer;
+//     typedef typename __alloc_traits::const_pointer   				const_pointer;
+//     typedef typename __alloc_traits::size_type       				size_type;
+//     typedef typename __alloc_traits::difference_type 				difference_type;
+//     typedef __map_iterator<typename __base::iterator>				iterator;
+//     typedef __map_const_iterator<typename __base::const_iterator> 	const_iterator;
+//     typedef _VSTD::reverse_iterator<iterator>               		reverse_iterator;
+//     typedef _VSTD::reverse_iterator<const_iterator>         		const_reverse_iterator;
+
 public:
 	/*CANONICAL-----------------------------------------------------------------------------------*/
 	// explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());										//EMPTY
