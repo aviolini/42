@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 16:28:06 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 23:23:40 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/10/29 15:58:15 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <algorithm>
 #include "vectorIterators.hpp"
 #include "utils.hpp"
+
 
 namespace ft
 {
@@ -246,8 +247,33 @@ public:
 			*it = val;
 	}
 	template <class InputIterator>
+	void assign (InputIterator first, InputIterator last, 
+				typename myEnable_if_false<myHas_iterator_category<InputIterator>::value, T>::type = 0,	//--------------------|
+				typename myEnable_if_false<myIs_integral<InputIterator>::value , T>::type = 0,								//|
+				typename myEnable_if_false<myIs_floating_point<InputIterator>::value , T>::type = 0)						//|
+	{																														//|
+		if (last - first < 0)																								//|
+			throw std::length_error("vector");																				//|
+		unsigned int len = last - first;																					//|	
+		// if (this->capacity() < len)																						//|
+		// {																												//|
+			this->_allocator.deallocate(this->_data, this->capacity());														//|
+			this->_allocator.destroy(this->_data);																			//|
+			this->_data = this->_allocator.allocate(len);																	//|
+			this->_capacity = len;																							//|
+		// }																												//|
+    	const size_t n = static_cast<size_type>(len);																		//|
+		this->_size = last - first;																							//|
+		iterator it = this->begin();																						//|
+		size_type i = 0;																									//|
+		for (; i < n; ++it, ++first, ++i)																					//|
+			*it = *first;																									//|
+	}																														//|
+	template <class InputIterator> //<-------------------------------------------------------------------------------------|
 	void assign (InputIterator first, InputIterator last, typename myEnable_if<myHas_iterator_category<InputIterator>::value, T>::type = 0)
 	{
+		if (last - first < 0)																								
+			throw std::length_error("vector");	
 		unsigned int len = last - first;
 		if (this->capacity() < len)
 		{
@@ -373,6 +399,57 @@ public:
 		this->_capacity = newCap;
 		this->_data = temp;
 		this->_size+=n;
+	}
+	template <class InputIterator>
+	void insert (iterator position, InputIterator first, InputIterator last,
+				typename myEnable_if_false<myHas_iterator_category<InputIterator>::value, T>::type = 0,
+				typename myEnable_if_false<myIs_integral<InputIterator>::value , T>::type = 0,
+				typename myEnable_if_false<myIs_floating_point<InputIterator>::value , T>::type = 0)
+				
+	{
+		if (last - first < 0)
+			return ;
+    	const size_t n = static_cast<size_type>(last - first);
+		if ((this->size() + n) <= this->capacity())
+		{
+			ft::vector<T,A>::iterator it = this->begin();
+			for (;it != position; ++it){}
+			ft::vector<T,A>::iterator save = it;
+			ft::vector<T,A>::iterator end = this->end();
+			
+			for (;end != (save - n); --end)
+				*(end + n)=*end;
+			for (size_type i = 0;i < n; ++i)
+			{
+				*it = *first;
+				first++;
+			}
+			this->_size+=n;
+			return ;
+		}
+		size_type newCap;
+		if (!this->capacity())
+			newCap = n;
+		else if (this->capacity() < n)
+			newCap = n + this->size();
+		else
+			newCap = this->capacity() * 2;
+		typename ft::vector<T,A>::pointer temp;
+		temp = this->_allocator.allocate(newCap);
+		size_type i = 0;
+		size_type k = 0;
+		ft::vector<T,A>::iterator it = this->begin();
+		for (; it != position; ++it, ++i, ++k)
+			temp[k] = this->_data[i];
+		for (size_type i = 0; i  < n; ++i, ++k, first++)
+			temp[k] = *first;
+		for (; it != this->end(); ++it, ++i, ++k)
+			temp[k] = this->_data[i];		
+		this->_allocator.deallocate(this->_data, this->capacity());
+		this->_allocator.destroy(this->_data);
+		this->_capacity = newCap;
+		this->_data = temp;
+		this->_size+=n;	
 	}
 	template <class InputIterator>
 	void insert (iterator position, InputIterator first, InputIterator last, typename myEnable_if<myHas_iterator_category<InputIterator>::value, T>::type = 0)

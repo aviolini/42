@@ -6,12 +6,14 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 16:38:56 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/29 11:00:43 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/10/29 15:06:57 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 #define UTILS_H
+
+#include <iostream>
 
 struct myInput_iterator_tag {};
 struct myOutput_iterator_tag {};
@@ -24,29 +26,25 @@ namespace ft
   typedef unsigned long int 	size_t;
   typedef long int				ptrdiff_t;
 };
+
 //TYPE_TRAITS//////////////////////////////////////////////RIGA 706
-
-
 template <class _Tp, _Tp __v>
 struct myIntegral_constant
 {
-    static const _Tp      value = __v;
-    typedef _Tp           value_type;
-//     typedef integral_constant type;
+    static const _Tp      		value = __v;
+    typedef _Tp           		value_type;
+    typedef myIntegral_constant type;
 //     _LIBCPP_INLINE_VISIBILITY
-        operator value_type() const _NOEXCEPT {return value;}
+    operator value_type() const throw() {return value;}
 // #if _LIBCPP_STD_VER > 11
 //     _LIBCPP_INLINE_VISIBILITY
     // constexpr value_type operator ()() const _NOEXCEPT {return value;}
 
 };
 
-// template <class _Tp, _Tp __v>
-// const _Tp myIntegral_constant<_Tp, __v>::value;
-
-
+/////////////////////////////////////////////////////////////////////
 typedef myIntegral_constant<bool, true>  true_type;
-typedef myIntegral_constant<bool, true> false_type;
+typedef myIntegral_constant<bool, false> false_type;
 
 template <class _Tp> struct myIs_integral                     : public false_type {};
 template <>          struct myIs_integral<bool>               : public true_type {};
@@ -61,6 +59,11 @@ template <>          struct myIs_integral<long>               : public true_type
 template <>          struct myIs_integral<unsigned long>      : public true_type {};
 template <>          struct myIs_integral<long long>          : public true_type {};
 template <>          struct myIs_integral<unsigned long long> : public true_type {};
+
+template <class _Tp> struct myIs_floating_point              : public false_type {};
+template <>          struct myIs_floating_point<float>       : public true_type {};
+template <>          struct myIs_floating_point<double>      : public true_type {};
+template <>          struct myIs_floating_point<long double> : public true_type {};
 
 
 
@@ -83,7 +86,18 @@ template <typename T>
 struct myEnable_if<true, T> {
   typedef T type;
 };
+
+template <bool, typename T = void>
+struct myEnable_if_false
+{};
+
+template <typename T>
+struct myEnable_if_false<false, T> {
+  typedef T type;
+};
+
 ////////////////////////////////////////////////////////////////
+
 
 //MAP//////////////////////////////////////////////////////////////
 namespace ft
@@ -99,8 +113,8 @@ public:
 
 	pair() : first(0), second(0) {}													//DEFAULT
 	template<class U, class V> 														//COPY
-	pair (const pair<U,V>& pr) : first(pr.first), second(pr.second) {}	
-	pair (const first_type& a, const second_type& b) : first(a), second(b) {}								//INIZIALIZATION
+	pair (const pair<U,V>& pr) : first(pr.first), second(pr.second) {}
+	pair (const first_type& a, const second_type& b) : first(a), second(b) {}		//INIZIALIZATION
 	pair& operator= (const pair& pr)
 	{
 		this->first = pr.first;

@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:27:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/29 11:01:09 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/10/29 16:01:22 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void printVec(C &v)
 template<typename C>
 void vectorTest()
 {
-	// /*
+
 	std::cout << "=================================" << std::endl;
 	std::cout<<std::endl;
 	std::cout << "--------------DEFAULT CONSTRUCTOR" << std::endl;
@@ -438,7 +438,7 @@ void vectorTest()
 	else
 		std::cout << "FALSE" << std::endl;
 	///////////////////////////////////////////////////
-// */
+
 	C test23;
 	test23.push_back(9);
 	test23.push_back(19);
@@ -538,45 +538,65 @@ void vectorTest()
 
 
 //////////////////////ARRAY IN A VECTOR/////////////////////////
+
 	C test24;
 	typename C::value_type arr[] = {1,2,3,4};
+	
+	//ASSIGN
 	test24.assign(arr, &arr[3]);
 	printVec(test24);
 
 	C test25;
-	typename C::value_type *a = new typename C::value_type;
-	*a = 5;
-	typename C::value_type *b = new typename C::value_type;
-	*b = 6;
+	double a = 3;
+	double b = 4;
 	(void)b;
-	typename C::value_type *c = new typename C::value_type;
-	*c = 7;
-	test25.assign(a, c);	
+	double c = 5;
+	test25.assign(a,c);
 	printVec(test25);
 
-	std::cout << std::endl;	
-	std::cout << "CHAR" << std::endl;
-	C test26;
-	char *d = new char;
-	*d = '5';
-	char *e = new char;
-	*e = '6';
-	(void)e;
-	char *f = new char;
-	*f = '7';
-	test26.assign(d, f);	
-	printVec(test26);
+	try
+	{
+		test25.assign(&a,&c);
+		printVec(test25);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	test25.assign(&c,&a);
+	printVec(test25);
 
-	std::cout << std::endl;	
-	std::cout << "CHAR2" << std::endl;
-	C test27;
-	char g = '5';
-	char h = '6';
-	(void)h;
-	char i = '7';
-	test27.assign(&i, &g);	
-	printVec(test27);
+	C test28(8,9);
+	printVec(test28);
+	C test29;
+	test29.assign(test28.begin(), test28.end());
+	printVec(test29);
+
+	C test30;
+	try
+	{
+		test30.assign(test28.end(), test28.begin());
+		printVec(test30);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
+	//INSERT RANGE
+	typename C::pointer ptr = new typename C::value_type[4];
+	for (int i = 0; i < 4; ++i)
+		ptr[i] = i;
+	C test31;
+	printVec(test31);
+	test31.insert(test20.begin(), &ptr[3], &ptr[0]);
+
+	delete[] ptr;
+	printVec(test31);
+
 	
+	
+
 	return ;
 }
 
