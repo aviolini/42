@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:26:14 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/29 09:53:02 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/10/29 16:26:36 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 #include <vector>
 #include <stack>
 #include <map>
-#include <iterator>
-#include <type_traits>
+
+// #include <iterator>
+// #include <type_traits>
 
 
 #include "vectorTests.cpp"
@@ -28,8 +29,9 @@
 
 int main()
 {
-	vectorTest< std::vector<int> >();
+	// vectorTest< std::vector<int> >();
 	// stackTest< std::stack<int, std::vector<int> > > ();
+	mapTest<std::map<int,int> >();
 
 	return 0;
 }
