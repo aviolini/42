@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 16:38:56 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/29 15:06:57 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/02 11:13:07 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define UTILS_H
 
 #include <iostream>
+#include <__tree>
 
 struct myInput_iterator_tag {};
 struct myOutput_iterator_tag {};
