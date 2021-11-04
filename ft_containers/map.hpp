@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/04 14:19:08 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/04 14:47:11 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,29 +89,43 @@ ft::pair<T1,T2> make_pair (T1 x, T2 y)
 namespace ft
 {
 
-template <class Pair, class Compare = std::less<typename Pair::first_type>, class Alloc = std::allocator<Pair> >
+template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<Key,T> > >
 class node
 {
 public:
+	typedef ft::pair<Key, T> 	Pair;
 	node() : _l(0), _r(0) {}
+	node(Pair & obj) : _content(obj), _l(0), _r(0) {}
 	~node(){}
-private:
+// private:
 	Pair _content;
 	node *_l;
 	node *_r;
 };
 
-template <class Pair, class Compare = std::less<typename Pair::first_type>, class Alloc = std::allocator<Pair> >
+template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<Key,T> > >
 class tree
 {
 public:
-	tree() : _begin(0){}
-	~tree();
+	typedef ft::pair<Key, T> 	Pair;
+	tree() : _b(0){}
+	~tree(){}
 private:
-	node<Pair> *_begin;
+	node<Key,T> *_b;
+public:
+	void addnode(Pair & obj)
+	{
+		if (!_b)
+		{
+			_b = new node<Key,T>(obj);
+			std::cout << "EMPTY" << std::endl;
+			return ;
+		}
+		std::cout << " NOT EMPTY" << std::endl;
+	}
 };
 
-template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<const Key,T> > > 
+template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<Key,T> > > 
 class map
 {
 public:
