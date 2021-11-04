@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 16:38:56 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/02 11:13:07 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/04 13:53:07 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,69 +101,69 @@ struct myEnable_if_false<false, T> {
 
 
 //MAP//////////////////////////////////////////////////////////////
-namespace ft
-{	
-template <class T1, class T2>
-struct pair
-{
-public:
-	typedef T1		first_type;
-	typedef T2		second_type;
-	first_type		first;
-	second_type 	second;
+// namespace ft
+// {	
+// template <class T1, class T2>
+// struct pair
+// {
+// public:
+// 	typedef T1		first_type;
+// 	typedef T2		second_type;
+// 	first_type		first;
+// 	second_type 	second;
 
-	pair() : first(0), second(0) {}													//DEFAULT
-	template<class U, class V> 														//COPY
-	pair (const pair<U,V>& pr) : first(pr.first), second(pr.second) {}
-	pair (const first_type& a, const second_type& b) : first(a), second(b) {}		//INIZIALIZATION
-	pair& operator= (const pair& pr)
-	{
-		this->first = pr.first;
-		this->second = pr.second;
-		return *this;
-	}
-	~pair() {}
-};
-};
-template <class T1, class T2>
-bool operator== (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
-{
-	return lhs.first == rhs.first && lhs.second == rhs.second;
-}
-template <class T1, class T2>
-bool operator!= (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
-{
-	return lhs != rhs;
-}
-template <class T1, class T2>
-bool operator<  (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
-{
-	return lhs.first < rhs.first || (!(rhs.first < lhs.first) && lhs.second < rhs.second);
-}
-template <class T1, class T2>
-bool operator<= (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
-{
-	return !(rhs < lhs);
-}
-template <class T1, class T2>
-bool operator>  (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
-{
-	return rhs < lhs;
-}
-template <class T1, class T2>
-bool operator>= (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
-{
-	return !(lhs < rhs);
-}
-///////////////////////////////////////////////////////////////////////////////
-namespace ft
-{
-template <class T1, class T2>
-ft::pair<T1,T2> make_pair (T1 x, T2 y)
-{
-	return ( ft::pair<T1,T2>(x,y) );
-};
-};
-/////////////////////////////////////////////////////////////////////////////////
+// 	pair() : first(0), second(0) {}													//DEFAULT
+// 	template<class U, class V> 														//COPY
+// 	pair (const pair<U,V>& pr) : first(pr.first), second(pr.second) {}
+// 	pair (const first_type& a, const second_type& b) : first(a), second(b) {}		//INIZIALIZATION
+// 	pair& operator= (const pair& pr)
+// 	{
+// 		this->first = pr.first;
+// 		this->second = pr.second;
+// 		return *this;
+// 	}
+// 	~pair() {}
+// };
+// };
+// template <class T1, class T2>
+// bool operator== (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
+// {
+// 	return lhs.first == rhs.first && lhs.second == rhs.second;
+// }
+// template <class T1, class T2>
+// bool operator!= (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
+// {
+// 	return lhs != rhs;
+// }
+// template <class T1, class T2>
+// bool operator<  (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
+// {
+// 	return lhs.first < rhs.first || (!(rhs.first < lhs.first) && lhs.second < rhs.second);
+// }
+// template <class T1, class T2>
+// bool operator<= (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
+// {
+// 	return !(rhs < lhs);
+// }
+// template <class T1, class T2>
+// bool operator>  (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
+// {
+// 	return rhs < lhs;
+// }
+// template <class T1, class T2>
+// bool operator>= (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
+// {
+// 	return !(lhs < rhs);
+// }
+// ///////////////////////////////////////////////////////////////////////////////
+// namespace ft
+// {
+// template <class T1, class T2>
+// ft::pair<T1,T2> make_pair (T1 x, T2 y)
+// {
+// 	return ( ft::pair<T1,T2>(x,y) );
+// };
+// };
+// /////////////////////////////////////////////////////////////////////////////////
 
 #endif
