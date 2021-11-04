@@ -4,7 +4,7 @@ METTERE IL CONTROLLO DI n < max size ogni volta che si usa?
 
 TEST:
 	nel costruttore fill con n > max_size
-
+	resize con size maggiore del doppio della this->capacity * 2
 
 IMPLEMENTARE TUTTI GLI OPERATORI DELL'ITERATOR, CANONICAL IN ITERATOR
 
