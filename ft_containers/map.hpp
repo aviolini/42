@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/04 16:40:07 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/04 17:23:39 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,14 +119,10 @@ public:
 			_b = new node<Pair>(obj);
 			return ;
 		}
+		if (_b->_content.first > obj.first)
+			_b->_l = new node<Pair>(obj);
 		else
-		{
-			if (obj.first < _b->_content.first)
-			{
-				_b = new node<Pair>(obj);
-			}
-		}
-		std::cout << " NOT EMPTY" << std::endl;
+			_b->_r = new node<Pair>(obj);
 	}
 };
 
