@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapIterators.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/10/27 23:17:16 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/05 11:54:57 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ protected:
 public:	
 	/*CANONICAL-----------------------------------------------------------------------------------*/		
 	mapIterator ();
+	
 	mapIterator (pointer initLoc);
 	virtual ~mapIterator();
 	mapIterator(mapIterator const & rhs);

@@ -7,7 +7,7 @@ TEST:
 	resize con size maggiore del doppio della this->capacity * 2
 
 IMPLEMENTARE TUTTI GLI OPERATORI DELL'ITERATOR, CANONICAL IN ITERATOR
-
+TOGLIERE LA STRUTTUAAR MYITERATORTAG E METTERE LA STANDARD?
 
 • iterators_traits, reverse_iterator, enable_if, is_integral, equal/lexicographical com-
 pare, std::pair, std::make_pair, must be reimplemented.

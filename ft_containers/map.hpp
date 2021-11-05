@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/05 09:09:59 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/05 11:59:46 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,113 +18,11 @@
 #include <limits>
 #include <stdexcept>
 #include "./utils.hpp"
+#include "./tree.hpp"
 #include "./mapIterators.hpp"
 
-
-namespace ft
-{	
-template <class T1, class T2>
-struct pair
-{
-public:
-	typedef T1		first_type;
-	typedef T2		second_type;
-	first_type		first;
-	second_type 	second;
-
-	pair() : first(0), second(0) {}													//DEFAULT
-	template<class U, class V> 														//COPY
-	pair (const pair<U,V>& pr) : first(pr.first), second(pr.second) {}
-	pair (const first_type& a, const second_type& b) : first(a), second(b) {}		//INIZIALIZATION
-	pair& operator= (const pair& pr)
-	{
-		this->first = pr.first;
-		this->second = pr.second;
-		return *this;
-	}
-	~pair() {}
-};
-};
-template <class T1, class T2>
-bool operator== (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
-{
-	return lhs.first == rhs.first && lhs.second == rhs.second;
-}
-template <class T1, class T2>
-bool operator!= (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
-{
-	return lhs != rhs;
-}
-template <class T1, class T2>
-bool operator<  (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
-{
-	return lhs.first < rhs.first || (!(rhs.first < lhs.first) && lhs.second < rhs.second);
-}
-template <class T1, class T2>
-bool operator<= (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
-{
-	return !(rhs < lhs);
-}
-template <class T1, class T2>
-bool operator>  (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
-{
-	return rhs < lhs;
-}
-template <class T1, class T2>
-bool operator>= (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
-{
-	return !(lhs < rhs);
-}
-///////////////////////////////////////////////////////////////////////////////
 namespace ft
 {
-template <class T1, class T2>
-ft::pair<T1,T2> make_pair (T1 x, T2 y)
-{
-	return ( ft::pair<T1,T2>(x,y) );
-};
-};
-/////////////////////////////////////////////////////////////////////////////////
-
-namespace ft
-{
-
-template < class Pair,  class Compare = std::less<typename Pair::first_type>, class Alloc = std::allocator<Pair> >
-class node
-{
-public:
-	node() : _l(0), _r(0) {}
-	node(Pair & obj) : _content(obj), _l(0), _r(0) {}
-	~node(){}
-// private:
-	Pair 		_content;
-	node 		*_l;
-	node 		*_r;
-};
-
-template < class Pair, class Compare = std::less<typename Pair::first_type>, class Alloc = std::allocator<Pair> >
-class tree
-{
-public:
-	tree() : _b(0){}
-	~tree(){}
-// private:
-	Alloc		_allocator;
-	node<Pair>	*_b;
-public:
-	void addnode(Pair & obj)
-	{
-		if (!_b)
-		{
-			_b = new node<Pair>(obj);
-			return ;
-		}
-		if (_b->_content.first > obj.first)
-			_b->_l = new node<Pair>(obj);
-		else
-			_b->_r = new node<Pair>(obj);
-	}
-};
 
 template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<Key,T> > > 
 class map
