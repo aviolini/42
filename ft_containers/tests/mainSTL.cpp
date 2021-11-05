@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:26:14 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/29 16:26:36 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/05 11:27:26 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // #include "../vectorOR.hpp"
 #include <vector>
 #include <stack>
-#include <map>
+#include "../mapOr.hpp"
 
 // #include <iterator>
 // #include <type_traits>
@@ -31,7 +31,7 @@ int main()
 {
 	// vectorTest< std::vector<int> >();
 	// stackTest< std::stack<int, std::vector<int> > > ();
-	mapTest<std::map<int,int> >();
+	mapTest<std::map<char,int> >();
 
 	return 0;
 }
