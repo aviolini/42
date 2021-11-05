@@ -968,7 +968,7 @@ template<class _Tp, class _Compare>
         "the specified comparator type does not provide a const call operator")
 #endif
 int __diagnose_non_const_comparator();
-
+//TREEBEGIN//////////////////////////////////////////////////////////////////////////////////////////////
 template <class _Tp, class _Compare, class _Allocator>
 class __tree
 {

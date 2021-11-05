@@ -893,6 +893,7 @@ public:
     template <class, class, class, class> friend class _LIBCPP_TEMPLATE_VIS multimap;
     template <class, class, class> friend class _LIBCPP_TEMPLATE_VIS __tree_const_iterator;
 };
+//MAPBEGIN//////////////////////////////////////////////////////////////////////////////////////////////
 
 template <class _Key, class _Tp, class _Compare = less<_Key>,
           class _Allocator = allocator<pair<const _Key, _Tp> > >
