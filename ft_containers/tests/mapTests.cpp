@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/05 12:29:31 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/05 13:12:11 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,16 @@ void mapTest()
 	t.addnode((pair3));
 	t.addnode((pair4));
 	
+	
+	
 	std::cout << t._b->_content.first << std::endl;
 
 	
 	std::cout << t._b->_r->_content.first << std::endl;
+
+
+	ft::tree<ft::pair<std::string,int> >::iterator it1 = t.begin();
+	std::cout << (*it1)._content.first << std::endl;
 
 	
 	//MAP

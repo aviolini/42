@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/05 12:48:53 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/05 13:16:55 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ class treeIterator
     // typedef typename _NodeTypes::__iter_pointer             __iter_pointer;
     // typedef pointer_traits<__node_pointer> __pointer_traits;
 public:
-    typedef myBidirectional_iterator_tag		iterator_category;
-    typedef _Tp                         		value_type;
-	typedef value_type*				pointer;
-	typedef value_type&				reference;
-    // typedef _DiffType                                      difference_type;
-    // typedef typename _NodeTypes::__node_value_type_pointer pointer;
+    typedef myBidirectional_iterator_tag	iterator_category;
+    typedef _Tp                         	value_type;
+	typedef value_type*						pointer;
+	typedef value_type&						reference;
+    // typedef _DiffType					difference_type;
 private:
     pointer _data;
 public:
@@ -51,11 +50,6 @@ public:
 	{
 		return *this->_data;
 	}
-	treeIterator operator + ( const size_t &n ) const
-	{
-		treeIterator obj(this->_data + n);
-		return obj;
-	}
 	
 };
 
@@ -63,18 +57,18 @@ template < class Pair, class Alloc, class Compare = std::less<typename Pair::fir
 class node
 {
 public:
-	typedef Pair											value_type;
-	typedef Alloc                                		    allocator_type;
-    typedef typename allocator_type::size_type		    	size_type;
-    typedef value_type&								    	reference;
-    typedef const value_type&						    	const_reference;
-    typedef typename allocator_type::difference_type		difference_type;
-    typedef typename allocator_type::pointer				pointer;
-    typedef typename allocator_type::const_pointer	    	const_pointer;
-	// typedef treeIterator<Pair>								const_iterator;
-	// typedef treeIterator<Pair>								iterator;
-	// typedef	vecReverse_iterator< const_iterator >			const_reverse_iterator;
-	// typedef	vecReverse_iterator< iterator >					reverse_iterator;
+	typedef Pair										value_type;
+	typedef Alloc										allocator_type;
+    typedef typename allocator_type::size_type		    size_type;
+    typedef value_type&								    reference;
+    typedef const value_type&						    const_reference;
+    typedef typename allocator_type::difference_type	difference_type;
+    typedef typename allocator_type::pointer			pointer;
+    typedef typename allocator_type::const_pointer	    const_pointer;
+	// typedef treeIterator<Pair>						const_iterator;
+	// typedef treeIterator<Pair>						iterator;
+	// typedef	vecReverse_iterator< const_iterator >	const_reverse_iterator;
+	// typedef	vecReverse_iterator< iterator >			reverse_iterator;
 public:
 	node() : _l(0), _r(0) {}
 	node(Pair & obj) : _content(obj), _l(0), _r(0) {}
@@ -89,18 +83,18 @@ template < class Pair, class Compare = std::less<typename Pair::first_type>, cla
 class tree
 {
 public:
-	typedef node<Pair, Alloc>								value_type;
-	typedef Alloc                                		    allocator_type;
-    typedef typename allocator_type::size_type		    	size_type;
-    typedef value_type&								    	reference;
-    typedef const value_type&						    	const_reference;
-    typedef typename allocator_type::difference_type		difference_type;
-    typedef value_type* 									pointer;
-    // typedef typename allocator_type::const_pointer	    const_pointer;
-	// typedef treeIterator<node<Pair, Alloc> >				const_iterator;
-	typedef treeIterator<node<Pair, Alloc> >				iterator;
-	// typedef	vecReverse_iterator<const_iterator>			const_reverse_iterator;
-	// typedef	vecReverse_iterator<iterator>				reverse_iterator;	
+	typedef node<Pair, Alloc>							value_type;
+	typedef Alloc										allocator_type;
+    typedef typename allocator_type::size_type		    size_type;
+    typedef value_type&								    reference;
+    typedef const value_type&						    const_reference;
+    typedef typename allocator_type::difference_type	difference_type;
+    typedef value_type* 								pointer;
+    // typedef typename allocator_type::const_pointer	const_pointer;
+	// typedef treeIterator<node<Pair, Alloc> >			const_iterator;
+	typedef treeIterator<node<Pair, Alloc> >			iterator;
+	// typedef	vecReverse_iterator<const_iterator>		const_reverse_iterator;
+	// typedef	vecReverse_iterator<iterator>			reverse_iterator;	
 public:
 	tree() : _b(0){}
 	~tree(){}
@@ -120,8 +114,11 @@ public:
 		else
 			_b->_r = new node<Pair, Alloc>(obj);
 	}
+	iterator begin()
+	{
+		return iterator(_b);
+	}
 };
-
 };
 
 #endif
