@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/04 17:23:39 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/05 09:09:59 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ public:
 	};
 	
 private:
-
+	tree<value_type> _tree;
 // private:
 //     typedef _VSTD::__value_type<key_type, mapped_type>             									__value_type;
 //     typedef __map_value_compare<key_type, __value_type, key_compare> 								__vc;
