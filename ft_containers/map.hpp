@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/05 11:59:46 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/09 09:38:31 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,24 +62,7 @@ public:
 	
 private:
 	tree<value_type> _tree;
-// private:
-//     typedef _VSTD::__value_type<key_type, mapped_type>             									__value_type;
-//     typedef __map_value_compare<key_type, __value_type, key_compare> 								__vc;
-//     typedef typename __rebind_alloc_helper<allocator_traits<allocator_type>, __value_type>::type 	__allocator_type;
-//     typedef __tree<__value_type, __vc, __allocator_type>            								__base;
-//     typedef typename __base::__node_traits                          								__node_traits;
-//     typedef allocator_traits<allocator_type>                        								__alloc_traits;
-//     __base __tree_;
 
-// public:
-//     typedef typename __alloc_traits::pointer         				pointer;
-//     typedef typename __alloc_traits::const_pointer   				const_pointer;
-//     typedef typename __alloc_traits::size_type       				size_type;
-//     typedef typename __alloc_traits::difference_type 				difference_type;
-//     typedef __map_iterator<typename __base::iterator>				iterator;
-//     typedef __map_const_iterator<typename __base::const_iterator> 	const_iterator;
-//     typedef _VSTD::reverse_iterator<iterator>               		reverse_iterator;
-//     typedef _VSTD::reverse_iterator<const_iterator>         		const_reverse_iterator;
 
 public:
 	/*CANONICAL-----------------------------------------------------------------------------------*/

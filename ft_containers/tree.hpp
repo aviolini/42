@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/05 13:16:55 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/09 09:43:01 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ public:
 	node() : _l(0), _r(0) {}
 	node(Pair & obj) : _content(obj), _l(0), _r(0) {}
 	~node(){}
-// private:
+private:
 	Pair 		_content;
 	node 		*_l;
 	node 		*_r;
@@ -95,29 +95,25 @@ public:
 	typedef treeIterator<node<Pair, Alloc> >			iterator;
 	// typedef	vecReverse_iterator<const_iterator>		const_reverse_iterator;
 	// typedef	vecReverse_iterator<iterator>			reverse_iterator;	
+private:
+	Alloc			_allocator;
+	pointer			_begin;
+	pointer			_end;
+	difference_type	_size;
 public:
-	tree() : _b(0){}
+/*CANONICAL-----------------------------------------------------------------------------------*/
+	tree() : _allocator(0), _begin(0), _end(0), _size(0){}
 	~tree(){}
-// private:
-	Alloc		_allocator;
-	pointer		_b;
-public:
-	void addnode(Pair & obj)
-	{
-		if (!_b)
-		{
-			_b = new node<Pair, Alloc>(obj);
-			return ;
-		}
-		if (_b->_content.first > obj.first)
-			_b->_l = new node<Pair, Alloc>(obj);
-		else
-			_b->_r = new node<Pair, Alloc>(obj);
-	}
+/*ITERATORS-----------------------------------------------------------------------------------*/
 	iterator begin()
 	{
-		return iterator(_b);
+		return iterator(_begin);
 	}
+	iterator end()
+	{
+		return iterator(_end);	
+	}
+/*METHODS-----------------------------------------------------------------------------------*/
 };
 };
 

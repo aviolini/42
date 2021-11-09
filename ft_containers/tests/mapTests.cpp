@@ -6,12 +6,18 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/05 13:12:11 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/09 09:52:20 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
+/////////////////////////////////////////////////////////
+#include "../utils.hpp"
+#include "../tree.hpp"
+#include "../mapIterators.hpp"
+#include "../map.hpp"
+/////////////////////////////////////////////////////////
 
 template<typename C>
 void mapTest()
