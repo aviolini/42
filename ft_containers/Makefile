@@ -6,7 +6,7 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 09:43:32 by aviolini          #+#    #+#              #
-#    Updated: 2021/11/10 00:11:58 by arrigo           ###   ########.fr        #
+#    Updated: 2021/11/10 00:31:49 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,15 +16,13 @@ FTNAME		=	ftTest
 	
 STLNAME		=	stlTest
 	
-FTSRCS		=	mainFT.cpp vectorTests.cpp stackTests.cpp mapTests.cpp
+SRCS		=	vectorTests.cpp stackTests.cpp mapTests.cpp
 	
 FTINC		=	vector.hpp vectorIterators.hpp stack.hpp utils.hpp map.hpp mapIterators.hpp
 	
-STLSRCS		=	mainSTL.cpp vectorTests.cpp stackTests.cpp mapTests.cpp
-	
-FTOBJS		=	$(FTSRCS:.cpp=.o)
-	
-STLOBJS		=	$(STLSRCS:.cpp=.o)
+OBJS		=	$(SRCS:.cpp=.o)
+
+MAIN		=	./tests/main.cpp
 	
 CXX			=	clang++
 	
@@ -32,11 +30,11 @@ CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 	
 RM			=	rm -rf
 
-$(FTNAME)	:	$(addprefix $(TESTDIR), $(FTOBJS)) $(FTINC)
-				$(CXX) $(CXXFLAGS) -o $(FTNAME) $(FTOBJS)
+$(FTNAME)	:	$(addprefix $(TESTDIR), $(OBJS)) $(FTINC)
+				$(CXX) $(CXXFLAGS) $(MAIN) -o $(FTNAME) $(OBJS)
 
-$(STLNAME)	:	$(addprefix $(TESTDIR), $(STLOBJS))
-				$(CXX) $(CXXFLAGS) -o $(STLNAME) $(STLOBJS)
+$(STLNAME)	:	$(addprefix $(TESTDIR), $(OBJS))
+				$(CXX) $(CXXFLAGS) -D STD $(MAIN) -o $(STLNAME) $(OBJS)
 
 %.o			:	%.cpp
 				$(CXX) $(CXXFLAGS) -c $<
@@ -74,17 +72,17 @@ time		:	all
 				@time ./ftTest > /dev/null
 
 allall		:	cl re all clean test log time
-				@$(RM) $(FTOBJS) $(STLOBJS)
+				@$(RM) $(OBJS)
 				@$(RM) ftLog stlLog ftTest stlTest
 #CLEAN
 clean		:	
-				@$(RM) $(FTOBJS) $(STLOBJS)
+				@$(RM) $(OBJS)
 
 cleanft		:
-				@$(RM) $(FTOBJS)
+				@$(RM) $(OBJS)
 
 cleanstl	:
-				@$(RM) $(STLOBJS)
+				@$(RM) $(OBJS)
 
 cl			:	
 				clear
