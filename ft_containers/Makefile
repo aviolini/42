@@ -6,7 +6,7 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 09:43:32 by aviolini          #+#    #+#              #
-#    Updated: 2021/11/09 17:42:42 by arrigo           ###   ########.fr        #
+#    Updated: 2021/11/10 00:11:58 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ FTNAME		=	ftTest
 	
 STLNAME		=	stlTest
 	
-FTSRCS		=	mainFT.cpp vectorTests.cpp stackTests.cpp
+FTSRCS		=	mainFT.cpp vectorTests.cpp stackTests.cpp mapTests.cpp
 	
 FTINC		=	vector.hpp vectorIterators.hpp stack.hpp utils.hpp map.hpp mapIterators.hpp
 	
