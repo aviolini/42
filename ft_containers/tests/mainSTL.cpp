@@ -3,24 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   mainSTL.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:26:14 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/05 11:27:26 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/09 17:39:33 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
 
-// #include "../vectorOR.hpp"
 #include <vector>
 #include <stack>
-#include "../mapOr.hpp"
-
-// #include <iterator>
-// #include <type_traits>
-
+#include <map>
 
 #include "vectorTests.cpp"
 #include "stackTests.cpp"

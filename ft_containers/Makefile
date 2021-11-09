@@ -6,7 +6,7 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 09:43:32 by aviolini          #+#    #+#              #
-#    Updated: 2021/10/27 23:15:55 by arrigo           ###   ########.fr        #
+#    Updated: 2021/11/09 17:41:05 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ STLOBJS		=	$(STLSRCS:.cpp=.o)
 	
 CXX			=	clang++
 	
-CXXFLAGS	=	 -Wall -Wextra -Werror -std=c++98
+CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 	
 RM			=	rm -rf
 
@@ -52,47 +52,47 @@ stl			:	$(STLNAME)
 test		:	teststl testft
 
 testft		:	$(FTNAME)
-				@echo "\033[1;33m\n_FT_\033[0m"
-				./ftTest
+				@printf "\033[1;33m\n_FT_\n\033[0m"
+				@./ftTest
 
 teststl		:	$(STLNAME)
-				@echo "\033[1;32m\n_STL_\033[0m"
-				./stlTest
+				@printf "\033[1;32m\n_STL_\n\033[0m"
+				@./stlTest
 
 #LOG
 log			:	all
-				./ftTest > ftLog
-				./stlTest > stlLog
-				@echo "\033[1;34m\n_DIFF_\033[0m"
-				diff ftLog stlLog && echo "SUCCESS DIFF" || echo "ERROR DIFF"
+				@./ftTest > ftLog
+				@./stlTest > stlLog
+				@printf "\033[1;34m\n_DIFF_\n\033[0m"
+				@diff ftLog stlLog || printf "ERROR DIFF"
 
 #TIME
 time		:	all
-				@echo "\033[1;32m\n_STL_TIME\033[0m"
-				time ./stlTest > /dev/null
-				@echo "\033[1;33m\n_FT_TIME\033[0m"
-				time ./ftTest > /dev/null
+				@printf "\033[1;32m\n_STL_TIME\033[0m"
+				@time ./stlTest > /dev/null
+				@printf "\033[1;33m\n_FT_TIME\033[0m"
+				@time ./ftTest > /dev/null
 
 allall		:	cl re all clean test log time
-				$(RM) $(FTOBJS) $(STLOBJS)
-				$(RM) ftLog stlLog
+				@$(RM) $(FTOBJS) $(STLOBJS)
+				@$(RM) ftLog stlLog ftTest stlTest
 #CLEAN
 clean		:	
-				$(RM) $(FTOBJS) $(STLOBJS)
+				@$(RM) $(FTOBJS) $(STLOBJS)
 
 cleanft		:
-				$(RM) $(FTOBJS)
+				@$(RM) $(FTOBJS)
 
 cleanstl	:
-				$(RM) $(STLOBJS)
+				@$(RM) $(STLOBJS)
 
 cl			:	
 				clear
 
 #FCLEAN
 fclean		:	clean
-				$(RM) $(FTNAME) $(STLNAME)
-				$(RM) ftLog stlLog
+				@$(RM) $(FTNAME) $(STLNAME)
+				@$(RM) ftLog stlLog
 
 fcleanft	:	cleanft
 				$(RM) $(FTNAME)
