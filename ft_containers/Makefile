@@ -6,7 +6,7 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 09:43:32 by aviolini          #+#    #+#              #
-#    Updated: 2021/11/09 17:41:05 by arrigo           ###   ########.fr        #
+#    Updated: 2021/11/09 17:42:42 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,4 +110,4 @@ reft		:	fcleanft ft
 restl		:	fcleanstl stl
 
 #.PHONY	
-.PHONY		:	all re clean flcean
+.PHONY		:	all re clean fclean
