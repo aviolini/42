@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/12 14:40:55 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/12 15:57:00 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@
 namespace ft
 {
 
-template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<const Key,T> > > 
+template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<Key,T> > > 
 class map
 {
 public:
 	typedef Key												key_type;		//THE TYPE OF THE KEY
 	typedef T												mapped_type;	//THE TYPE OF THE VALUES
-	typedef ft::pair<const key_type,mapped_type>			value_type;	
+	typedef ft::pair<key_type,mapped_type>					value_type;	
 	typedef Compare											key_compare;
 	typedef Alloc											allocator_type;
 	typedef ft::node<value_type, key_compare>				node_type;
@@ -115,7 +115,12 @@ public:
 	// /*ELEMENT ACCESS-------------------------------------------------------------------------------*/
 	// mapped_type& operator[] (const key_type& k);
 	// /*MODIFIERS-----------------------------------------------------------------------------------*/
-	// pair<iterator,bool> insert (const value_type& val);								//SINGLE ELEMENT
+	// pair<iterator,bool> insert (const value_type& val)								//SINGLE ELEMENT
+	void insert (const value_type& val)								//SINGLE ELEMENT
+	{
+		_tree.addnode(val);
+		return ;
+	}
 	// iterator insert (iterator position, const value_type& val);						//WITH HINT
 	// template <class InputIterator>													//RANGE
 	// void insert (InputIterator first, InputIterator last);

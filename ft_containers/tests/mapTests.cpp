@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapTests.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/10 00:29:46 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/12 16:01:35 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ template<typename C>
 void mapTest()
 {
 	// //PAIR////////////
-	// std::pair<std::string, int> pair1("primo", 1);
+	// ft::pair<std::string, int> pair1("primo", 1);
 	// std::cout << "STD::PAIR\t" << pair1.first << " , " << pair1.second << std::endl;
 	// ft::pair<std::string, int> pair2("primo", 1);
 	// std::cout << "FT::PAIR\t" << pair2.first << " , " << pair2.second << std::endl;
@@ -47,7 +47,6 @@ void mapTest()
 	// t.addnode((pair4));
 	
 	
-	
 	// std::cout << t._b->_content.first << std::endl;
 
 	
@@ -60,10 +59,16 @@ void mapTest()
 	
 	//MAP
 	// C test1;
-	// char startC = 'a';
-	// char startN = 1;
+	// // char startC = 'a';
+	// // char startN = 1;
+	// typename C::value_type pair1 ('a', 1);
+	// typename C::value_type pair2('b', 2);
+	// // test1.insert(pair1);
+	// (void)pair1;
+	// (void)pair2;
+
 	// for (int i = 0; i < 20; i+=2)
-	// 	test1.insert(std::make_pair<char, char>(startC + i,startN + i));
+	// 	test1.insert(std::make_pair<char, int>(startC + i,startN + i));
 	// for (int i = 0; i < 20; i+=2)
 	// 	test1.insert(std::make_pair<char, char>(startC + i,startN + i));
 	// typename C::iterator it1 = test1.begin();

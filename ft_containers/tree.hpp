@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/12 12:37:24 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/12 15:29:00 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,16 +145,23 @@ public:
 		return const_iterator(_end);	
 	}
 /*METHODS-----------------------------------------------------------------------------------*/
-void addnode(ft::pair<typename Pair::first_type,typename Pair::second_type> &obj)
-{
-	if (!_begin)
+	void addnode(Pair &obj)
 	{
-		_begin = this->_allocator.allocate(1);
-		this->_begin->first = obj.first;
-		this->_begin->second = obj.second;
-		return;	
+		if (!_begin)
+		{
+			_begin = this->_allocator.allocate(1);
+			this->_begin->first = obj.first;
+			this->_begin->second = obj.second;
+			return;	
+		}
+		pointer temp = this->_allocator.allocate(1);
+		temp.first = obj.first;
+		temp.second = obj.second;
+		if (obj.first > this->first)
+			_begin->_r = temp;
+		else
+			_begin->_l = temp;
 	}
-}
 };
 };
 

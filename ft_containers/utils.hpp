@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 16:38:56 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/09 17:33:15 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/12 15:37:27 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,9 +158,9 @@ bool operator>= (const ft::pair<T1,T2>& lhs, const ft::pair<T1,T2>& rhs)
 namespace ft
 {
 template <class T1, class T2>
-ft::pair<T1,T2> make_pair (T1 x, T2 y)
+pair<T1,T2> make_pair (T1 x, T2 y)
 {
-	return ( ft::pair<T1,T2>(x,y) );
+	return ( pair<T1,T2>(x,y) );
 };
 };
 /////////////////////////////////////////////////////////////////////////////////
