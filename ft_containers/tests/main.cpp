@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:13:14 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/12 15:53:08 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/12 16:28:41 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int main(int argc, char** argv) {
 	
 	// vectorTest< ft::vector<int> >();
 	// stackTest< ft::stack<int, ft::vector<int> > > ();
-	
-	mapTest< ft::map<char,int, std::less<char>, std::allocator<ft::pair<char,int> > > >();
+	mapTest< ft::map<char,int, std::less<char>, std::allocator<ft::pair <const char, int > > > >();
+
 
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/12 15:57:00 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/12 16:10:27 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ private:
 public:
 /*CANONICAL-----------------------------------------------------------------------------------*/
 	explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
-	_allocator(alloc), value_compare(comp) {}									//EMPTY
+	_allocator(alloc){
+		(void)comp;
+	// value_compare(comp); 
+	}									//EMPTY
 	template <class InputIterator>
 	map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type(),		//RANGE
 		typename myEnable_if_false<myIs_integral<InputIterator>::value , T>::type = 0,

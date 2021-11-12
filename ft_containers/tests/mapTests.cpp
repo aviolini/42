@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/12 16:01:35 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/12 16:29:32 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,15 @@ void mapTest()
 
 	
 	//MAP
-	// C test1;
+	C test1;
 	// // char startC = 'a';
 	// // char startN = 1;
-	// typename C::value_type pair1 ('a', 1);
+	typename C::value_type pair1 ('a', 1);
 	// typename C::value_type pair2('b', 2);
-	// // test1.insert(pair1);
-	// (void)pair1;
+	// test1.insert(pair1);
+	(void)pair1;
 	// (void)pair2;
+	(void)test1;
 
 	// for (int i = 0; i < 20; i+=2)
 	// 	test1.insert(std::make_pair<char, int>(startC + i,startN + i));
