@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/09 12:01:23 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:23:45 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,22 @@ template < class Key, class T, class Compare = std::less<Key>, class Alloc = std
 class map
 {
 public:
-	typedef Key													key_type;		//THE TYPE OF THE KEY
-	typedef T													mapped_type;	//THE TYPE OF THE VALUES
-	typedef ft::pair<const key_type,mapped_type>				value_type;	
-	typedef Compare												key_compare;
-	typedef Alloc												allocator_type;
-	typedef typename allocator_type::reference					reference;
-	typedef typename allocator_type::const_reference			const_reference;
-	typedef typename allocator_type::pointer					pointer;
-	typedef typename allocator_type::const_pointer				const_pointer;
-    typedef typename allocator_type::difference_type			difference_type;
-    typedef typename allocator_type::size_type		   			size_type;
-	typedef mapIterator< myBidirectional_iterator_tag, T > 		const_iterator;
-	typedef mapIterator< myBidirectional_iterator_tag, T > 		iterator;
-	typedef mapReverse_iterator<const_iterator> 				const_reverse_iterator;
-	typedef mapReverse_iterator<iterator> 						reverse_iterator;
+	typedef Key												key_type;		//THE TYPE OF THE KEY
+	typedef T												mapped_type;	//THE TYPE OF THE VALUES
+	typedef ft::pair<const key_type,mapped_type>			value_type;	
+	typedef Compare											key_compare;
+	typedef Alloc											allocator_type;
+	typedef ft::node<value_type, key_compare>				node_type;
+	typedef typename allocator_type::reference				reference;
+	typedef typename allocator_type::const_reference		const_reference;
+	typedef typename allocator_type::pointer				pointer;
+	typedef typename allocator_type::const_pointer			const_pointer;
+    typedef typename allocator_type::difference_type		difference_type;
+    typedef typename allocator_type::size_type		   		size_type;
+	typedef mapIterator<ft::treeIterator<node_type> >		const_iterator;
+	typedef mapIterator<ft::treeIterator<node_type> >		iterator;
+	typedef mapReverse_iterator<const_iterator> 			const_reverse_iterator;
+	typedef mapReverse_iterator<iterator> 					reverse_iterator;
 	
 	class value_compare
 	{
@@ -51,9 +52,9 @@ public:
 	  Compare comp;
 	  value_compare (Compare c) : comp(c) {}
 	public:
-	  typedef bool result_type;
-	  typedef value_type first_argument_type;
-	  typedef value_type second_argument_type;
+	  typedef bool											result_type;
+	  typedef value_type									first_argument_type;
+	  typedef value_type									second_argument_type;
 	  bool operator() (const value_type& x, const value_type& y) const
 	  {
 	    return comp(x.first, y.first);
@@ -61,18 +62,19 @@ public:
 	};
 	
 private:
-	tree<value_type> _tree;
-
+	allocator_type											_allocator;
+	tree<value_type> 										_tree;
 
 public:
-	/*CANONICAL-----------------------------------------------------------------------------------*/
-	// explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());										//EMPTY
+/*CANONICAL-----------------------------------------------------------------------------------*/
+	explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
+	_allocator(alloc), value_compare(comp) {}									//EMPTY
 	// template <class InputIterator>
 	// map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());		//RANGE
 	// map (const map& x);																															//COPY
 	// ~map();
 	// map& operator= (const map& x);
-	// /*ITERATORS-----------------------------------------------------------------------------------*/
+/*ITERATORS-----------------------------------------------------------------------------------*/
 	// iterator begin();
 	// const_iterator begin() const;
     // iterator end();
@@ -81,7 +83,7 @@ public:
 	// const_reverse_iterator rbegin() const;
     // reverse_iterator rend();
 	// const_reverse_iterator rend() const;
-	// /*CAPACITY-----------------------------------------------------------------------------------*/
+/*CAPACITY-----------------------------------------------------------------------------------*/
 	// bool empty() const;
 	// size_type size() const;
 	// size_type max_size() const;
@@ -97,7 +99,7 @@ public:
 	// void erase (iterator first, iterator last);
 	// void swap (map& x);
 	// void clear();
-	///*OBSERVERS----------------------------------------------------------------------------------*/
+/*OBSERVERS----------------------------------------------------------------------------------*/
 // /*	key_compare key_comp() const
 // 	{
 // 		return __tree_.value_comp().key_comp();
@@ -107,7 +109,7 @@ public:
 // 		return value_compare(__tree_.value_comp().key_comp())
 // 	}
 // */
-	// /*OPERATIONS----------------------------------------------------------------------------------*/
+/*OPERATIONS----------------------------------------------------------------------------------*/
     // iterator find (const key_type& k);
 	// const_iterator find (const key_type& k) const;
 	// size_type count (const key_type& k) const;
@@ -117,12 +119,12 @@ public:
 	// const_iterator upper_bound (const key_type& k) const;
 	// pair<const_iterator,const_iterator> equal_range (const key_type& k) const;
 	// pair<iterator,iterator>             equal_range (const key_type& k);
-	// /*ALLOCATOR-----------------------------------------------------------------------------------*/
-// /*	allocator_type get_allocator() const 
+/*ALLOCATOR-----------------------------------------------------------------------------------*/
+/*	allocator_type get_allocator() const 
 // 	{
 // 		return allocator_type(__tree_.__alloc());
 // 	}
-// */
+*/
 	
 };
 };

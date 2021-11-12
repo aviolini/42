@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/09 12:52:41 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/12 12:37:24 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,48 +32,70 @@ public:
     typedef _Tp                         	value_type;
 	typedef value_type*						pointer;
 	typedef value_type&						reference;
-    // typedef _DiffType					difference_type;
+    typedef ft::ptrdiff_t					difference_type;
 private:
-    pointer _data;
+    pointer _ptr;
 public:
-	treeIterator() : _data(0){}
-	treeIterator (pointer initLoc) : _data(initLoc){}
+	treeIterator() : _ptr(0){}
+	treeIterator (pointer initLoc) : _ptr(initLoc){}
 	~treeIterator(){}
-	treeIterator(treeIterator const & rhs) : _data(rhs._data) {}
+	treeIterator(treeIterator const & rhs) : _ptr(rhs._ptr) {}
 	treeIterator operator = (const treeIterator & rhs)
 	{
-		this->_data = rhs._data;
+		this->_ptr = rhs._ptr;
 		return *this;		
 	}
 	/*MEMBER OPERATORS--------------------------------------------------*/
 	reference operator *()
 	{
-		return *this->_data;
+		return *this->_ptr;
 	}
+	treeIterator operator + ( const difference_type &n ) const;
+	treeIterator &operator ++()			//PREFIX
+	{
+		if (this->_ptr->_right != 0)
+		{
+			this->_ptr = this->_ptr->_right;
+			while (this->_ptr->_left != 0)
+				this->_ptr = this->_ptr->_left;
+			return *this;		
+		}
+		while (_ptr == _ptr->_parent->_left)
+			_ptr = _ptr->_parent;
+		return *this;
+	}
+	treeIterator operator ++(int)			//POSTFIX
+	{
+		treeIterator t;
+		++(*this);
+		return t;
+	}
+	treeIterator & operator += (difference_type n);
+	treeIterator operator - ( const difference_type &n ) const;
+	difference_type operator - ( const treeIterator &rhs) const;
+	treeIterator &operator --()		;		//PREFIX
+	treeIterator operator --(int)	;			//POSTFIX
+	treeIterator & operator -= (difference_type n);
+	pointer operator -> ();
+	reference operator [] (int index);
+	/*RELATIONAL OPERATORS--------------------------------------------------*/
+	bool operator == (const treeIterator & rhs);
+	bool operator != (const treeIterator & rhs);
+	bool operator > (const treeIterator & rhs);
+	bool operator >= (const treeIterator & rhs);
+	bool operator < (const treeIterator & rhs);
+	bool operator <= (const treeIterator & rhs);
 };
 
 template < class Pair,class Compare = std::less<typename Pair::first_type> >
 class node : public ft::pair<typename Pair::first_type,typename Pair::second_type>
 {
 public:
-	// typedef std::allocator<Pair>						Alloc;
-	// typedef Pair										value_type;
-	// typedef Alloc										allocator_type;
-    // typedef typename allocator_type::size_type		    size_type;
-    // typedef value_type&								    reference;
-    // typedef const value_type&						    const_reference;
-    // typedef typename allocator_type::difference_type	difference_type;
-    // typedef typename allocator_type::pointer			pointer;
-    // typedef typename allocator_type::const_pointer	    const_pointer;
-	// typedef treeIterator<Pair>						const_iterator;
-	// typedef treeIterator<Pair>						iterator;
-	// typedef	vecReverse_iterator< const_iterator >	const_reverse_iterator;
-	// typedef	vecReverse_iterator< iterator >			reverse_iterator;
-public:
-	node() : _l(0), _r(0), ft::pair<typename Pair::first_type,typename Pair::second_type>() {};
-	node(Pair & obj) : ft::pair<typename Pair::first_type,typename Pair::second_type>(obj), _l(0), _r(0) {};
+	node() : _parent(0), _l(0), _r(0), ft::pair<typename Pair::first_type, typename Pair::second_type>() {};
+	node(Pair & obj) : ft::pair<typename Pair::first_type, typename Pair::second_type>(obj), _parent(0), _l(0), _r(0) {};
 	~node(){}
 private:
+	node		*_parent;
 	node 		*_l;
 	node 		*_r;
 };
@@ -89,9 +111,8 @@ public:
     typedef value_type&								    reference;
     typedef const value_type&						    const_reference;
     typedef typename allocator_type::difference_type	difference_type;
-    // typedef value_type* 								pointer;
     typedef typename allocator_type::pointer			pointer;
-    // typedef typename allocator_type::const_pointer	const_pointer;
+    typedef typename allocator_type::const_pointer		const_pointer;
 	typedef treeIterator<node<Pair> >					const_iterator;
 	typedef treeIterator<node<Pair> >					iterator;
 	// typedef	vecReverse_iterator<const_iterator>		const_reverse_iterator;
@@ -104,7 +125,6 @@ private:
 	difference_type	_size;
 public:
 /*CANONICAL-----------------------------------------------------------------------------------*/
-	// tree() : _allocator(0),_root(0), _begin(0), _end(0), _size(0){}
 	explicit tree (const allocator_type& alloc = allocator_type()) : _allocator(alloc), _root(0), _begin(0), _end(0), _size(0){}
 	~tree(){}
 /*ITERATORS-----------------------------------------------------------------------------------*/

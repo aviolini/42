@@ -694,7 +694,7 @@ private:
 };
 
 template <class _ValueTp, class _VoidPtr>
-struct __make_tree_node_types {
+struct z__make_tree_node_types {
   typedef typename __rebind_pointer<_VoidPtr, __tree_node<_ValueTp, _VoidPtr> >::type
                                                                         _NodePtr;
   typedef __tree_node_types<_NodePtr> type;
@@ -833,6 +833,7 @@ public:
     _LIBCPP_INLINE_VISIBILITY pointer operator->() const
         {return pointer_traits<pointer>::pointer_to(__get_np()->__value_);}
 
+///TREENEXTITER///////////////////////////////////////////
     _LIBCPP_INLINE_VISIBILITY
     __tree_iterator& operator++() {
       __ptr_ = static_cast<__iter_pointer>(
@@ -841,7 +842,11 @@ public:
     }
     _LIBCPP_INLINE_VISIBILITY
     __tree_iterator operator++(int)
-        {__tree_iterator __t(*this); ++(*this); return __t;}
+    {
+		__tree_iterator __t(*this);
+		++(*this);
+		return __t;
+	}
 
     _LIBCPP_INLINE_VISIBILITY
     __tree_iterator& operator--() {

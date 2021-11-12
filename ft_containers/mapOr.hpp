@@ -772,7 +772,7 @@ struct __extract_key_value_types<__value_type<_Key, _Tp> >
   typedef _Key const __key_type;
   typedef _Tp        __mapped_type;
 };
-
+//MAPITERATORBEGIN////////////////////////////////////////
 template <class _TreeIterator>
 class _LIBCPP_TEMPLATE_VIS __map_iterator
 {
@@ -800,7 +800,11 @@ public:
     pointer operator->() const {return pointer_traits<pointer>::pointer_to(__i_->__get_value());}
 
     _LIBCPP_INLINE_VISIBILITY
-    __map_iterator& operator++() {++__i_; return *this;}
+    __map_iterator& operator++()
+	{
+		++__i_;
+		return *this;
+	}
     _LIBCPP_INLINE_VISIBILITY
     __map_iterator operator++(int)
     {

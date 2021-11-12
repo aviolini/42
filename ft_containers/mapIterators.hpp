@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/05 11:54:57 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/12 12:27:49 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,44 @@
 
 #include "utils.hpp"
 
-template <class Category, class T, class Distance = ft::ptrdiff_t, class Pointer = T*, class Reference = T&>
+template <class treeIterator>
 class mapIterator
 {
 public:
-	typedef T					value_type;
-	typedef Pointer				pointer;
-	typedef Reference			reference;
-	typedef Distance			difference_type;
-	typedef Category			iterator_category;
+	typedef typename treeIterator::iterator_category	iterator_category;
+	typedef typename treeIterator::pointer				pointer;
+	typedef typename treeIterator::reference			reference;
+	typedef typename treeIterator::difference_type		difference_type;
 protected:
-	pointer _data;
+	treeIterator _data;
 public:	
 	/*CANONICAL-----------------------------------------------------------------------------------*/		
-	mapIterator ();
-	
-	mapIterator (pointer initLoc);
+	mapIterator () : _data(0) {}
+	mapIterator (treeIterator initLoc) : _data(initLoc) {}
 	virtual ~mapIterator();
-	mapIterator(mapIterator const & rhs);
-	mapIterator operator = (const mapIterator & rhs);
+	// mapIterator(mapIterator const & rhs);
+	mapIterator operator = (const mapIterator & rhs)
+	{
+		this->_data = rhs._data;
+		return *this;
+	}
 	/*MEMBER OPERATORS--------------------------------------------------*/
-	reference operator *();
+	reference operator *()
+	{
+		return *_data;
+	}
 	mapIterator operator + ( const difference_type &n ) const;
-	mapIterator &operator ++();				//PREFIX
-	mapIterator operator ++(int);				//POSTFIX
+	mapIterator &operator ++()				//PREFIX
+	{
+		++_data;
+		return *this;
+	}
+	mapIterator operator ++(int)				//POSTFIX
+	{
+		mapIterator t(*this);
+		++(*this);
+		return t;
+	}
 	mapIterator & operator += (difference_type n);
 	mapIterator operator - ( const difference_type &n ) const;
 	difference_type operator - ( const mapIterator &rhs) const;
