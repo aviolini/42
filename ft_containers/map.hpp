@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/12 14:23:45 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:40:55 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,45 @@ public:
 /*CANONICAL-----------------------------------------------------------------------------------*/
 	explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
 	_allocator(alloc), value_compare(comp) {}									//EMPTY
-	// template <class InputIterator>
-	// map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type());		//RANGE
-	// map (const map& x);																															//COPY
-	// ~map();
-	// map& operator= (const map& x);
+	template <class InputIterator>
+	map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type(),		//RANGE
+		typename myEnable_if_false<myIs_integral<InputIterator>::value , T>::type = 0,
+		typename myEnable_if_false<myIs_floating_point<InputIterator>::value , T>::type = 0)
+	: _allocator(alloc), value_compare(comp)
+	{
+		(void)first;
+		(void)last;
+	}
+	map (const map& x)
+	{
+		(void)x;
+	}																															//COPY
+	~map(){}
+	map& operator= (const map& x)
+	{
+		(void)x;
+	}
 /*ITERATORS-----------------------------------------------------------------------------------*/
-	// iterator begin();
-	// const_iterator begin() const;
-    // iterator end();
-	// const_iterator end() const;
-    // reverse_iterator rbegin();
-	// const_reverse_iterator rbegin() const;
-    // reverse_iterator rend();
-	// const_reverse_iterator rend() const;
+	iterator begin()
+	{
+		return _tree.begin();
+	}
+	const_iterator begin() const
+	{
+		return _tree.begin();
+	}
+    iterator end()
+	{
+		return _tree.end();
+	}
+	const_iterator end() const
+	{
+		return _tree.end();
+	}
+    reverse_iterator rbegin();
+	const_reverse_iterator rbegin() const;
+    reverse_iterator rend();
+	const_reverse_iterator rend() const;
 /*CAPACITY-----------------------------------------------------------------------------------*/
 	// bool empty() const;
 	// size_type size() const;

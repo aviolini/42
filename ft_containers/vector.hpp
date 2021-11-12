@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 16:28:06 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/29 16:23:10 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:35:13 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ public:
 		this->_size = last - first;
 		this->_capacity = this->size();	
 	}
-	vector (const vector& x) : _allocator(allocator_type()), _size(x.size()), _capacity(x.size())
+	// vector (const vector& x) : _allocator(allocator_type()), _size(x.size()), _capacity(x.size())
+	vector (const vector& x) : _allocator(x._allocator), _size(x.size()), _capacity(x.size())
+
 	{
 		this->_data = this->_allocator.allocate(this->capacity());
 		ft::vector<T,A>::const_iterator it = x.begin();

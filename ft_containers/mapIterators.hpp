@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/12 12:27:49 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:39:00 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,18 @@ public:
 		return *this;
 	}
 	/*MEMBER OPERATORS--------------------------------------------------*/
+	pointer operator -> ()
+	{
+		return this->_data;
+	}
 	reference operator *()
 	{
-		return *_data;
+		return *this->_data;
 	}
 	mapIterator operator + ( const difference_type &n ) const;
 	mapIterator &operator ++()				//PREFIX
 	{
-		++_data;
+		++this->_data;
 		return *this;
 	}
 	mapIterator operator ++(int)				//POSTFIX
@@ -59,7 +63,6 @@ public:
 	mapIterator &operator --();				//PREFIX
 	mapIterator operator --(int);				//POSTFIX
 	mapIterator & operator -= (difference_type n);
-	pointer operator -> ();
 	reference operator [] (int index);
 	/*RELATIONAL OPERATORS--------------------------------------------------*/
 	bool operator == (const mapIterator & rhs);
