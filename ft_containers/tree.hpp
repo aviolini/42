@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/12 15:29:00 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/12 16:38:52 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,13 @@ template < class Pair,class Compare = std::less<typename Pair::first_type> >
 class node : public ft::pair<typename Pair::first_type,typename Pair::second_type>
 {
 public:
-	node() : _parent(0), _l(0), _r(0), ft::pair<typename Pair::first_type, typename Pair::second_type>() {};
-	node(Pair & obj) : ft::pair<typename Pair::first_type, typename Pair::second_type>(obj), _parent(0), _l(0), _r(0) {};
+	node() : _parent(0), _left(0), _right(0), ft::pair<typename Pair::first_type, typename Pair::second_type>() {};
+	node(Pair & obj) : ft::pair<typename Pair::first_type, typename Pair::second_type>(obj), _parent(0), _left(0), _right(0) {};
 	~node(){}
-private:
+// private:
 	node		*_parent;
-	node 		*_l;
-	node 		*_r;
+	node 		*_left;
+	node 		*_right;
 };
 
 template < class Pair, class Compare = std::less<typename Pair::first_type>  >
@@ -145,7 +145,7 @@ public:
 		return const_iterator(_end);	
 	}
 /*METHODS-----------------------------------------------------------------------------------*/
-	void addnode(Pair &obj)
+	void addnode(const Pair &obj)
 	{
 		if (!_begin)
 		{
@@ -155,12 +155,12 @@ public:
 			return;	
 		}
 		pointer temp = this->_allocator.allocate(1);
-		temp.first = obj.first;
-		temp.second = obj.second;
-		if (obj.first > this->first)
-			_begin->_r = temp;
+		temp->first = obj.first;
+		temp->second = obj.second;
+		if (obj.first > this->_begin->first)
+			_begin->_right = temp;
 		else
-			_begin->_l = temp;
+			_begin->_left = temp;
 	}
 };
 };
