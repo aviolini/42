@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/15 10:59:11 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/15 17:04:38 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ public:
 	/*MEMBER OPERATORS--------------------------------------------------*/
 	pointer operator -> ()
 	{
-		return this->_data;
+		return &*this->_data;
 	}
 	reference operator *()
 	{

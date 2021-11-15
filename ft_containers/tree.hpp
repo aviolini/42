@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/15 14:34:36 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/15 17:04:20 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ public:
 		return *this;		
 	}
 	/*MEMBER OPERATORS--------------------------------------------------*/
+	pointer operator -> ()
+	{
+		return &*this->_ptr;
+	}
 	reference operator *()
 	{
 		return *this->_ptr;
@@ -76,7 +80,6 @@ public:
 	treeIterator &operator --()		;		//PREFIX
 	treeIterator operator --(int)	;			//POSTFIX
 	treeIterator & operator -= (difference_type n);
-	pointer operator -> ();
 	reference operator [] (int index);
 	/*RELATIONAL OPERATORS--------------------------------------------------*/
 	bool operator == (const treeIterator & rhs)
