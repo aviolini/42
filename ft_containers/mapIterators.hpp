@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/12 16:45:51 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/15 10:59:11 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,10 @@ public:
 	mapIterator & operator -= (difference_type n);
 	reference operator [] (int index);
 	/*RELATIONAL OPERATORS--------------------------------------------------*/
-	bool operator == (const mapIterator & rhs);
+	bool operator == (const mapIterator & rhs)
+	{
+		return (this->_data == rhs._data);
+	}
 	bool operator != (const mapIterator & rhs)
 	{
 		return !(this->_data == rhs._data);

@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/12 16:38:52 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/15 11:41:26 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,14 @@ public:
 	pointer operator -> ();
 	reference operator [] (int index);
 	/*RELATIONAL OPERATORS--------------------------------------------------*/
-	bool operator == (const treeIterator & rhs);
-	bool operator != (const treeIterator & rhs);
+	bool operator == (const treeIterator & rhs)
+	{
+		return (this->_ptr == rhs._ptr);
+	}
+	bool operator != (const treeIterator & rhs)
+	{
+		return !(this->_ptr == rhs._ptr);
+	}
 	bool operator > (const treeIterator & rhs);
 	bool operator >= (const treeIterator & rhs);
 	bool operator < (const treeIterator & rhs);
@@ -91,8 +97,8 @@ template < class Pair,class Compare = std::less<typename Pair::first_type> >
 class node : public ft::pair<typename Pair::first_type,typename Pair::second_type>
 {
 public:
-	node() : _parent(0), _left(0), _right(0), ft::pair<typename Pair::first_type, typename Pair::second_type>() {};
-	node(Pair & obj) : ft::pair<typename Pair::first_type, typename Pair::second_type>(obj), _parent(0), _left(0), _right(0) {};
+	node() : ft::pair<typename Pair::first_type, typename Pair::second_type>(), _parent(0), _left(0), _right(0) {}
+	node(Pair & obj) : ft::pair<typename Pair::first_type, typename Pair::second_type>(obj), _parent(0), _left(0), _right(0) {}
 	~node(){}
 // private:
 	node		*_parent;
@@ -145,22 +151,26 @@ public:
 		return const_iterator(_end);	
 	}
 /*METHODS-----------------------------------------------------------------------------------*/
-	void addnode(const Pair &obj)
+	void addnode(Pair &obj)
 	{
-		if (!_begin)
+		this->_root = insert(_root, obj);
+	}
+	pointer insert (pointer p_tree, Pair & obj)
+	{
+		if ( p_tree == 0 )
 		{
-			_begin = this->_allocator.allocate(1);
-			this->_begin->first = obj.first;
-			this->_begin->second = obj.second;
-			return;	
+		 	pointer p_new_tree = new value_type;
+		 	p_new_tree->_left = 0;
+		 	p_new_tree->_right = 0;
+		 	p_new_tree->first = obj.first;
+		 	p_new_tree->second = obj.second;
+		 	return p_new_tree;
 		}
-		pointer temp = this->_allocator.allocate(1);
-		temp->first = obj.first;
-		temp->second = obj.second;
-		if (obj.first > this->_begin->first)
-			_begin->_right = temp;
+		if( obj.first < p_tree->first )
+		 	p_tree->_left = insert( p_tree->_left, obj );
 		else
-			_begin->_left = temp;
+		 	p_tree->_right = insert( p_tree->_right, obj );
+		return p_tree;
 	}
 };
 };

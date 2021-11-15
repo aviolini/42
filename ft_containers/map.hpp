@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/12 16:30:55 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/15 10:48:17 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ public:
 	// mapped_type& operator[] (const key_type& k);
 	// /*MODIFIERS-----------------------------------------------------------------------------------*/
 	// pair<iterator,bool> insert (const value_type& val)								//SINGLE ELEMENT
-	void insert (const value_type& val)								//SINGLE ELEMENT
+	void insert (value_type& val)								//SINGLE ELEMENT
 	{
 		_tree.addnode(val);
 		return ;
