@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/15 12:16:21 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/15 14:34:36 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,24 +140,27 @@ public:
 		while (temp->_left != 0)
 			temp = temp->_left;
 		return iterator(temp);
-		// return iterator(_begin);
 	}
 	iterator end()
 	{
 		pointer temp = this->_root;
 		while (temp->_right != 0)
 			temp = temp->_right;
-		// return iterator(temp->_right);
-		return (temp->_right);
-
+		return iterator(temp->_right);
 	}
 	const_iterator begin() const
 	{
-		return const_iterator(_begin);
+		pointer temp = this->_root;
+		while (temp->_left != 0)
+			temp = temp->_left;
+		return const_iterator(temp);
 	}
 	const_iterator end() const
 	{
-		return const_iterator(_end);	
+		pointer temp = this->_root;
+		while (temp->_right != 0)
+			temp = temp->_right;
+		return const_iterator(temp->_right);
 	}
 /*METHODS-----------------------------------------------------------------------------------*/
 	void addnode(Pair &obj)
