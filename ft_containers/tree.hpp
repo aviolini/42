@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/15 17:04:20 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/15 18:24:38 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ public:
 	typedef value_type*						pointer;
 	typedef value_type&						reference;
     typedef ft::ptrdiff_t					difference_type;
+	typedef typename _Tp::Pair_type 		Pair;
 private:
     pointer _ptr;
 public:
@@ -48,7 +49,7 @@ public:
 	/*MEMBER OPERATORS--------------------------------------------------*/
 	pointer operator -> ()
 	{
-		return &*this->_ptr;
+		return this->_ptr;
 	}
 	reference operator *()
 	{
@@ -96,17 +97,22 @@ public:
 	bool operator <= (const treeIterator & rhs);
 };
 
-template < class Pair,class Compare = std::less<typename Pair::first_type> >
-class node : public ft::pair<typename Pair::first_type,typename Pair::second_type>
+template < class Pair >
+class node
 {
 public:
-	node() : ft::pair<typename Pair::first_type, typename Pair::second_type>(), _parent(0), _left(0), _right(0) {}
-	node(Pair & obj) : ft::pair<typename Pair::first_type, typename Pair::second_type>(obj), _parent(0), _left(0), _right(0) {}
+	typedef Pair Pair_type;
+	node() : _parent(0), _left(0), _right(0), _value(0) {}
+	node(Pair & obj) : _parent(0), _left(0), _right(0)
+	{
+		this->_value = new Pair(obj);
+	}
 	~node(){}
 // private:
 	node		*_parent;
 	node 		*_left;
 	node 		*_right;
+	Pair		*_value;
 };
 
 template < class Pair, class Compare = std::less<typename Pair::first_type>  >
@@ -168,20 +174,24 @@ public:
 /*METHODS-----------------------------------------------------------------------------------*/
 	void addnode(Pair &obj)
 	{
+
 		this->_root = insert(_root, obj);
 	}
 	pointer insert (pointer p_tree, Pair & obj)
 	{
 		if ( p_tree == 0 )
 		{
+
 		 	pointer p_new_tree = new value_type;
 		 	p_new_tree->_left = 0;
 		 	p_new_tree->_right = 0;
-		 	p_new_tree->first = obj.first;
-		 	p_new_tree->second = obj.second;
+			 p_new_tree->_value = new Pair(obj);
+		 	// p_new_tree->_value->first = obj.first;
+		 	// p_new_tree->_value->second = obj.second;
+		// std::cout << "AAH" << std::endl;
 		 	return p_new_tree;
 		}
-		if( obj.first < p_tree->first )
+		if( obj.first < p_tree->_value->first )
 		 	p_tree->_left = insert( p_tree->_left, obj );
 		else
 		 	p_tree->_right = insert( p_tree->_right, obj );

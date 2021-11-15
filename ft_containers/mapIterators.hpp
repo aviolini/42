@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/15 17:04:38 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/15 18:24:58 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ public:
 	typedef typename treeIterator::pointer				pointer;
 	typedef typename treeIterator::reference			reference;
 	typedef typename treeIterator::difference_type		difference_type;
+	typedef typename treeIterator::Pair					Pair;
 protected:
 	treeIterator _data;
 public:	
@@ -37,14 +38,14 @@ public:
 		return *this;
 	}
 	/*MEMBER OPERATORS--------------------------------------------------*/
-	pointer operator -> ()
+	Pair *operator -> ()
 	{
-		return &*this->_data;
+		return this->_data->_value;
 	}
-	reference operator *()
-	{
-		return *this->_data;
-	}
+	// Pair *operator *()
+	// {
+	// 	return (this->_data->_value);						////////NO O FIRST OI SECOND
+	// }
 	mapIterator operator + ( const difference_type &n ) const;
 	mapIterator &operator ++()				//PREFIX
 	{

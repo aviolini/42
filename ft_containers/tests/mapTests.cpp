@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/15 17:02:31 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/15 18:24:23 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,18 @@ void mapTest()
 	typename C::value_type pair2('b', 2);
 	typename C::value_type pair3('c', 3);
 
+
 	test1.insert(pair1);
 	test1.insert(pair2);
 	test1.insert(pair3);
-	(void)pair1;
-	(void)pair2;
+	// (void)pair1;
+	// (void)pair2;
 	(void)test1;
 
 	
+	// std::cout << "AAA" << *test1.end() << std::endl;
 	for (typename C::iterator it1 = test1.begin(); it1 != test1.end(); it1++)
+	// {}
 		// std::cout << "F: " << (*it1).first << "\tS: " << (*it1).second <<  std::endl;
 		std::cout << "F: " << it1->first << "\tS: " << it1->second <<  std::endl;
 

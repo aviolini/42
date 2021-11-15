@@ -862,9 +862,15 @@ public:
         : __i_(__i.__i_) {}
 
     _LIBCPP_INLINE_VISIBILITY
-    reference operator*() const {return __i_->__get_value();}
+    reference operator*() const 
+	{
+		return __i_->__get_value();
+	}
     _LIBCPP_INLINE_VISIBILITY
-    pointer operator->() const {return pointer_traits<pointer>::pointer_to(__i_->__get_value());}
+    pointer operator->() const 
+	{
+		return pointer_traits<pointer>::pointer_to(__i_->__get_value());
+	}
 
     _LIBCPP_INLINE_VISIBILITY
     __map_const_iterator& operator++() {++__i_; return *this;}
