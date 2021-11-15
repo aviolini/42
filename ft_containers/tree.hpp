@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/15 11:41:26 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/15 12:16:21 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,11 +136,20 @@ public:
 /*ITERATORS-----------------------------------------------------------------------------------*/
 	iterator begin()
 	{
-		return iterator(_begin);
+		pointer temp = this->_root;
+		while (temp->_left != 0)
+			temp = temp->_left;
+		return iterator(temp);
+		// return iterator(_begin);
 	}
 	iterator end()
 	{
-		return iterator(_end);
+		pointer temp = this->_root;
+		while (temp->_right != 0)
+			temp = temp->_right;
+		// return iterator(temp->_right);
+		return (temp->_right);
+
 	}
 	const_iterator begin() const
 	{
