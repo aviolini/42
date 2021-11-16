@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/16 22:16:04 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/17 00:50:23 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ public:
 	// typedef mapReverse_iterator<iterator> 					reverse_iterator;
 
 private:
-	tree<value_type,key_compare,allocator_type> 										_tree;
+	tree<value_type,key_compare,allocator_type> 			_tree;
 
 public:
 /*CANONICAL-----------------------------------------------------------------------------------*/

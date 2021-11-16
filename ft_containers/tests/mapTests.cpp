@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/16 23:17:33 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/17 00:40:19 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,20 +79,22 @@ void mapTest()
 
 	
 	// std::cout << "AAA" << *test1.end() << std::endl;
+	std::cout << (test1.begin() == test1.end()) << std::endl;
 	typename C::iterator it1 = test1.begin();
-	// for (; it1 != test1.end(); it1++)
+	for (; it1 != test1.end(); it1++)
 	// {}
-		// std::cout << "F: " << (*it1).first << "\tS: " << (*it1).second <<  std::endl;
+		// // std::cout << "F: " << (*it1).first << "\tS: " << (*it1).second <<  std::endl;
 		std::cout << "F: " << it1->first << "\tS: " << it1->second <<  std::endl;
-			it1++;
-		std::cout << "F: " << it1->first << "\tS: " << it1->second <<  std::endl;
-			it1++;
-		std::cout << "F: " << it1->first << "\tS: " << it1->second <<  std::endl;
-			it1++;
-		std::cout << "F: " << it1->first << "\tS: " << it1->second <<  std::endl;
-			it1++;
-		std::cout << "F: " << it1->first << "\tS: " << it1->second <<  std::endl;
-
+		// 	it1++;
+		// std::cout << "F: " << it1->first << "\tS: " << it1->second <<  std::endl;
+		// 	it1++;
+		// std::cout << "F: " << it1->first << "\tS: " << it1->second <<  std::endl;
+		// 	it1++;
+		// std::cout << "F: " << it1->first << "\tS: " << it1->second <<  std::endl;
+		// 	it1++;
+		// std::cout << "F: " << it1->first << "\tS: " << it1->second <<  std::endl;
+		// 	it1++;
+		// std::cout << "F: " << it1->first << "\tS: " << it1->second <<  std::endl;
 		
 	// for (int i = 0; i < 20; i+=2)
 	// 	test1.insert(std::make_pair<char, int>(startC + i,startN + i));
