@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/15 18:15:27 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/16 22:16:04 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,31 +45,14 @@ public:
 	
 	// typedef mapReverse_iterator<const_iterator> 			const_reverse_iterator;
 	// typedef mapReverse_iterator<iterator> 					reverse_iterator;
-	
-	class value_compare
-	{
-	  friend class map;
-	protected:
-	  Compare comp;
-	  value_compare (Compare c) : comp(c) {}
-	public:
-	  typedef bool											result_type;
-	  typedef value_type									first_argument_type;
-	  typedef value_type									second_argument_type;
-	  bool operator() (const value_type& x, const value_type& y) const
-	  {
-	    return comp(x.first, y.first);
-	  }
-	};
-	
+
 private:
-	allocator_type											_allocator;
-	tree<value_type> 										_tree;
+	tree<value_type,key_compare,allocator_type> 										_tree;
 
 public:
 /*CANONICAL-----------------------------------------------------------------------------------*/
 	explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
-	_allocator(alloc){
+	_tree(comp, alloc){
 		(void)comp;
 	// value_compare(comp); 
 	}									//EMPTY
@@ -77,7 +60,7 @@ public:
 	map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type(),		//RANGE
 		typename myEnable_if_false<myIs_integral<InputIterator>::value , T>::type = 0,
 		typename myEnable_if_false<myIs_floating_point<InputIterator>::value , T>::type = 0)
-	: _allocator(alloc), value_compare(comp)
+	:_tree(comp,alloc)
 	{
 		(void)first;
 		(void)last;

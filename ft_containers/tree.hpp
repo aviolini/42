@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/16 16:26:58 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/16 22:24:53 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,13 @@ public:
 	Pair		*_value;
 };
 
-template < class Pair, class Compare = std::less<typename Pair::first_type>  >
+template < class Pair, class Compare = std::less<typename Pair::first_type>, class Alloc = std::allocator<node<Pair> > >
 class tree
 {
 public:
-	typedef std::allocator<node<Pair> >					Alloc;
-	typedef Alloc										allocator_type;
+	typedef Alloc										pair_allocator;
+	typedef Compare										key_compare;
+	typedef std::allocator<node<Pair> >					allocator_type;
 	typedef typename allocator_type::value_type			value_type;
     typedef typename allocator_type::size_type		    size_type;
     typedef typename allocator_type::reference			reference;
@@ -131,19 +132,34 @@ public:
 	typedef treeIterator<node<Pair> >					const_iterator;
 	typedef treeIterator<node<Pair> >					iterator;
 	// typedef	vecReverse_iterator<const_iterator>		const_reverse_iterator;
-	// typedef	vecReverse_iterator<iterator>			reverse_iterator;	
+	// typedef	vecReverse_iterator<iterator>			reverse_iterator;
+	class value_compare
+	{
+	  friend class tree;
+	protected:
+	  Compare comp;
+	  value_compare (Compare c) : comp(c) {}
+	public:
+	  typedef bool											result_type;
+	  typedef value_type									first_argument_type;
+	  typedef value_type									second_argument_type;
+	  bool operator() (const value_type& x, const value_type& y) const
+	  {
+	    return comp(x.first, y.first);
+	  }
+	};
 private:
-	Alloc			_allocator;
-	pointer			_root;
-	pointer			_end;
-	difference_type	_size;
+	key_compare			_compare;
+	pair_allocator		_pair_allocator;
+	allocator_type		_node_allocator;
+	pointer				_root;
+	pointer				_end;
 public:
 /*CANONICAL-----------------------------------------------------------------------------------*/
-	explicit tree (const allocator_type& alloc = allocator_type()) : _allocator(alloc)//, _root(0), _end(0), _size(0){}
+	explicit tree (const key_compare& comp = key_compare(), const pair_allocator& alloc = pair_allocator())
+	:_compare(comp), _pair_allocator(alloc)
 	{
-		this->_end = this->_allocator.allocate(1);
-		// this->_root = this->_end;
-		this->_size = 0;
+		this->_end = this->_node_allocator.allocate(1);
 		this->_root = 0;
 	}
 	~tree(){}
@@ -183,20 +199,7 @@ public:
 		this->_root = insert(_root, obj);
 	}
 	pointer insert (pointer root, Pair & obj)
-	{
-		if ( root == this->_end )
-		{
-			std::cout << "1" << std::endl;
-		 	pointer temp = new value_type;
-		 	temp->_left = 0;
-		 	temp->_right = this->_end;
-			temp->_value = new Pair(obj);
-			// temp->_parent = parent;
-		 	// temp->_value->first = obj.first;
-		 	// temp->_value->second = obj.second;
-		// std::cout << "AAH" << std::endl;
-		 	return temp;
-		}		
+	{		
 		if ( root == 0 )
 		{
 			std::cout << "2" << std::endl;
