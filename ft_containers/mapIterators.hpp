@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapIterators.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/15 18:24:58 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/16 22:45:16 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ public:
 	/*MEMBER OPERATORS--------------------------------------------------*/
 	Pair *operator -> ()
 	{
-		return this->_data->_value;
+		return &this->_data->_value;
 	}
-	// Pair *operator *()
-	// {
-	// 	return (this->_data->_value);						////////NO O FIRST OI SECOND
-	// }
+	Pair *operator *()
+	{
+		return (this->_data->_value);
+	}
 	mapIterator operator + ( const difference_type &n ) const;
 	mapIterator &operator ++()				//PREFIX
 	{

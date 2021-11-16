@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/16 22:24:53 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/16 22:45:59 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,17 +102,18 @@ class node
 {
 public:
 	typedef Pair Pair_type;
-	node() : _parent(0), _left(0), _right(0), _value(0) {}
+	node() :  _value(), _parent(0), _left(0), _right(0) {}
 	node(Pair & obj) : _parent(0), _left(0), _right(0)
 	{
-		this->_value = new Pair(obj);
+		this->_value.first = obj.first;
+		this->_value.second = obj.second;
 	}
 	~node(){}
 // private:
+	Pair		_value;
 	node		*_parent;
 	node 		*_left;
 	node 		*_right;
-	Pair		*_value;
 };
 
 template < class Pair, class Compare = std::less<typename Pair::first_type>, class Alloc = std::allocator<node<Pair> > >
@@ -198,26 +199,27 @@ public:
 
 		this->_root = insert(_root, obj);
 	}
-	pointer insert (pointer root, Pair & obj)
+	pointer insert ( pointer node, Pair & obj)
 	{		
-		if ( root == 0 )
+		if ( node == 0 )
 		{
-			std::cout << "2" << std::endl;
+			// std::cout << "2" << std::endl;
 		 	pointer temp = new value_type;
 		 	temp->_left = 0;
 		 	temp->_right = 0;
-			temp->_value = new Pair(obj);
+			temp->_value.first = obj.first;
+			temp->_value.second = obj.second;
 			// temp->_parent = parent;
 		 	// temp->_value->first = obj.first;
 		 	// temp->_value->second = obj.second;
 		// std::cout << "AAH" << std::endl;
 		 	return temp;
 		}
-		if( obj.first < root->_value->first )
-		 	root->_left = insert(root->_left, obj );
+		if( obj.first < node->_value.first )
+		 	node->_left = insert(node->_left, obj );
 		else
-		 	root->_right = insert(root->_right, obj );
-		return root;
+		 	node->_right = insert(node->_right, obj );
+		return node;
 	}
 };
 };
