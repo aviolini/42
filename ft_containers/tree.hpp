@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/16 22:45:59 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/16 23:01:09 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,9 +197,9 @@ public:
 	void addnode(Pair &obj)
 	{
 
-		this->_root = insert(_root, obj);
+		this->_root = insert(0, _root, obj);
 	}
-	pointer insert ( pointer node, Pair & obj)
+	pointer insert ( pointer parent, pointer node, Pair & obj)
 	{		
 		if ( node == 0 )
 		{
@@ -209,16 +209,16 @@ public:
 		 	temp->_right = 0;
 			temp->_value.first = obj.first;
 			temp->_value.second = obj.second;
-			// temp->_parent = parent;
+			temp->_parent = parent;
 		 	// temp->_value->first = obj.first;
 		 	// temp->_value->second = obj.second;
 		// std::cout << "AAH" << std::endl;
 		 	return temp;
 		}
 		if( obj.first < node->_value.first )
-		 	node->_left = insert(node->_left, obj );
+		 	node->_left = insert(node, node->_left, obj );
 		else
-		 	node->_right = insert(node->_right, obj );
+		 	node->_right = insert(node, node->_right, obj );
 		return node;
 	}
 };
