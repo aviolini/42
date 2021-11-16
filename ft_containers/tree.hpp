@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/16 23:01:09 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/17 00:30:03 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,16 @@ public:
 	treeIterator operator + ( const difference_type &n ) const;
 	treeIterator &operator ++()			//PREFIX
 	{
-		if (this->_ptr->_right != 0)
+		if (_ptr->_right != 0)
 		{
-			this->_ptr = this->_ptr->_right;
-			while (this->_ptr->_left != 0)
-				this->_ptr = this->_ptr->_left;
+			_ptr = _ptr->_right;
+			while (_ptr->_left != 0)
+				_ptr = _ptr->_left;
 			return *this;		
 		}
-		while (_ptr == _ptr->_parent->_left)
+		while (!(_ptr == _ptr->_parent->_left))
 			_ptr = _ptr->_parent;
+		_ptr = _ptr->_parent;
 		return *this;
 	}
 	treeIterator operator ++(int)			//POSTFIX
