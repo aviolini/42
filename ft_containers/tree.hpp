@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/16 12:40:19 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/16 15:22:11 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,12 +135,16 @@ public:
 private:
 	Alloc			_allocator;
 	pointer			_root;
-	pointer			_begin;
 	pointer			_end;
 	difference_type	_size;
 public:
 /*CANONICAL-----------------------------------------------------------------------------------*/
-	explicit tree (const allocator_type& alloc = allocator_type()) : _allocator(alloc), _root(0), _begin(0), _end(0), _size(0){}
+	explicit tree (const allocator_type& alloc = allocator_type()) : _allocator(alloc)//, _root(0), _end(0), _size(0){}
+	{
+		this->_end = this->_allocator.allocate(1);
+		// this->_root = this->_end;
+		this->_size = 0;
+	}
 	~tree(){}
 /*ITERATORS-----------------------------------------------------------------------------------*/
 	iterator begin()
@@ -177,25 +181,25 @@ public:
 
 		this->_root = insert(_root, obj);
 	}
-	pointer insert (pointer p_tree, Pair & obj)
+	pointer insert (pointer root, Pair & obj)
 	{
-		if ( p_tree == 0 )
+		if ( root == 0 )
 		{
-
-		 	pointer p_new_tree = new value_type;
-		 	p_new_tree->_left = 0;
-		 	p_new_tree->_right = 0;
-			 p_new_tree->_value = new Pair(obj);
-		 	// p_new_tree->_value->first = obj.first;
-		 	// p_new_tree->_value->second = obj.second;
+		 	pointer temp = new value_type;
+		 	temp->_left = 0;
+		 	temp->_right = 0;
+			temp->_value = new Pair(obj);
+			// temp->_parent = parent;
+		 	// temp->_value->first = obj.first;
+		 	// temp->_value->second = obj.second;
 		// std::cout << "AAH" << std::endl;
-		 	return p_new_tree;
+		 	return temp;
 		}
-		if( obj.first < p_tree->_value->first )
-		 	p_tree->_left = insert( p_tree->_left, obj );
+		if( obj.first < root->_value->first )
+		 	root->_left = insert(root->_left, obj );
 		else
-		 	p_tree->_right = insert( p_tree->_right, obj );
-		return p_tree;
+		 	root->_right = insert(root->_right, obj );
+		return root;
 	}
 };
 };
