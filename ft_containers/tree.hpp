@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/16 15:22:11 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/16 16:26:58 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ public:
 		this->_end = this->_allocator.allocate(1);
 		// this->_root = this->_end;
 		this->_size = 0;
+		this->_root = 0;
 	}
 	~tree(){}
 /*ITERATORS-----------------------------------------------------------------------------------*/
@@ -183,8 +184,22 @@ public:
 	}
 	pointer insert (pointer root, Pair & obj)
 	{
+		if ( root == this->_end )
+		{
+			std::cout << "1" << std::endl;
+		 	pointer temp = new value_type;
+		 	temp->_left = 0;
+		 	temp->_right = this->_end;
+			temp->_value = new Pair(obj);
+			// temp->_parent = parent;
+		 	// temp->_value->first = obj.first;
+		 	// temp->_value->second = obj.second;
+		// std::cout << "AAH" << std::endl;
+		 	return temp;
+		}		
 		if ( root == 0 )
 		{
+			std::cout << "2" << std::endl;
 		 	pointer temp = new value_type;
 		 	temp->_left = 0;
 		 	temp->_right = 0;
