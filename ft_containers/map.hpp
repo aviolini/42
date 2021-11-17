@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/17 20:04:01 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/17 22:38:00 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ public:
 	// pair<iterator,bool> insert (const value_type& val)								//SINGLE ELEMENT
 	void insert (const value_type& val)								//SINGLE ELEMENT
 	{
-		_tree.addnode(val);
+		_tree.insert(val);
 		return ;
 	}
 	// iterator insert (iterator position, const value_type& val);						//WITH HINT
