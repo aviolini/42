@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/17 19:40:08 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/17 19:50:09 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ public:
 		_root = _end;
 	}
 	~tree(){}
+
 /*ITERATORS-----------------------------------------------------------------------------------*/
 	iterator begin()
 	{
@@ -183,6 +184,7 @@ public:
 			temp = temp->_right;
 		return const_iterator(temp->_right);
 	}
+
 /*METHODS-----------------------------------------------------------------------------------*/
 	void addnode(const Pair &obj)
 	{
@@ -213,8 +215,6 @@ public:
 		 	node->_right = insert(node, node->_right, obj );
 		return node;
 	}
-
-
 };
 };
 
