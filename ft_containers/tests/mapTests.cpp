@@ -6,18 +6,18 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/17 15:10:22 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/17 16:09:59 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
 
-template<typename C>
-void mapTest()
+template<typename C, typename PAIR>
+void mapTest(PAIR (*makepair)(const char, int))
 {
 
-	// std::cout << *ptr('a',1).first << std::endl;
+	std::cout << makepair('a',1).first << std::endl;
 
 	// //PAIR////////////
 	// ft::pair<std::string, int> pair1("primo", 1);
