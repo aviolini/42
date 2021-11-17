@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/16 22:45:16 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/17 19:44:53 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ public:
 protected:
 	treeIterator _data;
 public:	
-	/*CANONICAL-----------------------------------------------------------------------------------*/		
+/*CANONICAL-----------------------------------------------------------------------------------*/		
 	mapIterator () : _data(0) {}
 	mapIterator (treeIterator initLoc) : _data(initLoc) {}
 	~mapIterator(){}
@@ -37,7 +37,7 @@ public:
 		this->_data = rhs._data;
 		return *this;
 	}
-	/*MEMBER OPERATORS--------------------------------------------------*/
+/*MEMBER OPERATORS--------------------------------------------------*/
 	Pair *operator -> ()
 	{
 		return &this->_data->_value;
@@ -52,7 +52,7 @@ public:
 		++this->_data;
 		return *this;
 	}
-	mapIterator operator ++(int)				//POSTFIX
+	mapIterator operator ++(int)			//POSTFIX
 	{
 		mapIterator t(*this);
 		++(*this);
@@ -65,7 +65,7 @@ public:
 	mapIterator operator --(int);				//POSTFIX
 	mapIterator & operator -= (difference_type n);
 	reference operator [] (int index);
-	/*RELATIONAL OPERATORS--------------------------------------------------*/
+/*RELATIONAL OPERATORS--------------------------------------------------*/
 	bool operator == (const mapIterator & rhs)
 	{
 		return (this->_data == rhs._data);
@@ -90,7 +90,7 @@ public:
 	typedef typename iterator_type::reference			reference;
 	typedef typename iterator_type::difference_type		difference_type;
 	typedef typename iterator_type::iterator_category	iterator_category;
-	/*CANONICAL-----------------------------------------------------------------------------------*/		
+/*CANONICAL-----------------------------------------------------------------------------------*/		
 	mapReverse_iterator ();
 	explicit mapReverse_iterator (iterator_type it);
 	template <class Iter>
@@ -98,12 +98,12 @@ public:
 	~mapReverse_iterator();
 	mapReverse_iterator(mapReverse_iterator const & rhs);
 	mapReverse_iterator operator = (const mapReverse_iterator & rhs);
-	/*MEMBER OPERATORS--------------------------------------------------*/
+/*MEMBER OPERATORS--------------------------------------------------*/
 	mapReverse_iterator &operator ++();				//PREFIX
 	mapReverse_iterator operator ++(int);				//POSTFIX
 	mapReverse_iterator &operator --();				//PREFIX
 	mapReverse_iterator operator --(int);				//POSTFIX
-	/*RELATIONAL OPERATORS--------------------------------------------------*/
+/*RELATIONAL OPERATORS--------------------------------------------------*/
 	bool operator > (const mapReverse_iterator & rhs);
 	bool operator >= (const mapReverse_iterator & rhs);
 	bool operator < (const mapReverse_iterator & rhs);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:13:14 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/17 16:36:40 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/17 19:33:04 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ int main(int argc, char** argv) {
 	
 	// vectorTest< ft::vector<int> >();
 	// stackTest< ft::stack<int, ft::vector<int> > > ();
-	// Form *(Intern:: *methods_arr[3])(std::string const & targetForm) const = {&Intern::CreateShrubberyCreationForm,	&Intern::CreateRobotomyRequestForm,	&Intern::CreatePresidentialPardonForm};
 	ft::pair<const char, int> (*ptr)(const char, int) = &ft::make_pair<const char, int>;
-	// std::cout << ptr('a',1).first << std::endl;
 	mapTest< ft::map<char,int, std::less<char>, std::allocator<ft::pair <const char, int > > >, ft::pair<const char, int> >(ptr);
 
 
