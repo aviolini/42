@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:13:14 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/17 16:11:01 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/17 16:24:41 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
 	// Form *(Intern:: *methods_arr[3])(std::string const & targetForm) const = {&Intern::CreateShrubberyCreationForm,	&Intern::CreateRobotomyRequestForm,	&Intern::CreatePresidentialPardonForm};
 	std::pair<const char, int> (*ptr)(const char, int) = &std::make_pair<const char, int>;
 	// std::cout << ptr('a',1).first << std::endl;
-	mapTest< ft::map<const char,int, std::less<const char>, std::allocator<std::pair <const char, int > > >, std::pair<const char, int> >(ptr);   ///NON SI PUO' METTERE FT
+	mapTest< ft::map<char,int, std::less<char>, std::allocator<std::pair <const char, int > > >, std::pair<const char, int> >(ptr);   ///NON SI PUO' METTERE FT
 
 
 	return (0);
