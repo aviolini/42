@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/17 22:37:44 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/17 23:36:43 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,9 +189,6 @@ public:
 	void insert(const Pair &obj)
 	{
 		_root = insert(0, _root, obj);
-		// if (!_root)
-		// 	return false;
-		// return false;
 	}
 	pointer insert ( pointer parent, pointer node, const Pair & obj)
 	{
@@ -211,13 +208,28 @@ public:
 			temp->_parent = parent;
 		 	return temp;
 		}
-		// if (std::equal_to(obj.first,node->_value.first))
-		// 	return 0;
 		if( _compare(obj.first,node->_value.first))
 		 	node->_left = insert(node, node->_left, obj );
 		else
 		 	node->_right = insert(node, node->_right, obj );
 		return node;
+	}
+
+	iterator find(typename Pair::first_type & k)
+	{
+		return iterator(find(_root,k));
+	}
+	pointer find(pointer node, typename Pair::first_type  & k)
+	{
+		
+		if (node == 0)
+			return _end;
+		// if (std::equal_to<typename Pair::first_type>(k, node->_value.first))
+		if (k == node->_value.first)
+			return node;
+		if( _compare(k,node->_value.first))
+			return find(node->_left, k);
+		return find(node->_right, k);
 	}
 };
 };

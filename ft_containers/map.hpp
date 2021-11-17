@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/17 22:38:00 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/17 23:25:31 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,10 @@ public:
 	{
 		_tree.insert(val);
 		return ;
+	}
+	iterator find (const key_type & k)
+	{
+		return iterator(_tree.find(k));
 	}
 	// iterator insert (iterator position, const value_type& val);						//WITH HINT
 	// template <class InputIterator>													//RANGE
