@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/17 23:36:43 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/18 00:23:28 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,9 +186,10 @@ public:
 	}
 
 /*METHODS-----------------------------------------------------------------------------------*/
-	void insert(const Pair &obj)
+	iterator insert(const Pair &obj)
 	{
-		_root = insert(0, _root, obj);
+		_root = (insert(0, _root, obj));
+		return iterator(_root);
 	}
 	pointer insert ( pointer parent, pointer node, const Pair & obj)
 	{

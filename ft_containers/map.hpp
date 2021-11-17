@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/17 23:25:31 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/18 00:21:58 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,9 @@ public:
 
 /*MODIFIERS-----------------------------------------------------------------------------------*/
 	// pair<iterator,bool> insert (const value_type& val)								//SINGLE ELEMENT
-	void insert (const value_type& val)								//SINGLE ELEMENT
+	iterator insert (const value_type& val)								//SINGLE ELEMENT
 	{
-		_tree.insert(val);
-		return ;
+		return iterator(_tree.insert(val));
 	}
 	iterator find (const key_type & k)
 	{
