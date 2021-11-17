@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/17 16:09:59 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/17 16:19:33 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ template<typename C, typename PAIR>
 void mapTest(PAIR (*makepair)(const char, int))
 {
 
-	std::cout << makepair('a',1).first << std::endl;
+	// std::cout << makepair('a',1).first << std::endl;
 
 	// //PAIR////////////
 	// ft::pair<std::string, int> pair1("primo", 1);
@@ -72,6 +72,7 @@ void mapTest(PAIR (*makepair)(const char, int))
 	typename C::value_type pair9('l', 9);
 	typename C::value_type pair6('g', 6);
 	
+	test1.insert(makepair('n', 11));
 	test1.insert(pair4);
 	test1.insert(pair1);
 	test1.insert(pair5);
@@ -79,7 +80,11 @@ void mapTest(PAIR (*makepair)(const char, int))
 	test1.insert(pair9);
 	test1.insert(pair3);
 	test1.insert(pair6);
-	// test1.insert(fc('h', 7));
+	test1.insert(makepair('h', 7));
+	test1.insert(makepair('i', 8));
+	test1.insert(makepair('m', 10));
+
+
 
 
 	// (void)pair1;
@@ -88,7 +93,7 @@ void mapTest(PAIR (*makepair)(const char, int))
 
 	
 	// std::cout << "AAA" << *test1.end() << std::endl;
-	std::cout << (test1.begin() == test1.end()) << std::endl;
+	// std::cout << (test1.begin() == test1.end()) << std::endl;
 	typename C::iterator it1 = test1.begin();
 	for (; it1 != test1.end(); it1++)
 	// {}
