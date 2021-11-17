@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/17 19:34:35 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/17 20:11:51 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ void mapTest(PAIR (*makepair)(const char, int))
 	test1.insert(makepair('h', 7));
 	test1.insert(makepair('i', 8));
 	test1.insert(makepair('m', 10));
-	
+	// std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
+	// std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
+
 	typename C::iterator it1 = test1.begin();
 	for (; it1 != test1.end(); it1++)
 		std::cout << "F: " << it1->first << "\tS: " << it1->second <<  std::endl;

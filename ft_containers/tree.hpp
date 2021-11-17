@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/17 19:50:09 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/17 20:11:28 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ public:
     typedef typename allocator_type::difference_type	difference_type;
     typedef typename allocator_type::pointer			pointer;
     typedef typename allocator_type::const_pointer		const_pointer;
-	typedef treeIterator<node<Pair> >					const_iterator;
-	typedef treeIterator<node<Pair> >					iterator;
+	typedef treeIterator<value_type>					const_iterator;
+	typedef treeIterator<value_type>					iterator;
 	// typedef	vecReverse_iterator<const_iterator>		const_reverse_iterator;
 	// typedef	vecReverse_iterator<iterator>			reverse_iterator;
 	class value_compare
@@ -129,10 +129,10 @@ public:
 	  Compare comp;
 	  value_compare (Compare c) : comp(c) {}
 	public:
-	  typedef bool											result_type;
-	  typedef value_type									first_argument_type;
-	  typedef value_type									second_argument_type;
-	  bool operator() (const value_type& x, const value_type& y) const
+	  typedef bool			result_type;
+	  typedef value_type	first_argument_type;
+	  typedef value_type	second_argument_type;
+	  result_type operator() (const value_type& x, const value_type& y) const
 	  {
 	    return comp(x.first, y.first);
 	  }
@@ -188,8 +188,10 @@ public:
 /*METHODS-----------------------------------------------------------------------------------*/
 	void addnode(const Pair &obj)
 	{
-
 		_root = insert(0, _root, obj);
+		// if (!_root)
+		// 	return false;
+		// return false;
 	}
 	pointer insert ( pointer parent, pointer node, const Pair & obj)
 	{
@@ -209,6 +211,8 @@ public:
 			temp->_parent = parent;
 		 	return temp;
 		}
+		// if (std::equal_to(obj.first,node->_value.first))
+		// 	return 0;
 		if( _compare(obj.first,node->_value.first))
 		 	node->_left = insert(node, node->_left, obj );
 		else
