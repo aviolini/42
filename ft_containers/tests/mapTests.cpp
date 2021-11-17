@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapTests.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/17 00:40:19 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/17 12:47:57 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,19 @@ void mapTest()
 	typename C::value_type pair3('c', 3);
 	typename C::value_type pair4('e', 4);
 	typename C::value_type pair5('f', 5);
-
+	typename C::value_type pair9('l', 9);
+	typename C::value_type pair6('g', 6);
 	
 	test1.insert(pair4);
-	test1.insert(pair5);
 	test1.insert(pair1);
+	test1.insert(pair5);
 	test1.insert(pair2);
+	test1.insert(pair9);
 	test1.insert(pair3);
+	test1.insert(pair6);
+	test1.insert(std::make_pair('h', 7));
+
+
 	// (void)pair1;
 	// (void)pair2;
 	(void)test1;
@@ -85,6 +91,7 @@ void mapTest()
 	// {}
 		// // std::cout << "F: " << (*it1).first << "\tS: " << (*it1).second <<  std::endl;
 		std::cout << "F: " << it1->first << "\tS: " << it1->second <<  std::endl;
+	// test1.print();
 		// 	it1++;
 		// std::cout << "F: " << it1->first << "\tS: " << it1->second <<  std::endl;
 		// 	it1++;

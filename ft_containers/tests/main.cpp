@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:13:14 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/17 00:50:41 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/17 12:50:21 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
 	
 	// vectorTest< ft::vector<int> >();
 	// stackTest< ft::stack<int, ft::vector<int> > > ();
-	mapTest< ft::map<char,int, std::less<char>, std::allocator<ft::pair <const char, int > > > >();
+	mapTest< ft::map<const char,int, std::less<const char>, std::allocator<std::pair <const char, int > > > >();
 
 
 	return (0);

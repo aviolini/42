@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/17 00:50:23 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/17 12:57:21 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,15 @@
 namespace ft
 {
 
-template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<Key,T> > > 
+template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<const Key,T> > > 
 class map
 {
 public:
 	typedef Key												key_type;		//THE TYPE OF THE KEY
 	typedef T												mapped_type;	//THE TYPE OF THE VALUES
-	typedef ft::pair<key_type,mapped_type>					value_type;	
-	typedef Compare											key_compare;
 	typedef Alloc											allocator_type;
-	typedef ft::node<value_type>				node_type;
+	typedef Compare											key_compare;
+	typedef typename allocator_type::value_type				value_type;	
 	typedef typename allocator_type::reference				reference;
 	typedef typename allocator_type::const_reference		const_reference;
 	typedef typename allocator_type::pointer				pointer;
@@ -41,13 +40,15 @@ public:
     typedef typename allocator_type::difference_type		difference_type;
     typedef typename allocator_type::size_type		   		size_type;
 	// typedef mapIterator<ft::treeIterator<node_type> >		const_iterator;
+	typedef ft::node<value_type>							node_type;
 	typedef mapIterator<ft::treeIterator<node_type> >		iterator;
+	typedef tree<value_type,key_compare,allocator_type> 	tree_type;
 	
 	// typedef mapReverse_iterator<const_iterator> 			const_reverse_iterator;
 	// typedef mapReverse_iterator<iterator> 					reverse_iterator;
 
 private:
-	tree<value_type,key_compare,allocator_type> 			_tree;
+	tree_type	_tree;
 
 public:
 /*CANONICAL-----------------------------------------------------------------------------------*/
@@ -74,6 +75,53 @@ public:
 	{
 		(void)x;
 	}
+/*EXTRA-------------------------------------------------------------------------------------------------------------------------------*/
+    // void print(StringBuilder buffer, String prefix, String childrenPrefix) 
+	// {
+    //     buffer.append(prefix);
+    //     buffer.append(name);
+    //     buffer.append('\n');
+    //     for (iterator it = children.iterator(); it != it.end();) 
+	// 	{
+    //         TreeNode next = it.next();
+    //         if (it.hasNext())
+    //             next.print(buffer, childrenPrefix + "├── ", childrenPrefix + "│   ");
+    //         else
+    //             next.print(buffer, childrenPrefix + "└── ", childrenPrefix + "    ");
+    //     }
+    // }
+	// void print()
+	// {
+	// 	this->printRec(this->_tree._root, "", "");
+	// }
+	// void printRec(node_type *node, std::string s1, std::string s2)
+	// {
+	// 	// iterator it1 = iterator(this->_tree._root);
+		
+	// 	typename tree_type::iterator it1 = typename tree_type::iterator(node);
+	// 	typename tree_type::iterator end = typename tree_type::iterator(this->_tree._end);
+	// 	std::cout << it1->_value.first << std::endl;
+	// 	it1++;
+	// 	for (; it1 != end; it1++)
+	// 	{
+	// 		node_type* next = node.next();
+	// 		if (it1 != end)
+	// 		{
+	// 			            if (it.hasNext()) {
+    //             next.print(node, nPrefix + "├── ", childrenPrefix + "│   ");
+    //         } else {
+    //             next.print(buffer, childrenPrefix + "└── ", childrenPrefix + "    ");
+    //         }
+	// 			std::cout << "├── " << it1->_value.first;
+	// 			if (it1->_right == _tree._end)
+	// 				std::cout << " ──END";
+	// 			std::cout << std::endl;
+	// 		}
+	// 	}
+	// }
+/*EXTRA-------------------------------------------------------------------------------------------------------------------------------*/
+
+
 /*ITERATORS-----------------------------------------------------------------------------------*/
 	iterator begin()
 	{
@@ -103,7 +151,7 @@ public:
 	// mapped_type& operator[] (const key_type& k);
 	// /*MODIFIERS-----------------------------------------------------------------------------------*/
 	// pair<iterator,bool> insert (const value_type& val)								//SINGLE ELEMENT
-	void insert (value_type& val)								//SINGLE ELEMENT
+	void insert (const value_type& val)								//SINGLE ELEMENT
 	{
 		_tree.addnode(val);
 		return ;

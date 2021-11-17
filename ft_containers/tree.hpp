@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/17 00:47:01 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/17 12:59:37 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,7 @@ class node
 public:
 	typedef Pair Pair_type;
 	node() :  _value(), _parent(0), _left(0), _right(0) {}
-	node(Pair & obj) : _parent(0), _left(0), _right(0)
-	{
-		_value.first = obj.first;
-		_value.second = obj.second;
-	}
+	node(const Pair & obj) : _value(obj), _parent(0), _left(0), _right(0){}
 	~node(){}
 // private:
 	Pair		_value;
@@ -150,7 +146,7 @@ public:
 	    return comp(x.first, y.first);
 	  }
 	};
-private:
+// private:
 	key_compare			_compare;
 	pair_allocator		_pair_allocator;
 	allocator_type		_node_allocator;
@@ -161,7 +157,8 @@ public:
 	explicit tree (const key_compare& comp = key_compare(), const pair_allocator& alloc = pair_allocator())
 	:_compare(comp), _pair_allocator(alloc)
 	{
-		_end = _node_allocator.allocate(1);
+		// _end = _node_allocator.allocate(1);
+		_end = new value_type;
 		// _end->_parent = _root;
 		_root = _end;
 	}
@@ -197,30 +194,31 @@ public:
 		return const_iterator(temp->_right);
 	}
 /*METHODS-----------------------------------------------------------------------------------*/
-	void addnode(Pair &obj)
+	void addnode(const Pair &obj)
 	{
 
 		_root = insert(0, _root, obj);
 	}
-	pointer insert ( pointer parent, pointer node, Pair & obj)
+	pointer insert ( pointer parent, pointer node, const Pair & obj)
 	{
 		if (node == _end)
 		{
-		 	pointer temp = new value_type;
+		 	pointer temp = new value_type(obj);
 		 	temp->_left = 0;
 		 	temp->_right = _end;
-			temp->_value.first = obj.first;
-			temp->_value.second = obj.second;
+			// temp->_value(obj);
+			// temp->_value.first = obj.first;
+			// temp->_value.second = obj.second;
 			temp->_parent = parent;			
 			return temp;
 		}		
 		if ( node == 0 )
 		{
-		 	pointer temp = new value_type;
+		 	pointer temp = new value_type(obj);
 		 	temp->_left = 0;
 		 	temp->_right = 0;
-			temp->_value.first = obj.first;
-			temp->_value.second = obj.second;
+			// temp->_value.first = obj.first;
+			// temp->_value.second = obj.second;
 			temp->_parent = parent;
 		 	return temp;
 		}
@@ -231,6 +229,8 @@ public:
 		 	node->_right = insert(node, node->_right, obj );
 		return node;
 	}
+
+
 };
 };
 
