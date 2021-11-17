@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/17 12:47:57 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/17 15:10:22 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 template<typename C>
 void mapTest()
 {
+
+	// std::cout << *ptr('a',1).first << std::endl;
+
 	// //PAIR////////////
 	// ft::pair<std::string, int> pair1("primo", 1);
 	// std::cout << "STD::PAIR\t" << pair1.first << " , " << pair1.second << std::endl;
@@ -76,7 +79,7 @@ void mapTest()
 	test1.insert(pair9);
 	test1.insert(pair3);
 	test1.insert(pair6);
-	test1.insert(std::make_pair('h', 7));
+	// test1.insert(fc('h', 7));
 
 
 	// (void)pair1;

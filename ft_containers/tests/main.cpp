@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:13:14 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/17 12:50:21 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/17 15:09:54 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ int main(int argc, char** argv) {
 	
 	// vectorTest< ft::vector<int> >();
 	// stackTest< ft::stack<int, ft::vector<int> > > ();
-	mapTest< ft::map<const char,int, std::less<const char>, std::allocator<std::pair <const char, int > > > >();
+	// Form *(Intern:: *methods_arr[3])(std::string const & targetForm) const = {&Intern::CreateShrubberyCreationForm,	&Intern::CreateRobotomyRequestForm,	&Intern::CreatePresidentialPardonForm};
+	std::pair<const char, int> (*ptr)(const char, int) = &std::make_pair<const char, int>;
+	std::cout << ptr('a',1).first << std::endl;
+	mapTest< ft::map<const char,int, std::less<const char>, std::allocator<std::pair <const char, int > > > >();   ///NON SI PUO' METTERE FT
 
 
 	return (0);
