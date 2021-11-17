@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/17 23:27:33 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/18 00:49:31 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,25 @@ void mapTest(PAIR (*makepair)(const char, int))
 	int i = 1;
 	for (typename C::iterator itfind1 = test1.begin(); itfind1->first != 'm'; ++itfind1)
 		++i;
-	std::cout << "I:" << i << std::endl;
+	// std::cout << "I:" << i << std::endl;
 
-
+/*FIND------------------------------------------------------------*/
 	std::cout << (test1.find('m'))->first << std::endl;
 	std::cout << (test1.find('m') == test1.end()) << std::endl;
 	std::cout << (test1.find('z') == test1.end()) << std::endl;
+/*-----------------------------------------------------------------*/
 	
+/*INSERT------------------------------------------------------------*/
+	std::cout << ((test1.insert(makepair('o', 12))).first->first) << std::endl;
+	std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
+	std::cout << ((test1.insert(makepair('o', 12))).first->first) << std::endl;
+	std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
+/*-----------------------------------------------------------------*/
 
-	
-	// std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
-	// std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
-
+/*PRINT------------------------------------------------------------*/
 	typename C::iterator it1 = test1.begin();
 	for (; it1 != test1.end(); it1++)
 		std::cout << "F: " << it1->first << "\tS: " << it1->second <<  std::endl;
+/*-----------------------------------------------------------------*/
 
 }

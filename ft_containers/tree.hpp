@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/18 00:23:28 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/18 00:49:39 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,6 @@ public:
 		
 		if (node == 0)
 			return _end;
-		// if (std::equal_to<typename Pair::first_type>(k, node->_value.first))
 		if (k == node->_value.first)
 			return node;
 		if( _compare(k,node->_value.first))

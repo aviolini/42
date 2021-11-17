@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/18 00:21:58 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/18 00:50:55 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,14 +102,12 @@ public:
 	// mapped_type& operator[] (const key_type& k);
 
 /*MODIFIERS-----------------------------------------------------------------------------------*/
-	// pair<iterator,bool> insert (const value_type& val)								//SINGLE ELEMENT
-	iterator insert (const value_type& val)								//SINGLE ELEMENT
+	pair<iterator,bool> insert (const value_type& val)								//SINGLE ELEMENT
 	{
-		return iterator(_tree.insert(val));
-	}
-	iterator find (const key_type & k)
-	{
-		return iterator(_tree.find(k));
+		iterator it = find(val.first);
+		if (it != end()) //E' STATO TROVATO
+			return pair<iterator,bool>(it, false);
+		return pair<iterator,bool>(++(iterator(_tree.insert(val))), true);
 	}
 	// iterator insert (iterator position, const value_type& val);						//WITH HINT
 	// template <class InputIterator>													//RANGE
@@ -131,7 +129,10 @@ public:
 	// 	}
 
 /*OPERATIONS----------------------------------------------------------------------------------*/
-    // iterator find (const key_type& k);
+	iterator find (const key_type & k)
+	{
+		return iterator(_tree.find(k));
+	}
 	// const_iterator find (const key_type& k) const;
 	// size_type count (const key_type& k) const;
     // iterator lower_bound (const key_type& k);
