@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/18 15:03:10 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/18 15:05:10 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,25 +75,23 @@ void mapTest(PAIR (*makepair)(const char, int))
 	std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
 	std::cout << ((test1.insert(makepair('o', 12))).first->first) << std::endl;
 	std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
-/*-----------------------------------------------------------------*/
-printMap(test1, "TEST1");
+	printMap(test1, "TEST1");
 /*-----------------------------------------------------------------*/
 /*INSERT-ITERATOR-----------------------------------------------------*/
 	PAIR array1[] = {makepair('a', 1), makepair('b', 2), makepair('c', 3), makepair('d', 4)};
 	C test3;
 	test3.insert(array1, &array1[4]);
 	(void)array1;
-/*-----------------------------------------------------------------*/
-printMap(test3, "TEST3");
+	printMap(test3, "TEST3");
 /*-----------------------------------------------------------------*/
 /*INSERT-ITERATOR-----------------------------------------------------*/
 	C test4;
 	test4.insert(test1.begin(), test1.end());
+	printMap(test4, "TEST4");
 /*-----------------------------------------------------------------*/
-printMap(test4, "TEST4");
+/*CONSTRUCTOR-ITERATOR-----------------------------------------------------*/
+	C test5(test1.begin(), test1.end());
+	printMap(test5, "TEST5");
 /*-----------------------------------------------------------------*/
-
-
-
 
 }
