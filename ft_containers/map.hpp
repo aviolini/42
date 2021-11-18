@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/18 00:50:55 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/18 12:18:05 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,20 @@ public:
 	// const_reverse_iterator rend() const{}
 
 /*CAPACITY-----------------------------------------------------------------------------------*/
-	// bool empty() const;
-	// size_type size() const;
-	// size_type max_size() const;
+	// bool empty() const
+	// {
+	// 	if (!_tree._root)
+	// 		return true;
+	// 	return false;
+	// }
+	size_type size() const
+	{
+		return _tree.size();
+	}
+	// size_type max_size() const
+	// {
+	// 	return _
+	// }
 
 /*ELEMENT ACCESS-------------------------------------------------------------------------------*/
 	// mapped_type& operator[] (const key_type& k);

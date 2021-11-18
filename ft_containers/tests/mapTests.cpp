@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapTests.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/18 00:49:31 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/18 11:38:41 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,23 @@ void mapTest(PAIR (*makepair)(const char, int))
 	test1.insert(makepair('i', 8));
 	test1.insert(makepair('m', 10));
 	
+/*SIZE------------------------------------------------------------*/
+
+	std::cout << "TEST1_SIZE:" <<test1.size() << std::endl;
+	C test2;
+	std::cout << "TEST2_SIZE:" << test2.size() << std::endl;
+
+
+
+/*-----------------------------------------------------------------*/
+
+
+/*FIND------------------------------------------------------------*/
 	int i = 1;
 	for (typename C::iterator itfind1 = test1.begin(); itfind1->first != 'm'; ++itfind1)
 		++i;
 	// std::cout << "I:" << i << std::endl;
 
-/*FIND------------------------------------------------------------*/
 	std::cout << (test1.find('m'))->first << std::endl;
 	std::cout << (test1.find('m') == test1.end()) << std::endl;
 	std::cout << (test1.find('z') == test1.end()) << std::endl;

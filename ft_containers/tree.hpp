@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/18 00:49:39 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/18 12:16:27 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,27 +122,29 @@ public:
 	typedef treeIterator<value_type>					iterator;
 	// typedef	vecReverse_iterator<const_iterator>		const_reverse_iterator;
 	// typedef	vecReverse_iterator<iterator>			reverse_iterator;
-	class value_compare
-	{
-	  friend class tree;
-	protected:
-	  Compare comp;
-	  value_compare (Compare c) : comp(c) {}
-	public:
-	  typedef bool			result_type;
-	  typedef value_type	first_argument_type;
-	  typedef value_type	second_argument_type;
-	  result_type operator() (const value_type& x, const value_type& y) const
-	  {
-	    return comp(x.first, y.first);
-	  }
-	};
+
+	// class value_compare
+	// {
+	//   friend class tree;
+	// protected:
+	//   Compare comp;
+	//   value_compare (Compare c) : comp(c) {}
+	// public:
+	//   typedef bool			result_type;
+	//   typedef value_type	first_argument_type;
+	//   typedef value_type	second_argument_type;
+	//   result_type operator() (const value_type& x, const value_type& y) const
+	//   {
+	//     return comp(x.first, y.first);
+	//   }
+	// };
 private:
 	key_compare			_compare;
 	pair_allocator		_pair_allocator;
 	allocator_type		_node_allocator;
 	pointer				_root;
 	pointer				_end;
+	size_type			_size;
 public:
 /*CANONICAL-----------------------------------------------------------------------------------*/
 	explicit tree (const key_compare& comp = key_compare(), const pair_allocator& alloc = pair_allocator())
@@ -151,6 +153,7 @@ public:
 		// _end = _node_allocator.allocate(1);
 		_end = new value_type;
 		_root = _end;
+		this->_size = 0;
 	}
 	~tree(){}
 
@@ -186,6 +189,11 @@ public:
 	}
 
 /*METHODS-----------------------------------------------------------------------------------*/
+	size_type size() const
+	{
+		return _size;
+	}
+
 	iterator insert(const Pair &obj)
 	{
 		_root = (insert(0, _root, obj));
@@ -198,7 +206,8 @@ public:
 		 	pointer temp = new value_type(obj);
 		 	temp->_left = 0;
 		 	temp->_right = _end;
-			temp->_parent = parent;			
+			temp->_parent = parent;
+			_size++;
 			return temp;
 		}		
 		if ( node == 0 )
@@ -207,6 +216,7 @@ public:
 		 	temp->_left = 0;
 		 	temp->_right = 0;
 			temp->_parent = parent;
+			_size++;
 		 	return temp;
 		}
 		if( _compare(obj.first,node->_value.first))
