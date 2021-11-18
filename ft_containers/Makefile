@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
+#    By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 09:43:32 by aviolini          #+#    #+#              #
-#    Updated: 2021/11/10 00:31:49 by arrigo           ###   ########.fr        #
+#    Updated: 2021/11/18 14:31:37 by aviolini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,10 @@ time		:	all
 allall		:	cl re all clean test log time
 				@$(RM) $(OBJS)
 				@$(RM) ftLog stlLog ftTest stlTest
+
+leaks		:	cl fclean ft
+				leaks --atExit -- ./$(FTNAME)
+
 #CLEAN
 clean		:	
 				@$(RM) $(OBJS)
