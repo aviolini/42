@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/18 15:06:42 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/18 15:56:59 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,16 @@ public:
 	{
 		insert(first,last);
 	}
-	map (const map& x)
+	map (const map& x) : _tree(x._tree)
 	{
-		(void)x;
+        // insert(x.begin(), x.end());
 	}																															//COPY
 	~map(){}
 	map& operator= (const map& x)
 	{
-		(void)x;
+		//CANCELLARE TUTTO
+		_tree = x._tree;
+		return *this;
 	}
 
 /*ITERATORS-----------------------------------------------------------------------------------*/

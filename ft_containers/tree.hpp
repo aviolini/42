@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/18 12:34:37 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/18 15:58:35 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,31 @@ public:
 		_end = new value_type;
 		_root = _end;
 		this->_size = 0;
+	}
+	tree (const tree& x)
+	:_compare(x._compare), _pair_allocator(x._pair_allocator), _node_allocator(x._node_allocator)
+	{
+		_end = new value_type;
+		_root = _end;
+		for (iterator it = x.begin(); it != x.end(); ++it)
+			insert(it->_value);
+		this->_size = x._size;
+	}																															//COPY
+	tree& operator= (const tree& x)
+	{
+    	if (this != &x)
+    	{
+    	    //CANCELLA TUTTO
+			_compare = x._compare;
+			_pair_allocator = x._pair_allocator;
+			_node_allocator = x._node_allocator;
+			_end = new value_type;
+			_root = _end;
+			for (iterator it = x.begin(); it != x.end(); ++it)
+				insert(it->_value);
+			this->_size = x._size;
+    	}
+    	return *this;
 	}
 	~tree(){}
 
