@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/18 14:57:23 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/18 17:25:12 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ public:
 	mapIterator () : _data(0) {}
 	mapIterator (treeIterator initLoc) : _data(initLoc) {}
 	~mapIterator(){}
-	// mapIterator(mapIterator const & rhs);
+	mapIterator(mapIterator const & rhs) : _data(rhs._data) {}
 	mapIterator operator = (const mapIterator & rhs)
 	{
 		this->_data = rhs._data;
@@ -46,7 +46,6 @@ public:
 	{
 		return (this->_data->_value);
 	}
-	mapIterator operator + ( const difference_type &n ) const;
 	mapIterator &operator ++()				//PREFIX
 	{
 		++this->_data;
@@ -58,13 +57,8 @@ public:
 		++(*this);
 		return t;
 	}
-	mapIterator & operator += (difference_type n);
-	mapIterator operator - ( const difference_type &n ) const;
-	difference_type operator - ( const mapIterator &rhs) const;
-	mapIterator &operator --();				//PREFIX
-	mapIterator operator --(int);				//POSTFIX
-	mapIterator & operator -= (difference_type n);
-	reference operator [] (int index);
+	// mapIterator &operator --();				//PREFIX
+	// mapIterator operator --(int);				//POSTFIX
 /*RELATIONAL OPERATORS--------------------------------------------------*/
 	bool operator == (const mapIterator & rhs)
 	{
@@ -74,40 +68,6 @@ public:
 	{
 		return !(this->_data == rhs._data);
 	}
-	bool operator > (const mapIterator & rhs);
-	bool operator >= (const mapIterator & rhs);
-	bool operator < (const mapIterator & rhs);
-	bool operator <= (const mapIterator & rhs);
-};
-
-template <class Iterator> 
-class mapReverse_iterator : public Iterator
-{
-public:
-	typedef Iterator									iterator_type;
-	typedef typename iterator_type::value_type 			value_type;
-	typedef typename iterator_type::pointer				pointer;
-	typedef typename iterator_type::reference			reference;
-	typedef typename iterator_type::difference_type		difference_type;
-	typedef typename iterator_type::iterator_category	iterator_category;
-/*CANONICAL-----------------------------------------------------------------------------------*/		
-	mapReverse_iterator ();
-	explicit mapReverse_iterator (iterator_type it);
-	template <class Iter>
-  	mapReverse_iterator (const mapReverse_iterator<Iter>& rev_it,typename myEnable_if<myHas_iterator_category<Iter>::value, value_type>::type = 0);
-	~mapReverse_iterator();
-	mapReverse_iterator(mapReverse_iterator const & rhs);
-	mapReverse_iterator operator = (const mapReverse_iterator & rhs);
-/*MEMBER OPERATORS--------------------------------------------------*/
-	mapReverse_iterator &operator ++();				//PREFIX
-	mapReverse_iterator operator ++(int);				//POSTFIX
-	mapReverse_iterator &operator --();				//PREFIX
-	mapReverse_iterator operator --(int);				//POSTFIX
-/*RELATIONAL OPERATORS--------------------------------------------------*/
-	bool operator > (const mapReverse_iterator & rhs);
-	bool operator >= (const mapReverse_iterator & rhs);
-	bool operator < (const mapReverse_iterator & rhs);
-	bool operator <= (const mapReverse_iterator & rhs);
 };
 
 #endif

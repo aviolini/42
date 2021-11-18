@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/18 17:08:43 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/18 17:25:26 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ public:
 	{
 		return *_ptr;
 	}
-	treeIterator operator + ( const difference_type &n ) const;
 	treeIterator &operator ++()			//PREFIX
 	{
 		if (_ptr->_right != 0)
@@ -70,13 +69,9 @@ public:
 		++(*this);
 		return t;
 	}
-	treeIterator & operator += (difference_type n);
-	treeIterator operator - ( const difference_type &n ) const;
-	difference_type operator - ( const treeIterator &rhs) const;
-	treeIterator &operator --()		;		//PREFIX
-	treeIterator operator --(int)	;			//POSTFIX
-	treeIterator & operator -= (difference_type n);
-	reference operator [] (int index);
+
+	// treeIterator &operator --()		;		//PREFIX
+	// treeIterator operator --(int)	;			//POSTFIX
 /*RELATIONAL OPERATORS--------------------------------------------------*/
 	bool operator == (const treeIterator & rhs)
 	{
@@ -86,10 +81,6 @@ public:
 	{
 		return !(_ptr == rhs._ptr);
 	}
-	bool operator > (const treeIterator & rhs);
-	bool operator >= (const treeIterator & rhs);
-	bool operator < (const treeIterator & rhs);
-	bool operator <= (const treeIterator & rhs);
 };
 
 template < class Pair >
