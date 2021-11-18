@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/18 15:58:35 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/18 17:08:43 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ public:
 				_ptr = _ptr->_left;
 			return *this;		
 		}
-		while (!(_ptr == _ptr->_parent->_left))
+		// while (_ptr->_parent && _ptr != _ptr->_parent->_left)
+		while ( _ptr != _ptr->_parent->_left)
 			_ptr = _ptr->_parent;
 		_ptr = _ptr->_parent;
 		return *this;
@@ -160,26 +161,27 @@ public:
 	{
 		_end = new value_type;
 		_root = _end;
+		this->_size = 0;
 		for (iterator it = x.begin(); it != x.end(); ++it)
 			insert(it->_value);
-		this->_size = x._size;
+		std::cout << "END OF TREE COPY CONSTR" << std::endl;
 	}																															//COPY
-	tree& operator= (const tree& x)
-	{
-    	if (this != &x)
-    	{
-    	    //CANCELLA TUTTO
-			_compare = x._compare;
-			_pair_allocator = x._pair_allocator;
-			_node_allocator = x._node_allocator;
-			_end = new value_type;
-			_root = _end;
-			for (iterator it = x.begin(); it != x.end(); ++it)
-				insert(it->_value);
-			this->_size = x._size;
-    	}
-    	return *this;
-	}
+	// tree& operator= (const tree& x)
+	// {
+    // 	if (this != &x)
+    // 	{
+    // 	    //CANCELLA TUTTO
+	// 		_compare = x._compare;
+	// 		_pair_allocator = x._pair_allocator;
+	// 		_node_allocator = x._node_allocator;
+	// 		_end = new value_type;
+	// 		_root = _end;
+	// 		for (iterator it = x.begin(); it != x.end(); ++it)
+	// 			insert(it->_value);
+	// 		this->_size = x._size;
+    // 	}
+    // 	return *this;
+	// }
 	~tree(){}
 
 /*ITERATORS-----------------------------------------------------------------------------------*/
