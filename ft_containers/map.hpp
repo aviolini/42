@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/18 14:26:09 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/18 14:50:34 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,12 @@ public:
 		return pair<iterator,bool>(++(iterator(_tree.insert(val))), true);
 	}
 	// iterator insert (iterator position, const value_type& val);						//WITH HINT
-	// template <class InputIterator>													//RANGE
-	// void insert (InputIterator first, InputIterator last);
+	template <class InputIterator>													//RANGE
+	void insert (InputIterator first, InputIterator last)
+	{
+		for (; first != last; ++first)
+			insert(*first);
+	}
 	// void erase (iterator position);
 	// size_type erase (const key_type& k);
 	// void erase (iterator first, iterator last);

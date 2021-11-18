@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/18 14:26:25 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/18 14:58:21 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void mapTest(PAIR (*makepair)(const char, int))
 	test1.insert(makepair('m', 10));
 	
 /*SIZE------------------------------------------------------------*/
-
 	std::cout << "TEST1_SIZE:" <<test1.size() << std::endl;
 	// std::cout << "TEST1_MAXSIZE:" <<test1.max_size() << std::endl;
 	std::cout << "TEST1_EMPTY:" <<test1.empty() << std::endl;
@@ -48,13 +47,7 @@ void mapTest(PAIR (*makepair)(const char, int))
 	std::cout << "TEST2_SIZE:" << test2.size() << std::endl;
 	// std::cout << "TEST2_MAXSIZE:" <<test2.max_size() << std::endl;
 	std::cout << "TEST2_EMPTY:" <<test2.empty() << std::endl;
-
-
-
-
 /*-----------------------------------------------------------------*/
-
-
 /*FIND------------------------------------------------------------*/
 	int i = 1;
 	for (typename C::iterator itfind1 = test1.begin(); itfind1->first != 'm'; ++itfind1)
@@ -65,18 +58,42 @@ void mapTest(PAIR (*makepair)(const char, int))
 	std::cout << (test1.find('m') == test1.end()) << std::endl;
 	std::cout << (test1.find('z') == test1.end()) << std::endl;
 /*-----------------------------------------------------------------*/
-	
-/*INSERT------------------------------------------------------------*/
+/*INSERT-SINGLE---------------------------------------------------------*/
 	std::cout << ((test1.insert(makepair('o', 12))).first->first) << std::endl;
 	std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
 	std::cout << ((test1.insert(makepair('o', 12))).first->first) << std::endl;
 	std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
 /*-----------------------------------------------------------------*/
-
 /*PRINT------------------------------------------------------------*/
+	std::cout << std::endl << "TEST1" << std::endl;
 	typename C::iterator it1 = test1.begin();
 	for (; it1 != test1.end(); it1++)
 		std::cout << "F: " << it1->first << "\tS: " << it1->second <<  std::endl;
 /*-----------------------------------------------------------------*/
+/*INSERT-ITERATOR-----------------------------------------------------*/
+	PAIR array1[] = {makepair('a', 1), makepair('b', 2), makepair('c', 3), makepair('d', 4)};
+	C test3;
+	test3.insert(array1, &array1[4]);
+	(void)array1;
+/*-----------------------------------------------------------------*/
+/*PRINT------------------------------------------------------------*/
+	std::cout << std::endl << "TEST3" << std::endl;
+	typename C::iterator it3 = test3.begin();
+	for (; it3 != test3.end(); it3++)
+		std::cout << "F: " << it3->first << "\tS: " << it3->second <<  std::endl;
+/*-----------------------------------------------------------------*/
+/*INSERT-ITERATOR-----------------------------------------------------*/
+	C test4;
+	test4.insert(test1.begin(), test1.end());
+/*-----------------------------------------------------------------*/
+/*PRINT------------------------------------------------------------*/
+	std::cout << std::endl << "TEST4" << std::endl;
+	typename C::iterator it4 = test4.begin();
+	for (; it4 != test4.end(); it4++)
+		std::cout << "F: " << it4->first << "\tS: " << it4->second <<  std::endl;
+/*-----------------------------------------------------------------*/
+
+
+
 
 }
