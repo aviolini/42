@@ -6,12 +6,24 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/18 14:58:21 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/18 15:03:10 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
+
+template<typename C>
+void printMap(C &m, std::string name)
+{
+	std::cout << std::endl << name << std::endl;
+	std::cout << "size:" << m.size() << std::endl;
+	std::cout << "content: ";
+	typename C::iterator it = m.begin();;
+	for (; it != m.end() ; ++it)
+		std::cout << "F: " << it->first << "\tS: " << it->second <<  std::endl;
+	std::cout << std::endl;
+}
 
 template<typename C, typename PAIR>
 void mapTest(PAIR (*makepair)(const char, int))
@@ -64,11 +76,7 @@ void mapTest(PAIR (*makepair)(const char, int))
 	std::cout << ((test1.insert(makepair('o', 12))).first->first) << std::endl;
 	std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
 /*-----------------------------------------------------------------*/
-/*PRINT------------------------------------------------------------*/
-	std::cout << std::endl << "TEST1" << std::endl;
-	typename C::iterator it1 = test1.begin();
-	for (; it1 != test1.end(); it1++)
-		std::cout << "F: " << it1->first << "\tS: " << it1->second <<  std::endl;
+printMap(test1, "TEST1");
 /*-----------------------------------------------------------------*/
 /*INSERT-ITERATOR-----------------------------------------------------*/
 	PAIR array1[] = {makepair('a', 1), makepair('b', 2), makepair('c', 3), makepair('d', 4)};
@@ -76,21 +84,13 @@ void mapTest(PAIR (*makepair)(const char, int))
 	test3.insert(array1, &array1[4]);
 	(void)array1;
 /*-----------------------------------------------------------------*/
-/*PRINT------------------------------------------------------------*/
-	std::cout << std::endl << "TEST3" << std::endl;
-	typename C::iterator it3 = test3.begin();
-	for (; it3 != test3.end(); it3++)
-		std::cout << "F: " << it3->first << "\tS: " << it3->second <<  std::endl;
+printMap(test3, "TEST3");
 /*-----------------------------------------------------------------*/
 /*INSERT-ITERATOR-----------------------------------------------------*/
 	C test4;
 	test4.insert(test1.begin(), test1.end());
 /*-----------------------------------------------------------------*/
-/*PRINT------------------------------------------------------------*/
-	std::cout << std::endl << "TEST4" << std::endl;
-	typename C::iterator it4 = test4.begin();
-	for (; it4 != test4.end(); it4++)
-		std::cout << "F: " << it4->first << "\tS: " << it4->second <<  std::endl;
+printMap(test4, "TEST4");
 /*-----------------------------------------------------------------*/
 
 
