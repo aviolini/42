@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/18 12:16:27 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/18 12:34:37 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ struct node
 	node 		*_right;
 };
 
-template < class Pair, class Compare = std::less<typename Pair::first_type>, class Alloc = std::allocator<node<Pair> > >
+template < class Pair, class Compare = std::less<typename Pair::first_type>, class Alloc = std::allocator<Pair> >
 class tree
 {
 public:
@@ -148,7 +148,7 @@ private:
 public:
 /*CANONICAL-----------------------------------------------------------------------------------*/
 	explicit tree (const key_compare& comp = key_compare(), const pair_allocator& alloc = pair_allocator())
-	:_compare(comp), _pair_allocator(alloc)
+	:_compare(comp), _pair_allocator(alloc), _node_allocator(allocator_type())
 	{
 		// _end = _node_allocator.allocate(1);
 		_end = new value_type;
@@ -193,7 +193,12 @@ public:
 	{
 		return _size;
 	}
-
+	
+	size_type max_size() const
+	{
+		return _pair_allocator.max_size();
+	}
+	
 	iterator insert(const Pair &obj)
 	{
 		_root = (insert(0, _root, obj));

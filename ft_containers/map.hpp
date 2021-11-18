@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/18 12:19:53 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/18 12:34:12 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,10 @@ public:
 	{
 		return _tree.size();
 	}
-	// size_type max_size() const
-	// {
-	// 	return _
-	// }
+	size_type max_size() const
+	{
+		return _tree.max_size();
+	}
 
 /*ELEMENT ACCESS-------------------------------------------------------------------------------*/
 	// mapped_type& operator[] (const key_type& k);
