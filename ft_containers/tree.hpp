@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/18 17:25:26 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/18 17:36:11 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,27 @@ public:
 		++(*this);
 		return t;
 	}
-
+	treeIterator &operator --()			//PREFIX
+	{
+		if (_ptr->_left != 0)
+		{
+			_ptr = _ptr->_left;
+			while (_ptr->_right != 0)
+				_ptr = _ptr->_right;
+			return *this;		
+		}
+		// while (_ptr->_parent && _ptr != _ptr->_parent->_left)
+		while ( _ptr == _ptr->_parent->_left)
+			_ptr = _ptr->_parent;
+		_ptr = _ptr->_parent;
+		return *this;
+	}
+	treeIterator operator --(int)			//POSTFIX
+	{
+		treeIterator t;
+		--(*this);
+		return t;
+	}
 	// treeIterator &operator --()		;		//PREFIX
 	// treeIterator operator --(int)	;			//POSTFIX
 /*RELATIONAL OPERATORS--------------------------------------------------*/

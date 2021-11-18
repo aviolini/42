@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/18 17:22:25 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/18 17:47:23 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,16 @@ void mapTest(PAIR (*makepair)(const char, int))
 /*ITERATOR-CONSTRUCTOR------------------------------------------------*/
 	C test5(test1.begin(), test1.end());
 	printMap(test5, "TEST5");
+/*-----------------------------------------------------------------*/
+/*ITERATOR--      ------------------------------------------------*/
+	// typename C::iterator it4 = test5.end();
+	// it4--;																	//VA IN SEG
+	// for (; it4 != test5.begin(); --it4)
+	// {
+	// 	std::cout << it4->first << std::endl;
+	// }
+
+
 /*-----------------------------------------------------------------*/
 // /*COPY-CONSTRUCTOR---------------------------------------------------*/     VA IN SEG, SBLOCCARE LA RIGA 61 DI TREE.HPP
 // 	C test6(test5);

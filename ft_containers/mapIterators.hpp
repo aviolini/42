@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/18 17:25:12 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/18 17:46:49 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,17 @@ public:
 		++(*this);
 		return t;
 	}
-	// mapIterator &operator --();				//PREFIX
-	// mapIterator operator --(int);				//POSTFIX
+	mapIterator &operator --()
+	{
+		--this->_data;
+		return *this;
+	}
+	mapIterator operator --(int)
+	{
+		mapIterator t(*this);
+		--(*this);
+		return t;
+	}				//POSTFIX
 /*RELATIONAL OPERATORS--------------------------------------------------*/
 	bool operator == (const mapIterator & rhs)
 	{
