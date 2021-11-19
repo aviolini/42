@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/19 17:12:15 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/19 17:18:41 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,6 @@ public:
 		--(*this);
 		return t;
 	}
-	// treeIterator &operator --()		;		//PREFIX
-	// treeIterator operator --(int)	;			//POSTFIX
 /*RELATIONAL OPERATORS--------------------------------------------------*/
 	bool operator == (const treeIterator & rhs)
 	{

@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/19 17:17:56 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/19 17:20:15 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,12 @@ void mapTest(PAIR (*makepair)(const char, int))
 	// printMap(test5, "TEST5");
 // -----------------------------------------------------------------
 /*
+*/
 // ITERATOR++      ------------------------------------------------
 	std::cout << "------ITERATOR ++------" << std::endl;
 	typename C::iterator it3 = test5.begin();
 	// ++it3;
-	for (; it3 != test5.end(); ++it3)
+	for (; it3 != test5.end(); it3++)
 		std::cout << it3->first << std::endl;
 	std::cout << "------------------------------" << std::endl;
 // -----------------------------------------------------------------
@@ -114,7 +115,7 @@ void mapTest(PAIR (*makepair)(const char, int))
 	std::cout << "-----ITERATOR --    ------" << std::endl;
 	typename C::iterator it4 = test5.end();
 	--it4;
-	for (; it4 != test5.begin(); --it4)
+	for (; it4 != test5.begin(); it4--)
 		std::cout << it4->first << std::endl;
 	std::cout << "------------------------------" << std::endl;
 // -----------------------------------------------------------------
@@ -122,7 +123,7 @@ void mapTest(PAIR (*makepair)(const char, int))
 	std::cout << "-----REV ITERATOR ++-------" << std::endl;
 	typename C::reverse_iterator it5 = test5.rend();
 	// ++it5;
-	for (; it5 != test5.rbegin(); --it5)
+	for (; it5 != test5.rbegin(); it5--)
 		std::cout << it5->first << std::endl;
 std::cout << "------------------------------" << std::endl;	
 // -----------------------------------------------------------------
@@ -131,11 +132,10 @@ std::cout << "------------------------------" << std::endl;
 	typename C::reverse_iterator it6 = test5.rbegin();
 	// typename C::reverse_iterator it7 = test5.rend();
 	// ++it6;
-	for (; it6 != test5.rend(); ++it6)
+	for (; it6 != test5.rend(); it6++)
 		std::cout << it6->first << std::endl;
 	std::cout << "------------------------------" << std::endl;	
 // -----------------------------------------------------------------
-*/
 
 /*COPY-CONSTRUCTOR---------------------------------------------------*/     //VA IN SEG, SBLOCCARE LA RIGA 61 DI TREE.HPP
 	C test6(test5);

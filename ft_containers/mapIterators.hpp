@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/19 16:26:47 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/19 17:21:35 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ public:
 	mapReverseIterator operator ++(int)			//POSTFIX
 	{
 		mapReverseIterator t(*this);
-		--(*this);
+		++(*this);
 		return t;
 	}
 	mapReverseIterator &operator --()
@@ -121,7 +121,7 @@ public:
 	mapReverseIterator operator --(int)
 	{
 		mapReverseIterator t(*this);
-		++(*this);
+		--(*this);
 		return t;
 	}				//POSTFIX
 };
