@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/19 17:18:41 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/19 17:38:24 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,24 +170,36 @@ public:
 	tree (const tree& x)
 	:_compare(x._compare), _pair_allocator(x._pair_allocator), _node_allocator(x._node_allocator)
 	{
-		std::cout << "COPY CONSTR" << std::endl;
+		_end = new value_type;
+		_begin = new value_type;
+		_root = _end;
+		this->_size = 0;
+		iterator it = x.begin();			//FARLO PARTIRE DA ROOT OPPURE COSI E BILANCIARLO DOPO?
+		it++;
+		for (; it != x.end(); ++it)
+			insert(it->_value);
 	}																															//COPY
 	tree& operator= (const tree& x)
 	{
-		std::cout << "ASSIGN OPERAT" << std::endl;
-		(void)x;
-    // 	if (this != &x)
-    // 	{
-    // 	    //CANCELLA TUTTO
-	// 		_compare = x._compare;
-	// 		_pair_allocator = x._pair_allocator;
-	// 		_node_allocator = x._node_allocator;
-	// 		_end = new value_type;
-	// 		_root = _end;
-	// 		for (iterator it = x.begin(); it != x.end(); ++it)
-	// 			insert(it->_value);
-	// 		this->_size = x._size;
-    // 	}
+    	if (this != &x)
+    	{
+			if (_root == _end)
+			{
+	    	    //CANCELLA TUTTO QUELLO CHE C'ERA PRIMA
+			}
+			_compare = x._compare;
+			_pair_allocator = x._pair_allocator;
+			_node_allocator = x._node_allocator;
+			
+			_end = new value_type;
+			_begin = new value_type;
+			_root = _end;
+			this->_size = 0;
+			iterator it = x.begin();			//FARLO PARTIRE DA ROOT OPPURE COSI E BILANCIARLO DOPO?
+			it++;
+			for (; it != x.end(); ++it)
+				insert(it->_value);
+    	}
     	return *this;
 	}
 	~tree(){}
@@ -231,12 +243,10 @@ public:
 	{
 		return _size;
 	}
-	
 	size_type max_size() const
 	{
 		return _pair_allocator.max_size();
 	}
-	
 	iterator insert(const Pair &obj)
 	{
 		_root = (insert(0, _root, obj));
@@ -244,7 +254,7 @@ public:
 	}
 	pointer insert ( pointer parent, pointer node, const Pair & obj)
 	{
-		if (parent == 0 && node == _end)
+		if (parent == 0 && node == _end)				// PRIMO GIRO
 		{
 		 	pointer temp = new value_type(obj);
 		 	temp->_left = _begin;
@@ -255,7 +265,7 @@ public:
 			_size++;
 			return temp;			
 		}
-		if (node == _begin)
+		if (node == _begin)								//SE ARRIVA AL NODO CON VALUE MINORE
 		{
 		 	pointer temp = new value_type(obj);
 		 	temp->_left = _begin;
@@ -265,7 +275,7 @@ public:
 			_size++;
 			return temp;
 		}	
-		if (node == _end)
+		if (node == _end)								//SE ARRIVA AL NODO CON VALUE MAGGIORE
 		{
 		 	pointer temp = new value_type(obj);
 		 	temp->_left = 0;
@@ -275,7 +285,7 @@ public:
 			_size++;
 			return temp;
 		}		
-		if ( node == 0 )
+		if ( node == 0 )								//SE ARRIVA ALLA FINE DI UN SUBTREE
 		{
 		 	pointer temp = new value_type(obj);
 		 	temp->_left = 0;
@@ -293,14 +303,12 @@ public:
 		 	node->_right = insert(node, node->_right, obj );
 		return node;
 	}
-
 	iterator find(typename Pair::first_type & k)
 	{
 		return iterator(find(_root,k));
 	}
 	pointer find(pointer node, typename Pair::first_type  & k)
 	{
-		
 		if (node == 0)
 			return _end;
 		if (k == node->_value.first)

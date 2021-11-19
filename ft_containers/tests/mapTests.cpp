@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/19 17:20:15 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/19 17:57:35 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@
 template<typename C>
 void printMap(C &m, std::string name)
 {
-	// std::cout << std::endl << name << std::endl;
 	std::cout << "-----" << name << "-----------------------" << std::endl;
 	if (m.empty())
 	{
 		std::cout << "EMPTY MAP" << std::endl;
-	std::cout << "------------------------------" << std::endl;
+		std::cout << "------------------------------" << std::endl;
 		return ;
 	}
 	std::cout << "size:" << m.size() << std::endl;
@@ -57,7 +56,7 @@ void mapTest(PAIR (*makepair)(const char, int))
 	test1.insert(makepair('h', 7));
 	test1.insert(makepair('i', 8));
 	test1.insert(makepair('m', 10));
-/*	
+///*	
 //SIZE------------------------------------------------------------
 	std::cout << "TEST1_SIZE:" <<test1.size() << std::endl;
 	// std::cout << "TEST1_MAXSIZE:" <<test1.max_size() << std::endl;
@@ -96,13 +95,12 @@ void mapTest(PAIR (*makepair)(const char, int))
 	test4.insert(test1.begin(), test1.end());
 	printMap(test4, "TEST4");
 // -----------------------------------------------------------------
-*/
+
 // ITERATOR-CONSTRUCTOR------------------------------------------------
 	C test5(test1.begin(), test1.end());
 	// printMap(test5, "TEST5");
 // -----------------------------------------------------------------
 /*
-*/
 // ITERATOR++      ------------------------------------------------
 	std::cout << "------ITERATOR ++------" << std::endl;
 	typename C::iterator it3 = test5.begin();
@@ -136,15 +134,16 @@ std::cout << "------------------------------" << std::endl;
 		std::cout << it6->first << std::endl;
 	std::cout << "------------------------------" << std::endl;	
 // -----------------------------------------------------------------
-
-/*COPY-CONSTRUCTOR---------------------------------------------------*/     //VA IN SEG, SBLOCCARE LA RIGA 61 DI TREE.HPP
+*/
+// COPY-CONSTRUCTOR---------------------------------------------------
 	C test6(test5);
 	printMap(test6, "TEST6");
-// /*-----------------------------------------------------------------*/
-/*ASSIGN-OPERATOR---------------------------------------------------*/     //VA IN SEG, SBLOCCARE LA RIGA 61 DI TREE.HPP
-	// C test7;
-	// test7 = test5;
-	// printMap(test7, "TEST6");
-// /*-----------------------------------------------------------------*/
+// -----------------------------------------------------------------
+
+// ASSIGN-OPERATOR---------------------------------------------------
+	C test7;
+	test7 = test5;
+	printMap(test7, "TEST7");
+// -----------------------------------------------------------------
 
 }
