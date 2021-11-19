@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/19 12:08:10 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:12:15 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,12 +151,13 @@ public:
 	//   }
 	// };
 private:
-	key_compare			_compare;
-	pair_allocator		_pair_allocator;
-	allocator_type		_node_allocator;
-	pointer				_root;
-	pointer				_end;
-	size_type			_size;
+	key_compare		_compare;
+	pair_allocator	_pair_allocator;
+	allocator_type	_node_allocator;
+	pointer			_root;
+	pointer			_end;
+	pointer			_begin;
+	size_type		_size;
 public:
 /*CANONICAL-----------------------------------------------------------------------------------*/
 	explicit tree (const key_compare& comp = key_compare(), const pair_allocator& alloc = pair_allocator())
@@ -164,6 +165,7 @@ public:
 	{
 		// _end = _node_allocator.allocate(1);
 		_end = new value_type;
+		_begin = new value_type;
 		_root = _end;
 		this->_size = 0;
 	}
@@ -195,10 +197,11 @@ public:
 /*ITERATORS-----------------------------------------------------------------------------------*/
 	iterator begin()
 	{
-		pointer temp = _root;
-		while (temp->_left != 0)
-			temp = temp->_left;
-		return iterator(temp);
+		// pointer temp = _root;
+		// while (temp->_left != 0)
+		// 	temp = temp->_left;
+		// return iterator(temp);
+		return iterator(_begin);
 	}
 	iterator end()
 	{
@@ -210,17 +213,19 @@ public:
 	}
 	const_iterator begin() const
 	{
-		pointer temp = _root;
-		while (temp->_left != 0)
-			temp = temp->_left;
-		return const_iterator(temp);
+		// pointer temp = _root;
+		// while (temp->_left != 0)
+		// 	temp = temp->_left;
+		// return const_iterator(temp);
+		return const_iterator(_begin);
 	}
 	const_iterator end() const
 	{
-		pointer temp = _root;
-		while (temp->_right != 0)
-			temp = temp->_right;
-		return const_iterator(temp->_right);
+		// pointer temp = _root;
+		// while (temp->_right != 0)
+		// 	temp = temp->_right;
+		// return const_iterator(temp->_right);
+		return const_iterator(_end);
 	}
 
 /*METHODS-----------------------------------------------------------------------------------*/
@@ -241,16 +246,34 @@ public:
 	}
 	pointer insert ( pointer parent, pointer node, const Pair & obj)
 	{
+		if (parent == 0 && node == _end)
+		{
+		 	pointer temp = new value_type(obj);
+		 	temp->_left = _begin;
+		 	temp->_right = _end;
+			_end->_parent = temp;
+			_begin->_parent = temp;
+			temp->_parent = 0;
+			_size++;
+			return temp;			
+		}
+		if (node == _begin)
+		{
+		 	pointer temp = new value_type(obj);
+		 	temp->_left = _begin;
+		 	temp->_right = 0;
+			_begin->_parent = temp;
+			temp->_parent = parent;
+			_size++;
+			return temp;
+		}	
 		if (node == _end)
 		{
 		 	pointer temp = new value_type(obj);
 		 	temp->_left = 0;
 		 	temp->_right = _end;
 			_end->_parent = temp;
-			// if (parent == 0)
-			// 	temp->_parent = temp;
-			// else 
-				temp->_parent = parent;
+			temp->_parent = parent;
 			_size++;
 			return temp;
 		}		

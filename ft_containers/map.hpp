@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/19 12:35:19 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:16:04 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ public:
 /*ITERATORS-----------------------------------------------------------------------------------*/
 	iterator begin()
 	{
-		return iterator(_tree.begin());
+		return ++iterator(_tree.begin());
 	}
 	const_iterator begin() const
 	{
-		return const_iterator(_tree.begin());
+		return ++const_iterator(_tree.begin());
 	}
     iterator end()
 	{
@@ -89,17 +89,21 @@ public:
 	{
 		return const_iterator(_tree.end());
 	}
-    reverse_iterator rbegin(){
-		return reverse_iterator(end());
+    reverse_iterator rbegin()
+	{
+		return reverse_iterator(--iterator(_tree.end()));
 	}
-	const_reverse_iterator rbegin() const{
-		return const_reverse_iterator(end());
+	const_reverse_iterator rbegin() const
+	{
+		return const_reverse_iterator(--const_iterator(_tree.end()));
 	}
-    reverse_iterator rend(){
-		return reverse_iterator(begin());		
+    reverse_iterator rend()
+	{
+		return reverse_iterator(iterator(_tree.begin()));		
 	}
-	const_reverse_iterator rend() const{
-		return const_reverse_iterator(begin());		
+	const_reverse_iterator rend() const
+	{
+		return const_reverse_iterator(const_iterator(_tree.begin()));
 	}
 
 /*CAPACITY-----------------------------------------------------------------------------------*/

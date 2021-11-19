@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapTests.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/19 12:46:01 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:17:56 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void mapTest(PAIR (*makepair)(const char, int))
 	test1.insert(makepair('h', 7));
 	test1.insert(makepair('i', 8));
 	test1.insert(makepair('m', 10));
-	
-/*SIZE------------------------------------------------------------*/
+/*	
+//SIZE------------------------------------------------------------
 	std::cout << "TEST1_SIZE:" <<test1.size() << std::endl;
 	// std::cout << "TEST1_MAXSIZE:" <<test1.max_size() << std::endl;
 	std::cout << "TEST1_EMPTY:" <<test1.empty() << std::endl;
@@ -66,8 +66,8 @@ void mapTest(PAIR (*makepair)(const char, int))
 	std::cout << "TEST2_SIZE:" << test2.size() << std::endl;
 	// std::cout << "TEST2_MAXSIZE:" <<test2.max_size() << std::endl;
 	std::cout << "TEST2_EMPTY:" <<test2.empty() << std::endl;
-/*-----------------------------------------------------------------*/
-/*FIND------------------------------------------------------------*/
+// -----------------------------------------------------------------
+// FIND------------------------------------------------------------
 	int i = 1;
 	for (typename C::iterator itfind1 = test1.begin(); itfind1->first != 'm'; ++itfind1)
 		++i;
@@ -76,64 +76,75 @@ void mapTest(PAIR (*makepair)(const char, int))
 	std::cout << (test1.find('m'))->first << std::endl;
 	std::cout << (test1.find('m') == test1.end()) << std::endl;
 	std::cout << (test1.find('z') == test1.end()) << std::endl;
-/*-----------------------------------------------------------------*/
-/*INSERT-SINGLE---------------------------------------------------------*/
+// -----------------------------------------------------------------
+// INSERT-SINGLE---------------------------------------------------------
 	std::cout << ((test1.insert(makepair('o', 12))).first->first) << std::endl;
 	std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
 	std::cout << ((test1.insert(makepair('o', 12))).first->first) << std::endl;
 	std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
 	printMap(test1, "TEST1");
-/*-----------------------------------------------------------------*/
-/*INSERT-ITERATOR-----------------------------------------------------*/
+// -----------------------------------------------------------------
+// INSERT-ITERATOR-----------------------------------------------------
 	PAIR array1[] = {makepair('a', 1), makepair('b', 2), makepair('c', 3), makepair('d', 4)};
 	C test3;
 	test3.insert(array1, &array1[4]);
 	(void)array1;
 	printMap(test3, "TEST3");
-/*-----------------------------------------------------------------*/
-/*INSERT-ITERATOR-----------------------------------------------------*/
+// -----------------------------------------------------------------
+// INSERT-ITERATOR-----------------------------------------------------
 	C test4;
 	test4.insert(test1.begin(), test1.end());
 	printMap(test4, "TEST4");
-/*-----------------------------------------------------------------*/
-/*ITERATOR-CONSTRUCTOR------------------------------------------------*/
+// -----------------------------------------------------------------
+*/
+// ITERATOR-CONSTRUCTOR------------------------------------------------
 	C test5(test1.begin(), test1.end());
-	printMap(test5, "TEST5");
-/*-----------------------------------------------------------------*/
-/*ITERATOR++      ------------------------------------------------*/
+	// printMap(test5, "TEST5");
+// -----------------------------------------------------------------
+/*
+// ITERATOR++      ------------------------------------------------
+	std::cout << "------ITERATOR ++------" << std::endl;
 	typename C::iterator it3 = test5.begin();
 	// ++it3;
 	for (; it3 != test5.end(); ++it3)
 		std::cout << it3->first << std::endl;
-/*-----------------------------------------------------------------*/
-/*ITERATOR--      ------------------------------------------------*/
+	std::cout << "------------------------------" << std::endl;
+// -----------------------------------------------------------------
+// ITERATOR--      ------------------------------------------------
+	std::cout << "-----ITERATOR --    ------" << std::endl;
 	typename C::iterator it4 = test5.end();
 	--it4;
 	for (; it4 != test5.begin(); --it4)
 		std::cout << it4->first << std::endl;
-/*-----------------------------------------------------------------*/
-/*REV ITERATOR++      ------------------------------------------------*/
-	// typename C::reverse_iterator it5 = test5.rend();
-	// // ++it5;
-	// for (; it5 != test5.rbegin(); --it5)
-	// 	std::cout << it5->first << std::endl;								//VA IN SEG ANCHE CON STL
-/*-----------------------------------------------------------------*/
-/*REV ITERATOR--      ------------------------------------------------*/
-	// typename C::reverse_iterator it6 = test5.rbegin();
-	// // typename C::reverse_iterator it7 = test5.rend();
+	std::cout << "------------------------------" << std::endl;
+// -----------------------------------------------------------------
+// REV ITERATOR++      ------------------------------------------------
+	std::cout << "-----REV ITERATOR ++-------" << std::endl;
+	typename C::reverse_iterator it5 = test5.rend();
+	// ++it5;
+	for (; it5 != test5.rbegin(); --it5)
+		std::cout << it5->first << std::endl;
+std::cout << "------------------------------" << std::endl;	
+// -----------------------------------------------------------------
+// REV ITERATOR--      ------------------------------------------------
+	std::cout << "-----REV ITERATOR --   -------" << std::endl;
+	typename C::reverse_iterator it6 = test5.rbegin();
+	// typename C::reverse_iterator it7 = test5.rend();
 	// ++it6;
-	// for (; it6 != test5.rend(); --it6)
-	// 	std::cout << it6->first << std::endl;
-/*-----------------------------------------------------------------*/
+	for (; it6 != test5.rend(); ++it6)
+		std::cout << it6->first << std::endl;
+	std::cout << "------------------------------" << std::endl;	
+// -----------------------------------------------------------------
+*/
 
 /*COPY-CONSTRUCTOR---------------------------------------------------*/     //VA IN SEG, SBLOCCARE LA RIGA 61 DI TREE.HPP
-	// C test6(test5);
-	// printMap(test6, "TEST6");
-/*-----------------------------------------------------------------*/
+	C test6(test5);
+	printMap(test6, "TEST6");
+// /*-----------------------------------------------------------------*/
 /*ASSIGN-OPERATOR---------------------------------------------------*/     //VA IN SEG, SBLOCCARE LA RIGA 61 DI TREE.HPP
 	// C test7;
 	// test7 = test5;
 	// printMap(test7, "TEST6");
-/*-----------------------------------------------------------------*/
+// /*-----------------------------------------------------------------*/
 
 }
