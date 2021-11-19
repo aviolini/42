@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/19 11:40:08 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/19 12:13:09 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,20 @@
 template<typename C>
 void printMap(C &m, std::string name)
 {
-	std::cout << std::endl << name << std::endl;
+	// std::cout << std::endl << name << std::endl;
+	std::cout << "-----" << name << "-----------------------" << std::endl;
+	if (m.empty())
+	{
+		std::cout << "EMPTY MAP" << std::endl;
+	std::cout << "------------------------------" << std::endl;
+		return ;
+	}
 	std::cout << "size:" << m.size() << std::endl;
 	std::cout << "content: "<< std::endl;
 	typename C::iterator it = m.begin();;
 	for (; it != m.end() ; ++it)
 		std::cout << "F: " << it->first << "\tS: " << it->second <<  std::endl;
-	std::cout << std::endl;
+	std::cout << "-----------------------------" << std::endl;
 }
 
 template<typename C, typename PAIR>

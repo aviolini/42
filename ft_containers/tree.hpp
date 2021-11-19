@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/19 11:35:02 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/19 12:08:10 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,15 +170,12 @@ public:
 	tree (const tree& x)
 	:_compare(x._compare), _pair_allocator(x._pair_allocator), _node_allocator(x._node_allocator)
 	{
-		_end = new value_type;
-		_root = _end;
-		this->_size = 0;
-		for (iterator it = x.begin(); it != x.end(); ++it)
-			insert(it->_value);
-		std::cout << "END OF TREE COPY CONSTR" << std::endl;
+		std::cout << "COPY CONSTR" << std::endl;
 	}																															//COPY
-	// tree& operator= (const tree& x)
-	// {
+	tree& operator= (const tree& x)
+	{
+		std::cout << "ASSIGN OPERAT" << std::endl;
+		(void)x;
     // 	if (this != &x)
     // 	{
     // 	    //CANCELLA TUTTO
@@ -191,8 +188,8 @@ public:
 	// 			insert(it->_value);
 	// 		this->_size = x._size;
     // 	}
-    // 	return *this;
-	// }
+    	return *this;
+	}
 	~tree(){}
 
 /*ITERATORS-----------------------------------------------------------------------------------*/
