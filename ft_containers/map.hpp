@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/19 11:45:10 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/19 12:35:19 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ public:
 	typedef ft::node<value_type>							node_type;
 	typedef mapIterator<ft::treeIterator<node_type> >		const_iterator;
 	typedef mapIterator<ft::treeIterator<node_type> >		iterator;
-	// typedef mapReverse_iterator<const_iterator> 			const_reverse_iterator;
-	// typedef mapReverse_iterator<iterator> 				reverse_iterator;
+	typedef mapReverseIterator<const_iterator> 				const_reverse_iterator;
+	typedef mapReverseIterator<iterator> 					reverse_iterator;
 
 private:
 	tree_type	_tree;
@@ -89,10 +89,18 @@ public:
 	{
 		return const_iterator(_tree.end());
 	}
-    // reverse_iterator rbegin(){}
-	// const_reverse_iterator rbegin() const{}
-    // reverse_iterator rend(){}
-	// const_reverse_iterator rend() const{}
+    reverse_iterator rbegin(){
+		return reverse_iterator(end());
+	}
+	const_reverse_iterator rbegin() const{
+		return const_reverse_iterator(end());
+	}
+    reverse_iterator rend(){
+		return reverse_iterator(begin());		
+	}
+	const_reverse_iterator rend() const{
+		return const_reverse_iterator(begin());		
+	}
 
 /*CAPACITY-----------------------------------------------------------------------------------*/
 	bool empty() const
