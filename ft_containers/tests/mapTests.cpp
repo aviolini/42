@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/18 17:47:23 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/19 11:40:08 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,24 +93,26 @@ void mapTest(PAIR (*makepair)(const char, int))
 	C test5(test1.begin(), test1.end());
 	printMap(test5, "TEST5");
 /*-----------------------------------------------------------------*/
-/*ITERATOR--      ------------------------------------------------*/
-	// typename C::iterator it4 = test5.end();
-	// it4--;																	//VA IN SEG
-	// for (; it4 != test5.begin(); --it4)
-	// {
-	// 	std::cout << it4->first << std::endl;
-	// }
-
-
+/*ITERATOR++      ------------------------------------------------*/
+	typename C::iterator it3 = test5.begin();
+	// ++it3;
+	for (; it3 != test5.end(); ++it3)
+		std::cout << it3->first << std::endl;
 /*-----------------------------------------------------------------*/
-// /*COPY-CONSTRUCTOR---------------------------------------------------*/     VA IN SEG, SBLOCCARE LA RIGA 61 DI TREE.HPP
-// 	C test6(test5);
-// 	printMap(test6, "TEST6");
-// /*-----------------------------------------------------------------*/
-// /*ASSIGN-OPERATOR---------------------------------------------------*/     VA IN SEG, SBLOCCARE LA RIGA 61 DI TREE.HPP
-// 	C test7;
-// 	test7 = test5;
-// 	printMap(test7, "TEST6");
-// /*-----------------------------------------------------------------*/
+/*ITERATOR--      ------------------------------------------------*/
+	typename C::iterator it4 = test5.end();
+	--it4;
+	for (; it4 != test5.begin(); --it4)
+		std::cout << it4->first << std::endl;
+/*-----------------------------------------------------------------*/
+/*COPY-CONSTRUCTOR---------------------------------------------------*/     //VA IN SEG, SBLOCCARE LA RIGA 61 DI TREE.HPP
+	// C test6(test5);
+	// printMap(test6, "TEST6");
+/*-----------------------------------------------------------------*/
+/*ASSIGN-OPERATOR---------------------------------------------------*/     //VA IN SEG, SBLOCCARE LA RIGA 61 DI TREE.HPP
+	// C test7;
+	// test7 = test5;
+	// printMap(test7, "TEST6");
+/*-----------------------------------------------------------------*/
 
 }

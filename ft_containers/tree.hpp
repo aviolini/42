@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/18 17:36:11 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/19 11:35:02 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ public:
 			return *this;		
 		}
 		// while (_ptr->_parent && _ptr != _ptr->_parent->_left)
-		while ( _ptr == _ptr->_parent->_left)
-			_ptr = _ptr->_parent;
+		// while ( _ptr == _ptr->_parent->_left)
+		// 	_ptr = _ptr->_parent;
 		_ptr = _ptr->_parent;
 		return *this;
 	}
@@ -249,7 +249,11 @@ public:
 		 	pointer temp = new value_type(obj);
 		 	temp->_left = 0;
 		 	temp->_right = _end;
-			temp->_parent = parent;
+			_end->_parent = temp;
+			// if (parent == 0)
+			// 	temp->_parent = temp;
+			// else 
+				temp->_parent = parent;
 			_size++;
 			return temp;
 		}		
@@ -258,7 +262,10 @@ public:
 		 	pointer temp = new value_type(obj);
 		 	temp->_left = 0;
 		 	temp->_right = 0;
-			temp->_parent = parent;
+			// if (parent == 0)
+			// 	temp->_parent = temp;
+			// else 
+				temp->_parent = parent;
 			_size++;
 		 	return temp;
 		}
