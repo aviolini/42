@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/19 17:16:04 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/22 12:11:52 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,14 @@ public:
 	{
         // insert(x.begin(), x.end());
 	}																															//COPY
-	~map(){}
+	~map()
+	{
+		_tree.destroy_tree();
+	}
 	map& operator= (const map& x)
 	{
 		//CANCELLARE TUTTO
+		// _tree.destroy_tree();
 		_tree = x._tree;
 		return *this;
 	}

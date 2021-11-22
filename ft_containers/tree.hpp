@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/19 17:38:24 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/22 12:19:41 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,10 +183,11 @@ public:
 	{
     	if (this != &x)
     	{
-			if (_root == _end)
-			{
-	    	    //CANCELLA TUTTO QUELLO CHE C'ERA PRIMA
-			}
+			// if (_root == _end)
+			// {
+	    	//     //CANCELLA TUTTO QUELLO CHE C'ERA PRIMA
+			// }
+			destroy_tree();
 			_compare = x._compare;
 			_pair_allocator = x._pair_allocator;
 			_node_allocator = x._node_allocator;
@@ -310,12 +311,27 @@ public:
 	pointer find(pointer node, typename Pair::first_type  & k)
 	{
 		if (node == 0)
-			return _end;
+			return _end;				//SERVE AL FIND DEL MAP
 		if (k == node->_value.first)
 			return node;
 		if( _compare(k,node->_value.first))
 			return find(node->_left, k);
 		return find(node->_right, k);
+	}
+	void destroy_tree()
+	{
+		destroy_tree(_root);
+		delete _end;
+		delete _begin;
+	}
+	void destroy_tree(pointer node)
+	{
+		if (node != 0 && node != _end && node != _begin)
+		{
+			destroy_tree(node->_left);
+			destroy_tree(node->_right);
+			delete node;
+		}
 	}
 };
 };
