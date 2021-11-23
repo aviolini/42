@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/23 11:55:14 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/23 12:19:14 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -338,24 +338,91 @@ public:
 	{
  		if (node == 0)
 			return 0;
-		if (node->p_right == 0) 
+		if (node->_right == 0) 
 			return node; 
-		return find_max(node->p_right); 
+		return find_max(node->_right); 
 	}
 	pointer find_min (pointer node) 
 	{
  		if (node == 0)
 			return 0;
-		if (node->p_left == 0) 
+		if (node->_left == 0) 
 			return node; 
-		return find_min(node->p_left); 
+		return find_min(node->_left); 
 	}
 	void remove(typename Pair::first_type  & k)
 	{
-		(void)k;
-		std::cout << "TODO:ERASE" << std::endl;
+		remove(_root,k);
 	}
 	/////////////////////////////////////////////////////////////////////
+	//REMOVE 
+	//1. jumping into c++ - Alex Allain - PAG195
+	//2. https://www.youtube.com/watch?v=gcULXE7ViZw    ->  https://gist.github.com/mycodeschool/9465a188248b624afdbf 
+	// https://www.geeksforgeeks.org/deletion-binary-tree/?ref=lbp
+	/////////////////////////////////////////////////////////////////////
+	
+	//1.////////////////////////////////////////////////////////////////
+	pointer remove_max_node (pointer node, pointer max_node) 
+	{
+ 		// defensive coding--shouldn't actually hit this 
+ 		if ( node == 0 )
+			return 0;
+ 		// we found or node, now we can replace it 
+ 		if ( node == max_node ) 
+ 		{
+  			// the only reason we can do this is because we know  
+  			// max_node->_right is 0 so we aren’t losing  
+  			// any information. If max_node has no left sub-tree,  
+  			// then we will just return 0 from this branch, which  
+  			// will result in max_node being replaced with an empty tree, 
+  			// which is what we want. 
+  			return max_node->_left;
+		} 
+		// each recursive call replaces the right sub-tree tree with a  
+		// new sub-tree that does not contain max_node. 
+		node->_right = remove_max_node( node->_right, max_node ); 
+		return node; 
+	}
+	pointer remove (pointer node, int key)
+	{
+		if (node == 0)
+			return 0;
+		if (node->_value.first == key)
+		{
+			_size--;
+			// the first two cases handle having zero or one child node
+		  	if (node->_left == 0)
+			{
+				pointer right_subtree = node->_right;
+				delete node;
+				// this might return 0 if there are zero child nodes,
+				// but that is what we want anyway
+				return right_subtree;
+			}
+			if (node->_right == 0)
+			{
+				pointer left_subtree = node->_left;
+				delete node;
+				// this will always return a valid node, since we know
+				// is not 0 from the previous if statement
+				return left_subtree;
+			}
+			pointer max_node = find_max(node->_left);
+			// since max_node came from the left sub-tree, we need to
+			// remove it from that sub-tree before re-linking that sub-tree
+			// back into the rest of the tree
+			max_node->_left = remove_max_node(node->_left, max_node);
+			max_node->_right = node->_right;
+			delete node;
+			return max_node;
+		}
+		else if (key < node->_value.first)
+			node->_left = remove(node->_left, key);
+		else
+			node->_right = remove(node->_right, key);
+		return node;
+	}
+	///////////////////////////////////////////////////////////////////
 
 
 
