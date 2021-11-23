@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/23 23:29:12 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/23 23:50:29 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void mapTest(PAIR (*makepair)(const char, int))
 	typename C::value_type pair9('l', 9);
 	typename C::value_type pair6('g', 6);
 	
-	test1.insert(makepair('n', 11));
+	test1.insert(makepair('r', 15));
 	test1.insert(pair4);
 	test1.insert(pair1);
 	test1.insert(pair5);
@@ -61,7 +61,12 @@ void mapTest(PAIR (*makepair)(const char, int))
 	test1.insert(pair6);
 	test1.insert(makepair('h', 7));
 	test1.insert(makepair('i', 8));
+	test1.insert(makepair('n', 11));
+	test1.insert(makepair('p', 13));
 	test1.insert(makepair('m', 10));
+	test1.insert(makepair('o', 12));
+	test1.insert(makepair('s', 16));
+	
 ///*	
 //SIZE------------------------------------------------------------
 	std::cout << "TEST1_SIZE:" <<test1.size() << std::endl;
@@ -83,11 +88,11 @@ void mapTest(PAIR (*makepair)(const char, int))
 	std::cout << (test1.find('z') == test1.end()) << std::endl;
 // -----------------------------------------------------------------
 // INSERT-SINGLE---------------------------------------------------------
-	std::cout << ((test1.insert(makepair('o', 12))).first->first) << std::endl;
-	std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
-	std::cout << ((test1.insert(makepair('o', 12))).first->first) << std::endl;
-	std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
-	printMap(test1, "TEST1");
+	// std::cout << ((test1.insert(makepair('o', 12))).first->first) << std::endl;
+	// std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
+	// std::cout << ((test1.insert(makepair('o', 12))).first->first) << std::endl;
+	// std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
+	// printMap(test1, "TEST1");
 // -----------------------------------------------------------------
 // INSERT-ITERATOR-----------------------------------------------------
 	PAIR array1[] = {makepair('a', 1), makepair('b', 2), makepair('c', 3), makepair('d', 4)};
@@ -153,10 +158,14 @@ std::cout << "------------------------------" << std::endl;
 // -----------------------------------------------------------------
 
 // // REMOVE---------------------------------------------------
-	// test1.erase('n');
-	printMap(test1, "TEST1");
-	// test1.erase('m');
+	test1.erase('i');
+	// test1.erase('a');
+	
+	test1.erase('p');
+	test1.erase('g');
+
 	printTree(test1, "TEST1");
+	printMap(test1, "TEST1");
 // -----------------------------------------------------------------
 
 }

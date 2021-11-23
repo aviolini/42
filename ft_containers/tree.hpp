@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/23 23:28:18 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/23 23:45:57 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -392,6 +392,12 @@ public:
 		{
 			_size--;
 			// the first two cases handle having zero or one child node
+			if (node->_left == 0 && node->_right == 0)
+			{
+				std::cout << "0" << std::endl;
+				delete node;
+				return 0;
+			}
 		  	if (node->_left == 0)
 			{
 				std::cout << "1" << std::endl;
