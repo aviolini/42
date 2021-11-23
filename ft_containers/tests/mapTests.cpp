@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/24 00:46:05 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/24 00:53:02 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ std::cout << "------------------------------" << std::endl;
 	printMap(test7, "TEST7");
 // -----------------------------------------------------------------
 
-// // REMOVE---------------------------------------------------
+// // ERASE---------------------------------------------------
 	// printTree(test1, "TEST1");
 	test1.erase('i');	//OK	//0
 	test1.erase('p');	//OK	//2
@@ -168,17 +168,23 @@ std::cout << "------------------------------" << std::endl;
 	test1.erase('a');	//OK	//3
 	test1.erase('e');	//OK	//3
 	test1.erase('r');	//OK	//3
-	// printTree(test1, "TEST1");
+	test1.erase('c');	//OK	//3
+	test1.erase('f');	//OK	//3
+	test1.erase('h');	//OK	//3
 	printMap(test1, "TEST1");
+
+// --INSERT AFTER ERASE---------------------------------------------------------------
+	// test1.insert(makepair('h', 7));	//NO FORSE PERCHE' NON E' DETTO CHE BEGIN STA A SX
+	// // printTree(test1, "TEST1");
+	// printMap(test1, "TEST1");
 // -----------------------------------------------------------------
 
 	// C test8;
-	// test8.insert(makepair('h', 7));
 	// test8.insert(makepair('i', 8));
-	// printTree(test8, "TEST8");
+	// // printTree(test8, "TEST8");
 	// printMap(test8, "TEST8");
-	// test8.erase('h');
-	// printTree(test8, "TEST8");
+	// test8.erase('h');				//NO
+	// // printTree(test8, "TEST8");
 	// printMap(test8, "TEST8");
 	// test8.insert(makepair('h', 7));
 	// printMap(test8, "TEST8");
