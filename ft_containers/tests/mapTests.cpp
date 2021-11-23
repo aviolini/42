@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/24 00:36:49 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/24 00:46:05 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ std::cout << "------------------------------" << std::endl;
 // -----------------------------------------------------------------
 
 // // REMOVE---------------------------------------------------
-	printTree(test1, "TEST1");
+	// printTree(test1, "TEST1");
 	test1.erase('i');	//OK	//0
 	test1.erase('p');	//OK	//2
 	test1.erase('g');	//OK	//1
@@ -167,9 +167,20 @@ std::cout << "------------------------------" << std::endl;
 	test1.erase('l');	//OK	//3
 	test1.erase('a');	//OK	//3
 	test1.erase('e');	//OK	//3
-	test1.erase('r');	///NO
-	printTree(test1, "TEST1");
+	test1.erase('r');	//OK	//3
+	// printTree(test1, "TEST1");
 	printMap(test1, "TEST1");
 // -----------------------------------------------------------------
+
+	// C test8;
+	// test8.insert(makepair('h', 7));
+	// test8.insert(makepair('i', 8));
+	// printTree(test8, "TEST8");
+	// printMap(test8, "TEST8");
+	// test8.erase('h');
+	// printTree(test8, "TEST8");
+	// printMap(test8, "TEST8");
+	// test8.insert(makepair('h', 7));
+	// printMap(test8, "TEST8");
 
 }
