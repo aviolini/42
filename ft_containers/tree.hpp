@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/23 11:02:37 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/23 11:55:14 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -333,11 +333,32 @@ public:
 			delete node;
 		}
 	}
+	/////////////////////////////////////////////////////////////////////
+	pointer find_max (pointer node) 
+	{
+ 		if (node == 0)
+			return 0;
+		if (node->p_right == 0) 
+			return node; 
+		return find_max(node->p_right); 
+	}
+	pointer find_min (pointer node) 
+	{
+ 		if (node == 0)
+			return 0;
+		if (node->p_left == 0) 
+			return node; 
+		return find_min(node->p_left); 
+	}
 	void remove(typename Pair::first_type  & k)
 	{
-		pointer temp = find(_root, k);
-		std::cout << "TEMP: " << temp->_value.first << std::endl;
+		(void)k;
+		std::cout << "TODO:ERASE" << std::endl;
 	}
+	/////////////////////////////////////////////////////////////////////
+
+
+
 };
 };
 
