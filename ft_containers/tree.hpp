@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/23 12:19:14 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/23 12:42:19 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -353,6 +353,7 @@ public:
 	void remove(typename Pair::first_type  & k)
 	{
 		remove(_root,k);
+		// Delete(_root, k);
 	}
 	/////////////////////////////////////////////////////////////////////
 	//REMOVE 
@@ -420,6 +421,55 @@ public:
 			node->_left = remove(node->_left, key);
 		else
 			node->_right = remove(node->_right, key);
+		return node;
+	}
+	///////////////////////////////////////////////////////////////////
+	
+	//2.////////////////////////////////////////////////////////////////
+	pointer FindMin(pointer node)
+	{
+		while(node->_left != 0)
+			node = node->_left;
+		return node;
+	}
+	pointer Delete(pointer node, int key)
+	{
+		if(node == 0)
+			return node; 
+		else if(key < node->_value.first)
+			node->_left = Delete(node->_left, key);
+		else if (key > node->_value.first)
+			node->_right = Delete(node->_right, key);
+		// Wohoo... I found you, Get ready to be deleted	
+		else 
+		{
+			// Case 1:  No child
+			if(node->_left == 0 && node->_right == 0)
+			{ 
+				delete node;
+				node = 0;
+			}
+			//Case 2: One child 
+			else if(node->_left == 0)
+			{
+				pointer temp = node;
+				node = node->_right;
+				delete temp;
+			}
+			else if(node->_right == 0)
+			{
+				pointer temp = node;
+				node = node->_left;
+				delete temp;
+			}
+			// case 3: 2 children
+			else
+			{ 
+				pointer temp = FindMin(node->_right);
+				node->_value.first = temp->_value.first;
+				node->_right = Delete(node->_right, temp->_value.first);
+			}
+		}
 		return node;
 	}
 	///////////////////////////////////////////////////////////////////
