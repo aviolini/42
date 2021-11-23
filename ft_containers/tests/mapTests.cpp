@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/24 00:08:41 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/24 00:18:43 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,9 +162,13 @@ std::cout << "------------------------------" << std::endl;
 	test1.erase('p');	//OK	//2
 	test1.erase('g');	//OK	//1
 	test1.erase('b');	//OK	//1
-	// test1.erase('n');	////NO	//3
-	// test1.erase('l');	///NO	//3
-	// test1.erase('a');	///NO
+	test1.erase('n');	//OK	//3
+	test1.erase('l');	//OK	//3
+	test1.erase('a');	//OK	//3
+	test1.erase('e');	//OK	//3
+	// test1.erase('r');	///NO
+
+
 
 	
 

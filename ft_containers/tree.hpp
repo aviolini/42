@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/24 00:08:30 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/24 00:17:46 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -425,20 +425,22 @@ public:
 			// since max_node came from the left sub-tree, we need to
 			// remove it from that sub-tree before re-linking that sub-tree
 			// back into the rest of the tree
-			max_node->_left = remove_max_node(node->_left, max_node);				////////////////TOLTO
+			max_node->_left = remove_max_node(node->_left, max_node);
+			node->_left->_parent = max_node;
 			max_node->_right = node->_right;
+			node->_right->_parent = max_node;
 			max_node->_parent = node->_parent;
 			delete node;
-			////////////////////PRINT///////////////////////////////////////////////////////
-			if (max_node)
-				std::cout << "VALUE:" << max_node->_value.first << std::endl;
-			if (max_node->_parent)
-				std::cout << "PARENT:" << max_node->_parent->_value.first << std::endl;
-			if (max_node->_left)
-				std::cout << "LEFT:" << max_node->_left->_value.first << std::endl;
-			if (max_node->_right)
-				std::cout << "RIGHT:" << max_node->_right->_value.first << std::endl;
-			///////////////////////////////////////////////////////////////////////////////
+			// ////////////////////PRINT///////////////////////////////////////////////////////
+			// if (max_node)
+			// 	std::cout << "VALUE:" << max_node->_value.first << std::endl;
+			// if (max_node->_parent)
+			// 	std::cout << "PARENT:" << max_node->_parent->_value.first << std::endl;
+			// if (max_node->_left)
+			// 	std::cout << "LEFT:" << max_node->_left->_value.first << std::endl;
+			// if (max_node->_right)
+			// 	std::cout << "RIGHT:" << max_node->_right->_value.first << std::endl;
+			// ///////////////////////////////////////////////////////////////////////////////
 			return max_node;
 		}
 		else if (key < node->_value.first)
