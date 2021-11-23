@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/22 12:19:41 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/23 11:02:37 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,6 +332,11 @@ public:
 			destroy_tree(node->_right);
 			delete node;
 		}
+	}
+	void remove(typename Pair::first_type  & k)
+	{
+		pointer temp = find(_root, k);
+		std::cout << "TEMP: " << temp->_value.first << std::endl;
 	}
 };
 };
