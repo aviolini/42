@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/24 00:17:46 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/24 00:34:54 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -376,7 +376,9 @@ public:
   			// any information. If max_node has no left sub-tree,  
   			// then we will just return 0 from this branch, which  
   			// will result in max_node being replaced with an empty tree, 
-  			// which is what we want. 
+  			// which is what we want.
+			if (max_node->_left != 0)
+				max_node->_left->_parent = max_node->_parent;
   			return max_node->_left;
 		} 
 		// each recursive call replaces the right sub-tree tree with a  

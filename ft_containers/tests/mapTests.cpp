@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/24 00:18:43 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/24 00:36:49 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void mapTest(PAIR (*makepair)(const char, int))
 	test1.insert(makepair('p', 13));
 	test1.insert(makepair('m', 10));
 	test1.insert(makepair('o', 12));
-	test1.insert(makepair('s', 16));
+	// test1.insert(makepair('s', 16));
 	
 ///*	
 //SIZE------------------------------------------------------------
@@ -158,6 +158,7 @@ std::cout << "------------------------------" << std::endl;
 // -----------------------------------------------------------------
 
 // // REMOVE---------------------------------------------------
+	printTree(test1, "TEST1");
 	test1.erase('i');	//OK	//0
 	test1.erase('p');	//OK	//2
 	test1.erase('g');	//OK	//1
@@ -166,14 +167,7 @@ std::cout << "------------------------------" << std::endl;
 	test1.erase('l');	//OK	//3
 	test1.erase('a');	//OK	//3
 	test1.erase('e');	//OK	//3
-	// test1.erase('r');	///NO
-
-
-
-	
-
-
-
+	test1.erase('r');	///NO
 	printTree(test1, "TEST1");
 	printMap(test1, "TEST1");
 // -----------------------------------------------------------------
