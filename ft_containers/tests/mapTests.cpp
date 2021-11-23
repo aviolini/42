@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/23 23:50:29 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/24 00:08:41 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,11 +158,17 @@ std::cout << "------------------------------" << std::endl;
 // -----------------------------------------------------------------
 
 // // REMOVE---------------------------------------------------
-	test1.erase('i');
-	// test1.erase('a');
+	test1.erase('i');	//OK	//0
+	test1.erase('p');	//OK	//2
+	test1.erase('g');	//OK	//1
+	test1.erase('b');	//OK	//1
+	// test1.erase('n');	////NO	//3
+	// test1.erase('l');	///NO	//3
+	// test1.erase('a');	///NO
+
 	
-	test1.erase('p');
-	test1.erase('g');
+
+
 
 	printTree(test1, "TEST1");
 	printMap(test1, "TEST1");

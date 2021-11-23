@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/23 23:45:57 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/24 00:08:30 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -392,13 +392,13 @@ public:
 		{
 			_size--;
 			// the first two cases handle having zero or one child node
-			if (node->_left == 0 && node->_right == 0)
+			if (node->_left == 0 && node->_right == 0)	//NO CHILDREN
 			{
 				std::cout << "0" << std::endl;
 				delete node;
 				return 0;
 			}
-		  	if (node->_left == 0)
+		  	if (node->_left == 0)	//RIGHT CHILD
 			{
 				std::cout << "1" << std::endl;
 				pointer right_subtree = node->_right;
@@ -408,7 +408,7 @@ public:
 				// but that is what we want anyway
 				return right_subtree;
 			}
-			if (node->_right == 0)
+			if (node->_right == 0)	//LEFT CHILD
 			{
 				std::cout << "2" << std::endl;
 				pointer left_subtree = node->_left;
@@ -418,12 +418,14 @@ public:
 				// is not 0 from the previous if statement
 				return left_subtree;
 			}
+			//LEFT AND RIGHT CHILDREN
 			std::cout << "3" << std::endl;
 			pointer max_node = find_max(node->_left);
+			
 			// since max_node came from the left sub-tree, we need to
 			// remove it from that sub-tree before re-linking that sub-tree
 			// back into the rest of the tree
-			// max_node->_left = remove_max_node(node->_left, max_node);				////////////////TOLTO
+			max_node->_left = remove_max_node(node->_left, max_node);				////////////////TOLTO
 			max_node->_right = node->_right;
 			max_node->_parent = node->_parent;
 			delete node;
