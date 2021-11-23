@@ -6,12 +6,18 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/23 11:02:22 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/23 23:29:12 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
+
+template<typename C>
+void printTree(C &m, std::string name)
+{
+	m._tree.print(name);
+}
 
 template<typename C>
 void printMap(C &m, std::string name)
@@ -147,8 +153,10 @@ std::cout << "------------------------------" << std::endl;
 // -----------------------------------------------------------------
 
 // // REMOVE---------------------------------------------------
-	test7.erase('b');
-	printMap(test7, "TEST7");
+	// test1.erase('n');
+	printMap(test1, "TEST1");
+	// test1.erase('m');
+	printTree(test1, "TEST1");
 // -----------------------------------------------------------------
 
 }

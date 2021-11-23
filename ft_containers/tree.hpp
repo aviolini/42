@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/23 12:42:19 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/23 23:28:18 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -352,7 +352,7 @@ public:
 	}
 	void remove(typename Pair::first_type  & k)
 	{
-		remove(_root,k);
+		_root = remove(_root,k);
 		// Delete(_root, k);
 	}
 	/////////////////////////////////////////////////////////////////////
@@ -394,7 +394,9 @@ public:
 			// the first two cases handle having zero or one child node
 		  	if (node->_left == 0)
 			{
+				std::cout << "1" << std::endl;
 				pointer right_subtree = node->_right;
+				right_subtree->_parent = node->_parent;
 				delete node;
 				// this might return 0 if there are zero child nodes,
 				// but that is what we want anyway
@@ -402,19 +404,33 @@ public:
 			}
 			if (node->_right == 0)
 			{
+				std::cout << "2" << std::endl;
 				pointer left_subtree = node->_left;
+				left_subtree->_parent = node->_parent;
 				delete node;
 				// this will always return a valid node, since we know
 				// is not 0 from the previous if statement
 				return left_subtree;
 			}
+			std::cout << "3" << std::endl;
 			pointer max_node = find_max(node->_left);
 			// since max_node came from the left sub-tree, we need to
 			// remove it from that sub-tree before re-linking that sub-tree
 			// back into the rest of the tree
-			max_node->_left = remove_max_node(node->_left, max_node);
+			// max_node->_left = remove_max_node(node->_left, max_node);				////////////////TOLTO
 			max_node->_right = node->_right;
+			max_node->_parent = node->_parent;
 			delete node;
+			////////////////////PRINT///////////////////////////////////////////////////////
+			if (max_node)
+				std::cout << "VALUE:" << max_node->_value.first << std::endl;
+			if (max_node->_parent)
+				std::cout << "PARENT:" << max_node->_parent->_value.first << std::endl;
+			if (max_node->_left)
+				std::cout << "LEFT:" << max_node->_left->_value.first << std::endl;
+			if (max_node->_right)
+				std::cout << "RIGHT:" << max_node->_right->_value.first << std::endl;
+			///////////////////////////////////////////////////////////////////////////////
 			return max_node;
 		}
 		else if (key < node->_value.first)
@@ -473,7 +489,32 @@ public:
 		return node;
 	}
 	///////////////////////////////////////////////////////////////////
-
+void print(std::string name)
+{
+	std::cout << "-----" << name << "-----------------------" << std::endl;
+	if (!_size)
+	{
+		std::cout << "EMPTY TREE" << std::endl;
+		std::cout << "------------------------------" << std::endl;
+		return ;
+	}
+	std::cout << "size:" << _size << std::endl;
+	std::cout << "content: "<< std::endl;
+	iterator itB = begin();
+	itB++;
+	iterator itE = end();
+	// itE--;
+	for (; itB != itE ; ++itB)
+	{
+		std::cout << "F: " << itB->_value.first << "\tS: " << itB->_value.second;
+		if (itB->_parent)
+			std::cout << "\tP: " << itB->_parent->_value.first <<  std::endl;
+		else
+			std::cout << "\tP: NULL" << std::endl;
+			
+	}
+	std::cout << "-----------------------------" << std::endl;
+}
 
 
 };
