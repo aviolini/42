@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/24 11:18:05 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/25 00:49:48 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,16 @@ public:
 			return pair<iterator,bool>(it, false);
 		return pair<iterator,bool>(++(iterator(_tree.insert(val))), true);
 	}
-	iterator insert (iterator position, const value_type& val);						//WITH HINT
+	iterator insert (iterator position, const value_type& val)						//WITH HINT
+	{
+		iterator it = find(val.first);
+		if (it != end()) //E' STATO TROVATO
+			return it;
+		typename tree_type::pointer ptr;
+		ptr = _tree.insert(position.getNode()->_parent, position.getNode(), val);	//SE NON RIESCE A METTERLO
+		it = iterator(typename tree_type::iterator(ptr));							//RICOMINCIARE DA _root?
+			return it;
+	}
 	template <class InputIterator>													//RANGE
 	void insert (InputIterator first, InputIterator last)
 	{

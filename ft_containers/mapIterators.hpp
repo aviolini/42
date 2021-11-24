@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/19 17:21:35 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/25 00:28:17 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ public:
 		return *this;
 	}
 /*MEMBER OPERATORS--------------------------------------------------*/
+	pointer getNode()
+	{
+		return _data.getNode();
+	}
 	Pair *operator -> ()
 	{
 		return &this->_data->_value;

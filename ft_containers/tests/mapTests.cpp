@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/24 12:19:59 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/25 00:51:33 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void mapTest(PAIR (*makepair)(const char, int))
 	// printMap(test1, "TEST1");
 // -----------------------------------------------------------------
 // INSERT-ITERATOR-----------------------------------------------------
-	PAIR array1[] = {makepair('a', 1), makepair('b', 2), makepair('c', 3), makepair('d', 4)};
+	PAIR array1[] = {makepair('f', 6), makepair('b', 2), makepair('c', 3), makepair('e', 5)};
 	C test3;
 	test3.insert(array1, &array1[4]);
 	(void)array1;
@@ -105,6 +105,16 @@ void mapTest(PAIR (*makepair)(const char, int))
 	C test4;
 	test4.insert(test1.begin(), test1.end());
 	printMap(test4, "TEST4");
+// -----------------------------------------------------------------
+
+// INSERT-WITH HINT-----------------------------------------------------
+	// C test4;
+	typename C::iterator it3 = test3.end();
+	it3--;
+	test3.insert(it3, makepair('e', 5));
+	test3.insert(it3, makepair('d', 4));
+	test3.insert(it3, makepair('a', 1));
+	printMap(test3, "TEST3");
 // -----------------------------------------------------------------
 
 // ITERATOR-CONSTRUCTOR------------------------------------------------
