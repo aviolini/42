@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 00:51:33 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/25 00:57:41 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,10 @@ std::cout << "------------------------------" << std::endl;
 	printMap(test1, "TEST1");
 
 // // ERASE ITERATORS---------------------------------------------
+// // ERASE POSITIONS---------------------------------------------
+	test1.erase(test1.find('n'));	//OK	//3
+	test1.erase('h');	//OK	//3
+	test1.erase('v');	//OK	//3
 
 // // ERASE---------------------------------------------------
 	// test1.insert(makepair('t', 22));
@@ -184,14 +188,14 @@ std::cout << "------------------------------" << std::endl;
 	test1.erase('p');	//OK	//2
 	test1.erase('g');	//OK	//1
 	test1.erase('b');	//OK	//1
-	test1.erase('n');	//OK	//3
 	test1.erase('l');	//OK	//3
 	test1.erase('a');	//OK	//3
 	test1.erase('e');	//OK	//3
 	test1.erase('r');	//OK	//3
 	test1.erase('c');	//OK	//3
 	test1.erase('f');	//OK	//3
-	test1.erase('h');	//OK	//3
+	test1.erase('v');	//OK	//3
+
 	// printMap(test1, "TEST1");
 	// printTree(test1, "TREE");
 // --INSERT AFTER ERASE--------------------------------KO-------------------------------
