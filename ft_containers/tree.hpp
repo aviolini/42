@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/24 00:38:12 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/24 01:15:15 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -353,6 +353,8 @@ public:
 	void remove(typename Pair::first_type  & k)
 	{
 		_root = remove(_root,k);
+		if (_size == 0)
+		_root = _end;
 		// Delete(_root, k);
 	}
 	/////////////////////////////////////////////////////////////////////
@@ -394,7 +396,13 @@ public:
 		{
 			_size--;
 			// the first two cases handle having zero or one child node
-			if (node->_left == 0 && node->_right == 0)	//NO CHILDREN
+			// if (_size == 0)	//SE ERA L'ULTIMO ELEMENTO			<-------------------|
+			// {																		|
+			// 	delete node;															|
+			// 	return 0;																|
+			// }																		|
+			if ((node->_left == 0 && node->_right == 0) || 			//NO CHILDREN		|
+				(node->_left == _begin && node->_right == _end))	//ULTIMO ELEMENTO---|
 			{
 				// std::cout << "0" << std::endl;
 				delete node;

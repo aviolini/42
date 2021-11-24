@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/24 00:53:02 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/24 01:08:24 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,14 +179,13 @@ std::cout << "------------------------------" << std::endl;
 	// printMap(test1, "TEST1");
 // -----------------------------------------------------------------
 
-	// C test8;
+	C test8;
+	test8.insert(makepair('h', 7));
 	// test8.insert(makepair('i', 8));
-	// // printTree(test8, "TEST8");
-	// printMap(test8, "TEST8");
-	// test8.erase('h');				//NO
-	// // printTree(test8, "TEST8");
-	// printMap(test8, "TEST8");
-	// test8.insert(makepair('h', 7));
-	// printMap(test8, "TEST8");
+	printMap(test8, "TEST8");
+	test8.erase('h');				//NO
+	printMap(test8, "TEST8");
+	test8.insert(makepair('h', 7));
+	printMap(test8, "TEST8");
 
 }
