@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/24 01:49:07 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/24 02:01:51 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -422,13 +422,19 @@ public:
 			{
 				// std::cout << "1" << std::endl;
 				pointer right_subtree = node->_right;
-				right_subtree->_parent = node->_parent;
-				right_subtree->_left = _begin;
-				_begin->_parent = right_subtree;
+				if (right_subtree)
+				{
+					right_subtree->_parent = node->_parent;
+					right_subtree->_left = _begin;
+					_begin->_parent = right_subtree;
+					delete node;
+					// this might return 0 if there are zero child nodes,
+					// but that is what we want anyway
+					return right_subtree;
+				}
+				_begin->_parent = node->_parent;
 				delete node;
-				// this might return 0 if there are zero child nodes,
-				// but that is what we want anyway
-				return right_subtree;
+				return _begin;
 			}
 			if (node->_right == 0)	//LEFT CHILD
 			{
