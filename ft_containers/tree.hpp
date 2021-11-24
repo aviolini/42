@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/24 01:15:15 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/24 01:44:08 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -418,6 +418,18 @@ public:
 				// but that is what we want anyway
 				return right_subtree;
 			}
+		  	if (node->_left == _begin)	//LEFT BEGIN
+			{
+				// std::cout << "1" << std::endl;
+				pointer right_subtree = node->_right;
+				right_subtree->_parent = node->_parent;
+				right_subtree->_left = _begin;
+				_begin->_parent = right_subtree;
+				delete node;
+				// this might return 0 if there are zero child nodes,
+				// but that is what we want anyway
+				return right_subtree;
+			}
 			if (node->_right == 0)	//LEFT CHILD
 			{
 				// std::cout << "2" << std::endl;
@@ -428,10 +440,21 @@ public:
 				// is not 0 from the previous if statement
 				return left_subtree;
 			}
+		  	if (node->_left == _end)	//LEFT BEGIN
+			{
+				// std::cout << "1" << std::endl;
+				pointer right_subtree = node->_right;
+				right_subtree->_parent = node->_parent;
+				right_subtree->_left = _end;
+				_end->_parent = right_subtree;
+				delete node;
+				// this might return 0 if there are zero child nodes,
+				// but that is what we want anyway
+				return right_subtree;
+			}
 			//LEFT AND RIGHT CHILDREN
 			// std::cout << "3" << std::endl;
 			pointer max_node = find_max(node->_left);
-			
 			// since max_node came from the left sub-tree, we need to
 			// remove it from that sub-tree before re-linking that sub-tree
 			// back into the rest of the tree

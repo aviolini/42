@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/24 01:27:20 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/24 01:46:26 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,6 @@ std::cout << "------------------------------" << std::endl;
 // -----------------------------------------------------------------
 
 // // ERASE---------------------------------------------------
-	// printTree(test1, "TEST1");
 	test1.erase('i');	//OK	//0
 	test1.erase('p');	//OK	//2
 	test1.erase('g');	//OK	//1
@@ -174,7 +173,7 @@ std::cout << "------------------------------" << std::endl;
 	printMap(test1, "TEST1");
 // --INSERT AFTER ERASE---------------------------------KO------------------------------
 	// test1.insert(makepair('h', 8));	//NO FORSE PERCHE' NON E' DETTO CHE BEGIN STA A SX
-	printMap(test1, "TEST1");
+	// printMap(test1, "TEST1");
 // --INSERT AFTER ERASE--------------------------------KO-------------------------------
 	// test1.erase('m');
 	// test1.erase('o');
@@ -189,13 +188,13 @@ std::cout << "------------------------------" << std::endl;
 	printMap(test8, "TEST8");
 	test8.insert(makepair('h', 8));
 	printMap(test8, "TEST8");
-// ---INSERT 2 ELEMENT, ERASE FIRST AND REINSERT FIRST-----------KO---------------------------------
-	// C test9;
-	// test9.insert(makepair('h', 8));
-	// test9.insert(makepair('i', 9));
-	// printMap(test9, "TEST9");
-	// test9.erase('h');				//NO
-	// printMap(test9, "TEST9");
-	// test9.insert(makepair('h', 8));
-	// printMap(test9, "TEST9");
+// ---INSERT 2 ELEMENT, ERASE FIRST AND REINSERT FIRST-----------OK---------------------------------
+	C test9;
+	test9.insert(makepair('h', 8));
+	test9.insert(makepair('i', 9));
+	printMap(test9, "TEST9");
+	test9.erase('h');
+	printMap(test9, "TEST9");
+	test9.insert(makepair('h', 8));
+	printMap(test9, "TEST9");
 }
