@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/23 23:19:03 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/24 11:18:05 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,19 @@ public:
 	}
 
 /*ELEMENT ACCESS-------------------------------------------------------------------------------*/
-	// mapped_type& operator[] (const key_type& k);
+	mapped_type& operator[] (const key_type& k)
+	{
+		iterator it = begin();
+		while (it != end() && it->first != k)
+			++it;
+		if (it == end())
+		{
+			// insert(make_pair('t', 6));
+			// return begin()->second;
+			return insert(make_pair(k,mapped_type())).first->second;
+		}
+		return it->second;
+	}
 
 /*MODIFIERS-----------------------------------------------------------------------------------*/
 	pair<iterator,bool> insert (const value_type& val)								//SINGLE ELEMENT
@@ -137,7 +149,7 @@ public:
 			return pair<iterator,bool>(it, false);
 		return pair<iterator,bool>(++(iterator(_tree.insert(val))), true);
 	}
-	// iterator insert (iterator position, const value_type& val);						//WITH HINT
+	iterator insert (iterator position, const value_type& val);						//WITH HINT
 	template <class InputIterator>													//RANGE
 	void insert (InputIterator first, InputIterator last)
 	{

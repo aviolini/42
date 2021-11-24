@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/24 02:16:49 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/24 11:42:48 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -427,7 +427,8 @@ public:
 					// right_subtree->_parent = node->_parent;
 					// right_subtree->_left = _begin;////////////////////////////////////////TESTARE	
 					// _begin->_parent = right_subtree;
-
+					
+					right_subtree->_parent = node->_parent;
 					pointer min_node = find_min(right_subtree);
 					min_node->_left = _begin;
 					_begin->_parent = min_node;
