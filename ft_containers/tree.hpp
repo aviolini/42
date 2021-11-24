@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/24 11:42:48 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/24 12:21:00 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -278,6 +278,7 @@ public:
 		}	
 		if (node == _end)								//SE ARRIVA AL NODO CON VALUE MAGGIORE
 		{
+			// std::cout << "AAAA" <<std::endl;
 		 	pointer temp = new value_type(obj);
 		 	temp->_left = 0;
 		 	temp->_right = _end;
@@ -477,8 +478,16 @@ public:
 			// since max_node came from the left sub-tree, we need to
 			// remove it from that sub-tree before re-linking that sub-tree
 			// back into the rest of the tree
+			if (max_node == node->_left)										/*	 m	*/
+			{																	/*	/\	*/
+				node->_right->_parent = max_node;								/* d t	*/
+				max_node->_right = node->_right;								/*si rimuove m */
+				delete node;
+				return max_node;
+			}
 			max_node->_left = remove_max_node(node->_left, max_node);
-			node->_left->_parent = max_node;
+			// if (node->_left != max_node)
+				node->_left->_parent = max_node;
 			max_node->_right = node->_right;
 			node->_right->_parent = max_node;
 			max_node->_parent = node->_parent;
