@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/24 01:44:08 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/24 01:49:07 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -396,13 +396,13 @@ public:
 		{
 			_size--;
 			// the first two cases handle having zero or one child node
-			// if (_size == 0)	//SE ERA L'ULTIMO ELEMENTO			<-------------------|
-			// {																		|
-			// 	delete node;															|
-			// 	return 0;																|
-			// }																		|
-			if ((node->_left == 0 && node->_right == 0) || 			//NO CHILDREN		|
-				(node->_left == _begin && node->_right == _end))	//ULTIMO ELEMENTO---|
+			if (_size == 0)	//SE E' L'ULTIMO ELEMENTO			<-----------------------------|
+			{																				//|
+				delete node;																//|
+				return 0;																	//|
+			}																				//|
+			if ((node->_left == 0 && node->_right == 0))// || 			//NO CHILDREN		  |
+				//(node->_left == _begin && node->_right == _end))		//ULTIMO ELEMENTO-----|
 			{
 				// std::cout << "0" << std::endl;
 				delete node;

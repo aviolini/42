@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/24 01:46:26 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/24 01:47:33 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,8 +172,8 @@ std::cout << "------------------------------" << std::endl;
 	test1.erase('h');	//OK	//3
 	printMap(test1, "TEST1");
 // --INSERT AFTER ERASE---------------------------------KO------------------------------
-	// test1.insert(makepair('h', 8));	//NO FORSE PERCHE' NON E' DETTO CHE BEGIN STA A SX
-	// printMap(test1, "TEST1");
+	test1.insert(makepair('h', 8));	//NO FORSE PERCHE' NON E' DETTO CHE BEGIN STA A SX
+	printMap(test1, "TEST1");
 // --INSERT AFTER ERASE--------------------------------KO-------------------------------
 	// test1.erase('m');
 	// test1.erase('o');
