@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/24 02:01:51 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/24 02:16:49 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -424,9 +424,14 @@ public:
 				pointer right_subtree = node->_right;
 				if (right_subtree)
 				{
-					right_subtree->_parent = node->_parent;
-					right_subtree->_left = _begin;
-					_begin->_parent = right_subtree;
+					// right_subtree->_parent = node->_parent;
+					// right_subtree->_left = _begin;////////////////////////////////////////TESTARE	
+					// _begin->_parent = right_subtree;
+
+					pointer min_node = find_min(right_subtree);
+					min_node->_left = _begin;
+					_begin->_parent = min_node;
+
 					delete node;
 					// this might return 0 if there are zero child nodes,
 					// but that is what we want anyway
@@ -446,17 +451,24 @@ public:
 				// is not 0 from the previous if statement
 				return left_subtree;
 			}
-		  	if (node->_left == _end)	//LEFT BEGIN
+		  	if (node->_right == _end)	//LEFT BEGIN
 			{
 				// std::cout << "1" << std::endl;
-				pointer right_subtree = node->_right;
-				right_subtree->_parent = node->_parent;
-				right_subtree->_left = _end;
-				_end->_parent = right_subtree;
+				pointer left_subtree = node->_left;
+				if (left_subtree)
+				{
+					left_subtree->_parent = node->_parent;
+					pointer max_node = find_max(left_subtree);
+					max_node->_right = _end;
+					_end->_parent = max_node;
+					delete node;
+					// this might return 0 if there are zero child nodes,
+					// but that is what we want anyway
+					return left_subtree;
+				}
+				_end->_parent = node->_parent;
 				delete node;
-				// this might return 0 if there are zero child nodes,
-				// but that is what we want anyway
-				return right_subtree;
+				return _end;				
 			}
 			//LEFT AND RIGHT CHILDREN
 			// std::cout << "3" << std::endl;
