@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 02:19:27 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/25 03:01:03 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,29 @@ public:
     typedef typename allocator_type::difference_type		difference_type;
     typedef typename allocator_type::size_type		   		size_type;
 	typedef tree<value_type,key_compare,allocator_type> 	tree_type;
-	typedef typename tree_type::value_compare				value_compare;
+	// typedef typename tree_type::value_compare				value_compare;
 	typedef ft::node<value_type>							node_type;
 	typedef mapIterator<ft::treeIterator<node_type> >		const_iterator;
 	typedef mapIterator<ft::treeIterator<node_type> >		iterator;
 	typedef mapReverseIterator<const_iterator> 				const_reverse_iterator;
 	typedef mapReverseIterator<iterator> 					reverse_iterator;
-
+	class value_compare
+	{
+	//   friend class map;
+	// protected:
+	public:
+	  Compare key_comp;
+	  value_compare (Compare c) : key_comp(c) {}
+	  ~value_compare(){}
+	public:
+	  typedef bool			result_type;
+	  typedef value_type	first_argument_type;
+	  typedef value_type	second_argument_type;
+	  result_type operator() (const value_type& x, const value_type& y) const
+	  {
+	    return key_comp(x.first, y.first);
+	  }
+	};
 // private:
 	tree_type	_tree;
 
@@ -194,13 +210,11 @@ public:
 /*OBSERVERS----------------------------------------------------------------------------------*/
 	key_compare key_comp() const
 	{
-		// return _tree::value_compare.key_comp();
 		return _tree.key_comp;
 	}
 	value_compare value_comp() const
 	{
-		return _tree.value_comp;
-		// return value_compare(tree.value_comp().key_comp())
+		return value_compare(key_compare());
 	}
 
 /*OPERATIONS----------------------------------------------------------------------------------*/

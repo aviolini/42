@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 02:29:57 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/25 02:55:10 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,28 +137,9 @@ public:
 	// typedef	vecReverse_iterator<const_iterator>		const_reverse_iterator;
 	// typedef	vecReverse_iterator<iterator>			reverse_iterator;
 
-	class value_compare
-	{
-		
-	//   friend class tree;
-	//   friend class map;
-	public:
-	// protected:
 
-	  Compare key_comp;
-	  value_compare (Compare c) : key_comp(c) {}
-	  ~value_compare(){}
-	public:
-	  typedef bool			result_type;
-	  typedef value_type	first_argument_type;
-	  typedef value_type	second_argument_type;
-	  result_type operator() (const value_type& x, const value_type& y) const
-	  {
-	    return key_comp(x.first, y.first);
-	  }
-	};
 	key_compare		key_comp;
-	value_compare	value_comp;
+	// value_compare	value_comp;
 private:
 	pair_allocator	_pair_allocator;
 	allocator_type	_node_allocator;
@@ -169,7 +150,7 @@ private:
 public:
 /*CANONICAL-----------------------------------------------------------------------------------*/
 	explicit tree (const key_compare& key_comp = key_compare(), const pair_allocator& alloc = pair_allocator())
-	:key_comp(key_comp),value_comp(key_comp), _pair_allocator(alloc), _node_allocator(allocator_type())
+	:key_comp(key_comp), _pair_allocator(alloc), _node_allocator(allocator_type())
 	{
 		// _end = _node_allocator.allocate(1);
 		_end = new value_type;
@@ -178,7 +159,7 @@ public:
 		this->_size = 0;
 	}
 	tree (const tree& x)
-	:key_comp(x.key_comp),value_comp(key_comp),  _pair_allocator(x._pair_allocator), _node_allocator(x._node_allocator)
+	:key_comp(x.key_comp),  _pair_allocator(x._pair_allocator), _node_allocator(x._node_allocator)
 	{
 		_end = new value_type;
 		_begin = new value_type;
