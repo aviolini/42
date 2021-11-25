@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 03:01:03 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/25 11:42:31 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,10 @@ public:
 	{
 		return iterator(_tree.find(k));
 	}
-	// const_iterator find (const key_type& k) const;
+	const_iterator find (const key_type& k) const
+	{
+		return const_iterator(_tree.find(k));
+	}
 	// size_type count (const key_type& k) const;
     // iterator lower_bound (const key_type& k);
 	// const_iterator lower_bound (const key_type& k) const;

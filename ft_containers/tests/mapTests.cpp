@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapTests.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 02:40:00 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/25 11:46:14 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,14 @@ void mapTest(PAIR (*makepair)(const char, int))
 	std::cout << (test1.find('m') == test1.end()) << std::endl;
 	std::cout << (test1.find('z') == test1.end()) << std::endl;
 // -----------------------------------------------------------------
+// FIND CONST ITERATOR------------------------------------------------------------
+	// int i = 1;
+	std::cout << "FIND CONST ITERATOR" << std::endl;
+	typename C::const_iterator itfind11 = test1.find('m');
+	std::cout << itfind11->first << std::endl;
+	itfind11 = test1.find('z');
+	std::cout << itfind11->first << std::endl;
+// -----------------------------------------------------------------
 // INSERT-SINGLE---------------------------------------------------------
 	// std::cout << ((test1.insert(makepair('o', 12))).first->first) << std::endl;
 	// std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
@@ -156,6 +164,16 @@ std::cout << "------------------------------" << std::endl;
 	std::cout << "------------------------------" << std::endl;	
 // -----------------------------------------------------------------
 */
+
+// CONST_ITERATOR      ------------------------------------------------
+	std::cout << "------CONST_ITERATOR------" << std::endl;
+	typename C::const_iterator it31 = test5.begin();
+	// ++it3;
+	for (; it31 != test5.end(); it31++)
+		std::cout << it31->first << std::endl;
+	std::cout << "------------------------------" << std::endl;
+// -----------------------------------------------------------------
+
 // COPY-CONSTRUCTOR---------------------------------------------------
 	C test6(test5);
 	printMap(test6, "TEST6");
