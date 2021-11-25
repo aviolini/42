@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 12:12:06 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/25 12:37:47 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,7 +273,7 @@ std::cout << "------------------------------" << std::endl;
 // // COUNT---------------------------------------------
 	std::cout << "COUNT: " << test11.count('i') << std::endl;
 	std::cout << "COUNT: " << test11.count('v') << std::endl;
-// // LOWER BOUND---------------------------------------------
+// // LOWER BOUND AND UPPER BOUND---------------------------------------------
 	C test13(test12);
 	printMap(test12, "TEST12");
 	typename C::iterator lowB = test12.lower_bound('i');
@@ -282,6 +282,13 @@ std::cout << "------------------------------" << std::endl;
 	std::cout << "UPPER BOUND: " << upB->first << std::endl;
 	test12.erase(lowB, upB);	
 	printMap(test12, "TEST12");
-
+// // LOWER BOUND AND UPPER BOUND---------------------------------------------
+	printMap(test13, "TEST13");
+	typename C::const_iterator ClowB = test13.lower_bound('i');
+	typename C::const_iterator CupB = test13.upper_bound('t');
+	std::cout << "LOWER BOUND: " << ClowB->first << std::endl;
+	std::cout << "UPPER BOUND: " << CupB->first << std::endl;
+	test13.erase(ClowB, CupB);	
+	printMap(test13, "TEST13");
 
 }
