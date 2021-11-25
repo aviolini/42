@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 12:42:26 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/25 16:16:54 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ public:
 	}
 	size_type max_size() const
 	{
-		return _tree.max_size();
+		return allocator_type().max_size();
 	}
 
 /*ELEMENT ACCESS-------------------------------------------------------------------------------*/
@@ -201,7 +201,12 @@ public:
 			first = temp;
 		}
 	}
-	// void swap (map& x);
+	void swap (map& x)
+	{
+		map temp(x);
+		x = *this;
+		*this = temp;
+	}
 	void clear()
 	{
 		_tree.clear();
@@ -258,10 +263,10 @@ public:
 	}
 
 /*ALLOCATOR-----------------------------------------------------------------------------------*/
-	//	allocator_type get_allocator() const 
-	// 	{
-	// 		return allocator_type(__tree_.__alloc());
-	// 	}
+		allocator_type get_allocator() const 
+		{
+			return allocator_type();
+		}
 
 /*EXTRA-------------------------------------------------------------------------------------------------------------------------------*/
     // void print(StringBuilder buffer, String prefix, String childrenPrefix) 

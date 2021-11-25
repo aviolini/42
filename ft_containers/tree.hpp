@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 11:59:10 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/25 16:19:29 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,15 +178,16 @@ public:
 			// {
 	    	//     //CANCELLA TUTTO QUELLO CHE C'ERA PRIMA
 			// }
-			destroy_tree();
+			// destroy_tree();
+			clear();
 			key_comp = x.key_comp;
 			_pair_allocator = x._pair_allocator;
 			_node_allocator = x._node_allocator;
 			
-			_end = new value_type;
-			_begin = new value_type;
-			_root = _end;
-			this->_size = 0;
+			// _end = new value_type;
+			// _begin = new value_type;
+			// _root = _end;
+			// this->_size = 0;
 			iterator it = x.begin();			//FARLO PARTIRE DA ROOT OPPURE COSI E BILANCIARLO DOPO?
 			it++;
 			for (; it != x.end(); ++it)
@@ -234,10 +235,6 @@ public:
 	size_type size() const
 	{
 		return _size;
-	}
-	size_type max_size() const
-	{
-		return _pair_allocator.max_size();
 	}
 	iterator insert(const Pair &obj)
 	{

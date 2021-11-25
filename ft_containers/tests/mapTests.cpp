@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 12:45:56 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/25 16:08:54 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ void mapTest(PAIR (*makepair)(const char, int))
 	
 ///*	
 //SIZE------------------------------------------------------------
-	std::cout << "TEST1_SIZE:" <<test1.size() << std::endl;
-	// std::cout << "TEST1_MAXSIZE:" <<test1.max_size() << std::endl;
-	std::cout << "TEST1_EMPTY:" <<test1.empty() << std::endl;
+	std::cout << "TEST1_SIZE: " << test1.size() << std::endl;
+	std::cout << "TEST1_MAXSIZE: " << test1.max_size() << std::endl;
+	std::cout << "TEST1_EMPTY: " << test1.empty() << std::endl;
 	C test2;
-	std::cout << "TEST2_SIZE:" << test2.size() << std::endl;
-	// std::cout << "TEST2_MAXSIZE:" <<test2.max_size() << std::endl;
-	std::cout << "TEST2_EMPTY:" <<test2.empty() << std::endl;
+	std::cout << "TEST2_SIZE: " << test2.size() << std::endl;
+	std::cout << "TEST2_MAXSIZE: " << test2.max_size() << std::endl;
+	std::cout << "TEST2_EMPTY: " << test2.empty() << std::endl;
 // -----------------------------------------------------------------
 // FIND------------------------------------------------------------
 	int i = 1;
@@ -280,7 +280,7 @@ std::cout << "------------------------------" << std::endl;
 	typename C::iterator upB = test12.upper_bound('t');
 	std::cout << "LOWER BOUND: " << lowB->first << std::endl;
 	std::cout << "UPPER BOUND: " << upB->first << std::endl;
-	test12.erase(lowB, upB);	
+	test12.erase(lowB, upB);
 	printMap(test12, "TEST12");
 // // LOWER BOUND AND UPPER BOUND---------------------------------------------
 	C test14(test13);
@@ -289,10 +289,16 @@ std::cout << "------------------------------" << std::endl;
 	typename C::const_iterator CupB = test13.upper_bound('t');
 	std::cout << "LOWER BOUND: " << ClowB->first << std::endl;
 	std::cout << "UPPER BOUND: " << CupB->first << std::endl;
-	test13.erase(ClowB, CupB);	
+	test13.erase(ClowB, CupB);
 	printMap(test13, "TEST13");
 // // EQUAL RANGE---------------------------------------------
 	std::cout << test14.equal_range('g').first->first << std::endl;
 	std::cout << test14.equal_range('g').second->first << std::endl;
-
+// // SWAP---------------------------------------------
+	std::cout << "SWAP :" << std::endl;
+	printMap(test11, "TEST11");
+	printMap(test13, "TEST13");
+	test13.swap(test11);
+	printMap(test11, "TEST11");
+	printMap(test13, "TEST13");
 }
