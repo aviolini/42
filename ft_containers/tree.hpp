@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 01:53:26 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/25 02:29:57 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,23 +137,29 @@ public:
 	// typedef	vecReverse_iterator<const_iterator>		const_reverse_iterator;
 	// typedef	vecReverse_iterator<iterator>			reverse_iterator;
 
-	// class value_compare
-	// {
+	class value_compare
+	{
+		
 	//   friend class tree;
+	//   friend class map;
+	public:
 	// protected:
-	//   Compare comp;
-	//   value_compare (Compare c) : comp(c) {}
-	// public:
-	//   typedef bool			result_type;
-	//   typedef value_type	first_argument_type;
-	//   typedef value_type	second_argument_type;
-	//   result_type operator() (const value_type& x, const value_type& y) const
-	//   {
-	//     return comp(x.first, y.first);
-	//   }
-	// };
+
+	  Compare key_comp;
+	  value_compare (Compare c) : key_comp(c) {}
+	  ~value_compare(){}
+	public:
+	  typedef bool			result_type;
+	  typedef value_type	first_argument_type;
+	  typedef value_type	second_argument_type;
+	  result_type operator() (const value_type& x, const value_type& y) const
+	  {
+	    return key_comp(x.first, y.first);
+	  }
+	};
+	key_compare		key_comp;
+	value_compare	value_comp;
 private:
-	key_compare		_compare;
 	pair_allocator	_pair_allocator;
 	allocator_type	_node_allocator;
 	pointer			_root;
@@ -162,8 +168,8 @@ private:
 	size_type		_size;
 public:
 /*CANONICAL-----------------------------------------------------------------------------------*/
-	explicit tree (const key_compare& comp = key_compare(), const pair_allocator& alloc = pair_allocator())
-	:_compare(comp), _pair_allocator(alloc), _node_allocator(allocator_type())
+	explicit tree (const key_compare& key_comp = key_compare(), const pair_allocator& alloc = pair_allocator())
+	:key_comp(key_comp),value_comp(key_comp), _pair_allocator(alloc), _node_allocator(allocator_type())
 	{
 		// _end = _node_allocator.allocate(1);
 		_end = new value_type;
@@ -172,7 +178,7 @@ public:
 		this->_size = 0;
 	}
 	tree (const tree& x)
-	:_compare(x._compare), _pair_allocator(x._pair_allocator), _node_allocator(x._node_allocator)
+	:key_comp(x.key_comp),value_comp(key_comp),  _pair_allocator(x._pair_allocator), _node_allocator(x._node_allocator)
 	{
 		_end = new value_type;
 		_begin = new value_type;
@@ -192,7 +198,7 @@ public:
 	    	//     //CANCELLA TUTTO QUELLO CHE C'ERA PRIMA
 			// }
 			destroy_tree();
-			_compare = x._compare;
+			key_comp = x.key_comp;
 			_pair_allocator = x._pair_allocator;
 			_node_allocator = x._node_allocator;
 			
@@ -303,7 +309,7 @@ public:
 			_size++;
 		 	return temp;
 		}
-		if( _compare(obj.first,node->_value.first))
+		if( key_comp(obj.first,node->_value.first))
 		 	node->_left = insert(node, node->_left, obj );
 		else
 		 	node->_right = insert(node, node->_right, obj );
@@ -319,7 +325,7 @@ public:
 			return _end;				//SERVE AL FIND DEL MAP
 		if (k == node->_value.first)
 			return node;
-		if( _compare(k,node->_value.first))
+		if( key_comp(k,node->_value.first))
 			return find(node->_left, k);
 		return find(node->_right, k);
 	}

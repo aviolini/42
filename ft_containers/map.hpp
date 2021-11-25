@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 01:50:15 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/25 02:19:27 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ public:
     typedef typename allocator_type::difference_type		difference_type;
     typedef typename allocator_type::size_type		   		size_type;
 	typedef tree<value_type,key_compare,allocator_type> 	tree_type;
+	typedef typename tree_type::value_compare				value_compare;
 	typedef ft::node<value_type>							node_type;
 	typedef mapIterator<ft::treeIterator<node_type> >		const_iterator;
 	typedef mapIterator<ft::treeIterator<node_type> >		iterator;
@@ -191,14 +192,16 @@ public:
 	}
 
 /*OBSERVERS----------------------------------------------------------------------------------*/
-	//	key_compare key_comp() const
-	// 	{
-	// 		return __tree_.value_comp().key_comp();
-	// 	}
-	// 	value_compare value_comp() const
-	// 	{
-	// 		return value_compare(__tree_.value_comp().key_comp())
-	// 	}
+	key_compare key_comp() const
+	{
+		// return _tree::value_compare.key_comp();
+		return _tree.key_comp;
+	}
+	value_compare value_comp() const
+	{
+		return _tree.value_comp;
+		// return value_compare(tree.value_comp().key_comp())
+	}
 
 /*OPERATIONS----------------------------------------------------------------------------------*/
 	iterator find (const key_type & k)

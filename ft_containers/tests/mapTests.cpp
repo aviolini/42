@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 01:49:33 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/25 02:40:00 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,15 @@ std::cout << "------------------------------" << std::endl;
 	printMap(test11, "TEST11");
 	test11.insert(makepair('i', 9));
 	printMap(test11, "TEST11");
-
+// // OBSERVERVERS---------------------------------------------
+	typename C::key_compare key_comp = test11.key_comp();
+	std::cout << "KEY COMP: " << key_comp(test11.begin()->first, 'h') << std::endl;
+	std::cout << "KEY COMP: " << key_comp(test11.begin()->first, 'l') << std::endl;
+	typename C::value_compare value_comp = test11.value_comp();
+	(void)value_comp;
+	// std::cout << "AAAAA: " << (*test11.begin()).first << std::endl;
+	std::cout << "VALUE COMP: " << value_comp(*test11.begin(), makepair('h', 8)) << std::endl;
+	std::cout << "VALUE COMP: " << value_comp(*test11.begin(), makepair('l', 10)) << std::endl;
 
 
 }
