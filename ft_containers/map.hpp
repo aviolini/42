@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 11:42:31 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/25 12:01:36 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,7 +226,12 @@ public:
 	{
 		return const_iterator(_tree.find(k));
 	}
-	// size_type count (const key_type& k) const;
+	size_type count (const key_type& k) const
+	{
+		if (find(k) == end())
+			return 0;
+		return 1;
+	}
     // iterator lower_bound (const key_type& k);
 	// const_iterator lower_bound (const key_type& k) const;
 	// iterator upper_bound (const key_type& k);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 02:55:10 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/25 11:59:10 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,11 +296,11 @@ public:
 		 	node->_right = insert(node, node->_right, obj );
 		return node;
 	}
-	iterator find(typename Pair::first_type & k)
+	iterator find(const typename Pair::first_type & k) const
 	{
 		return iterator(find(_root,k));
 	}
-	pointer find(pointer node, typename Pair::first_type  & k)
+	pointer find(pointer node, const typename Pair::first_type  & k) const
 	{
 		if (node == 0)
 			return _end;				//SERVE AL FIND DEL MAP

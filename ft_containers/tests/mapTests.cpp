@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 11:46:14 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/25 12:01:24 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,6 +269,9 @@ std::cout << "------------------------------" << std::endl;
 	// std::cout << "AAAAA: " << (*test11.begin()).first << std::endl;
 	std::cout << "VALUE COMP: " << value_comp(*test11.begin(), makepair('h', 8)) << std::endl;
 	std::cout << "VALUE COMP: " << value_comp(*test11.begin(), makepair('l', 10)) << std::endl;
+// // COUNT---------------------------------------------
+	std::cout << "COUNT: " << test11.count('i') << std::endl;
+	std::cout << "COUNT: " << test11.count('v') << std::endl;
 
 
 }
