@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 01:27:52 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/25 01:53:26 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -325,17 +325,26 @@ public:
 	}
 	void destroy_tree()
 	{
-		destroy_tree(_root);
+		clear(_root);
 		delete _end;
 		delete _begin;
+		_end = 0;
+		_begin = 0;
+		_root = 0;
 	}
-	void destroy_tree(pointer node)
+	void clear()
+	{
+		clear(_root);
+	}
+	void clear(pointer node)
 	{
 		if (node != 0 && node != _end && node != _begin)
 		{
-			destroy_tree(node->_left);
-			destroy_tree(node->_right);
+			clear(node->_left);
+			clear(node->_right);
 			delete node;
+			_size = 0;
+			_root = _end;
 		}
 	}
 	/////////////////////////////////////////////////////////////////////

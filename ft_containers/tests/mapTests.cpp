@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 01:39:58 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/25 01:49:33 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,6 +228,7 @@ std::cout << "------------------------------" << std::endl;
 	test9.insert(makepair('h', 8));
 	printMap(test9, "TEST9");
 // // ERASE ITERATORS---------------------------------------------
+	C test11(test10);
 	printMap(test10, "TEST10");
 	test10.erase(++test10.begin(), --test10.end());
 	printMap(test10, "TEST10");
@@ -235,4 +236,13 @@ std::cout << "------------------------------" << std::endl;
 	printMap(test10, "TEST10");
 	test10.erase(test10.begin(), test10.end());
 	printMap(test10, "TEST10");
+// // CLEAR---------------------------------------------
+	printMap(test11, "TEST11");
+	test11.clear();
+	printMap(test11, "TEST11");
+	test11.insert(makepair('i', 9));
+	printMap(test11, "TEST11");
+
+
+
 }
