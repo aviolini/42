@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 12:01:24 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/25 12:12:06 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,7 @@ std::cout << "------------------------------" << std::endl;
 	printMap(test10, "TEST10");
 // // CLEAR---------------------------------------------
 	printMap(test11, "TEST11");
+	C test12(test11);
 	test11.clear();
 	printMap(test11, "TEST11");
 	test11.insert(makepair('i', 9));
@@ -272,6 +273,15 @@ std::cout << "------------------------------" << std::endl;
 // // COUNT---------------------------------------------
 	std::cout << "COUNT: " << test11.count('i') << std::endl;
 	std::cout << "COUNT: " << test11.count('v') << std::endl;
+// // LOWER BOUND---------------------------------------------
+	C test13(test12);
+	printMap(test12, "TEST12");
+	typename C::iterator lowB = test12.lower_bound('i');
+	typename C::iterator upB = test12.upper_bound('t');
+	std::cout << "LOWER BOUND: " << lowB->first << std::endl;
+	std::cout << "UPPER BOUND: " << upB->first << std::endl;
+	test12.erase(lowB, upB);	
+	printMap(test12, "TEST12");
 
 
 }
