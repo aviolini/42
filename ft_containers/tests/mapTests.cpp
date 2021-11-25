@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 12:37:47 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/25 12:45:56 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,6 +283,7 @@ std::cout << "------------------------------" << std::endl;
 	test12.erase(lowB, upB);	
 	printMap(test12, "TEST12");
 // // LOWER BOUND AND UPPER BOUND---------------------------------------------
+	C test14(test13);
 	printMap(test13, "TEST13");
 	typename C::const_iterator ClowB = test13.lower_bound('i');
 	typename C::const_iterator CupB = test13.upper_bound('t');
@@ -290,5 +291,8 @@ std::cout << "------------------------------" << std::endl;
 	std::cout << "UPPER BOUND: " << CupB->first << std::endl;
 	test13.erase(ClowB, CupB);	
 	printMap(test13, "TEST13");
+// // EQUAL RANGE---------------------------------------------
+	std::cout << test14.equal_range('g').first->first << std::endl;
+	std::cout << test14.equal_range('g').second->first << std::endl;
 
 }

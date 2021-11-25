@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 12:06:35 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/25 12:42:26 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,8 +248,14 @@ public:
 	{
 		return ++find(k);		
 	}
-	// pair<const_iterator,const_iterator> equal_range (const key_type& k) const;
-	// pair<iterator,iterator>             equal_range (const key_type& k);
+	pair<const_iterator,const_iterator> equal_range (const key_type& k) const
+	{
+		return pair<const_iterator, const_iterator> (lower_bound(k), upper_bound(k));
+	}
+	pair<iterator,iterator>             equal_range (const key_type& k)
+	{
+		return pair<iterator, iterator> (lower_bound(k), upper_bound(k));
+	}
 
 /*ALLOCATOR-----------------------------------------------------------------------------------*/
 	//	allocator_type get_allocator() const 
