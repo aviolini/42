@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 00:32:18 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/25 01:27:52 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -358,6 +358,7 @@ public:
 	void remove(typename Pair::first_type  & k)
 	{
 		_root = remove(_root,k);
+		// std::cout << "SIZE: " << _size << std::endl;
 		if (_size == 0)
 		_root = _end;
 		// Delete(_root, k);

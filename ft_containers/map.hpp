@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 00:55:30 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/25 01:39:22 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,16 @@ public:
 		_tree.remove(k);
 		return 1;
 	}
-	// void erase (iterator first, iterator last);
+	void erase (iterator first, iterator last)
+	{
+		while (first != last)
+		{
+			iterator temp = first;
+			temp++;
+			_tree.remove(first->first);
+			first = temp;
+		}
+	}
 	// void swap (map& x);
 	// void clear();
 

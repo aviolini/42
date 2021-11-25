@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 00:57:41 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/25 01:39:58 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,12 +175,10 @@ std::cout << "------------------------------" << std::endl;
 	std::cout << test1['t'] << std::endl;
 	std::cout << test1['z'] << std::endl;
 	printMap(test1, "TEST1");
-
-// // ERASE ITERATORS---------------------------------------------
+	C test10(test1);
 // // ERASE POSITIONS---------------------------------------------
 	test1.erase(test1.find('n'));	//OK	//3
-	test1.erase('h');	//OK	//3
-	test1.erase('v');	//OK	//3
+	test1.erase(test1.find('h'));	//OK	//3
 
 // // ERASE---------------------------------------------------
 	// test1.insert(makepair('t', 22));
@@ -195,16 +193,20 @@ std::cout << "------------------------------" << std::endl;
 	test1.erase('c');	//OK	//3
 	test1.erase('f');	//OK	//3
 	test1.erase('v');	//OK	//3
+	// test1.erase('d');	//OK	//3
+	// test1.erase('q');	//OK	//3
+	// test1.erase('t');	//OK	//3
+	// test1.erase('z');	//OK	//3
+	// test1.insert(array1, &array1[4]);
+
 
 	// printMap(test1, "TEST1");
 	// printTree(test1, "TREE");
 // --INSERT AFTER ERASE--------------------------------KO-------------------------------
 	test1.erase('o');
 	// printTree(test1, "TREE");
-
 	test1.erase('m');
 	// printTree(test1, "TREE");
-
 	printMap(test1, "TEST1");
 // 	test1.insert(makepair('f', 6));
 // 	printMap(test1, "TEST1");
@@ -225,4 +227,12 @@ std::cout << "------------------------------" << std::endl;
 	printMap(test9, "TEST9");
 	test9.insert(makepair('h', 8));
 	printMap(test9, "TEST9");
+// // ERASE ITERATORS---------------------------------------------
+	printMap(test10, "TEST10");
+	test10.erase(++test10.begin(), --test10.end());
+	printMap(test10, "TEST10");
+	test10.erase(test10.begin(), --test10.end());
+	printMap(test10, "TEST10");
+	test10.erase(test10.begin(), test10.end());
+	printMap(test10, "TEST10");
 }
