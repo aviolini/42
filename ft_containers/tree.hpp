@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/26 12:04:54 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/26 16:31:18 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -584,8 +584,37 @@ void print(std::string name)
 	}
 	std::cout << "-----------------------------" << std::endl;
 }
-
-
+	///////////////////////////////////////////////////////////////////
+void print()
+{
+	if (!_size)
+	{
+		std::cout << "EMPTY TREE" << std::endl;
+		return;
+	}
+	print(_root);
+	// std::cout << _root->_value.first << std::endl;
+	// if (_root->_right && _root->_left)
+	// 	std::cout << "├── " << std::endl;
+	// else if (_root->_right && !_root->_left)
+	// 	std::cout << "└── " << std::endl;
+	// else if (_root->_left && !_root->_right)
+	// 	std::cout << "│   " << std::endl;
+}
+void print(pointer node)
+{
+	std::cout << node->_value.first << std::endl;
+	if (node->_right && node->_left)
+		std::cout << "├── " ;//<< std::endl;
+	else if (node->_right && !node->_left)
+		std::cout << "└── " ;//<< std::endl;
+	else if (node->_left && !node->_right)
+		std::cout << "│   ";// << std::endl;
+	if (node->_right)
+		print(node->_right);
+	if (node->_left)
+		print(node->_left);
+}
 };
 };
 

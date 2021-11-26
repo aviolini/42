@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 16:16:54 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/26 16:20:09 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,6 +267,11 @@ public:
 		{
 			return allocator_type();
 		}
+
+void print()
+{
+	_tree.print();
+}
 
 /*EXTRA-------------------------------------------------------------------------------------------------------------------------------*/
     // void print(StringBuilder buffer, String prefix, String childrenPrefix) 
