@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 16:08:54 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/26 11:34:33 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,11 @@ void mapTest(PAIR (*makepair)(const char, int))
 	std::cout << itfind11->first << std::endl;
 // -----------------------------------------------------------------
 // INSERT-SINGLE---------------------------------------------------------
-	// std::cout << ((test1.insert(makepair('o', 12))).first->first) << std::endl;
-	// std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
-	// std::cout << ((test1.insert(makepair('o', 12))).first->first) << std::endl;
-	// std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
-	// printMap(test1, "TEST1");
+	std::cout << ((test1.insert(makepair('o', 12))).first->first) << std::endl;
+	std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
+	std::cout << ((test1.insert(makepair('o', 12))).first->first) << std::endl;
+	std::cout << ((test1.insert(makepair('o', 12))).second) << std::endl;
+	printMap(test1, "TEST1");
 // -----------------------------------------------------------------
 // INSERT-ITERATOR-----------------------------------------------------
 	PAIR array1[] = {makepair('f', 6), makepair('b', 2), makepair('c', 3), makepair('e', 5)};
@@ -117,11 +117,11 @@ void mapTest(PAIR (*makepair)(const char, int))
 
 // INSERT-WITH HINT-----------------------------------------------------
 	// C test4;
-	typename C::iterator it3 = test3.end();
-	it3--;
-	test3.insert(it3, makepair('e', 5));
-	test3.insert(it3, makepair('d', 4));
-	test3.insert(it3, makepair('a', 1));
+	typename C::iterator it2 = test3.end();
+	it2--;
+	test3.insert(it2, makepair('e', 5));
+	test3.insert(it2, makepair('d', 4));
+	test3.insert(it2, makepair('a', 1));
 	printMap(test3, "TEST3");
 // -----------------------------------------------------------------
 
@@ -129,7 +129,7 @@ void mapTest(PAIR (*makepair)(const char, int))
 	C test5(test1.begin(), test1.end());
 	// printMap(test5, "TEST5");
 // -----------------------------------------------------------------
-/*
+
 // ITERATOR++      ------------------------------------------------
 	std::cout << "------ITERATOR ++------" << std::endl;
 	typename C::iterator it3 = test5.begin();
@@ -148,22 +148,22 @@ void mapTest(PAIR (*makepair)(const char, int))
 // -----------------------------------------------------------------
 // REV ITERATOR++      ------------------------------------------------
 	std::cout << "-----REV ITERATOR ++-------" << std::endl;
-	typename C::reverse_iterator it5 = test5.rend();
+	typename C::reverse_iterator it5 = test5.rbegin();
 	// ++it5;
-	for (; it5 != test5.rbegin(); it5--)
+	for (; it5 != test5.rend(); it5++)
 		std::cout << it5->first << std::endl;
-std::cout << "------------------------------" << std::endl;	
+std::cout << "------------------------------" << std::endl;
 // -----------------------------------------------------------------
 // REV ITERATOR--      ------------------------------------------------
 	std::cout << "-----REV ITERATOR --   -------" << std::endl;
-	typename C::reverse_iterator it6 = test5.rbegin();
+	typename C::reverse_iterator it6 = test5.rend();
+	// (void)it6;
 	// typename C::reverse_iterator it7 = test5.rend();
-	// ++it6;
-	for (; it6 != test5.rend(); it6++)
+	--it6;
+	for (; it6 != test5.rbegin(); it6--)
 		std::cout << it6->first << std::endl;
-	std::cout << "------------------------------" << std::endl;	
+	// std::cout << "------------------------------" << std::endl;
 // -----------------------------------------------------------------
-*/
 
 // CONST_ITERATOR      ------------------------------------------------
 	std::cout << "------CONST_ITERATOR------" << std::endl;
