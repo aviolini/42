@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/25 16:19:29 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/26 12:04:54 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,7 +287,7 @@ public:
 			_size++;
 		 	return temp;
 		}
-		if( key_comp(obj.first,node->_value.first))
+		if( key_compare()(obj.first,node->_value.first))
 		 	node->_left = insert(node, node->_left, obj );
 		else
 		 	node->_right = insert(node, node->_right, obj );
@@ -303,7 +303,7 @@ public:
 			return _end;				//SERVE AL FIND DEL MAP
 		if (k == node->_value.first)
 			return node;
-		if( key_comp(k,node->_value.first))
+		if( key_compare()(k,node->_value.first))
 			return find(node->_left, k);
 		return find(node->_right, k);
 	}
