@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/27 22:53:07 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/27 23:12:07 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -627,7 +627,10 @@ void print(pointer node, int tab, std::string prefix, int s, pointer ref)
 	else if (node->_right && !node->_left && node->_right != _end)
 	{
 		// std::cout << "└──" ;//<< std::endl;
-		print(node->_right, tab , "└──",1, ref);
+		if (!prefix.compare("├──"))
+			print(node->_right, tab + 1 , "└──",1, ref);
+		else if(!prefix.compare(""))
+			print(node->_right, tab , "└──",1, ref);
 	}
 	else if (node->_left && !node->_right && node->_left != _begin)
 	{
