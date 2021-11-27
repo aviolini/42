@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/27 22:29:11 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/27 22:53:07 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -592,7 +592,7 @@ void print()
 		std::cout << "EMPTY TREE" << std::endl;
 		return;
 	}
-	print(_root, -1, "", -1);
+	print(_root, -1, "", -1, _root->_left);
 	// std::cout << _root->_value.first << std::endl;
 	// if (_root->_right && _root->_left)
 	// 	std::cout << "├── " << std::endl;
@@ -601,9 +601,15 @@ void print()
 	// else if (_root->_left && !_root->_right)
 	// 	std::cout << "│   " << std::endl;
 }
-void print(pointer node, int tab, std::string prefix, int s)
+void print(pointer node, int tab, std::string prefix, int s, pointer ref)
 {
 	// for (int i = 0; i != s; ++i)
+	if (node == ref)
+	{	
+		// if (ref->_left != 0 && ref->_left != _begin)
+			print(ref, -1, "", -1, ref->_left);
+		return ;
+	}
 	if (s > 0)
 		std::cout << "│";
 	for (int i = 0; i < tab; ++i)
@@ -615,19 +621,19 @@ void print(pointer node, int tab, std::string prefix, int s)
 	std::cout << node->_value.first << std::endl;
 	if (node->_right && node->_left)
 	{
-		print(node->_right, tab + 1, "├──",s + 1);
-		print(node->_left, tab + 1, "",s + 1);
+		print(node->_right, tab + 1, "├──",s + 1, ref);
+		print(node->_left, tab + 1, "",s + 1, ref);
 	}
 	else if (node->_right && !node->_left && node->_right != _end)
 	{
 		// std::cout << "└──" ;//<< std::endl;
-		print(node->_right, tab , "└──",1);
+		print(node->_right, tab , "└──",1, ref);
 	}
-	// else if (node->_left && !node->_right && node->_left != _begin)
-	// {
-	// 	std::cout << "│   ";// << std::endl;
-	// 	print(node->_left, tab + 1);	
-	// }
+	else if (node->_left && !node->_right && node->_left != _begin)
+	{
+		// std::cout << "│   ";// << std::endl;
+		print(node->_left, tab + 1,"│   ",1,ref);	
+	}
 	// if (node->_right)
 	// 	print(node->_right, ++tab);
 	// if (node->_left)
