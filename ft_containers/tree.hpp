@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/27 23:12:07 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/28 00:06:30 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -610,37 +610,40 @@ void print(pointer node, int tab, std::string prefix, int s, pointer ref)
 			print(ref, -1, "", -1, ref->_left);
 		return ;
 	}
-	if (s > 0)
+	for (int x = s; x > 0; --x)
+	{	
 		std::cout << "│";
-	for (int i = 0; i < tab; ++i)
-		if (s > 0)
-			std::cout << "  ";
-		else
-			std::cout << "   ";
+	}
 	std::cout << prefix ;
+	if (!prefix.compare("│"))
+	{
+		std::cout << std::endl;
+		for (int x = s; x > 0; --x)
+		{
+			std::cout << "│";
+		}
+		
+	}
 	std::cout << node->_value.first << std::endl;
 	if (node->_right && node->_left)
 	{
-		print(node->_right, tab + 1, "├──",s + 1, ref);
+		print(node->_right, tab + 1, "├",s + 1, ref);
+		// print(node->_left, tab + 1, "", s, node->_left);
 		print(node->_left, tab + 1, "",s + 1, ref);
 	}
 	else if (node->_right && !node->_left && node->_right != _end)
 	{
 		// std::cout << "└──" ;//<< std::endl;
-		if (!prefix.compare("├──"))
-			print(node->_right, tab + 1 , "└──",1, ref);
-		else if(!prefix.compare(""))
-			print(node->_right, tab , "└──",1, ref);
+		// if (!prefix.compare("├"))
+			print(node->_right, tab + 1 , "└",s+1, ref);
+		// else if(!prefix.compare(""))
+		// 	print(node->_right, tab , "└",1, ref);
 	}
 	else if (node->_left && !node->_right && node->_left != _begin)
 	{
 		// std::cout << "│   ";// << std::endl;
-		print(node->_left, tab + 1,"│   ",1,ref);	
+		print(node->_left, tab + 1,"│",s+1,ref);	
 	}
-	// if (node->_right)
-	// 	print(node->_right, ++tab);
-	// if (node->_left)
-	// 	print(node->_left);
 }
 };
 };

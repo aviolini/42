@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/27 21:58:05 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/27 23:40:22 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -328,10 +328,14 @@ std::cout << "------------------------------" << std::endl;
 	test1.insert(makepair('p', 13));
 	test1.insert(makepair('m', 10));
 	test1.insert(makepair('o', 12));
-	test1.insert(makepair('v', 13));
-	test1.insert(makepair('z', 10));
+	test1.insert(makepair('t', 13));
+	test1.insert(makepair('v', 12));
+	test1.insert(makepair('u', 10));
+	test1.insert(makepair('z', 12));
 	test1.insert(makepair('s', 12));
-	test1.insert(makepair('u', 12));
+
+	// test1.insert(makepair('A', 12));
+
 
 	std::cout << "TEST PRINT" << std::endl;
 	printTree(test1, "TREE1");
