@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapTests.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/26 16:29:03 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/27 21:58:05 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -328,7 +328,13 @@ std::cout << "------------------------------" << std::endl;
 	test1.insert(makepair('p', 13));
 	test1.insert(makepair('m', 10));
 	test1.insert(makepair('o', 12));
+	test1.insert(makepair('v', 13));
+	test1.insert(makepair('z', 10));
+	test1.insert(makepair('s', 12));
+	test1.insert(makepair('u', 12));
+
 	std::cout << "TEST PRINT" << std::endl;
+	printTree(test1, "TREE1");
 	test1.print();
 }
 
