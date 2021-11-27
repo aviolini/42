@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/27 21:56:27 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/27 22:29:11 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -592,7 +592,7 @@ void print()
 		std::cout << "EMPTY TREE" << std::endl;
 		return;
 	}
-	print(_root, 0, "");
+	print(_root, -1, "", -1);
 	// std::cout << _root->_value.first << std::endl;
 	// if (_root->_right && _root->_left)
 	// 	std::cout << "├── " << std::endl;
@@ -601,23 +601,28 @@ void print()
 	// else if (_root->_left && !_root->_right)
 	// 	std::cout << "│   " << std::endl;
 }
-void print(pointer node, int tab, std::string prefix)
+void print(pointer node, int tab, std::string prefix, int s)
 {
+	// for (int i = 0; i != s; ++i)
+	if (s > 0)
+		std::cout << "│";
+	for (int i = 0; i < tab; ++i)
+		if (s > 0)
+			std::cout << "  ";
+		else
+			std::cout << "   ";
 	std::cout << prefix ;
 	std::cout << node->_value.first << std::endl;
-	for (int i = 0; i != tab; ++i)
-		std::cout << "   ";
 	if (node->_right && node->_left)
 	{
-		// std::cout << "├──" ;//<< std::endl;
-		print(node->_right, tab + 1, "├──");
-		// print(node->_left, tab);
+		print(node->_right, tab + 1, "├──",s + 1);
+		print(node->_left, tab + 1, "",s + 1);
 	}
-	// else if (node->_right && !node->_left && node->_right != _end)
-	// {
-	// 	std::cout << "└──" ;//<< std::endl;
-	// 	print(node->_right, tab + 1);
-	// }
+	else if (node->_right && !node->_left && node->_right != _end)
+	{
+		// std::cout << "└──" ;//<< std::endl;
+		print(node->_right, tab , "└──",1);
+	}
 	// else if (node->_left && !node->_right && node->_left != _begin)
 	// {
 	// 	std::cout << "│   ";// << std::endl;
