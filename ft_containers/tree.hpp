@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/28 01:56:41 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/28 02:33:00 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -579,8 +579,7 @@ void print(std::string name)
 		if (itB->_parent)
 			std::cout << "\tP: " << itB->_parent->_value.first <<  std::endl;
 		else
-			std::cout << "\tP: NULL" << std::endl;
-			
+			std::cout << "\tP: NULL" << std::endl;	
 	}
 	std::cout << "-----------------------------" << std::endl;
 }
@@ -588,106 +587,49 @@ void print(std::string name)
 void print()
 {
 	if (!_size)
-	{
 		std::cout << "EMPTY TREE" << std::endl;
-		return;
-	}
-	std::cout << "root" << std::endl;
-	print(_root, -1, "", -1, _root->_left, "");
-	// std::cout << _root->_value.first << std::endl;
-	// if (_root->_right && _root->_left)
-	// 	std::cout << "├── " << std::endl;
-	// else if (_root->_right && !_root->_left)
-	// 	std::cout << "└── " << std::endl;
-	// else if (_root->_left && !_root->_right)
-	// 	std::cout << "│   " << std::endl;
-}
-void print(pointer node, int tab, std::string prefix, int s, pointer ref,std::string str)
-{
-	// for (int i = 0; i != s; ++i)
-	(void)tab;
-	(void)s;
-	if (s == -1)
-		std::cout << "│ " << std::endl;
-	if (node == _begin)
+	else
 	{
+		std::cout << "\033[1;31mroot\033[0m" << std::endl;
+		print(_root, "",0, _root->_left, "");
+	}
+}
+void print(pointer node, std::string prefix, int s, pointer ref,std::string str)
+{
+	if (s == 0)// && node->_left == ref)
 		std::cout << "│ " << std::endl;
-
-		std::cout << "begin" << std::endl;
-		return;
-	}
 	if (node == ref)
-	{	
-		// std::cout << "LLLL" << std::endl;
-		// if (ref->_left != 0 && ref->_left != _begin)
-			print(ref, -1, "", -1, ref->_left,"");
-		return ;
-	}
-	// for (int x = s; x > 0; --x)
-	// if (s>0)
+		return print(ref, "", 0, ref->_left,"");
 	if (!prefix.compare("├─"))
 	{	
 		std::cout << str;
-		// if (node->_left != _begin)
-			str = str + "│ ";
-		// std::cout << str + ;
+		str = str + "│ ";
 	}
 	else if (!prefix.compare("└─"))
 	{	
 		std::cout << str;
-
 		str = str + "  ";
-		// std::cout << str + ;
 	}
 	else
 		std::cout << str;
-	
 	std::cout << prefix ;
 	if (!prefix.compare("│ "))
-	{
-		std::cout << std::endl;
-		// for (int x = s; x > 0; --x)
-		// if (s>0)
-		{
-			std::cout << str;
-		}
-		
-	}
+		std::cout << std::endl << str;
 	if (node == _end)
-	{
-		std::cout << "end" << std::endl;
-	}
+		std::cout << "\033[1;33mend\033[0m" << std::endl;
 	else if (node == _begin)
-	{
-		std::cout << "begin" << std::endl;
-		// return;
-	}
+		std::cout << "\033[1;34mbegin\033[0m" << std::endl;
 	else
-	std::cout << node->_value.first << std::endl;
-	// if (node->_right == _end)
-	// {
-	// 	std::cout << "end" << std::endl;
-	// 	return;
-	// }
+		std::cout << "\033[1;32m" << node->_value.first << "\033[0m" << std::endl;
 	if (node->_right && node->_left)
 	{
-		print(node->_right, tab + 1, "├─",s + 1, ref,str);
-		// print(node->_left, tab + 1, "", s, node->_left);
-		print(node->_left, tab + 1, "",s + 1, ref,str);
+		print(node->_right, "├─",s + 1, ref,str);
+		print(node->_left, "",s + 1, ref,str);
 	}
-	else if (node->_right && !node->_left)// && node->_right != _end)
-	{
-		// std::cout << "└──" ;//<< std::endl;
-		// if (!prefix.compare("├"))
-			print(node->_right, tab + 1 , "└─",s+1, ref,str);
-		// else if(!prefix.compare(""))
-		// 	print(node->_right, tab , "└",1, ref);
-	}
-	else if (node->_left && !node->_right)// && node->_left != _begin)
-	{
-		// std::cout << "│   ";// << std::endl;
-		print(node->_left, tab + 1,"│ ",s+1,ref,str);	
-	}
+	else if (node->_right && !node->_left)
+			print(node->_right , "└─",s+1, ref,str);
+	else if (node->_left && !node->_right)
+		print(node->_left,"│ ",s+1,ref,str);	
 }
 };
 };

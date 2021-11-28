@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/28 01:58:27 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/28 02:25:59 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -329,9 +329,9 @@ std::cout << "------------------------------" << std::endl;
 	test1.insert(makepair('i', 8));
 	test1.insert(makepair('n', 11));
 	// test1.insert(makepair('A', 11));
-	test1.insert(makepair('H', 11));
+	// test1.insert(makepair('H', 11));
 	test1.insert(makepair('3', 11));
-	test1.insert(makepair('6', 11));
+	// test1.insert(makepair('6', 11));
 
 
 	test1.insert(makepair('Z', 11));
@@ -342,9 +342,9 @@ std::cout << "------------------------------" << std::endl;
 	test1.insert(makepair('t', 13));
 	test1.insert(makepair('v', 12));
 	test1.insert(makepair('u', 10));
-	test1.insert(makepair('5', 10));
+	// test1.insert(makepair('5', 10));
 
-	test1.insert(makepair('z', 12));
+	// test1.insert(makepair('z', 12));
 	test1.insert(makepair('s', 12));
 	test1.insert(makepair('j', 12));
 
