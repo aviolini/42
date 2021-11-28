@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/28 02:33:00 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/28 16:59:59 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -591,15 +591,17 @@ void print()
 	else
 	{
 		std::cout << "\033[1;31mroot\033[0m" << std::endl;
-		print(_root, "",0, _root->_left, "");
+		std::cout << "│ " << std::endl;
+		print(_root, "", _root->_left, "");
 	}
 }
-void print(pointer node, std::string prefix, int s, pointer ref,std::string str)
+void print(pointer node, std::string prefix, pointer ref,std::string str)
 {
-	if (s == 0)// && node->_left == ref)
-		std::cout << "│ " << std::endl;
 	if (node == ref)
-		return print(ref, "", 0, ref->_left,"");
+	{
+		std::cout << "│ " << std::endl;
+		return print(ref, "", ref->_left, "");
+	}
 	if (!prefix.compare("├─"))
 	{	
 		std::cout << str;
@@ -623,13 +625,13 @@ void print(pointer node, std::string prefix, int s, pointer ref,std::string str)
 		std::cout << "\033[1;32m" << node->_value.first << "\033[0m" << std::endl;
 	if (node->_right && node->_left)
 	{
-		print(node->_right, "├─",s + 1, ref,str);
-		print(node->_left, "",s + 1, ref,str);
+		print(node->_right, "├─", ref, str);
+		print(node->_left, "", ref, str);
 	}
 	else if (node->_right && !node->_left)
-			print(node->_right , "└─",s+1, ref,str);
+		print(node->_right, "└─", ref, str);
 	else if (node->_left && !node->_right)
-		print(node->_left,"│ ",s+1,ref,str);	
+		print(node->_left, "│ ", ref, str);	
 }
 };
 };
