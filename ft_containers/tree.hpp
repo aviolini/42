@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/28 01:51:45 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/28 01:56:41 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -608,10 +608,10 @@ void print(pointer node, int tab, std::string prefix, int s, pointer ref,std::st
 	(void)tab;
 	(void)s;
 	if (s == -1)
-		std::cout << "│" << std::endl;
+		std::cout << "│ " << std::endl;
 	if (node == _begin)
 	{
-		std::cout << "│" << std::endl;
+		std::cout << "│ " << std::endl;
 
 		std::cout << "begin" << std::endl;
 		return;
@@ -625,25 +625,25 @@ void print(pointer node, int tab, std::string prefix, int s, pointer ref,std::st
 	}
 	// for (int x = s; x > 0; --x)
 	// if (s>0)
-	if (!prefix.compare("├"))
+	if (!prefix.compare("├─"))
 	{	
 		std::cout << str;
 		// if (node->_left != _begin)
-			str = str + "│";
+			str = str + "│ ";
 		// std::cout << str + ;
 	}
-	else if (!prefix.compare("└"))
+	else if (!prefix.compare("└─"))
 	{	
 		std::cout << str;
 
-		str = str + " ";
+		str = str + "  ";
 		// std::cout << str + ;
 	}
 	else
 		std::cout << str;
 	
 	std::cout << prefix ;
-	if (!prefix.compare("│"))
+	if (!prefix.compare("│ "))
 	{
 		std::cout << std::endl;
 		// for (int x = s; x > 0; --x)
@@ -671,7 +671,7 @@ void print(pointer node, int tab, std::string prefix, int s, pointer ref,std::st
 	// }
 	if (node->_right && node->_left)
 	{
-		print(node->_right, tab + 1, "├",s + 1, ref,str);
+		print(node->_right, tab + 1, "├─",s + 1, ref,str);
 		// print(node->_left, tab + 1, "", s, node->_left);
 		print(node->_left, tab + 1, "",s + 1, ref,str);
 	}
@@ -679,14 +679,14 @@ void print(pointer node, int tab, std::string prefix, int s, pointer ref,std::st
 	{
 		// std::cout << "└──" ;//<< std::endl;
 		// if (!prefix.compare("├"))
-			print(node->_right, tab + 1 , "└",s+1, ref,str);
+			print(node->_right, tab + 1 , "└─",s+1, ref,str);
 		// else if(!prefix.compare(""))
 		// 	print(node->_right, tab , "└",1, ref);
 	}
 	else if (node->_left && !node->_right)// && node->_left != _begin)
 	{
 		// std::cout << "│   ";// << std::endl;
-		print(node->_left, tab + 1,"│",s+1,ref,str);	
+		print(node->_left, tab + 1,"│ ",s+1,ref,str);	
 	}
 }
 };
