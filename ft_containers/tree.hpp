@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/28 17:33:31 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/28 19:40:48 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,21 +120,20 @@ class tree
 public:
 	typedef Alloc										pair_allocator;
 	typedef Compare										key_compare;
-	typedef std::allocator<node<Pair> >					allocator_type;
-	typedef typename allocator_type::value_type			value_type;
-    typedef typename allocator_type::size_type		    size_type;
-    typedef typename allocator_type::reference			reference;
-    typedef typename allocator_type::const_reference	const_reference;
-    typedef typename allocator_type::difference_type	difference_type;
-    typedef typename allocator_type::pointer			pointer;
-    typedef typename allocator_type::const_pointer		const_pointer;
+	typedef std::allocator<node<Pair> >					node_allocator;
+	typedef typename node_allocator::value_type			value_type;
+    typedef typename node_allocator::size_type		    size_type;
+    typedef typename node_allocator::reference			reference;
+    typedef typename node_allocator::const_reference	const_reference;
+    typedef typename node_allocator::difference_type	difference_type;
+    typedef typename node_allocator::pointer			pointer;
+    typedef typename node_allocator::const_pointer		const_pointer;
 	typedef treeIterator<value_type>					const_iterator;
 	typedef treeIterator<value_type>					iterator;
 
 	key_compare		key_comp;
 private:
 	pair_allocator	_pair_allocator;
-	allocator_type	_node_allocator;
 	pointer			_root;
 	pointer			_end;
 	pointer			_begin;
@@ -142,18 +141,26 @@ private:
 public:
 /*CANONICAL-----------------------------------------------------------------------------------*/
 	explicit tree (const key_compare& key_comp = key_compare(), const pair_allocator& alloc = pair_allocator())
-	:key_comp(key_comp), _pair_allocator(alloc), _node_allocator(allocator_type())
+	:key_comp(key_comp), _pair_allocator(alloc)
 	{
-		_end = new value_type;
-		_begin = new value_type;
+		// _end = new value_type;
+		// _begin = new value_type;
+		_end = node_allocator().allocate(1);
+		node_allocator().construct(_end, value_type());
+		_begin = node_allocator().allocate(1);
+		node_allocator().construct(_begin, value_type());
 		_root = _end;
 		this->_size = 0;
 	}
 	tree (const tree& x)
-	:key_comp(x.key_comp),  _pair_allocator(x._pair_allocator), _node_allocator(x._node_allocator)
+	:key_comp(x.key_comp),  _pair_allocator(x._pair_allocator)
 	{
-		_end = new value_type;
-		_begin = new value_type;
+		// _end = new value_type;
+		// _begin = new value_type;
+		_end = node_allocator().allocate(1);
+		node_allocator().construct(_end, value_type());
+		_begin = node_allocator().allocate(1);
+		node_allocator().construct(_begin, value_type());
 		_root = _end;
 		this->_size = 0;
 		iterator it = x.begin();			//FARLO PARTIRE DA ROOT OPPURE COSI E BILANCIARLO DOPO?
@@ -168,7 +175,6 @@ public:
 			clear();
 			key_comp = x.key_comp;
 			_pair_allocator = x._pair_allocator;
-			_node_allocator = x._node_allocator;
 			iterator it = x.begin();			//FARLO PARTIRE DA ROOT OPPURE COSI E BILANCIARLO DOPO?
 			it++;
 			for (; it != x.end(); ++it)
@@ -217,7 +223,9 @@ public:
 	{
 		if (parent == 0 && node == _end)				// PRIMO GIRO
 		{
-		 	pointer temp = new value_type(obj);
+		 	// pointer temp = new value_type(obj);
+			pointer temp = node_allocator().allocate(1);
+			node_allocator().construct(temp, obj);
 		 	temp->_left = _begin;
 		 	temp->_right = _end;
 			_end->_parent = temp;
@@ -228,7 +236,9 @@ public:
 		}
 		if (node == _begin)								//SE ARRIVA AL NODO CON VALUE MINORE
 		{
-		 	pointer temp = new value_type(obj);
+		 	// pointer temp = new value_type(obj);
+			pointer temp = node_allocator().allocate(1);
+			node_allocator().construct(temp, obj);
 		 	temp->_left = _begin;
 		 	temp->_right = 0;
 			_begin->_parent = temp;
@@ -238,7 +248,9 @@ public:
 		}	
 		if (node == _end)								//SE ARRIVA AL NODO CON VALUE MAGGIORE
 		{
-		 	pointer temp = new value_type(obj);
+		 	// pointer temp = new value_type(obj);
+			pointer temp = node_allocator().allocate(1);
+			node_allocator().construct(temp, obj);
 		 	temp->_left = 0;
 		 	temp->_right = _end;
 			_end->_parent = temp;
@@ -248,7 +260,9 @@ public:
 		}		
 		if ( node == 0 )								//SE ARRIVA ALLA FINE DI UN SUBTREE
 		{
-		 	pointer temp = new value_type(obj);
+		 	// pointer temp = new value_type(obj);
+			pointer temp = node_allocator().allocate(1);
+			node_allocator().construct(temp, obj);
 		 	temp->_left = 0;
 		 	temp->_right = 0;
 			temp->_parent = parent;
@@ -286,8 +300,12 @@ public:
 	void destroy_tree()
 	{
 		clear(_root);
-		delete _end;
-		delete _begin;
+		// delete _end;
+		// delete _begin;
+		node_allocator().deallocate(_end, 1);
+		node_allocator().destroy(_end);
+		node_allocator().deallocate(_begin, 1);
+		node_allocator().destroy(_begin);
 		_end = 0;
 		_begin = 0;
 		_root = 0;
@@ -302,7 +320,9 @@ public:
 		{
 			clear(node->_left);
 			clear(node->_right);
-			delete node;
+			// delete node;
+			node_allocator().deallocate(node, 1);
+			node_allocator().destroy(node);
 			_size = 0;
 			_root = _end;
 		}
@@ -327,10 +347,8 @@ public:
 	void remove(typename Pair::first_type  & k)
 	{
 		_root = remove(_root,k);
-		// std::cout << "SIZE: " << _size << std::endl;
 		if (_size == 0)
-		_root = _end;
-		// Delete(_root, k);
+			_root = _end;
 	}
 	/////////////////////////////////////////////////////////////////////
 	//REMOVE 
@@ -358,20 +376,26 @@ public:
 			_size--;
 			if (_size == 0)	//SE E' L'ULTIMO ELEMENTO			<-----------------------------|
 			{																				//|
-				delete node;																//|
+				// delete node;																//|
+				node_allocator().deallocate(node, 1);
+				node_allocator().destroy(node);
 				return 0;																	//|
 			}																				//|
 			if ((node->_left == 0 && node->_right == 0))// || 			//NO CHILDREN		  |
 				//(node->_left == _begin && node->_right == _end))		//ULTIMO ELEMENTO-----|
 			{
-				delete node;
+				// delete node;
+				node_allocator().deallocate(node, 1);
+				node_allocator().destroy(node);
 				return 0;
 			}
 		  	if (node->_left == 0)	//RIGHT CHILD
 			{
 				pointer right_subtree = node->_right;
 				right_subtree->_parent = node->_parent;
-				delete node;
+				// delete node;
+				node_allocator().deallocate(node, 1);
+				node_allocator().destroy(node);
 				return right_subtree;
 			}
 		  	if (node->_left == _begin)	//LEFT BEGIN
@@ -383,18 +407,24 @@ public:
 					pointer min_node = find_min(right_subtree);
 					min_node->_left = _begin;
 					_begin->_parent = min_node;
-					delete node;
+					// delete node;
+					node_allocator().deallocate(node, 1);
+					node_allocator().destroy(node);
 					return right_subtree;
 				}
 				_begin->_parent = node->_parent;
-				delete node;
+				// delete node;
+				node_allocator().deallocate(node, 1);
+				node_allocator().destroy(node);
 				return _begin;
 			}
 			if (node->_right == 0)	//LEFT CHILD
 			{
 				pointer left_subtree = node->_left;
 				left_subtree->_parent = node->_parent;
-				delete node;
+				// delete node;
+				node_allocator().deallocate(node, 1);
+				node_allocator().destroy(node);
 				return left_subtree;
 			}
 		  	if (node->_right == _end)	//LEFT BEGIN
@@ -406,11 +436,15 @@ public:
 					pointer max_node = find_max(left_subtree);
 					max_node->_right = _end;
 					_end->_parent = max_node;
-					delete node;
+					// delete node;
+					node_allocator().deallocate(node, 1);
+				node_allocator().destroy(node);
 					return left_subtree;
 				}
 				_end->_parent = node->_parent;
-				delete node;
+				// delete node;
+				node_allocator().deallocate(node, 1);
+				node_allocator().destroy(node);
 				return _end;
 			}
 			//LEFT AND RIGHT CHILDREN
@@ -419,7 +453,9 @@ public:
 			{																	/*	/\	*/
 				node->_right->_parent = max_node;								/* d t	*/
 				max_node->_right = node->_right;								/*si rimuove m */
-				delete node;
+				// delete node;
+				node_allocator().deallocate(node, 1);
+				node_allocator().destroy(node);
 				return max_node;
 			}
 			max_node->_left = remove_max_node(node->_left, max_node);
@@ -427,7 +463,9 @@ public:
 			max_node->_right = node->_right;
 			node->_right->_parent = max_node;
 			max_node->_parent = node->_parent;
-			delete node;
+			// delete node;
+			node_allocator().deallocate(node, 1);
+			node_allocator().destroy(node);
 			return max_node;
 		}
 		else if (key < node->_value.first)
