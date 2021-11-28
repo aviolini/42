@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/28 16:59:59 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/28 17:33:31 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ public:
 				_ptr = _ptr->_left;
 			return *this;		
 		}
-		// while (_ptr->_parent && _ptr != _ptr->_parent->_left)
 		while ( _ptr != _ptr->_parent->_left)
 			_ptr = _ptr->_parent;
 		_ptr = _ptr->_parent;
@@ -82,9 +81,6 @@ public:
 				_ptr = _ptr->_right;
 			return *this;		
 		}
-		// while (_ptr->_parent && _ptr != _ptr->_parent->_left)
-		// while ( _ptr == _ptr->_parent->_left)
-		// 	_ptr = _ptr->_parent;
 		_ptr = _ptr->_parent;
 		return *this;
 	}
@@ -134,12 +130,8 @@ public:
     typedef typename allocator_type::const_pointer		const_pointer;
 	typedef treeIterator<value_type>					const_iterator;
 	typedef treeIterator<value_type>					iterator;
-	// typedef	vecReverse_iterator<const_iterator>		const_reverse_iterator;
-	// typedef	vecReverse_iterator<iterator>			reverse_iterator;
-
 
 	key_compare		key_comp;
-	// value_compare	value_comp;
 private:
 	pair_allocator	_pair_allocator;
 	allocator_type	_node_allocator;
@@ -152,7 +144,6 @@ public:
 	explicit tree (const key_compare& key_comp = key_compare(), const pair_allocator& alloc = pair_allocator())
 	:key_comp(key_comp), _pair_allocator(alloc), _node_allocator(allocator_type())
 	{
-		// _end = _node_allocator.allocate(1);
 		_end = new value_type;
 		_begin = new value_type;
 		_root = _end;
@@ -174,20 +165,10 @@ public:
 	{
     	if (this != &x)
     	{
-			// if (_root == _end)
-			// {
-	    	//     //CANCELLA TUTTO QUELLO CHE C'ERA PRIMA
-			// }
-			// destroy_tree();
 			clear();
 			key_comp = x.key_comp;
 			_pair_allocator = x._pair_allocator;
 			_node_allocator = x._node_allocator;
-			
-			// _end = new value_type;
-			// _begin = new value_type;
-			// _root = _end;
-			// this->_size = 0;
 			iterator it = x.begin();			//FARLO PARTIRE DA ROOT OPPURE COSI E BILANCIARLO DOPO?
 			it++;
 			for (; it != x.end(); ++it)
@@ -195,39 +176,26 @@ public:
     	}
     	return *this;
 	}
-	~tree(){}
+	~tree()
+	{
+		destroy_tree();
+	}
 
 /*ITERATORS-----------------------------------------------------------------------------------*/
 	iterator begin()
 	{
-		// pointer temp = _root;
-		// while (temp->_left != 0)
-		// 	temp = temp->_left;
-		// return iterator(temp);
 		return iterator(_begin);
 	}
 	iterator end()
 	{
-		// pointer temp = _root;
-		// while (temp->_right != 0)
-		// 	temp = temp->_right;
-		// return iterator(temp->_right);
 		return iterator(_end);
 	}
 	const_iterator begin() const
 	{
-		// pointer temp = _root;
-		// while (temp->_left != 0)
-		// 	temp = temp->_left;
-		// return const_iterator(temp);
 		return const_iterator(_begin);
 	}
 	const_iterator end() const
 	{
-		// pointer temp = _root;
-		// while (temp->_right != 0)
-		// 	temp = temp->_right;
-		// return const_iterator(temp->_right);
 		return const_iterator(_end);
 	}
 
@@ -236,6 +204,10 @@ public:
 	{
 		return _size;
 	}
+	/////////////////////////////////////////////////////////////////////
+	//INSERT
+	//jumping into c++ - Alex Allain - CAP17
+	/////////////////////////////////////////////////////////////////////
 	iterator insert(const Pair &obj)
 	{
 		_root = (insert(0, _root, obj));
@@ -266,7 +238,6 @@ public:
 		}	
 		if (node == _end)								//SE ARRIVA AL NODO CON VALUE MAGGIORE
 		{
-			// std::cout << "AAAA" <<std::endl;
 		 	pointer temp = new value_type(obj);
 		 	temp->_left = 0;
 		 	temp->_right = _end;
@@ -280,10 +251,7 @@ public:
 		 	pointer temp = new value_type(obj);
 		 	temp->_left = 0;
 		 	temp->_right = 0;
-			// if (parent == 0)
-			// 	temp->_parent = temp;
-			// else 
-				temp->_parent = parent;
+			temp->_parent = parent;
 			_size++;
 		 	return temp;
 		}
@@ -293,6 +261,10 @@ public:
 		 	node->_right = insert(node, node->_right, obj );
 		return node;
 	}
+	/////////////////////////////////////////////////////////////////////
+	//SEARCH
+	//jumping into c++ - Alex Allain - CAP17
+	/////////////////////////////////////////////////////////////////////
 	iterator find(const typename Pair::first_type & k) const
 	{
 		return iterator(find(_root,k));
@@ -307,6 +279,10 @@ public:
 			return find(node->_left, k);
 		return find(node->_right, k);
 	}
+	/////////////////////////////////////////////////////////////////////
+	//DESTROY TREE
+	//jumping into c++ - Alex Allain - CAP17
+	/////////////////////////////////////////////////////////////////////
 	void destroy_tree()
 	{
 		clear(_root);
@@ -358,34 +334,20 @@ public:
 	}
 	/////////////////////////////////////////////////////////////////////
 	//REMOVE 
-	//1. jumping into c++ - Alex Allain - PAG195
-	//2. https://www.youtube.com/watch?v=gcULXE7ViZw    ->  https://gist.github.com/mycodeschool/9465a188248b624afdbf 
-	// https://www.geeksforgeeks.org/deletion-binary-tree/?ref=lbp
+	//jumping into c++ - Alex Allain - CAP17
 	/////////////////////////////////////////////////////////////////////
-	
-	//1.////////////////////////////////////////////////////////////////
 	pointer remove_max_node (pointer node, pointer max_node) 
 	{
- 		// defensive coding--shouldn't actually hit this 
- 		if ( node == 0 )
+ 		if (node == 0)
 			return 0;
- 		// we found or node, now we can replace it 
- 		if ( node == max_node ) 
+ 		if (node == max_node)
  		{
-  			// the only reason we can do this is because we know  
-  			// max_node->_right is 0 so we aren’t losing  
-  			// any information. If max_node has no left sub-tree,  
-  			// then we will just return 0 from this branch, which  
-  			// will result in max_node being replaced with an empty tree, 
-  			// which is what we want.
 			if (max_node->_left != 0)
 				max_node->_left->_parent = max_node->_parent;
   			return max_node->_left;
-		} 
-		// each recursive call replaces the right sub-tree tree with a  
-		// new sub-tree that does not contain max_node. 
-		node->_right = remove_max_node( node->_right, max_node ); 
-		return node; 
+		}
+		node->_right = remove_max_node(node->_right, max_node);
+		return node;
 	}
 	pointer remove (pointer node, int key)
 	{
@@ -394,7 +356,6 @@ public:
 		if (node->_value.first == key)
 		{
 			_size--;
-			// the first two cases handle having zero or one child node
 			if (_size == 0)	//SE E' L'ULTIMO ELEMENTO			<-----------------------------|
 			{																				//|
 				delete node;																//|
@@ -403,38 +364,26 @@ public:
 			if ((node->_left == 0 && node->_right == 0))// || 			//NO CHILDREN		  |
 				//(node->_left == _begin && node->_right == _end))		//ULTIMO ELEMENTO-----|
 			{
-				// std::cout << "0" << std::endl;
 				delete node;
 				return 0;
 			}
 		  	if (node->_left == 0)	//RIGHT CHILD
 			{
-				// std::cout << "1" << std::endl;
 				pointer right_subtree = node->_right;
 				right_subtree->_parent = node->_parent;
 				delete node;
-				// this might return 0 if there are zero child nodes,
-				// but that is what we want anyway
 				return right_subtree;
 			}
 		  	if (node->_left == _begin)	//LEFT BEGIN
 			{
-				// std::cout << "1" << std::endl;
 				pointer right_subtree = node->_right;
 				if (right_subtree)
 				{
-					// right_subtree->_parent = node->_parent;
-					// right_subtree->_left = _begin;////////////////////////////////////////TESTARE	
-					// _begin->_parent = right_subtree;
-					
 					right_subtree->_parent = node->_parent;
 					pointer min_node = find_min(right_subtree);
 					min_node->_left = _begin;
 					_begin->_parent = min_node;
-
 					delete node;
-					// this might return 0 if there are zero child nodes,
-					// but that is what we want anyway
 					return right_subtree;
 				}
 				_begin->_parent = node->_parent;
@@ -443,17 +392,13 @@ public:
 			}
 			if (node->_right == 0)	//LEFT CHILD
 			{
-				// std::cout << "2" << std::endl;
 				pointer left_subtree = node->_left;
 				left_subtree->_parent = node->_parent;
 				delete node;
-				// this will always return a valid node, since we know
-				// is not 0 from the previous if statement
 				return left_subtree;
 			}
 		  	if (node->_right == _end)	//LEFT BEGIN
 			{
-				// std::cout << "1" << std::endl;
 				pointer left_subtree = node->_left;
 				if (left_subtree)
 				{
@@ -462,20 +407,14 @@ public:
 					max_node->_right = _end;
 					_end->_parent = max_node;
 					delete node;
-					// this might return 0 if there are zero child nodes,
-					// but that is what we want anyway
 					return left_subtree;
 				}
 				_end->_parent = node->_parent;
 				delete node;
-				return _end;				
+				return _end;
 			}
 			//LEFT AND RIGHT CHILDREN
-			// std::cout << "3" << std::endl;
 			pointer max_node = find_max(node->_left);
-			// since max_node came from the left sub-tree, we need to
-			// remove it from that sub-tree before re-linking that sub-tree
-			// back into the rest of the tree
 			if (max_node == node->_left)										/*	 m	*/
 			{																	/*	/\	*/
 				node->_right->_parent = max_node;								/* d t	*/
@@ -484,22 +423,11 @@ public:
 				return max_node;
 			}
 			max_node->_left = remove_max_node(node->_left, max_node);
-			// if (node->_left != max_node)
-				node->_left->_parent = max_node;
+			node->_left->_parent = max_node;
 			max_node->_right = node->_right;
 			node->_right->_parent = max_node;
 			max_node->_parent = node->_parent;
 			delete node;
-			// ////////////////////PRINT///////////////////////////////////////////////////////
-			// if (max_node)
-			// 	std::cout << "VALUE:" << max_node->_value.first << std::endl;
-			// if (max_node->_parent)
-			// 	std::cout << "PARENT:" << max_node->_parent->_value.first << std::endl;
-			// if (max_node->_left)
-			// 	std::cout << "LEFT:" << max_node->_left->_value.first << std::endl;
-			// if (max_node->_right)
-			// 	std::cout << "RIGHT:" << max_node->_right->_value.first << std::endl;
-			// ///////////////////////////////////////////////////////////////////////////////
 			return max_node;
 		}
 		else if (key < node->_value.first)
@@ -508,131 +436,88 @@ public:
 			node->_right = remove(node->_right, key);
 		return node;
 	}
-	///////////////////////////////////////////////////////////////////
-	
-	//2.////////////////////////////////////////////////////////////////
-	pointer FindMin(pointer node)
+	//PRINT IN TABLE//////////////////////////////////////////////////////////////////////////////////////
+	void print(std::string name)
 	{
-		while(node->_left != 0)
-			node = node->_left;
-		return node;
-	}
-	pointer Delete(pointer node, int key)
-	{
-		if(node == 0)
-			return node; 
-		else if(key < node->_value.first)
-			node->_left = Delete(node->_left, key);
-		else if (key > node->_value.first)
-			node->_right = Delete(node->_right, key);
-		// Wohoo... I found you, Get ready to be deleted	
-		else 
+		std::cout << "-----" << name << "-----------------------" << std::endl;
+		if (!_size)
 		{
-			// Case 1:  No child
-			if(node->_left == 0 && node->_right == 0)
-			{ 
-				delete node;
-				node = 0;
-			}
-			//Case 2: One child 
-			else if(node->_left == 0)
-			{
-				pointer temp = node;
-				node = node->_right;
-				delete temp;
-			}
-			else if(node->_right == 0)
-			{
-				pointer temp = node;
-				node = node->_left;
-				delete temp;
-			}
-			// case 3: 2 children
-			else
-			{ 
-				pointer temp = FindMin(node->_right);
-				node->_value.first = temp->_value.first;
-				node->_right = Delete(node->_right, temp->_value.first);
-			}
+			std::cout << "EMPTY TREE" << std::endl;
+			std::cout << "------------------------------" << std::endl;
+			return ;
 		}
-		return node;
+		std::cout << "size:" << _size << std::endl;
+		std::cout << "content: "<< std::endl;
+		iterator itB = begin();
+		itB++;
+		iterator itE = end();
+		// itE--;
+		for (; itB != itE ; ++itB)
+		{
+			std::cout << "first: " << itB->_value.first << "\tsecond: " << itB->_value.second;
+			if (itB->_parent)
+				std::cout << "\tparent: " << itB->_parent->_value.first <<  std::endl;
+			else
+				std::cout << "\tparent: NULL" << std::endl;	
+		}
+		std::cout << "-----------------------------" << std::endl;
 	}
-	///////////////////////////////////////////////////////////////////
-void print(std::string name)
-{
-	std::cout << "-----" << name << "-----------------------" << std::endl;
-	if (!_size)
+	//PRINT IN TREE//////////////////////////////////////////////////////////////////////////////////////
+	void print()
 	{
-		std::cout << "EMPTY TREE" << std::endl;
-		std::cout << "------------------------------" << std::endl;
-		return ;
-	}
-	std::cout << "size:" << _size << std::endl;
-	std::cout << "content: "<< std::endl;
-	iterator itB = begin();
-	itB++;
-	iterator itE = end();
-	// itE--;
-	for (; itB != itE ; ++itB)
-	{
-		std::cout << "F: " << itB->_value.first << "\tS: " << itB->_value.second;
-		if (itB->_parent)
-			std::cout << "\tP: " << itB->_parent->_value.first <<  std::endl;
+		if (!_size)
+			std::cout << "EMPTY TREE" << std::endl;
 		else
-			std::cout << "\tP: NULL" << std::endl;	
+		{
+			std::cout << "\033[1;31mroot\033[0m" << std::endl;
+			std::cout << "│ " << std::endl;
+			print(_root, _root->_left, "", "");
+		}
 	}
-	std::cout << "-----------------------------" << std::endl;
-}
-	///////////////////////////////////////////////////////////////////
-void print()
-{
-	if (!_size)
-		std::cout << "EMPTY TREE" << std::endl;
-	else
+	void print(pointer node, pointer ref, std::string prefix, std::string str)
 	{
-		std::cout << "\033[1;31mroot\033[0m" << std::endl;
-		std::cout << "│ " << std::endl;
-		print(_root, "", _root->_left, "");
+		/////////////////////////////////////////////////PRINT LEFT SUBTREE
+		if (node == ref)
+		{
+			std::cout << "│ " << std::endl;
+			return print(ref, ref->_left, "", "");
+		}
+		/////////////////////////////////////////////////PRINT AND UPDATE STR PRINT FORMAT
+		if (!prefix.compare("├─"))
+		{
+			std::cout << str;
+			str = str + "│ ";
+		}
+		else if (!prefix.compare("└─"))
+		{	
+			std::cout << str;
+			str = str + "  ";
+		}
+		else
+			std::cout << str;
+		/////////////////////////////////////////////////PRINT NEW PREFIX
+		std::cout << prefix ;
+		/////////////////////////////////////////////////REPRINT FORMAT TO INSERT VALUE IN RIGHT POSITION
+		if (!prefix.compare("│ "))
+			std::cout << std::endl << str;
+		/////////////////////////////////////////////////PRINT NODE->VALUE
+		if (node == _end)
+			std::cout << "\033[1;33mend\033[0m" << std::endl;
+		else if (node == _begin)
+			std::cout << "\033[1;34mbegin\033[0m" << std::endl;
+		else
+			std::cout << "\033[1;32m" << node->_value.first << "\033[0m" << std::endl;
+		/////////////////////////////////////////////////PRINT NEXT NODES
+		if (node->_right && node->_left)
+		{
+			print(node->_right, ref, "├─", str);
+			print(node->_left, ref, "", str);
+		}
+		else if (node->_right && !node->_left)
+			print(node->_right, ref, "└─", str);
+		else if (node->_left && !node->_right)
+			print(node->_left, ref, "│ ", str);	
 	}
-}
-void print(pointer node, std::string prefix, pointer ref,std::string str)
-{
-	if (node == ref)
-	{
-		std::cout << "│ " << std::endl;
-		return print(ref, "", ref->_left, "");
-	}
-	if (!prefix.compare("├─"))
-	{	
-		std::cout << str;
-		str = str + "│ ";
-	}
-	else if (!prefix.compare("└─"))
-	{	
-		std::cout << str;
-		str = str + "  ";
-	}
-	else
-		std::cout << str;
-	std::cout << prefix ;
-	if (!prefix.compare("│ "))
-		std::cout << std::endl << str;
-	if (node == _end)
-		std::cout << "\033[1;33mend\033[0m" << std::endl;
-	else if (node == _begin)
-		std::cout << "\033[1;34mbegin\033[0m" << std::endl;
-	else
-		std::cout << "\033[1;32m" << node->_value.first << "\033[0m" << std::endl;
-	if (node->_right && node->_left)
-	{
-		print(node->_right, "├─", ref, str);
-		print(node->_left, "", ref, str);
-	}
-	else if (node->_right && !node->_left)
-		print(node->_right, "└─", ref, str);
-	else if (node->_left && !node->_right)
-		print(node->_left, "│ ", ref, str);	
-}
 };
 };
 
