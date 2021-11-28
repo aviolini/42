@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/28 17:25:02 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/28 23:21:39 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,29 +70,20 @@ public:
 	explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
 	_tree(comp, alloc){}									//EMPTY
 	template <class InputIterator>
-	map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())//,		//RANGE
-		// typename myEnable_if_false<myIs_integral<InputIterator>::value , T>::type = 0,
-		// typename myEnable_if_false<myIs_floating_point<InputIterator>::value , T>::type = 0)
+	map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type(),		//RANGE
+		typename myEnable_if_false<myIs_integral<InputIterator>::value , T>::type = 0,
+		typename myEnable_if_false<myIs_floating_point<InputIterator>::value , T>::type = 0)
 	:_tree(comp,alloc)
 	{
 		insert(first,last);
 	}
-	map (const map& x) : _tree(x._tree)
-	{
-        // insert(x.begin(), x.end());
-	}																															//COPY
-	~map()
-	{
-		// _tree.destroy_tree();
-	}
+	map (const map& x) : _tree(x._tree){}																															//COPY
+	~map(){}
 	map& operator= (const map& x)
 	{
-		//CANCELLARE TUTTO
-		// _tree.destroy_tree();
 		_tree = x._tree;
 		return *this;
 	}
-
 /*ITERATORS-----------------------------------------------------------------------------------*/
 	iterator begin()
 	{
@@ -126,7 +117,6 @@ public:
 	{
 		return const_reverse_iterator(const_iterator(_tree.begin()));
 	}
-
 /*CAPACITY-----------------------------------------------------------------------------------*/
 	bool empty() const
 	{
@@ -141,8 +131,8 @@ public:
 	size_type max_size() const
 	{
 		return allocator_type().max_size();
+		// return typename tree_type::node_allocator().max_size();
 	}
-
 /*ELEMENT ACCESS-------------------------------------------------------------------------------*/
 	mapped_type& operator[] (const key_type& k)
 	{
@@ -150,30 +140,25 @@ public:
 		while (it != end() && it->first != k)
 			++it;
 		if (it == end())
-		{
-			// insert(make_pair('t', 6));
-			// return begin()->second;
 			return insert(make_pair(k,mapped_type())).first->second;
-		}
 		return it->second;
 	}
-
 /*MODIFIERS-----------------------------------------------------------------------------------*/
 	pair<iterator,bool> insert (const value_type& val)								//SINGLE ELEMENT
 	{
 		iterator it = find(val.first);
-		if (it != end()) //E' STATO TROVATO
+		if (it != end()) //FOUND
 			return pair<iterator,bool>(it, false);
 		return pair<iterator,bool>(++(iterator(_tree.insert(val))), true);
 	}
 	iterator insert (iterator position, const value_type& val)						//WITH HINT
 	{
 		iterator it = find(val.first);
-		if (it != end()) //E' STATO TROVATO
+		if (it != end()) //FOUND
 			return it;
 		typename tree_type::pointer ptr;
-		ptr = _tree.insert(position.getNode()->_parent, position.getNode(), val);	//SE NON RIESCE A METTERLO
-		it = iterator(typename tree_type::iterator(ptr));							//RICOMINCIARE DA _root?
+		ptr = _tree.insert(position.getNode()->_parent, position.getNode(), val);
+		it = iterator(typename tree_type::iterator(ptr));
 			return it;
 	}
 	template <class InputIterator>													//RANGE
@@ -211,7 +196,6 @@ public:
 	{
 		_tree.clear();
 	}
-
 /*OBSERVERS----------------------------------------------------------------------------------*/
 	key_compare key_comp() const
 	{
@@ -221,7 +205,6 @@ public:
 	{
 		return value_compare(key_compare());
 	}
-
 /*OPERATIONS----------------------------------------------------------------------------------*/
 	iterator find (const key_type & k)
 	{
@@ -257,68 +240,20 @@ public:
 	{
 		return pair<const_iterator, const_iterator> (lower_bound(k), upper_bound(k));
 	}
-	pair<iterator,iterator>             equal_range (const key_type& k)
+	pair<iterator,iterator> equal_range (const key_type& k)
 	{
 		return pair<iterator, iterator> (lower_bound(k), upper_bound(k));
 	}
-
 /*ALLOCATOR-----------------------------------------------------------------------------------*/
-		allocator_type get_allocator() const 
-		{
-			return allocator_type();
-		}
-
-void print()
-{
-	_tree.print();
-}
-
+	allocator_type get_allocator() const 
+	{
+		return allocator_type();
+	}
 /*EXTRA-------------------------------------------------------------------------------------------------------------------------------*/
-    // void print(StringBuilder buffer, String prefix, String childrenPrefix) 
-	// {
-    //     buffer.append(prefix);
-    //     buffer.append(name);
-    //     buffer.append('\n');
-    //     for (iterator it = children.iterator(); it != it.end();) 
-	// 	{
-    //         TreeNode next = it.next();
-    //         if (it.hasNext())
-    //             next.print(buffer, childrenPrefix + "├── ", childrenPrefix + "│   ");
-    //         else
-    //             next.print(buffer, childrenPrefix + "└── ", childrenPrefix + "    ");
-    //     }
-    // }
-	// void print()
-	// {
-	// 	this->printRec(this->_tree._root, "", "");
-	// }
-	// void printRec(node_type *node, std::string s1, std::string s2)
-	// {
-	// 	// iterator it1 = iterator(this->_tree._root);
-		
-	// 	typename tree_type::iterator it1 = typename tree_type::iterator(node);
-	// 	typename tree_type::iterator end = typename tree_type::iterator(this->_tree._end);
-	// 	std::cout << it1->_value.first << std::endl;
-	// 	it1++;
-	// 	for (; it1 != end; it1++)
-	// 	{
-	// 		node_type* next = node.next();
-	// 		if (it1 != end)
-	// 		{
-	// 			            if (it.hasNext()) {
-    //             next.print(node, nPrefix + "├── ", childrenPrefix + "│   ");
-    //         } else {
-    //             next.print(buffer, childrenPrefix + "└── ", childrenPrefix + "    ");
-    //         }
-	// 			std::cout << "├── " << it1->_value.first;
-	// 			if (it1->_right == _tree._end)
-	// 				std::cout << " ──END";
-	// 			std::cout << std::endl;
-	// 		}
-	// 	}
-	// }
-/*EXTRA-------------------------------------------------------------------------------------------------------------------------------*/
-
+	void print()
+	{
+		_tree.print();
+	}
 };
 };
 

@@ -3,37 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   stackTests.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:03:25 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/29 09:46:38 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/29 00:02:34 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
 
-template< typename StackBase, typename Container >											//IMPLEMENT ITERATOR IN STACK TO PRINT STACK
+template< typename StackBase, typename Container >	//IMPLEMENT ITERATOR IN STACK TO PRINT STACK
 class MutantStack : public StackBase
 {
-	public:
-		MutantStack< StackBase, Container >(){}
-		MutantStack< StackBase, Container >(MutantStack const & obj) : StackBase(obj){}
-		MutantStack< StackBase, Container >(StackBase const & obj) : StackBase(obj){}
-		~MutantStack< StackBase, Container >(){}
-		MutantStack operator = (MutantStack const & obj)
-		{
-			StackBase::operator = (obj);
-		}
-		typedef typename StackBase::container_type::iterator iterator;
-		iterator begin()
-		{
-			return StackBase::c.begin();
-		}
-		iterator end()
-		{
-			return StackBase::c.end();
-		}
+public:
+	MutantStack< StackBase, Container >(){}
+	MutantStack< StackBase, Container >(MutantStack const & obj) : StackBase(obj){}
+	MutantStack< StackBase, Container >(StackBase const & obj) : StackBase(obj){}
+	~MutantStack< StackBase, Container >(){}
+	MutantStack operator = (MutantStack const & obj)
+	{
+		StackBase::operator = (obj);
+	}
+	typedef typename StackBase::container_type::iterator iterator;
+	iterator begin()
+	{
+		return StackBase::c.begin();
+	}
+	iterator end()
+	{
+		return StackBase::c.end();
+	}
 };
 
 template <typename S>

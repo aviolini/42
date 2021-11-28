@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:13:14 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/17 19:33:04 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/28 23:52:44 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,14 @@ namespace ft = std;
 #include "mapTests.cpp"
 
 
-int main(int argc, char** argv) {
+int main() 
+{
+	vectorTest< ft::vector<int> >();
 
-	(void)argc;
-	(void)argv;
-	
-	// vectorTest< ft::vector<int> >();
-	// stackTest< ft::stack<int, ft::vector<int> > > ();
+	stackTest< ft::stack<int, ft::vector<int> > > ();
+
 	ft::pair<const char, int> (*ptr)(const char, int) = &ft::make_pair<const char, int>;
 	mapTest< ft::map<char,int, std::less<char>, std::allocator<ft::pair <const char, int > > >, ft::pair<const char, int> >(ptr);
-
 
 	return (0);
 }

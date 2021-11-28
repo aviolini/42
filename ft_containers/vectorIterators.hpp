@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 10:44:33 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 23:17:44 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/28 23:57:13 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "utils.hpp"
 
 template <class Category, class T, class Distance = ft::ptrdiff_t, class Pointer = T*, class Reference = T&>
-class vecIterator
+class vectorIterator
 {
 public:
 	typedef T					value_type;
@@ -28,11 +28,11 @@ protected:
 	pointer _data;
 public:	
 	/*CANONICAL-----------------------------------------------------------------------------------*/		
-	vecIterator () : _data(0){}
-	vecIterator (pointer initLoc) : _data(initLoc){}
-	virtual ~vecIterator(){}
-	vecIterator(vecIterator const & rhs) : _data(rhs._data){}
-	vecIterator operator = (const vecIterator & rhs)
+	vectorIterator () : _data(0){}
+	vectorIterator (pointer initLoc) : _data(initLoc){}
+	virtual ~vectorIterator(){}
+	vectorIterator(vectorIterator const & rhs) : _data(rhs._data){}
+	vectorIterator operator = (const vectorIterator & rhs)
 	{
 		this->_data = rhs._data;
 		return *this;
@@ -42,48 +42,48 @@ public:
 	{
 		return *this->_data;
 	}
-	vecIterator operator + ( const difference_type &n ) const
+	vectorIterator operator + ( const difference_type &n ) const
 	{
-		vecIterator obj(this->_data + n);
+		vectorIterator obj(this->_data + n);
 		return obj;
 	}
-	vecIterator &operator ++()				//PREFIX
+	vectorIterator &operator ++()				//PREFIX
 	{
 		this->_data++;
 		return *this;
 	}
-	vecIterator operator ++(int)				//POSTFIX
+	vectorIterator operator ++(int)			//POSTFIX
 	{
-		vecIterator temp = *this;
+		vectorIterator temp = *this;
 		this->_data++;
 		return temp;
 	}
-	vecIterator & operator += (difference_type n)
+	vectorIterator & operator += (difference_type n)
 	{
 		this->_data += n;
 		return *this;
 	}
-	vecIterator operator - ( const difference_type &n ) const
+	vectorIterator operator - ( const difference_type &n ) const
 	{
-		vecIterator obj(this->_data - n);
+		vectorIterator obj(this->_data - n);
 		return obj;
 	}
-	difference_type operator - ( const vecIterator &rhs) const
+	difference_type operator - ( const vectorIterator &rhs) const
 	{
 		return this->_data - rhs._data;
 	}
-	vecIterator &operator --()				//PREFIX
+	vectorIterator &operator --()				//PREFIX
 	{
 		this->_data--;
 		return *this;
 	}
-	vecIterator operator --(int)				//POSTFIX
+	vectorIterator operator --(int)			//POSTFIX
 	{
-		vecIterator temp = *this;
+		vectorIterator temp = *this;
 		this->_data--;
 		return temp;
 	}
-	vecIterator & operator -= (difference_type n)
+	vectorIterator & operator -= (difference_type n)
 	{
 		this->_data -= n;
 		return *this;
@@ -97,34 +97,34 @@ public:
 		return *(this->_data + index);
 	}
 	/*RELATIONAL OPERATORS--------------------------------------------------*/
-	bool operator == (const vecIterator & rhs)
+	bool operator == (const vectorIterator & rhs)
 	{
 		return this->_data == rhs._data;
 	}
-	bool operator != (const vecIterator & rhs)
+	bool operator != (const vectorIterator & rhs)
 	{
 		return !(this->_data == rhs._data);
 	}
-	bool operator > (const vecIterator & rhs)
+	bool operator > (const vectorIterator & rhs)
 	{
 		return (this->_data > rhs._data);
 	}
-	bool operator >= (const vecIterator & rhs)
+	bool operator >= (const vectorIterator & rhs)
 	{
 		return (this->_data >= rhs._data);
 	}
-	bool operator < (const vecIterator & rhs)
+	bool operator < (const vectorIterator & rhs)
 	{
 		return (this->_data < rhs._data);
 	}
-	bool operator <= (const vecIterator & rhs)
+	bool operator <= (const vectorIterator & rhs)
 	{
 		return (this->_data <= rhs._data);
 	}
 };
 
 template <class Iterator> 
-class vecReverse_iterator : public Iterator
+class vectorReverseIterator : public Iterator
 {
 public:
 	typedef Iterator									iterator_type;
@@ -134,60 +134,60 @@ public:
 	typedef typename iterator_type::difference_type		difference_type;
 	typedef typename iterator_type::iterator_category	iterator_category;
 	/*CANONICAL-----------------------------------------------------------------------------------*/		
-	vecReverse_iterator () : Iterator(0){}
-	explicit vecReverse_iterator (iterator_type it) : Iterator(it - 1){}
+	vectorReverseIterator () : Iterator(0){}
+	explicit vectorReverseIterator (iterator_type it) : Iterator(it - 1){}
 	template <class Iter>
-  	vecReverse_iterator (const vecReverse_iterator<Iter>& rev_it,typename myEnable_if<myHas_iterator_category<Iter>::value, value_type>::type = 0)
+  	vectorReverseIterator (const vectorReverseIterator<Iter>& rev_it,typename myEnable_if<myHas_iterator_category<Iter>::value, value_type>::type = 0)
 	{
 		this->_data = rev_it._data;
 	}
-	~vecReverse_iterator(){}
-	vecReverse_iterator(vecReverse_iterator const & rhs)
+	~vectorReverseIterator(){}
+	vectorReverseIterator(vectorReverseIterator const & rhs)
 	{
 		this->_data = rhs._data;
 	}
-	vecReverse_iterator operator = (const vecReverse_iterator & rhs)
+	vectorReverseIterator operator = (const vectorReverseIterator & rhs)
 	{
 		this->_data = rhs._data;
 		return *this;
 	}
 	/*MEMBER OPERATORS--------------------------------------------------*/
-	vecReverse_iterator &operator ++()				//PREFIX
+	vectorReverseIterator &operator ++()				//PREFIX
 	{
 		this->_data--;
 		return *this;
 	}
-	vecReverse_iterator operator ++(int)				//POSTFIX
+	vectorReverseIterator operator ++(int)			//POSTFIX
 	{
-		vecReverse_iterator temp = *this;
+		vectorReverseIterator temp = *this;
 		this->_data--;
 		return temp;
 	}
-	vecReverse_iterator &operator --()				//PREFIX
+	vectorReverseIterator &operator --()				//PREFIX
 	{
 		this->_data++;
 		return *this;
 	}
-	vecReverse_iterator operator --(int)				//POSTFIX
+	vectorReverseIterator operator --(int)			//POSTFIX
 	{
-		vecReverse_iterator temp = *this;
+		vectorReverseIterator temp = *this;
 		this->_data++;
 		return temp;
 	}
 	/*RELATIONAL OPERATORS--------------------------------------------------*/
-	bool operator > (const vecReverse_iterator & rhs)
+	bool operator > (const vectorReverseIterator & rhs)
 	{
 		return (this->_data < rhs._data);
 	}
-	bool operator >= (const vecReverse_iterator & rhs)
+	bool operator >= (const vectorReverseIterator & rhs)
 	{
 		return (this->_data <= rhs._data);
 	}
-	bool operator < (const vecReverse_iterator & rhs)
+	bool operator < (const vectorReverseIterator & rhs)
 	{
 		return (this->_data > rhs._data);
 	}
-	bool operator <= (const vecReverse_iterator & rhs)
+	bool operator <= (const vectorReverseIterator & rhs)
 	{
 		return (this->_data >= rhs._data);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectorTests.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:27:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/29 16:20:43 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/28 23:50:34 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 #include <string>
 
 template<typename C>
-void printVec(C &v)
+void printVec(C &v, std::string name)
 {
+	std::cout << "---------" << name << "----------------" << std::endl;
 	std::cout << "size:" << v.size() << "\tcapacity:" << v.capacity() << std::endl;
 	std::cout << "content: ";
 	typename C::iterator it = v.begin();;
 	for (; it != v.end() ; ++it)
 		std::cout << *it << " ";
-	std::cout << std::endl;
+	
+	std::cout << std::endl << "-----------------------------------------" << std::endl;
 }
 
 template<typename C>
@@ -32,62 +34,62 @@ void vectorTest()
 	std::cout<<std::endl;
 	std::cout << "--------------DEFAULT CONSTRUCTOR" << std::endl;
 		C test1;											//DEFAULT
-		printVec(test1);
+		printVec(test1,"TEST1");
 	std::cout << "--------------FILL CONSTRUCTOR" << std::endl;
 		C test2(10);										//FILL
-		printVec(test2);
+		printVec(test2,"TEST2");
 	std::cout << "--------------FILL CONSTRUCTOR" << std::endl;
 		C test3(10,5);										//FILL
-		printVec(test3);
+		printVec(test3,"TEST3");
 	std::cout << "--------------RANGE CONSTRUCTOR" << std::endl;
 		C test4(10,5);									//RANGE
 		C test5(test4.begin(),test4.end());
-		printVec(test4);
-		printVec(test5);
+		printVec(test4,"TEST4");
+		printVec(test5,"TEST5");
 	std::cout << "--------------COPY CONSTRUCTOR" << std::endl;
 		C test6(10,5);									//FILL
 		// test.push_back(6);
-		printVec(test6);
+		printVec(test6,"TEST6");
 		C copy1(test6);									//COPY
-		printVec(copy1);
+		printVec(copy1,"COPY1");
 
 		C empty1;
 		C empty2(empty1);
-		printVec(empty1);
-		printVec(empty2);
+		printVec(empty1,"EMPTY1");
+		printVec(empty2,"EMPTY2");
 	std::cout << "--------------ASSIGNMENT OPERATOR" << std::endl;
 		std::cout << "--full in empty--" << std::endl;
 		C test7(10,5);									//FILL
-		printVec(test7);
+		printVec(test7,"TEST7");
 		C test8;
-		printVec(test8);
+		printVec(test8,"TEST8");
 		test8 = test7;												//ASSIGNMENT OPERATOR
-		printVec(test8);
+		printVec(test8,"TEST8");
 
 		std::cout << "--empty in full--" << std::endl;
 		C empty3;
-		printVec(test7);
+		printVec(test7,"TEST7");
 		test7 = empty3;												//ASSIGNMENT OPERATOR
-		printVec(test7);
-		printVec(empty3);
+		printVec(test7,"TEST7");
+		printVec(empty3,"EMPTY3");
 
 		std::cout << "--more in less--" << std::endl;
 		C test9(10,5);
 		C test10(3,4);
-		printVec(test10);
-		printVec(test9);
+		printVec(test10,"TEST10");
+		printVec(test9,"TEST9");
 		test10 = test9;												//ASSIGNMENT OPERATOR
-		printVec(test10);
-		printVec(test9);
+		printVec(test10,"TEST10");
+		printVec(test9,"TEST9");
 		
 		std::cout << "--less in more--" << std::endl;
 		C test11(10,5);
 		C test12(3,4);
-		printVec(test11);
-		printVec(test12);
+		printVec(test11,"TEST11");
+		printVec(test12,"TEST12");
 		test11 = test12;												//ASSIGNMENT OPERATOR
-		printVec(test11);
-		printVec(test12);
+		printVec(test11,"TEST11");
+		printVec(test12,"TEST12");
 	std::cout << "--------------" << std::endl;
 	{
 
@@ -107,55 +109,55 @@ void vectorTest()
 		std::cout << "CAPACITY:\t" << test13.capacity() << std::endl;
 		std::cout << std::endl;
 		std::cout << "-------TESTS RESIZE---------" << std::endl;
-		printVec(test13);
+		printVec(test13,"TEST13");
 		
 		std::cout << "--PARAM(5)" << std::endl;
-		printVec(test13);
+		printVec(test13,"TEST13");
 		test13.resize(5);
-		printVec(test13);
+		printVec(test13,"TEST13");
 		test13 = copy2;
 	
 		// std::cout << "COPY: " << std::endl;
 		// printVec(copy2);
 		std::cout << "--PARAM(6,6)" << std::endl;
-		printVec(test13);
+		printVec(test13,"TEST13");
 		test13.resize(6,6);
 		for (int i=0; i < 14; i++)
 			test13.push_back(7);
-		printVec(test13);
+		printVec(test13,"TEST13");
 		test13.push_back(7);
-		printVec(test13);
+		printVec(test13,"TEST13");
 		for (int i=0; i < 20; i++)
 			test13.pop_back();
-		printVec(test13);
+		printVec(test13,"TEST13");
 		test13 = copy2;
 
 		std::cout << "--PARAM(15)" << std::endl;
-		printVec(test13);
+		printVec(test13,"TEST13");
 		test13.resize(15);
-		printVec(test13);
+		printVec(test13,"TEST13");
 		test13 = copy2;
 
 		std::cout << "--PARAM(15,7)" << std::endl;
-		printVec(test13);
+		printVec(test13,"TEST13");
 		test13.resize(15, 7);
-		printVec(test13);
+		printVec(test13,"TEST13");
 		test13 = copy2;
 
 		std::cout << std::endl;
 		std::cout << "-------TESTS RESERVE---------" << std::endl;
-		printVec(test13);
-		printVec(copy2);
+		printVec(test13,"TEST13");
+		printVec(copy2,"COPY2");
 
 		test13.reserve(15);
 		for (int i=0; i < 200; i++)
 			test13.push_back(7);
-		printVec(test13);
+		printVec(test13,"TEST13");
 		test13.reserve(400);
-		printVec(test13);
+		printVec(test13,"TEST13");
 		for (int i=0; i < 200; i++)
 			test13.pop_back();
-		printVec(test13);
+		printVec(test13,"TEST13");
 		test13 = copy2;
 	std::cout<<std::endl;
 	
@@ -193,17 +195,17 @@ void vectorTest()
 		
 		C test15;
 		test15.push_back(1);
-		printVec(test15);
+		printVec(test15,"TEST15");
 		test15.push_back(2);
-		printVec(test15);
+		printVec(test15,"TEST15");
 		test15.push_back(3);
-		printVec(test15);
+		printVec(test15,"TEST15");
 		for (int i = 0; i < 100; ++i)
 			test15.push_back(i);
-		printVec(test15);
+		printVec(test15,"TEST15");
 		for (int i = 0; i < 101; ++i)
 			test15.pop_back();
-		printVec(test15);
+		printVec(test15,"TEST15");
 	std::cout<<std::endl;
 
 		std::cout << "--------------ASSIGN" << std::endl;
@@ -212,73 +214,74 @@ void vectorTest()
 		C data3;
 		for (int i = 0; i < 100; ++i)
 			data3.push_back(i);
-		printVec(data3);
+		printVec(data3, "DATA3");
 		C test16;
 		test16.assign(data3.begin(), data3.end());
-		printVec(test16);
+		printVec(test16, "TEST16");
 		C test17(150,5);
 		test17.assign(data3.begin(), data3.end());
-		printVec(test17);
+		printVec(test17, "TEST17");
 		C test18(150,5);
 		test18.assign(data3.begin(), data3.begin() + 10);
-		printVec(test18);
+		printVec(test18, "TEST18");
 		//FILL
 		C test19;
 		test19.assign(50, 40);
-		printVec(test19);
+		printVec(test19, "TEST19");
 		test19.assign(20, 30);
-		printVec(test19);	
+		printVec(test19,"TEST19");	
 		test19.assign(200, 20);
-		printVec(test19);
+		printVec(test19,"TEST19");
 
 	//	INSERT SINGLE ELEMENT
 		C data4;
 		for (int i = 0; i < 100; ++i)
 			data4.push_back(i);
-		printVec(data4);
+		printVec(data4,"DATA4");
 		data4.insert(data4.begin(), 4);
-		printVec(data4);
+		printVec(data4,"DATA4");
 		for(int i = 0; i < 27; i++)
 			data4.insert(data4.begin(), 4);
-		printVec(data4);
+		printVec(data4,"DATA4");
 		data4.insert(data4.begin(),1);
-		printVec(data4);
+		printVec(data4,"DATA4");
 		for(int i = 0; i < 500; i++)
 			data4.insert(data4.begin(), 4);
-		printVec(data4);
+		printVec(data4,"DATA4");
 		//	INSERT FILL
+		/*
 		C data5;
 		for (int i = 0; i < 100; ++i)
 			data5.push_back(i);
-		printVec(data5);
+		printVec(data5,"DATA5");
 		data5.insert(data5.begin(), 5, 4);
-		printVec(data5);
+		printVec(data5,"DATA5");
 		data5.insert(data5.begin(), 24, 4);
-		printVec(data5);
+		printVec(data5,"DATA5");
 
 		
 		data5.insert(data5.begin(), 1);
-		printVec(data5);
+		printVec(data5,"DATA5");
 		data5.insert(data5.begin(), 127, 2);
-		printVec(data5);
+		printVec(data5,"DATA5");
 		data5.insert(data5.begin(), 258, 2);
-		printVec(data5);
-		
+		printVec(data5,"DATA5");
+		*/
 	//	INSERT RANGE
 		C data6;
 		for (int i = 0; i < 100; ++i)
 			data6.push_back(i);
 		C test20;
-		printVec(data6);
-		printVec(test20);
+		printVec(data6,"DATA6");
+		printVec(test20,"TEST20");
 		test20.insert(test20.begin(), data6.begin(), data6.end());
-		printVec(test20);
+		printVec(test20,"TEST20");
 		test20.insert(test20.end(), data6.begin(), data6.begin() + 1);
-		printVec(test20);
+		printVec(test20,"TEST20");
 		for (int i = 0; i < 200; ++i)
 			data6.push_back(i);
 		test20.insert(test20.begin(), data6.begin(), data6.end());
-		printVec(test20);
+		printVec(test20,"TEST20");
 
 	// ERASE
 		C data7;
@@ -286,56 +289,56 @@ void vectorTest()
 		data7.erase(data7.begin());
 		for (int i = 0; i < 100; ++i)
 			data7.push_back(i);
-		printVec(data7);
+		printVec(data7,"DATA7");
 		for (int i = 0; i < 100; ++i)
 			data7.push_back(i);
-		printVec(data7);
+		printVec(data7,"DATA7");
 		data7.erase(data7.begin(), data7.begin() + 3);
-		printVec(data7);
+		printVec(data7,"DATA7");
 		data7.erase(data7.begin(), data7.end());
-		printVec(data7);
+		printVec(data7,"DATA7");
 	// SWAP MEMBER
 		C data8;
 		for (int i = 0; i < 100; ++i)
 			data8.push_back(i);
-		printVec(data8);
+		printVec(data8,"DATA8");
 		C test21;
 		for (int i = 0; i < 200; ++i)
 			test21.push_back(i);
-		printVec(test21);
+		printVec(test21,"TEST21");
 		
 		test21.swap(data8);
-		printVec(data8);
-		printVec(test21);
+		printVec(data8,"DATA8");
+		printVec(test21,"TEST21");
 	// CLEAR
 		C data9;
 		for (int i = 0; i < 100; ++i)
 			data9.push_back(i);
-		printVec(data9);
+		printVec(data9,"DATA9");
 		data9.clear();
-		printVec(data9);
+		printVec(data9,"DATA9");
 	// SWAP NO MEMBER
 		C data10;
 		for (int i = 0; i < 100; ++i)
 			data10.push_back(i);
-		printVec(data10);
+		printVec(data10,"DATA10");
 		C test22;
 		for (int i = 0; i < 200; ++i)
 			test22.push_back(i);
-		printVec(test22);
+		printVec(test22,"TEST22");
 		
 		swap(data10,test22);
-		printVec(data10);
-		printVec(test22);
+		printVec(data10,"DATA10");
+		printVec(test22,"TEST22");
 
 	//RELATIONAL OPERATOR--------------------------------------------------------------------
 	C data1;
 	for (size_t i = 0; i < 80; ++i)
 		data1.push_back(i);
-	printVec(data1);
+	printVec(data1,"DATA1");
 	
 	C data2(data1);
-	printVec(data2);
+	printVec(data2,"DATA2");
 	///////////////////////////////////////////////////
 	std::cout << "==" << std::endl;
 	if (data1 == data2)
@@ -404,6 +407,7 @@ void vectorTest()
 	else
 		std::cout << "FALSE" << std::endl;
 	///////////////////////////////////////////////////
+	/*
 	std::cout << ">" << std::endl;
 	if (data1 > data2)
 		std::cout << "TRUE" << std::endl;
@@ -420,6 +424,7 @@ void vectorTest()
 		std::cout << "TRUE" << std::endl;
 	else
 		std::cout << "FALSE" << std::endl;
+	*/
 	///////////////////////////////////////////////////
 	std::cout << ">=" << std::endl;
 	if (data1 >= data2)
@@ -444,7 +449,7 @@ void vectorTest()
 	test23.push_back(19);
 	test23.push_back(29);
 	test23.push_back(39);
-	printVec(test23);
+	printVec(test23,"TEST23");
 
 	std::cout << "ITERATOR" << std::endl;
 	typename C::iterator itB = test23.begin();
@@ -547,7 +552,7 @@ void vectorTest()
 	C test32(arr, &arr[3]);
 	// C test32(&arr[3], arr);
 
-	printVec(test32);
+	printVec(test32,"TEST32");
 
 	// //ASSIGN
 	// std::cout << "ASSIGN" << std::endl;

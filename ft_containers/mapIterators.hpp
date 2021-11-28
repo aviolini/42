@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/25 00:28:17 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/28 23:13:39 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,28 +51,28 @@ public:
 	{
 		return (this->_data->_value);
 	}
-	mapIterator &operator ++()				//PREFIX
+	mapIterator &operator ++()			//PREFIX
 	{
 		++this->_data;
 		return *this;
 	}
-	mapIterator operator ++(int)			//POSTFIX
+	mapIterator operator ++(int)		//POSTFIX
 	{
 		mapIterator t(*this);
 		++(*this);
 		return t;
 	}
-	mapIterator &operator --()
+	mapIterator &operator --()			//PREFIX
 	{
 		--this->_data;
 		return *this;
 	}
-	mapIterator operator --(int)
+	mapIterator operator --(int)		//POSTFIX
 	{
 		mapIterator t(*this);
 		--(*this);
 		return t;
-	}				//POSTFIX
+	}				
 /*RELATIONAL OPERATORS--------------------------------------------------*/
 	bool operator == (const mapIterator & rhs)
 	{
@@ -106,7 +106,7 @@ public:
 		return *this;
 	}
 /*MEMBER OPERATORS--------------------------------------------------*/
-	mapReverseIterator &operator ++()				//PREFIX
+	mapReverseIterator &operator ++()			//PREFIX
 	{
 		--this->_data;
 		return *this;
@@ -117,17 +117,17 @@ public:
 		++(*this);
 		return t;
 	}
-	mapReverseIterator &operator --()
+	mapReverseIterator &operator --()			//PREFIX
 	{
 		++this->_data;
 		return *this;
 	}
-	mapReverseIterator operator --(int)
+	mapReverseIterator operator --(int)			//POSTFIX
 	{
 		mapReverseIterator t(*this);
 		--(*this);
 		return t;
-	}				//POSTFIX
+	}
 };
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 16:28:06 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/12 14:35:13 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/28 23:59:48 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@ template< typename T, typename A = std::allocator<T> >
 class vector
 {
 public:
-    typedef T										    	value_type;
-	typedef A                                		    	allocator_type;
-    typedef typename allocator_type::size_type		    	size_type;
-    typedef value_type&								    	reference;
-    typedef const value_type&						    	const_reference;
-    typedef typename allocator_type::difference_type		difference_type;
-    typedef typename allocator_type::pointer				pointer;
-    typedef typename allocator_type::const_pointer	    	const_pointer;
-	typedef vecIterator< myRandom_access_iterator_tag, T >	const_iterator;
-	typedef vecIterator< myRandom_access_iterator_tag, T >	iterator;
-	typedef	vecReverse_iterator< const_iterator >			const_reverse_iterator;
-	typedef	vecReverse_iterator< iterator >					reverse_iterator;	
+    typedef T										    		value_type;
+	typedef A                                		    		allocator_type;
+    typedef typename allocator_type::size_type		    		size_type;
+    typedef typename allocator_type::reference		    		reference;
+    typedef typename allocator_type::const_reference    		const_reference;
+    typedef typename allocator_type::difference_type			difference_type;
+    typedef typename allocator_type::pointer					pointer;
+    typedef typename allocator_type::const_pointer	    		const_pointer;
+	typedef vectorIterator<myRandom_access_iterator_tag, T>		const_iterator;
+	typedef vectorIterator<myRandom_access_iterator_tag, T>		iterator;
+	typedef	vectorReverseIterator<const_iterator>				const_reverse_iterator;
+	typedef	vectorReverseIterator<iterator>						reverse_iterator;	
 private:
 	allocator_type	_allocator;
 	pointer			_data;
@@ -597,11 +597,14 @@ bool operator< (const ft::vector<T,A>& lhs, const ft::vector<T,A>& rhs)
 	typename ft::vector<T,A>::const_iterator rit = rhs.begin();
 	while (lit != lhs.end())
 	{
-	  if (rit == rhs.end() || *rit < *lit) return false;
-	  else if (*lit < *rit) return true;
-	  ++lit; ++rit;
+		if (rit == rhs.end() || *rit < *lit)
+			return false;
+		else if (*lit < *rit)
+			return true;
+		++lit;
+		++rit;
 	}
-	return (rit!=rhs.end());
+	return (rit != rhs.end());
 }
 template <class T, class A>
 bool operator<= (const ft::vector<T,A>& lhs, const ft::vector<T,A>& rhs)
@@ -611,15 +614,19 @@ bool operator<= (const ft::vector<T,A>& lhs, const ft::vector<T,A>& rhs)
 template <class T, class A>
 bool operator> (const ft::vector<T,A>& lhs, const ft::vector<T,A>& rhs)
 {
-	typename ft::vector<T,A>::const_iterator lit = lhs.begin();
-	typename ft::vector<T,A>::const_iterator rit = rhs.begin();
-	while (rit != lhs.end())
-	{
-	  if (lit == rhs.end() || *lit < *rit) return false;
-	  else if (*rit < *lit) return true;
-	  ++rit; ++lit;
-	}
-	return (lit != rhs.end());
+	// typename ft::vector<T,A>::const_iterator lit = lhs.begin();
+	// typename ft::vector<T,A>::const_iterator rit = rhs.begin();
+	// while (rit != rhs.end())
+	// {
+	// 	if (lit == lhs.end() || *lit < *rit)
+	// 		return false;
+	// 	else if (*rit < *lit)
+	// 		return true;
+	// 	++rit;
+	// 	++lit;
+	// }
+	// return (lit != rhs.end());
+	return !(lhs<rhs);
 }
 template <class T, class A>
 bool operator>= (const ft::vector<T,A>& lhs, const ft::vector<T,A>& rhs)
