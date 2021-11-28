@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/28 01:20:26 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/28 01:51:45 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -592,6 +592,7 @@ void print()
 		std::cout << "EMPTY TREE" << std::endl;
 		return;
 	}
+	std::cout << "root" << std::endl;
 	print(_root, -1, "", -1, _root->_left, "");
 	// std::cout << _root->_value.first << std::endl;
 	// if (_root->_right && _root->_left)
@@ -606,13 +607,18 @@ void print(pointer node, int tab, std::string prefix, int s, pointer ref,std::st
 	// for (int i = 0; i != s; ++i)
 	(void)tab;
 	(void)s;
+	if (s == -1)
+		std::cout << "│" << std::endl;
 	if (node == _begin)
 	{
+		std::cout << "│" << std::endl;
+
 		std::cout << "begin" << std::endl;
 		return;
 	}
 	if (node == ref)
 	{	
+		// std::cout << "LLLL" << std::endl;
 		// if (ref->_left != 0 && ref->_left != _begin)
 			print(ref, -1, "", -1, ref->_left,"");
 		return ;
@@ -651,6 +657,11 @@ void print(pointer node, int tab, std::string prefix, int s, pointer ref,std::st
 	{
 		std::cout << "end" << std::endl;
 	}
+	else if (node == _begin)
+	{
+		std::cout << "begin" << std::endl;
+		// return;
+	}
 	else
 	std::cout << node->_value.first << std::endl;
 	// if (node->_right == _end)
@@ -672,7 +683,7 @@ void print(pointer node, int tab, std::string prefix, int s, pointer ref,std::st
 		// else if(!prefix.compare(""))
 		// 	print(node->_right, tab , "└",1, ref);
 	}
-	else if (node->_left && !node->_right && node->_left != _begin)
+	else if (node->_left && !node->_right)// && node->_left != _begin)
 	{
 		// std::cout << "│   ";// << std::endl;
 		print(node->_left, tab + 1,"│",s+1,ref,str);	
