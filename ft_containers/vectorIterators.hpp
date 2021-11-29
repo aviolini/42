@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 10:44:33 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/29 15:47:35 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/29 17:25:04 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,92 +34,92 @@ public:
 	vectorIterator(vectorIterator const & rhs) : _data(rhs._data){}
 	vectorIterator operator = (const vectorIterator & rhs)
 	{
-		this->_data = rhs._data;
+		_data = rhs._data;
 		return *this;
 	}	
 	/*MEMBER OPERATORS--------------------------------------------------*/
 	reference operator *()
 	{
-		return *this->_data;
+		return *_data;
 	}
 	vectorIterator operator + ( const difference_type &n ) const
 	{
-		vectorIterator obj(this->_data + n);
+		vectorIterator obj(_data + n);
 		return obj;
 	}
-	vectorIterator &operator ++()				//PREFIX
+	vectorIterator &operator ++()			//PREFIX
 	{
-		this->_data++;
+		_data++;
 		return *this;
 	}
 	vectorIterator operator ++(int)			//POSTFIX
 	{
 		vectorIterator temp = *this;
-		this->_data++;
+		_data++;
 		return temp;
 	}
 	vectorIterator & operator += (difference_type n)
 	{
-		this->_data += n;
+		_data += n;
 		return *this;
 	}
 	vectorIterator operator - ( const difference_type &n ) const
 	{
-		vectorIterator obj(this->_data - n);
+		vectorIterator obj(_data - n);
 		return obj;
 	}
 	difference_type operator - ( const vectorIterator &rhs) const
 	{
-		return this->_data - rhs._data;
+		return _data - rhs._data;
 	}
-	vectorIterator &operator --()				//PREFIX
+	vectorIterator &operator --()			//PREFIX
 	{
-		this->_data--;
+		_data--;
 		return *this;
 	}
 	vectorIterator operator --(int)			//POSTFIX
 	{
 		vectorIterator temp = *this;
-		this->_data--;
+		_data--;
 		return temp;
 	}
 	vectorIterator & operator -= (difference_type n)
 	{
-		this->_data -= n;
+		_data -= n;
 		return *this;
 	}
 	pointer operator -> ()
 	{
-		return this->_data;
+		return _data;
 	}
 	reference operator [] (int index)
 	{
-		return *(this->_data + index);
+		return *(_data + index);
 	}
 	/*RELATIONAL OPERATORS--------------------------------------------------*/
 	bool operator == (const vectorIterator & rhs)
 	{
-		return this->_data == rhs._data;
+		return _data == rhs._data;
 	}
 	bool operator != (const vectorIterator & rhs)
 	{
-		return !(this->_data == rhs._data);
+		return !(_data == rhs._data);
 	}
 	bool operator > (const vectorIterator & rhs)
 	{
-		return (this->_data > rhs._data);
+		return (_data > rhs._data);
 	}
 	bool operator >= (const vectorIterator & rhs)
 	{
-		return (this->_data >= rhs._data);
+		return (_data >= rhs._data);
 	}
 	bool operator < (const vectorIterator & rhs)
 	{
-		return (this->_data < rhs._data);
+		return (_data < rhs._data);
 	}
 	bool operator <= (const vectorIterator & rhs)
 	{
-		return (this->_data <= rhs._data);
+		return (_data <= rhs._data);
 	}
 };
 
@@ -152,7 +152,7 @@ public:
 		return *this;
 	}
 	/*MEMBER OPERATORS--------------------------------------------------*/
-	vectorReverseIterator &operator ++()				//PREFIX
+	vectorReverseIterator &operator ++()			//PREFIX
 	{
 		this->_data--;
 		return *this;
@@ -163,7 +163,7 @@ public:
 		this->_data--;
 		return temp;
 	}
-	vectorReverseIterator &operator --()				//PREFIX
+	vectorReverseIterator &operator --()			//PREFIX
 	{
 		this->_data++;
 		return *this;
