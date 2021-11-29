@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 16:28:06 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/29 13:14:30 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/29 14:58:38 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -578,12 +578,13 @@ bool operator== (const ft::vector<T,A>& lhs, const ft::vector<T,A>& rhs)
 {
 	if (lhs.size() != rhs.size())
 		return false;
-	typename ft::vector<T,A>::const_iterator lit = lhs.begin();
-	typename ft::vector<T,A>::const_iterator rit = rhs.begin();
-	for (;lit != lhs.end(); ++lit, ++rit)
-		if (*lit != * rit)
-			return false;
-	return true;
+	// typename ft::vector<T,A>::const_iterator lit = lhs.begin();
+	// typename ft::vector<T,A>::const_iterator rit = rhs.begin();
+	// for (;lit != lhs.end(); ++lit, ++rit)
+	// 	if (*lit != * rit)
+	// 		return false;
+	// return true;
+	return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
 }
 template <class T, class A>
 bool operator!= (const ft::vector<T,A>& lhs, const ft::vector<T,A>& rhs)
