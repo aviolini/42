@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/28 23:21:39 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/29 01:13:52 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,12 +178,12 @@ public:
 	}
 	void erase (iterator first, iterator last)
 	{
-		while (first != last)
+		iterator temp = first;
+		temp++;
+		if (first != last)
 		{
-			iterator temp = first;
-			temp++;
+			erase(temp, last);
 			_tree.remove(first->first);
-			first = temp;
 		}
 	}
 	void swap (map& x)
@@ -250,9 +250,9 @@ public:
 		return allocator_type();
 	}
 /*EXTRA-------------------------------------------------------------------------------------------------------------------------------*/
-	void print()
+	void print(std::string name)
 	{
-		_tree.print();
+		_tree.print(name);
 	}
 };
 };

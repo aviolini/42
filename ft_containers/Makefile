@@ -6,7 +6,7 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 09:43:32 by aviolini          #+#    #+#              #
-#    Updated: 2021/11/28 23:53:11 by arrigo           ###   ########.fr        #
+#    Updated: 2021/11/29 01:26:17 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ TESTDIR		= 	tests/
 FTNAME		=	ftTest
 	
 STLNAME		=	stlTest
+
+FTPRINT	    =	printTest
 	
 SRCS		=	vectorTests.cpp stackTests.cpp mapTests.cpp
 	
@@ -36,83 +38,75 @@ $(FTNAME)	:	$(addprefix $(TESTDIR), $(OBJS)) $(FTINC)
 $(STLNAME)	:	$(addprefix $(TESTDIR), $(OBJS))
 				$(CXX) $(CXXFLAGS) -D STD $(MAIN) -o $(STLNAME) $(OBJS)
 
+$(FTPRINT)	:	$(addprefix $(TESTDIR), $(OBJS)) $(FTINC)
+				$(CXX) $(CXXFLAGS) -D PRINT_TREE $(MAIN) -o $(FTPRINT) $(OBJS)
+
 %.o			:	%.cpp
 				$(CXX) $(CXXFLAGS) -c $<
 
 #MAKE
 all			:	stl ft
-
 ft			:	$(FTNAME)
-
 stl			:	$(STLNAME)
 
 #TEST
-test		:	teststl testft
-
-testft		:	$(FTNAME)
+run			:	runstl runft
+runft		:	$(FTNAME)
 				@printf "\033[1;33m\n_FT_\n\033[0m"
 				@./ftTest
-
-teststl		:	$(STLNAME)
+runstl		:	$(STLNAME)
 				@printf "\033[1;32m\n_STL_\n\033[0m"
 				@./stlTest
-
+				
 #LOG
 log			:	all
 				@./ftTest > ftLog
 				@./stlTest > stlLog
 				@printf "\033[1;34m\n_DIFF_\n\033[0m"
 				@diff ftLog stlLog || printf "ERROR DIFF"
-
+				
 #TIME
 time		:	all
 				@printf "\033[1;32m\n_STL_TIME\033[0m"
 				@time ./stlTest > /dev/null
 				@printf "\033[1;33m\n_FT_TIME\033[0m"
 				@time ./ftTest > /dev/null
-
-allall		:	cl re all clean test log time
+				
+#TEST, LOG, TIME
+allall		:	cl re all clean run log time
 				@$(RM) $(OBJS)
-				@$(RM) ftLog stlLog ftTest stlTest
-
+				# @$(RM) ftLog stlLog ftTest stlTest
+				
+#PRINT TREE
+print		:	$(FTPRINT)
+				@./printTest
+				
+#LEAKS CHECK MAC
 leaks		:	cl fclean ft
 				leaks --atExit -- ./$(FTNAME)
-
+				
+#LEAKS CHECK LINUX
 valgrind	:	cl fclean ft
-				valgrind -s --leak-check=full ./$(FTNAME) 
+				valgrind -s --leak-check=full ./$(FTNAME)
 
 #CLEAN
 clean		:	
 				@$(RM) $(OBJS)
 
-cleanft		:
-				@$(RM) $(OBJS)
-
-cleanstl	:
-				@$(RM) $(OBJS)
-
-cl			:	
-				clear
-
 #FCLEAN
 fclean		:	clean
-				@$(RM) $(FTNAME) $(STLNAME)
-				@$(RM) ftLog stlLog
-
-fcleanft	:	cleanft
 				$(RM) $(FTNAME)
 				$(RM) ftLog	
-
-fcleanstl	:	cleanstl
 				$(RM) $(STLNAME)
 				$(RM) stlLog
+				@$(RM) printTest
 
 #RE
 re			:	fclean all
 
-reft		:	fcleanft ft
-
-restl		:	fcleanstl stl
+#CLEAR
+cl			:	
+				clear
 
 #.PHONY	
 .PHONY		:	all re clean fclean

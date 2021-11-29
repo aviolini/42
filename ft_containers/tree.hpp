@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/28 19:40:48 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/29 00:30:11 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -474,35 +474,10 @@ public:
 			node->_right = remove(node->_right, key);
 		return node;
 	}
-	//PRINT IN TABLE//////////////////////////////////////////////////////////////////////////////////////
-	void print(std::string name)
+	//PRINT TREE//////////////////////////////////////////////////////////////////////////////////////
+	void print( std::string name)
 	{
-		std::cout << "-----" << name << "-----------------------" << std::endl;
-		if (!_size)
-		{
-			std::cout << "EMPTY TREE" << std::endl;
-			std::cout << "------------------------------" << std::endl;
-			return ;
-		}
-		std::cout << "size:" << _size << std::endl;
-		std::cout << "content: "<< std::endl;
-		iterator itB = begin();
-		itB++;
-		iterator itE = end();
-		// itE--;
-		for (; itB != itE ; ++itB)
-		{
-			std::cout << "first: " << itB->_value.first << "\tsecond: " << itB->_value.second;
-			if (itB->_parent)
-				std::cout << "\tparent: " << itB->_parent->_value.first <<  std::endl;
-			else
-				std::cout << "\tparent: NULL" << std::endl;	
-		}
-		std::cout << "-----------------------------" << std::endl;
-	}
-	//PRINT IN TREE//////////////////////////////////////////////////////////////////////////////////////
-	void print()
-	{
+		std::cout << "-------------" << name << "-----------" << std::endl; 
 		if (!_size)
 			std::cout << "EMPTY TREE" << std::endl;
 		else
@@ -511,6 +486,7 @@ public:
 			std::cout << "│ " << std::endl;
 			print(_root, _root->_left, "", "");
 		}
+		std::cout << "-------------------------------------------" << std::endl;
 	}
 	void print(pointer node, pointer ref, std::string prefix, std::string str)
 	{
