@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapTests.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/29 01:08:42 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/29 12:49:23 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,12 +280,6 @@ std::cout << "------------------------------" << std::endl;
 	#else
 	printMap(test10, "TEST10");
 	#endif
-	// test10.erase(test10.begin(), test10.end());
-	// #if PRINT_TREE
-	// test10.print("TEST10");
-	// #else
-	// printMap(test10, "TEST10");
-	// #endif
 /*
 */
 // // CLEAR---------------------------------------------

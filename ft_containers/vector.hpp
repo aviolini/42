@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 16:28:06 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/28 23:59:48 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/29 13:14:30 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -593,18 +593,20 @@ bool operator!= (const ft::vector<T,A>& lhs, const ft::vector<T,A>& rhs)
 template <class T, class A>
 bool operator< (const ft::vector<T,A>& lhs, const ft::vector<T,A>& rhs)
 {
-	typename ft::vector<T,A>::const_iterator lit = lhs.begin();
-	typename ft::vector<T,A>::const_iterator rit = rhs.begin();
-	while (lit != lhs.end())
-	{
-		if (rit == rhs.end() || *rit < *lit)
-			return false;
-		else if (*lit < *rit)
-			return true;
-		++lit;
-		++rit;
-	}
-	return (rit != rhs.end());
+	// typename ft::vector<T,A>::const_iterator lit = lhs.begin();
+	// typename ft::vector<T,A>::const_iterator rit = rhs.begin();
+	// while (lit != lhs.end())
+	// {
+	// 	if (rit == rhs.end() || *rit < *lit)
+	// 		return false;
+	// 	else if (*lit < *rit)
+	// 		return true;
+	// 	++lit;
+	// 	++rit;
+	// }
+	// return (rit != rhs.end());
+	return ft::lexicographical_compare<typename ft::vector<T,A>::const_iterator, typename ft::vector<T,A>::const_iterator>
+	(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 }
 template <class T, class A>
 bool operator<= (const ft::vector<T,A>& lhs, const ft::vector<T,A>& rhs)
@@ -626,7 +628,7 @@ bool operator> (const ft::vector<T,A>& lhs, const ft::vector<T,A>& rhs)
 	// 	++lit;
 	// }
 	// return (lit != rhs.end());
-	return !(lhs<rhs);
+	return !(lhs<=rhs);
 }
 template <class T, class A>
 bool operator>= (const ft::vector<T,A>& lhs, const ft::vector<T,A>& rhs)

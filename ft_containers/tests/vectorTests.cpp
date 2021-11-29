@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectorTests.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:27:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/28 23:50:34 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/29 12:51:51 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,7 +249,7 @@ void vectorTest()
 			data4.insert(data4.begin(), 4);
 		printVec(data4,"DATA4");
 		//	INSERT FILL
-		/*
+		// /*												//MAC NO LINUX
 		C data5;
 		for (int i = 0; i < 100; ++i)
 			data5.push_back(i);
@@ -266,7 +266,7 @@ void vectorTest()
 		printVec(data5,"DATA5");
 		data5.insert(data5.begin(), 258, 2);
 		printVec(data5,"DATA5");
-		*/
+		// */												//MAC NO LINUX
 	//	INSERT RANGE
 		C data6;
 		for (int i = 0; i < 100; ++i)
@@ -407,7 +407,7 @@ void vectorTest()
 	else
 		std::cout << "FALSE" << std::endl;
 	///////////////////////////////////////////////////
-	/*
+	// /*														MAC NO LINUX
 	std::cout << ">" << std::endl;
 	if (data1 > data2)
 		std::cout << "TRUE" << std::endl;
@@ -424,7 +424,7 @@ void vectorTest()
 		std::cout << "TRUE" << std::endl;
 	else
 		std::cout << "FALSE" << std::endl;
-	*/
+	// */														MAC NO LINUX
 	///////////////////////////////////////////////////
 	std::cout << ">=" << std::endl;
 	if (data1 >= data2)
