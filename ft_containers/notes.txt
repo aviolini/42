@@ -23,10 +23,8 @@ https://www.fluentcpp.com/2018/05/15/make-sfinae-pretty-1-what-value-sfinae-brin
 FRIEND
 https://www.justsoftwaresolutions.co.uk/cplusplus/hidden-friends.html
 
-
-SISTEMARE ENABLEIF DI VECTOR TRUE E FALSE
-PROVA IL POSTFIX NEI REVERSE ITERATOR DI VECTOR
-ALLOCARE IL PRIMO ELEMENTO DI VECTOR A VuOTO PER IL REVERSE ITERATOR
-
 MAP 
 INSERT CON GLI ITERATOR DI UN ELEMENTO ESISTENTE?
+
+BALANCE TREE
+https://www.programiz.com/dsa/avl-tree
