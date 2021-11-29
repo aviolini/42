@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/29 01:13:52 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/29 15:53:42 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ public:
 	_tree(comp, alloc){}									//EMPTY
 	template <class InputIterator>
 	map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type(),		//RANGE
-		typename myEnable_if_false<myIs_integral<InputIterator>::value , T>::type = 0,
-		typename myEnable_if_false<myIs_floating_point<InputIterator>::value , T>::type = 0)
+		typename EnableIfFalse<ft::IsIntegral<InputIterator>::value , T>::type = 0,
+		typename EnableIfFalse<ft::IsFloatingPoint<InputIterator>::value , T>::type = 0)
 	:_tree(comp,alloc)
 	{
 		insert(first,last);

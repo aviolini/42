@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectorIterators.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 10:44:33 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/28 23:57:13 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/29 15:47:35 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ public:
 	vectorReverseIterator () : Iterator(0){}
 	explicit vectorReverseIterator (iterator_type it) : Iterator(it - 1){}
 	template <class Iter>
-  	vectorReverseIterator (const vectorReverseIterator<Iter>& rev_it,typename myEnable_if<myHas_iterator_category<Iter>::value, value_type>::type = 0)
+  	vectorReverseIterator (const vectorReverseIterator<Iter>& rev_it,typename ft::EnableIfTrue<ft::HasIteratorCategory<Iter>::value, value_type>::type = 0)
 	{
 		this->_data = rev_it._data;
 	}

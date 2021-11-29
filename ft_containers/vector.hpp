@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 16:28:06 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/29 14:58:38 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/29 15:56:30 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ public:
     typedef typename allocator_type::difference_type			difference_type;
     typedef typename allocator_type::pointer					pointer;
     typedef typename allocator_type::const_pointer	    		const_pointer;
-	typedef vectorIterator<myRandom_access_iterator_tag, T>		const_iterator;
-	typedef vectorIterator<myRandom_access_iterator_tag, T>		iterator;
+	typedef vectorIterator<ft::Random_access_iterator_tag, T>		const_iterator;
+	typedef vectorIterator<ft::Random_access_iterator_tag, T>		iterator;
 	typedef	vectorReverseIterator<const_iterator>				const_reverse_iterator;
 	typedef	vectorReverseIterator<iterator>						reverse_iterator;	
 private:
@@ -56,27 +56,14 @@ public:
 		for (size_type i = 0; i < (n); i++)
 			this->_data[i] = val;
 	}
-	// template <class InputIterator>																		//<---|	
-    // vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type() ,		//|
-	// 		typename myEnable_if<myHas_iterator_category<InputIterator>::value, T>::type = 0)					//|
-	// : _allocator(alloc), _data(this->_allocator.allocate(last - first))										//|
-	// {																										//|
-	// 	InputIterator it = first;																				//|
-	// 	InputIterator my = this->_data;																			//|
-	// 	for (; it != last; ++it, ++my)																			//|
-	// 		*my = *it;																							//|
-	// 	this->_size = last - first;																				//|
-	// 	this->_capacity = this->size();																			//|
-	// }																										//|
-	template <class InputIterator>																				//|
-    vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type() ,			//|
-			// typename myEnable_if_false<myHas_iterator_category<InputIterator>::value, T>::type = 0,		//<---|
-			typename myEnable_if_false<myIs_integral<InputIterator>::value , T>::type = 0,
-			typename myEnable_if_false<myIs_floating_point<InputIterator>::value , T>::type = 0)
+	template <class InputIterator>
+    vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type() ,
+			typename ft::EnableIfFalse<ft::IsIntegral<InputIterator>::value , T>::type = 0,
+			typename ft::EnableIfFalse<ft::IsFloatingPoint<InputIterator>::value , T>::type = 0)
 	: _allocator(alloc), _data(this->_allocator.allocate(last - first))
 	{
-		if (last - first < 0)																								//|
-			throw std::length_error("vector");																				//|
+		if (last - first < 0)
+			throw std::length_error("vector");
 		InputIterator it = first;
 		InputIterator my = this->_data;
 		for (; it != last; ++it, ++my)
@@ -84,7 +71,6 @@ public:
 		this->_size = last - first;
 		this->_capacity = this->size();	
 	}
-	// vector (const vector& x) : _allocator(allocator_type()), _size(x.size()), _capacity(x.size())
 	vector (const vector& x) : _allocator(x._allocator), _size(x.size()), _capacity(x.size())
 
 	{
@@ -266,30 +252,9 @@ public:
 			*it = val;
 	}
 	template <class InputIterator>
-	void assign (InputIterator first, InputIterator last, 
-				typename myEnable_if_false<myHas_iterator_category<InputIterator>::value, T>::type = 0,	//--------------------|
-				typename myEnable_if_false<myIs_integral<InputIterator>::value , T>::type = 0,								//|
-				typename myEnable_if_false<myIs_floating_point<InputIterator>::value , T>::type = 0)						//|
-	{																														//|
-		if (last - first < 0)																								//|
-			throw std::length_error("vector");																				//|
-		unsigned int len = last - first;																					//|	
-		// if (this->capacity() < len)																						//|
-		// {																												//|
-			this->_allocator.deallocate(this->_data, this->capacity());														//|
-			this->_allocator.destroy(this->_data);																			//|
-			this->_data = this->_allocator.allocate(len);																	//|
-			this->_capacity = len;																							//|
-		// }																												//|
-    	const size_t n = static_cast<size_type>(len);																		//|
-		this->_size = last - first;																							//|
-		iterator it = this->begin();																						//|
-		size_type i = 0;																									//|
-		for (; i < n; ++it, ++first, ++i)																					//|
-			*it = *first;																									//|
-	}																														//|
-	template <class InputIterator> //<-------------------------------------------------------------------------------------|
-	void assign (InputIterator first, InputIterator last, typename myEnable_if<myHas_iterator_category<InputIterator>::value, T>::type = 0)
+	void assign (InputIterator first, InputIterator last,
+				typename ft::EnableIfFalse<ft::IsIntegral<InputIterator>::value , T>::type = 0,
+				typename ft::EnableIfFalse<ft::IsFloatingPoint<InputIterator>::value , T>::type = 0)
 	{
 		if (last - first < 0)																								
 			throw std::length_error("vector");	
@@ -335,7 +300,7 @@ public:
 	}
 	iterator insert (iterator position, const value_type& val)
 	{
-		if (this->size() < this->capacity())				///////CONTROLLARE
+		if (this->size() < this->capacity())
 		{
 			ft::vector<T,A>::iterator it = this->begin();
 			for (;it != position; ++it){}
@@ -421,59 +386,13 @@ public:
 	}
 	template <class InputIterator>
 	void insert (iterator position, InputIterator first, InputIterator last,
-				typename myEnable_if_false<myHas_iterator_category<InputIterator>::value, T>::type = 0,
-				typename myEnable_if_false<myIs_integral<InputIterator>::value , T>::type = 0,
-				typename myEnable_if_false<myIs_floating_point<InputIterator>::value , T>::type = 0)
+				typename ft::EnableIfFalse<ft::IsIntegral<InputIterator>::value , T>::type = 0,
+				typename ft::EnableIfFalse<ft::IsFloatingPoint<InputIterator>::value , T>::type = 0)
 				
 	{
 		if (last - first < 0)
 			return ;
     	const size_t n = static_cast<size_type>(last - first);
-		if ((this->size() + n) <= this->capacity())
-		{
-			ft::vector<T,A>::iterator it = this->begin();
-			for (;it != position; ++it){}
-			ft::vector<T,A>::iterator save = it;
-			ft::vector<T,A>::iterator end = this->end();
-			
-			for (;end != (save - n); --end)
-				*(end + n)=*end;
-			for (size_type i = 0;i < n; ++i)
-			{
-				*it = *first;
-				first++;
-			}
-			this->_size+=n;
-			return ;
-		}
-		size_type newCap;
-		if (!this->capacity())
-			newCap = n;
-		else if (this->capacity() < n)
-			newCap = n + this->size();
-		else
-			newCap = this->capacity() * 2;
-		typename ft::vector<T,A>::pointer temp;
-		temp = this->_allocator.allocate(newCap);
-		size_type i = 0;
-		size_type k = 0;
-		ft::vector<T,A>::iterator it = this->begin();
-		for (; it != position; ++it, ++i, ++k)
-			temp[k] = this->_data[i];
-		for (size_type i = 0; i  < n; ++i, ++k, first++)
-			temp[k] = *first;
-		for (; it != this->end(); ++it, ++i, ++k)
-			temp[k] = this->_data[i];		
-		this->_allocator.deallocate(this->_data, this->capacity());
-		this->_allocator.destroy(this->_data);
-		this->_capacity = newCap;
-		this->_data = temp;
-		this->_size+=n;	
-	}
-	template <class InputIterator>
-	void insert (iterator position, InputIterator first, InputIterator last, typename myEnable_if<myHas_iterator_category<InputIterator>::value, T>::type = 0)
-	{
-		size_type n = last - first;
 		if ((this->size() + n) <= this->capacity())
 		{
 			ft::vector<T,A>::iterator it = this->begin();
@@ -578,12 +497,6 @@ bool operator== (const ft::vector<T,A>& lhs, const ft::vector<T,A>& rhs)
 {
 	if (lhs.size() != rhs.size())
 		return false;
-	// typename ft::vector<T,A>::const_iterator lit = lhs.begin();
-	// typename ft::vector<T,A>::const_iterator rit = rhs.begin();
-	// for (;lit != lhs.end(); ++lit, ++rit)
-	// 	if (*lit != * rit)
-	// 		return false;
-	// return true;
 	return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
 }
 template <class T, class A>
@@ -594,18 +507,6 @@ bool operator!= (const ft::vector<T,A>& lhs, const ft::vector<T,A>& rhs)
 template <class T, class A>
 bool operator< (const ft::vector<T,A>& lhs, const ft::vector<T,A>& rhs)
 {
-	// typename ft::vector<T,A>::const_iterator lit = lhs.begin();
-	// typename ft::vector<T,A>::const_iterator rit = rhs.begin();
-	// while (lit != lhs.end())
-	// {
-	// 	if (rit == rhs.end() || *rit < *lit)
-	// 		return false;
-	// 	else if (*lit < *rit)
-	// 		return true;
-	// 	++lit;
-	// 	++rit;
-	// }
-	// return (rit != rhs.end());
 	return ft::lexicographical_compare<typename ft::vector<T,A>::const_iterator, typename ft::vector<T,A>::const_iterator>
 	(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 }
@@ -617,18 +518,6 @@ bool operator<= (const ft::vector<T,A>& lhs, const ft::vector<T,A>& rhs)
 template <class T, class A>
 bool operator> (const ft::vector<T,A>& lhs, const ft::vector<T,A>& rhs)
 {
-	// typename ft::vector<T,A>::const_iterator lit = lhs.begin();
-	// typename ft::vector<T,A>::const_iterator rit = rhs.begin();
-	// while (rit != rhs.end())
-	// {
-	// 	if (lit == lhs.end() || *lit < *rit)
-	// 		return false;
-	// 	else if (*rit < *lit)
-	// 		return true;
-	// 	++rit;
-	// 	++lit;
-	// }
-	// return (lit != rhs.end());
 	return !(lhs<=rhs);
 }
 template <class T, class A>

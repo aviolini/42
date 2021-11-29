@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/29 00:30:11 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/29 15:56:58 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ template <class _Tp>
 class treeIterator
 {
 public:
-    typedef myBidirectional_iterator_tag	iterator_category;
+    typedef ft::Bidirectional_iterator_tag	iterator_category;
     typedef _Tp                         	value_type;
 	typedef value_type*						pointer;
 	typedef value_type&						reference;
