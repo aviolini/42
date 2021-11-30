@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:13:14 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/30 22:07:32 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/30 22:48:03 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,23 @@ namespace ft = std;
 #define T_SIZE_TYPE typename ft::vector<T>::size_type
 #define TESTED_NAMESPACE ft
 
+class foo {
+	public:
+		foo(void) { };
+		~foo(void) { };
+		void m(void) { std::cout << "foo::m called [" << this->value << "]" << std::endl; };
+		void m(void) const { std::cout << "foo::m const called [" << this->value << "]" << std::endl; };
+		foo &operator=(int src) { this->value = src; return *this; };
+		int getValue(void) const { return this->value; };
+	private:
+		int	value;
+};
+
+std::ostream	&operator<<(std::ostream &o, foo const &bar) {
+	o << bar.getValue();
+	return o;
+}
+
 template <typename T>
 void	printSize(ft::vector<T> const &vct, bool print_content = true)
 {
@@ -55,7 +72,7 @@ void	printSize(ft::vector<T> const &vct, bool print_content = true)
 	std::cout << "###############################################" << std::endl;
 }
 
-#define TESTED_TYPE std::string
+#define TESTED_TYPE foo
 
 void	checkErase(TESTED_NAMESPACE::vector<TESTED_TYPE> const &vct,
 					TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator const &it)
@@ -67,33 +84,44 @@ void	checkErase(TESTED_NAMESPACE::vector<TESTED_TYPE> const &vct,
 
 int		main(void)
 {
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(10);
+	const int size = 5;
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it(vct.begin());
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator ite(vct.end());
+	(void)it;
+	(void)ite;
+	// for (int i = 1; it != ite; ++i)
+	// 	*it++ = i;
+	// printSize(vct, 1);
 
-	// for (unsigned long int i = 0; i < vct.size(); ++i)
-	// 	vct[i] = std::string((vct.size() - i), i + 65);
-	printSize(vct);
+	// it = vct.begin();
+	// ite = vct.begin();
 
-	// checkErase(vct, vct.erase(vct.begin() + 2));
+	// std::cout << *(++ite) << std::endl;
+	// std::cout << *(ite++) << std::endl;
+	// std::cout << *ite++ << std::endl;
+	// std::cout << *++ite << std::endl;
 
-	// checkErase(vct, vct.erase(vct.begin()));
-	// checkErase(vct, vct.erase(vct.end() - 1));
+	// it->m();
+	// ite->m();
 
-	// checkErase(vct, vct.erase(vct.begin(), vct.begin() + 3));
-	// checkErase(vct, vct.erase(vct.end() - 3, vct.end() - 1));
+	// std::cout << *(++it) << std::endl;
+	// std::cout << *(it++) << std::endl;
+	// std::cout << *it++ << std::endl;
+	// std::cout << *++it << std::endl;
 
-	// vct.push_back("Hello");
-	// vct.push_back("Hi there");
-	// printSize(vct);
-	// checkErase(vct, vct.erase(vct.end() - 3, vct.end()));
+	// std::cout << *(--ite) << std::endl;
+	// std::cout << *(ite--) << std::endl;
+	// std::cout << *--ite << std::endl;
+	// std::cout << *ite-- << std::endl;
 
-	// vct.push_back("ONE");
-	// vct.push_back("TWO");
-	// vct.push_back("THREE");
-	// vct.push_back("FOUR");
-	// printSize(vct);
-	// checkErase(vct, vct.erase(vct.begin(), vct.end()));
+	// (*it).m();
+	// (*ite).m();
 
-	return (0);
+	// std::cout << *(--it) << std::endl;
+	// std::cout << *(it--) << std::endl;
+	// std::cout << *it-- << std::endl;
+	// std::cout << *--it << std::endl;
 }
 
 

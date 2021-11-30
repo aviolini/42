@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:56:26 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/30 22:03:01 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/30 23:17:07 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ public:
 	/*CANONICAL-----------------------------------------------------------------------------------*/
 	explicit vector (const allocator_type& alloc = allocator_type()) : _allocator(alloc), _data(0), _size(0), _capacity(0){}											//DEFAULT
 	explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
-	: _allocator(alloc), _data(_allocator.allocate(n)), _size(n), _capacity(n)
+	: _allocator(alloc),  _size(n), _capacity(n)
 	{
-		_allocator.construct(_data, value_type());	
-		if (n >= max_size())
-			throw std::out_of_range("Error");
-		for (size_type i = 0; i < (n); i++)
-			_data[i] = val;
+		_data = _allocator.allocate(n);
+		// for (size_type i = 0; i < n; ++i)
+			// _allocator.construct(&_data[i], val);
+		_allocator.construct(_data, val);
+
 	}
 	template <class InputIterator>
     vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type() ,
@@ -87,8 +87,8 @@ public:
 	}
 	~vector()
 	{
-		_allocator.deallocate(_data, capacity());
 		_allocator.destroy(_data);
+		_allocator.deallocate(_data, capacity());
 		_data = 0;
 	}
 	vector& operator= (const vector& x)
@@ -119,11 +119,11 @@ public:
 	}
 	const_iterator begin() const
 	{
-		return iterator(_data);
+		return const_iterator(_data);
 	}
 	const_iterator end() const
 	{
-		return iterator(_data) + size();
+		return const_iterator(_data + size());
 	}
 	reverse_iterator rbegin()
 	{
@@ -135,11 +135,11 @@ public:
 	}
 	const_reverse_iterator rbegin() const
 	{
-		return reverse_iterator(end());
+		return const_reverse_iterator(end());
 	}
 	const_reverse_iterator rend() const
 	{
-		return reverse_iterator(begin());
+		return const_reverse_iterator(begin());
 	}
 	/*CAPACITY-----------------------------------------------------------------------------------*/
 	size_type size() const
