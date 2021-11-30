@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:13:14 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/30 22:48:03 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/01 00:16:46 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,40 +88,42 @@ int		main(void)
 	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
 	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it(vct.begin());
 	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator ite(vct.end());
+	// TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator ite;
+
 	(void)it;
 	(void)ite;
-	// for (int i = 1; it != ite; ++i)
-	// 	*it++ = i;
-	// printSize(vct, 1);
+	for (int i = 1; it != ite; ++i)
+		*it++ = i;
+	printSize(vct, 1);
 
-	// it = vct.begin();
-	// ite = vct.begin();
+	it = vct.begin();
+	ite = vct.begin();
 
-	// std::cout << *(++ite) << std::endl;
-	// std::cout << *(ite++) << std::endl;
-	// std::cout << *ite++ << std::endl;
-	// std::cout << *++ite << std::endl;
+	std::cout << *(++ite) << std::endl;
+	std::cout << *(ite++) << std::endl;
+	std::cout << *ite++ << std::endl;
+	std::cout << *++ite << std::endl;
 
-	// it->m();
-	// ite->m();
+	it->m();
+	ite->m();
 
-	// std::cout << *(++it) << std::endl;
-	// std::cout << *(it++) << std::endl;
-	// std::cout << *it++ << std::endl;
-	// std::cout << *++it << std::endl;
+	std::cout << *(++it) << std::endl;
+	std::cout << *(it++) << std::endl;
+	std::cout << *it++ << std::endl;
+	std::cout << *++it << std::endl;
 
-	// std::cout << *(--ite) << std::endl;
-	// std::cout << *(ite--) << std::endl;
-	// std::cout << *--ite << std::endl;
-	// std::cout << *ite-- << std::endl;
+	std::cout << *(--ite) << std::endl;
+	std::cout << *(ite--) << std::endl;
+	std::cout << *--ite << std::endl;
+	std::cout << *ite-- << std::endl;
 
-	// (*it).m();
-	// (*ite).m();
+	(*it).m();
+	(*ite).m();
 
-	// std::cout << *(--it) << std::endl;
-	// std::cout << *(it--) << std::endl;
-	// std::cout << *it-- << std::endl;
-	// std::cout << *--it << std::endl;
+	std::cout << *(--it) << std::endl;
+	std::cout << *(it--) << std::endl;
+	std::cout << *it-- << std::endl;
+	std::cout << *--it << std::endl;
 }
 
 

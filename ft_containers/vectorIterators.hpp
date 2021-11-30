@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectorIterators.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 10:44:33 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/29 17:25:04 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/01 00:30:31 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,19 @@ public:
 	/*CANONICAL-----------------------------------------------------------------------------------*/		
 	vectorIterator () : _data(0){}
 	vectorIterator (pointer initLoc) : _data(initLoc){}
+	// vectorIterator (T* initLoc) : _data(initLoc){}
 	virtual ~vectorIterator(){}
-	vectorIterator(vectorIterator const & rhs) : _data(rhs._data){}
-	vectorIterator operator = (const vectorIterator & rhs)
+	vectorIterator(vectorIterator<Category, T, Distance, T*, T&> const & rhs) : _data(rhs.getData()){}
+	vectorIterator &operator= (const vectorIterator & rhs)
 	{
-		_data = rhs._data;
+		_data = rhs.getData();
 		return *this;
-	}	
+	}
 	/*MEMBER OPERATORS--------------------------------------------------*/
+	pointer getData() const
+	{
+		return _data;
+	}
 	reference operator *()
 	{
 		return *_data;
@@ -96,31 +101,46 @@ public:
 	{
 		return *(_data + index);
 	}
-	/*RELATIONAL OPERATORS--------------------------------------------------*/
-	bool operator == (const vectorIterator & rhs)
-	{
-		return _data == rhs._data;
-	}
-	bool operator != (const vectorIterator & rhs)
-	{
-		return !(_data == rhs._data);
-	}
-	bool operator > (const vectorIterator & rhs)
-	{
-		return (_data > rhs._data);
-	}
-	bool operator >= (const vectorIterator & rhs)
-	{
-		return (_data >= rhs._data);
-	}
-	bool operator < (const vectorIterator & rhs)
-	{
-		return (_data < rhs._data);
-	}
-	bool operator <= (const vectorIterator & rhs)
-	{
-		return (_data <= rhs._data);
-	}
+	// /*RELATIONAL OPERATORS--------------------------------------------------*/
+	// bool operator == (const vectorIterator & rhs)
+	// {
+	// 	return _data == rhs._data;
+	// }
+	// bool operator != (const vectorIterator & rhs)
+	// {
+	// 	return !(_data == rhs._data);
+	// }
+	// bool operator > (const vectorIterator & rhs)
+	// {
+	// 	return (_data > rhs._data);
+	// }
+	// bool operator >= (const vectorIterator & rhs)
+	// {
+	// 	return (_data >= rhs._data);
+	// }
+	// bool operator < (const vectorIterator & rhs)
+	// {
+	// 	return (_data < rhs._data);
+	// }
+	// bool operator <= (const vectorIterator & rhs)
+	// {
+	// 	return (_data <= rhs._data);
+	// }
+
+/*Non-member function overloads*/
+/*RELATIONAL OPERATOR--------------------------------------------------------------------*/
+	friend bool operator== (const vectorIterator& lhs, const vectorIterator& rhs) 
+	{ return lhs._data == rhs._data; }
+	friend bool operator!= (const vectorIterator& lhs, const vectorIterator& rhs) 
+	{ return lhs._data != rhs._data; }
+	friend bool operator< (const vectorIterator& lhs, const vectorIterator& rhs) 
+	{ return lhs._data < rhs._data; }
+	friend bool operator<= (const vectorIterator& lhs, const vectorIterator& rhs) 
+	{ return lhs._data <= rhs._data; }
+	friend bool operator> (const vectorIterator& lhs, const vectorIterator& rhs) 
+	{ return lhs._data > rhs._data; }
+	friend bool operator>= (const vectorIterator& lhs, const vectorIterator& rhs) 
+	{ return lhs._data >= rhs._data; }
 };
 
 template <class Iterator> 

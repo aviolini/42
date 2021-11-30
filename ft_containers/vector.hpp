@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:56:26 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/30 23:17:07 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/01 00:32:04 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ public:
     typedef typename allocator_type::difference_type			difference_type;
     typedef typename allocator_type::pointer					pointer;
     typedef typename allocator_type::const_pointer	    		const_pointer;
-	typedef vectorIterator<ft::Random_access_iterator_tag, T>	const_iterator;
+	typedef vectorIterator<ft::Random_access_iterator_tag, 
+		value_type, ptrdiff_t, const_pointer, const_reference>	const_iterator;
 	typedef vectorIterator<ft::Random_access_iterator_tag, T>	iterator;
 	typedef	vectorReverseIterator<const_iterator>				const_reverse_iterator;
 	typedef	vectorReverseIterator<iterator>						reverse_iterator;	
