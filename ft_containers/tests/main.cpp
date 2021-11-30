@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:13:14 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/30 13:06:26 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/30 14:32:44 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int main()
 
 	vectorTest< ft::vector<int> >();
 
-	// ft::pair<const char, int> (*ptr)(const char, int) = &ft::make_pair<const char, int>;
-	// mapTest< ft::map<char,int, std::less<char>, std::allocator<ft::pair <const char, int > > >, ft::pair<const char, int> >(ptr);
+	ft::pair<const char, int> (*ptr)(const char, int) = &ft::make_pair<const char, int>;
+	mapTest< ft::map<char,int, std::less<char>, std::allocator<ft::pair <const char, int > > >, ft::pair<const char, int> >(ptr);
 
 	return (0);
 }
