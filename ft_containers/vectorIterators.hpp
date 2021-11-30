@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 10:44:33 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/01 00:30:31 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/01 00:45:02 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,6 @@ public:
 	{
 		return *_data;
 	}
-	vectorIterator operator + ( const difference_type &n ) const
-	{
-		vectorIterator obj(_data + n);
-		return obj;
-	}
 	vectorIterator &operator ++()			//PREFIX
 	{
 		_data++;
@@ -67,15 +62,6 @@ public:
 	{
 		_data += n;
 		return *this;
-	}
-	vectorIterator operator - ( const difference_type &n ) const
-	{
-		vectorIterator obj(_data - n);
-		return obj;
-	}
-	difference_type operator - ( const vectorIterator &rhs) const
-	{
-		return _data - rhs._data;
 	}
 	vectorIterator &operator --()			//PREFIX
 	{
@@ -101,6 +87,21 @@ public:
 	{
 		return *(_data + index);
 	}
+
+/*Non-member function overloads*/
+// /*ARITHMETIC OPERATORS--------------------------------------------------*/
+	friend vectorIterator	operator+(const vectorIterator& it, difference_type n) 
+	{ return vectorIterator(it._data + n); }
+	friend vectorIterator	operator+(difference_type n, const vectorIterator& it) 
+	{ return vectorIterator(it._data + n); }
+	friend vectorIterator	operator-(const vectorIterator& it, difference_type n) 
+	{ return vectorIterator(it._data - n); }
+	friend vectorIterator	operator-(difference_type n, const vectorIterator& it) 
+	{ return vectorIterator(it._data - n); }
+	friend difference_type	operator-(const vectorIterator& a, const vectorIterator& b) 
+	{ return (a._data - b._data); }
+
+	
 	// /*RELATIONAL OPERATORS--------------------------------------------------*/
 	// bool operator == (const vectorIterator & rhs)
 	// {
@@ -127,7 +128,6 @@ public:
 	// 	return (_data <= rhs._data);
 	// }
 
-/*Non-member function overloads*/
 /*RELATIONAL OPERATOR--------------------------------------------------------------------*/
 	friend bool operator== (const vectorIterator& lhs, const vectorIterator& rhs) 
 	{ return lhs._data == rhs._data; }
