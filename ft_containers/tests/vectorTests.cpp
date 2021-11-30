@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectorTests.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:27:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/30 14:40:38 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/30 21:37:42 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -507,10 +507,10 @@ void vectorTest()
 		test24.assign(arr, &arr[3]);
 		printVec(test24, "TEST24");
 		C test25;
-		double a = 3;
-		double b = 4;
+		int a = 3;
+		int b = 4;
 		(void)b;
-		double c = 5;
+		int c = 5;
 		test25.assign(a,c);
 		printVec(test25, "TEST25");
 		try
@@ -537,16 +537,7 @@ void vectorTest()
 		{
 			std::cerr << e.what() << '\n';
 		}
-		//INSERT RANGE
-		std::cout << "INSERT" << std::endl;
-		typename C::pointer ptr = new typename C::value_type[4];
-		for (int i = 0; i < 4; ++i)
-			ptr[i] = i;
-		C test31;
-		printVec(test31, "TEST31");
-		test31.insert(test20.begin(), &ptr[3], &ptr[0]);
-		delete[] ptr;
-		printVec(test31, "TEST31");
+
 	std::cout << "======================END VECTOR TEST==================" << std::endl;
 	
 	return ;
