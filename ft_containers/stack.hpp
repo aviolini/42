@@ -6,18 +6,18 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 12:46:50 by aviolini          #+#    #+#             */
-/*   Updated: 2021/10/27 13:13:04 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/30 12:32:06 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STACK_H
 #define STACK_H
 
-#include "vector.hpp"
+#include <deque>
 
 namespace ft
 {
-template <class T, class C > 
+template <class T, class C = std::deque<T> > 
 class stack
 {
 public:

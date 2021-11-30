@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stackTests.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:03:25 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/29 00:02:34 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/11/30 12:33:43 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void printStack(S &s)
 template<typename S>
 void stackTest()
 {
+	std::cout << "======================STACK TEST==================" << std::endl;
 	S data1;
 	std::cout << data1.empty() << std::endl;
 	data1.push(1);
@@ -73,5 +74,6 @@ void stackTest()
 	std::cout << (data1 <= data2) << std::endl;
 	std::cout << (data1 > data2) << std::endl;
 	std::cout << (data1 >= data2) << std::endl;
+	std::cout << "======================END STACK TEST==================" << std::endl;
 
 }

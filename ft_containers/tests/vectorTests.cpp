@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:27:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/29 12:51:51 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/30 13:06:02 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ template<typename C>
 void vectorTest()
 {
 
-	std::cout << "=================================" << std::endl;
+	std::cout << "======================VECTOR TEST==================" << std::endl;
 	std::cout<<std::endl;
 	std::cout << "--------------DEFAULT CONSTRUCTOR" << std::endl;
 		C test1;											//DEFAULT
@@ -555,62 +555,60 @@ void vectorTest()
 	printVec(test32,"TEST32");
 
 	// //ASSIGN
-	// std::cout << "ASSIGN" << std::endl;
-	// test24.assign(arr, &arr[3]);
-	// printVec(test24);
+	std::cout << "ASSIGN" << std::endl;
+	test24.assign(arr, &arr[3]);
+	printVec(test24, "TEST24");
 
-	// C test25;
-	// double a = 3;
-	// double b = 4;
-	// (void)b;
-	// double c = 5;
-	// test25.assign(a,c);
-	// printVec(test25);
+	C test25;
+	double a = 3;
+	double b = 4;
+	(void)b;
+	double c = 5;
+	test25.assign(a,c);
+	printVec(test25, "TEST25");
 
-	// try
-	// {
-	// 	test25.assign(&a,&c);
-	// 	printVec(test25);
-	// }
-	// catch(const std::exception& e)
-	// {
-	// 	std::cerr << e.what() << '\n';
-	// }
-	// test25.assign(&c,&a);
-	// printVec(test25);
+	try
+	{
+		test25.assign(&a,&c);
+		printVec(test25, "TEST25");
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	test25.assign(&c,&a);
+	printVec(test25, "TEST25");
 
-	// C test28(8,9);
-	// printVec(test28);
-	// C test29;
-	// test29.assign(test28.begin(), test28.end());
-	// printVec(test29);
+	C test28(8,9);
+	printVec(test28, "TEST28");
+	C test29;
+	test29.assign(test28.begin(), test28.end());
+	printVec(test29, "TEST29");
 
-	// C test30;
-	// try
-	// {
-	// 	test30.assign(test28.end(), test28.begin());
-	// 	printVec(test30);
-	// }
-	// catch(const std::exception& e)
-	// {
-	// 	std::cerr << e.what() << '\n';
-	// }
+	C test30;
+	try
+	{
+		test30.assign(test28.end(), test28.begin());
+		printVec(test30, "TEST30");
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 
-	// //INSERT RANGE
-	// std::cout << "INSERT" << std::endl;
-	// typename C::pointer ptr = new typename C::value_type[4];
-	// for (int i = 0; i < 4; ++i)
-	// 	ptr[i] = i;
-	// C test31;
-	// printVec(test31);
-	// test31.insert(test20.begin(), &ptr[3], &ptr[0]);
+	//INSERT RANGE
+	std::cout << "INSERT" << std::endl;
+	typename C::pointer ptr = new typename C::value_type[4];
+	for (int i = 0; i < 4; ++i)
+		ptr[i] = i;
+	C test31;
+	printVec(test31, "TEST31");
+	test31.insert(test20.begin(), &ptr[3], &ptr[0]);
 
-	// delete[] ptr;
-	// printVec(test31);
-
+	delete[] ptr;
+	printVec(test31, "TEST31");
+	std::cout << "======================END VECTOR TEST==================" << std::endl;
 	
-	
-
 	return ;
 }
 

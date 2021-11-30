@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
+#    By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 09:43:32 by aviolini          #+#    #+#              #
-#    Updated: 2021/11/29 01:26:17 by arrigo           ###   ########.fr        #
+#    Updated: 2021/11/30 12:31:48 by aviolini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,13 +33,13 @@ CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 RM			=	rm -rf
 
 $(FTNAME)	:	$(addprefix $(TESTDIR), $(OBJS)) $(FTINC)
-				$(CXX) $(CXXFLAGS) $(MAIN) -o $(FTNAME) $(OBJS)
+				$(CXX) $(CXXFLAGS) -I. $(MAIN) -o $(FTNAME) $(OBJS)
 
 $(STLNAME)	:	$(addprefix $(TESTDIR), $(OBJS))
 				$(CXX) $(CXXFLAGS) -D STD $(MAIN) -o $(STLNAME) $(OBJS)
 
 $(FTPRINT)	:	$(addprefix $(TESTDIR), $(OBJS)) $(FTINC)
-				$(CXX) $(CXXFLAGS) -D PRINT_TREE $(MAIN) -o $(FTPRINT) $(OBJS)
+				$(CXX) $(CXXFLAGS) -I. -D PRINT_TREE $(MAIN) -o $(FTPRINT) $(OBJS)
 
 %.o			:	%.cpp
 				$(CXX) $(CXXFLAGS) -c $<
