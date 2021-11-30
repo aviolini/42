@@ -1,17 +1,3 @@
-
-CONTROLLI NEI COSTRUTTORI if n > max size fare il throw
-METTERE IL CONTROLLO DI n < max size ogni volta che si usa?
-
-TEST:
-	nel costruttore fill con n > max_size
-	resize con size maggiore del doppio della this->capacity * 2
-
-IMPLEMENTARE TUTTI GLI OPERATORI DELL'ITERATOR, CANONICAL IN ITERATOR
-TOGLIERE LA STRUTTUAAR MYITERATORTAG E METTERE LA STANDARD?
-
-• iterators_traits, reverse_iterator, enable_if, is_integral, equal/lexicographical com-
-pare, std::pair, std::make_pair, must be reimplemented.
-
 IMPLEMENT ITERATOR
 https://www.youtube.com/watch?v=Q4bIYkTSu5c
 https://www.youtube.com/watch?v=F9eDv-YIOQ0
@@ -22,9 +8,6 @@ https://www.fluentcpp.com/2018/05/15/make-sfinae-pretty-1-what-value-sfinae-brin
 
 FRIEND
 https://www.justsoftwaresolutions.co.uk/cplusplus/hidden-friends.html
-
-MAP 
-INSERT CON GLI ITERATOR DI UN ELEMENTO ESISTENTE?
 
 BALANCE TREE
 https://www.programiz.com/dsa/avl-tree

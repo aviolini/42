@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:01:37 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/30 12:43:07 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/30 14:47:15 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,8 +280,6 @@ std::cout << "------------------------------" << std::endl;
 	#else
 	printMap(test10, "TEST10");
 	#endif
-/*
-*/
 // // CLEAR---------------------------------------------
 	#if PRINT_TREE
 	test11.print("TEST11");
@@ -366,22 +364,12 @@ std::cout << "------------------------------" << std::endl;
 	{
 	//------------------------PRINT TREE---------------------------------------------
 	C test1;
-	typename C::value_type pair1 ('a', 1);
-	typename C::value_type pair2('b', 2);
-	typename C::value_type pair3('c', 3);
-	typename C::value_type pair4('e', 4);
-	typename C::value_type pair5('f', 5);
-	typename C::value_type pair9('l', 9);
-	typename C::value_type pair6('g', 6);
 	test1.insert(makepair('r', 15));
 	test1.insert(makepair('R', 15));
 	test1.insert(makepair('G', 15));
 	test1.insert(pair4);
-	test1.insert(pair1);
 	test1.insert(pair5);
-	test1.insert(pair2);
 	test1.insert(pair9);
-	test1.insert(pair3);
 	test1.insert(pair6);
 	test1.insert(makepair('h', 7));
 	test1.insert(makepair('i', 8));
@@ -402,6 +390,7 @@ std::cout << "------------------------------" << std::endl;
 	test1.insert(makepair('z', 12));
 	test1.insert(makepair('s', 12));
 	test1.insert(makepair('j', 12));
+	test1.insert(test12.begin(), test12.end());
 	#if PRINT_TREE
 	test1.print("TEST1");
 	#else
