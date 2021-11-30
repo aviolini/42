@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:56:26 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/30 15:00:54 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/11/30 15:06:33 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ public:
 	explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
 	: _allocator(alloc), _data(_allocator.allocate(n)), _size(n), _capacity(n)
 	{
-		
+		_allocator.construct(_data, value_type());	
 		if (n >= max_size())
 			throw std::out_of_range("Error");
 		for (size_type i = 0; i < (n); i++)
@@ -61,6 +61,7 @@ public:
 			typename ft::EnableIfFalse<ft::IsFloatingPoint<InputIterator>::value , T>::type = 0)
 	: _allocator(alloc), _data(_allocator.allocate(last - first))
 	{
+		_allocator.construct(_data, value_type());
 		if (last - first < 0)
 			throw std::length_error("vector");
 		InputIterator it = first;
@@ -73,6 +74,7 @@ public:
 	vector (const vector& x) : _allocator(x._allocator), _size(x.size()), _capacity(x.size())
 	{
 		_data = _allocator.allocate(capacity());
+		_allocator.construct(_data, value_type());
 		const_iterator it = x.begin();
 		iterator my = _data;
 		for (; it != x.end(); ++it, ++my)
@@ -92,6 +94,7 @@ public:
 			_allocator.destroy(_data);
 			_capacity = x.size();
 			_data = _allocator.allocate(x.capacity());
+			_allocator.construct(_data, value_type());
 		}
 		_size = x.size();
 		const_iterator it = x.begin();
@@ -159,6 +162,7 @@ public:
 			pointer temp;
 			size_type newCap = capacity() * 2;
 			temp = _allocator.allocate(newCap);
+			_allocator.construct(temp, value_type());
 			size_type i = 0;
 			for (; i < size(); i++)
 				temp[i] = _data[i];
@@ -188,6 +192,7 @@ public:
 			pointer temp;
 			size_type newCap = n;
 			temp = _allocator.allocate(newCap);
+			_allocator.construct(temp, value_type());
 			size_type i = 0;
 			for (; i < size(); i++)
 				temp[i] = _data[i];
@@ -242,6 +247,7 @@ public:
 			_allocator.deallocate(_data, capacity());
 			_allocator.destroy(_data);
 			_data = _allocator.allocate(n);
+			_allocator.construct(_data, value_type());
 			_capacity = n;
 		}
 		_size = n;
@@ -262,6 +268,7 @@ public:
 			_allocator.deallocate(_data, capacity());
 			_allocator.destroy(_data);
 			_data = _allocator.allocate(len);
+			_allocator.construct(_data, value_type());
 			_capacity = len;
 		}
 		_size = last - first;
@@ -281,6 +288,7 @@ public:
 			else
 				newCap = capacity() * 2;
 			temp = _allocator.allocate(newCap);
+			_allocator.construct(temp, value_type());
 			size_type i = 0;
 			for (; i < size(); i++)
 				temp[i] = _data[i];
@@ -317,6 +325,7 @@ public:
 			newCap = capacity() * 2;		
 		pointer temp;
 		temp = _allocator.allocate(newCap);
+		_allocator.construct(temp, value_type());
 		size_type i = 0;
 		size_type k = 0;
 		iterator it = begin();
@@ -363,6 +372,7 @@ public:
 			newCap = capacity() * 2;
 		pointer temp;
 		temp = _allocator.allocate(newCap);
+		_allocator.construct(temp, value_type());
 		size_type i = 0;
 		size_type k = 0;
 		iterator it = begin();
@@ -411,6 +421,7 @@ public:
 			newCap = capacity() * 2;
 		pointer temp;
 		temp = _allocator.allocate(newCap);
+		_allocator.construct(temp, value_type());
 		size_type i = 0;
 		size_type k = 0;
 		iterator it = begin();
