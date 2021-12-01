@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:13:14 by arrigo            #+#    #+#             */
-/*   Updated: 2021/12/01 15:12:30 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/01 15:44:26 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,17 @@ int		main(void)
 	for (int i = 0; i < size; ++i)
 		vct[i] = (i + 1) * 5;
 	printSize(vct);
+
+	// std::cout << "IT" << *it_ << std::endl;
+	// std::cout << "IT" << *++it_ << std::endl;
+	// std::cout << "IT" << *++it_ << std::endl;
+
+	// std::cout << "RIT" << *it << std::endl;
+	// std::cout << "RIT" << *--it << std::endl;
+	// std::cout << "RIT" << *--it << std::endl;
+
+
+
 
 	std::cout << (it_ == it.base()) << std::endl;
 	std::cout << (it_ == (it + 3).base()) << std::endl;
