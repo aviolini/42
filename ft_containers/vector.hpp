@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:56:26 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/01 00:32:04 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/01 12:39:16 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,12 @@ public:
 	}
 	~vector()
 	{
-		_allocator.destroy(_data);
-		_allocator.deallocate(_data, capacity());
-		_data = 0;
+		if (_data)
+		{
+			_allocator.destroy(_data);
+			_allocator.deallocate(_data, capacity());
+			_data = 0;
+		}
 	}
 	vector& operator= (const vector& x)
 	{
@@ -296,12 +299,16 @@ public:
 			else
 				newCap = capacity() * 2;
 			temp = _allocator.allocate(newCap);
-			_allocator.construct(temp, value_type());
 			size_type i = 0;
+			_allocator.construct(temp, value_type());
 			for (; i < size(); i++)
 				temp[i] = _data[i];
-			_allocator.deallocate(_data, capacity());
-			_allocator.destroy(_data);
+			// _allocator.construct(&temp[i], _data[i]);
+			if (_data)
+			{
+				_allocator.destroy(_data);
+				_allocator.deallocate(_data, capacity());
+			}
 			_capacity = newCap;
 			_data = temp;	
 		}
