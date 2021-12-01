@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectorIterators.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 10:44:33 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/01 15:49:06 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/01 22:41:51 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ public:
 	vectorReverseIterator () : Iterator(0){}
 	explicit vectorReverseIterator (iterator_type it) : Iterator(it - 1){}
 	template <class Iter>
-  	vectorReverseIterator (const vectorReverseIterator<Iter>& rev_it, typename ft::EnableIfTrue<ft::HasIteratorCategory<Iter>::value, value_type>::type = 0)
+  	vectorReverseIterator (const vectorReverseIterator<Iter>& rev_it)//, typename ft::EnableIfTrue<ft::HasIteratorCategory<Iter>::value, value_type>::type = 0)
 	{
 		this->_data = rev_it.base() - 1;
 	}
@@ -171,11 +171,11 @@ public:
 		this->_data = rhs.base() - 1;
 		return *this;
 	}
-	vectorReverseIterator & operator =(const pointer& ptr)
-	{
-		this->_data = ptr;
-		return *this;
-	}
+	// vectorReverseIterator & operator =(const pointer& ptr)
+	// {
+	// 	this->_data = ptr;
+	// 	return *this;
+	// }
 	/*MEMBER OPERATORS--------------------------------------------------*/
 	pointer base() const
 	{
@@ -189,7 +189,7 @@ public:
 	vectorReverseIterator operator ++(int)			//POSTFIX
 	{
 		vectorReverseIterator temp = *this;
-		++this->_data;
+		--this->_data;
 		return temp;
 	}
 	vectorReverseIterator &operator --()			//PREFIX
@@ -200,7 +200,7 @@ public:
 	vectorReverseIterator operator --(int)			//POSTFIX
 	{
 		vectorReverseIterator temp = *this;
-		--this->_data;
+		++this->_data;
 		return temp;
 	}
 	vectorReverseIterator & operator += (difference_type n)
