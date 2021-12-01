@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:13:14 by arrigo            #+#    #+#             */
-/*   Updated: 2021/12/01 23:54:12 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/02 00:34:28 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ int		main(void)
 	printSize(vct, true);
 
 	is_empty(vct2);
-	vct2 = vct;
-	is_empty(vct2);
+	// vct2 = vct;
+	// is_empty(vct2);
 	// vct.reserve(vct.capacity() + 1);
 	// printSize(vct, true);
 	// printSize(vct2, true);
@@ -120,7 +120,6 @@ int		main(void)
 	// printSize(vct2, true);
 	return (0);
 }
-
 
 
 
