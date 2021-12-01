@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:56:26 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/01 12:39:16 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/01 15:17:21 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ public:
 	: _allocator(alloc),  _size(n), _capacity(n)
 	{
 		_data = _allocator.allocate(n);
-		// for (size_type i = 0; i < n; ++i)
-			// _allocator.construct(&_data[i], val);
-		_allocator.construct(_data, val);
+		for (size_type i = 0; i < n; ++i)
+			_allocator.construct(&_data[i], val);
+		// _allocator.construct(_data, val);
 
 	}
 	template <class InputIterator>
@@ -131,19 +131,19 @@ public:
 	}
 	reverse_iterator rbegin()
 	{
-		return reverse_iterator(end());
+		return reverse_iterator(end()-1);
 	}
 	reverse_iterator rend()
 	{
-		return reverse_iterator(begin());
+		return reverse_iterator(begin()-1);
 	}
 	const_reverse_iterator rbegin() const
 	{
-		return const_reverse_iterator(end());
+		return const_reverse_iterator(end()-1);
 	}
 	const_reverse_iterator rend() const
 	{
-		return const_reverse_iterator(begin());
+		return const_reverse_iterator(begin()-1);
 	}
 	/*CAPACITY-----------------------------------------------------------------------------------*/
 	size_type size() const
