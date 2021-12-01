@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 10:44:33 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/01 22:41:51 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/01 23:51:20 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,34 +100,6 @@ public:
 	{ return vectorIterator(it._data - n); }
 	friend difference_type	operator-(const vectorIterator& a, const vectorIterator& b) 
 	{ return (a._data - b._data); }
-
-	
-	// /*RELATIONAL OPERATORS--------------------------------------------------*/
-	// bool operator == (const vectorIterator & rhs)
-	// {
-	// 	return _data == rhs._data;
-	// }
-	// bool operator != (const vectorIterator & rhs)
-	// {
-	// 	return !(_data == rhs._data);
-	// }
-	// bool operator > (const vectorIterator & rhs)
-	// {
-	// 	return (_data > rhs._data);
-	// }
-	// bool operator >= (const vectorIterator & rhs)
-	// {
-	// 	return (_data >= rhs._data);
-	// }
-	// bool operator < (const vectorIterator & rhs)
-	// {
-	// 	return (_data < rhs._data);
-	// }
-	// bool operator <= (const vectorIterator & rhs)
-	// {
-	// 	return (_data <= rhs._data);
-	// }
-
 /*RELATIONAL OPERATOR--------------------------------------------------------------------*/
 	friend bool operator== (const vectorIterator& lhs, const vectorIterator& rhs) 
 	{ return lhs._data == rhs._data; }
@@ -233,14 +205,14 @@ public:
 	{ return vectorReverseIterator(it.base() + n); }
 
 /*RELATIONAL OPERATOR--------------------------------------------------------------------*/
-	friend bool operator< (const vectorReverseIterator& lhs, const vectorReverseIterator& rhs) 
-	{ return lhs._data >= rhs._data; }
-	friend bool operator<= (const vectorReverseIterator& lhs, const vectorReverseIterator& rhs) 
-	{ return lhs._data > rhs._data; }
-	friend bool operator> (const vectorReverseIterator& lhs, const vectorReverseIterator& rhs) 
-	{ return lhs._data <= rhs._data; }
-	friend bool operator>= (const vectorReverseIterator& lhs, const vectorReverseIterator& rhs) 
-	{ return lhs._data < rhs._data; }
+	// friend bool operator< (const vectorReverseIterator& lhs, const vectorReverseIterator& rhs) 
+	// { return lhs._data >= rhs._data; }
+	// friend bool operator<= (const vectorReverseIterator& lhs, const vectorReverseIterator& rhs) 
+	// { return lhs._data > rhs._data; }
+	// friend bool operator> (const vectorReverseIterator& lhs, const vectorReverseIterator& rhs) 
+	// { return lhs._data <= rhs._data; }
+	// friend bool operator>= (const vectorReverseIterator& lhs, const vectorReverseIterator& rhs) 
+	// { return lhs._data < rhs._data; }
 };
 
 #endif

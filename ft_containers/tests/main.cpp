@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:13:14 by arrigo            #+#    #+#             */
-/*   Updated: 2021/12/01 22:32:11 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/01 23:54:12 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,48 +72,52 @@ void	printSize(ft::vector<T> const &vct, bool print_content = true)
 	std::cout << "###############################################" << std::endl;
 }
 
-#define TESTED_TYPE foo
+#define TESTED_TYPE int
+
+void	is_empty(TESTED_NAMESPACE::vector<TESTED_TYPE> const &vct)
+{
+	std::cout << "is_empty: " << vct.empty() << std::endl;
+}
 
 int		main(void)
 {
-	const int size = 5;
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it(vct.rbegin());
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator ite(vct.rend());
+	const int start_size = 7;
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(start_size, 20);
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct2;
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it = vct.begin();
 
-	for (int i = 1; it != ite; ++i)
-		*it++ = (i * 7);
-	printSize(vct, 1);
+	for (int i = 2; i < start_size; ++i)
+		it[i] = (start_size - i) * 3;
+	printSize(vct, true);
 
-	it = vct.rbegin();
-	ite = vct.rbegin();
+	vct.resize(10, 42);
+	printSize(vct, true);
 
-	std::cout << *(++ite) << std::endl;
-	std::cout << *(ite++) << std::endl;
-	std::cout << *ite++ << std::endl;
-	std::cout << *++ite << std::endl;
+	vct.resize(18, 43);
+	printSize(vct, true);
+	vct.resize(10);
+	printSize(vct, true);
+	vct.resize(23, 44);
+	printSize(vct, true);
+	vct.resize(5);
+	printSize(vct, true);
+	vct.reserve(5);
+	vct.reserve(3);
+	printSize(vct, true);
+	vct.resize(87);
+	vct.resize(5);
+	printSize(vct, true);
 
-	it->m();
-	ite->m();
+	is_empty(vct2);
+	vct2 = vct;
+	is_empty(vct2);
+	// vct.reserve(vct.capacity() + 1);
+	// printSize(vct, true);
+	// printSize(vct2, true);
 
-	std::cout << *(++it) << std::endl;
-	std::cout << *(it++) << std::endl;
-	std::cout << *it++ << std::endl;
-	std::cout << *++it << std::endl;
-
-	std::cout << *(--ite) << std::endl;
-	std::cout << *(ite--) << std::endl;
-	std::cout << *--ite << std::endl;
-	std::cout << *ite-- << std::endl;
-
-	(*it).m();
-	(*ite).m();
-
-	std::cout << *(--it) << std::endl;
-	std::cout << *(it--) << std::endl;
-	std::cout << *it-- << std::endl;
-	std::cout << *--it << std::endl;
-
+	// vct2.resize(0);
+	// is_empty(vct2);
+	// printSize(vct2, true);
 	return (0);
 }
 
