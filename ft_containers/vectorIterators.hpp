@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 10:44:33 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/01 15:43:59 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/01 15:49:06 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,16 +159,16 @@ public:
 	template <class Iter>
   	vectorReverseIterator (const vectorReverseIterator<Iter>& rev_it, typename ft::EnableIfTrue<ft::HasIteratorCategory<Iter>::value, value_type>::type = 0)
 	{
-		this->_data = rev_it.base();
+		this->_data = rev_it.base() - 1;
 	}
 	~vectorReverseIterator(){}
 	vectorReverseIterator(vectorReverseIterator const & rhs)// : Iterator::_data(rhs.base()){}
 	{
-		this->_data = rhs.base();
+		this->_data = rhs.base() - 1;
 	}
 	vectorReverseIterator & operator =(const vectorReverseIterator & rhs)
 	{
-		this->_data = rhs.base();
+		this->_data = rhs.base() - 1;
 		return *this;
 	}
 	vectorReverseIterator & operator =(const pointer& ptr)
