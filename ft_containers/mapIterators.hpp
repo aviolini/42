@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapIterators.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/11/28 23:13:39 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/02 11:08:47 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ public:
 		return *this;
 	}
 /*MEMBER OPERATORS--------------------------------------------------*/
-	pointer getNode()
+	pointer getNode() const
 	{
 		return _data.getNode();
 	}
-	Pair *operator -> ()
+	Pair* operator -> () const
 	{
-		return &this->_data->_value;
+		return &(this->_data->_value);
 	}
-	Pair operator *()
+	Pair &operator *() const
 	{
 		return (this->_data->_value);
 	}
@@ -106,6 +106,14 @@ public:
 		return *this;
 	}
 /*MEMBER OPERATORS--------------------------------------------------*/
+	// value_type operator -> () const
+	// {
+	// 	return &this->_data->_value;
+	// }
+	// reference operator *() const
+	// {
+	// 	return (this->_data->_value);
+	// }	
 	mapReverseIterator &operator ++()			//PREFIX
 	{
 		--this->_data;

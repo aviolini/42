@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/30 14:52:09 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/02 11:09:33 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ public:
 	{
 		return _ptr;	
 	}
-	pointer operator -> ()
+	pointer operator -> () const
 	{
 		return _ptr;
 	}
-	reference operator *()
+	reference operator *() const
 	{
 		return *_ptr;
 	}
