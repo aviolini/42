@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:56:26 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/01 15:42:01 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/03 16:30:43 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,13 @@ public:
 	}
 	vector (const vector& x) : _allocator(x._allocator), _size(x.size()), _capacity(x.size())
 	{
-		_data = _allocator.allocate(capacity());
-		_allocator.construct(_data, value_type());
 		const_iterator it = x.begin();
-		iterator my = _data;
-		for (; it != x.end(); ++it, ++my)
-			*my = *it;				
+		_data = _allocator.allocate(capacity());
+		for (size_t i = 0; it != end(); ++i, ++it)
+			_allocator.construct(_data + i, *it);
+		// iterator my = _data;
+		// for (; it != x.end(); ++it, ++my)
+		// 	*my = *it;				
 	}
 	~vector()
 	{
