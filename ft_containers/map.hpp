@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/03 23:03:58 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/03 23:16:47 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,12 +136,12 @@ public:
 /*ELEMENT ACCESS-------------------------------------------------------------------------------*/
 	mapped_type& operator[] (const key_type& k)
 	{
-		iterator it = begin();
-		while (it != end() && it->first != k)
-			++it;
-		if (it == end())
-			return insert(ft::make_pair(k,mapped_type())).first->second;
-		return it->second;
+		iterator it = find(k);
+		if (it != end())
+			return it ->second;
+		insert(ft::make_pair(k,mapped_type()));
+		return find(k)->second;
+		// return (--(insert(ft::make_pair(k,mapped_type())).first))->second;/////////////////FARE UN TEST
 	}
 /*MODIFIERS-----------------------------------------------------------------------------------*/
 	pair<iterator,bool> insert (const value_type& val)								//SINGLE ELEMENT

@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:13:14 by arrigo            #+#    #+#             */
-/*   Updated: 2021/12/03 23:04:28 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/03 23:16:30 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,13 +134,13 @@ int		main(void)
 	TESTED_NAMESPACE::map<T1, T2> mp;
 
 	mp['a'] = "an element";
-	// mp['b'] = "another element";
-	// mp['c'] = mp['b'];
-	// mp['b'] = "old element";
+	mp['b'] = "another element";
+	mp['c'] = mp['b'];
+	mp['b'] = "old element";
 
-	// printSize(mp);
+	printSize(mp);
 
-	// std::cout << "insert a new element via operator[]: " << mp['d'] << std::endl;
+	std::cout << "insert a new element via operator[]: " << mp['d'] << std::endl;
 
 	printSize(mp);
 	return (0);
