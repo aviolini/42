@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:56:26 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/03 18:43:12 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/03 19:03:55 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,29 +166,33 @@ public:
 	}
 	void resize (size_type n, value_type val = value_type())
 	{
-		if (n <= size())
+		if (!capacity())
 		{
-			_size = n;
+			_size  = n;
+			_capacity = n;
+			_data = _allocator.allocate(n);
+			for (size_type i = 0; i < n; ++i)
+				_allocator.construct(_data + i, val);	
 		}
 		else if (n > size() && n <= capacity())
-		{
-			size_type i = size();
-			for(; i < n; i++)
+			for(size_type i = size(); i < n; i++)
 				_data[i] = val;
-		}
-		else
+		else if (n > capacity())
 		{
 			pointer temp;
 			size_type newCap = capacity() * 2;
 			temp = _allocator.allocate(newCap);
-			_allocator.construct(temp, value_type());
-			size_type i = 0;
-			for (; i < size(); i++)
-				temp[i] = _data[i];
-			for(; i < n; i++)
-				temp[i] = val;
+			// _allocator.construct(temp, value_type());
+			iterator it = begin();
+			for (size_type i = 0; i < size(); i++)
+				_allocator.construct(temp + i, *it++ );
+				// temp[i] = _data[i];
+			for(size_type i = size(); i < n; i++)
+				_allocator.construct(temp + i, val );
+				// temp[i] = val;
+			for (size_t i = 0; i < capacity(); ++i)
+				_allocator.destroy(_data + i);
 			_allocator.deallocate(_data, capacity());
-			_allocator.destroy(_data);
 			_capacity = newCap;
 			_data = temp;
 		}
