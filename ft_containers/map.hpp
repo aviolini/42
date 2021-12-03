@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/03 21:49:12 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/03 22:20:38 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,11 @@ public:
 /*ITERATORS-----------------------------------------------------------------------------------*/
 	iterator begin()
 	{
-		return ++iterator(_tree.begin());
+		return iterator(_tree.begin());
 	}
 	const_iterator begin() const
 	{
-		return ++const_iterator(_tree.begin());
+		return const_iterator(_tree.begin());
 	}
     iterator end()
 	{
@@ -111,11 +111,11 @@ public:
 	}
     reverse_iterator rend()
 	{
-		return reverse_iterator(iterator(_tree.begin()));		
+		return reverse_iterator(--iterator(_tree.begin()));		
 	}
 	const_reverse_iterator rend() const
 	{
-		return const_reverse_iterator(const_iterator(_tree.begin()));
+		return const_reverse_iterator(--const_iterator(_tree.begin()));
 	}
 /*CAPACITY-----------------------------------------------------------------------------------*/
 	bool empty() const

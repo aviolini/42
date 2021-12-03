@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/03 21:51:34 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/03 22:27:55 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ public:
 		_root = _end;
 		this->_size = 0;
 		iterator it = x.begin();
-		it++;
+		// it++;
 		for (; it != x.end(); ++it)
 			insert(it->_value);
 	}																															//COPY
@@ -173,7 +173,7 @@ public:
 			key_comp = x.key_comp;
 			_pair_allocator = x._pair_allocator;
 			iterator it = x.begin();
-			it++;
+			// it++;
 			for (; it != x.end(); ++it)
 				insert(it->_value);
     	}
@@ -187,7 +187,7 @@ public:
 /*ITERATORS-----------------------------------------------------------------------------------*/
 	iterator begin()
 	{
-		return iterator(_begin);
+		return iterator(find_min(_root));
 	}
 	iterator end()
 	{
@@ -195,7 +195,7 @@ public:
 	}
 	const_iterator begin() const
 	{
-		return const_iterator(_begin);
+		return const_iterator(find_min(_root));
 	}
 	const_iterator end() const
 	{
@@ -318,7 +318,7 @@ public:
 		}
 	}
 	/////////////////////////////////////////////////////////////////////
-	pointer find_max (pointer node) 
+	pointer find_max (pointer node) const 
 	{
  		if (node == 0)
 			return 0;
@@ -326,12 +326,12 @@ public:
 			return node; 
 		return find_max(node->_right); 
 	}
-	pointer find_min (pointer node) 
+	pointer find_min (pointer node) const
 	{
  		if (node == 0)
 			return 0;
-		if (node->_left == 0) 
-			return node; 
+		if (node->_left == 0 || node->_left == _begin) 
+			return node;
 		return find_min(node->_left); 
 	}
 	void remove(typename Pair::first_type  & k)
