@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/02 11:09:33 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/03 21:51:34 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ struct node
 	node		*_parent;
 	node 		*_left;
 	node 		*_right;
+	int c;						///SERVE PER MAX_SIZE() (SOLO LINUX)
 };
 
 template < class Pair, class Compare = std::less<typename Pair::first_type>, class Alloc = std::allocator<Pair> >
