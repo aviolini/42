@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:56:26 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/03 19:03:55 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/03 19:31:45 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,8 @@ public:
 		{
 			pointer temp;
 			size_type newCap = capacity() * 2;
+			if (newCap < n)
+				newCap = n;
 			temp = _allocator.allocate(newCap);
 			// _allocator.construct(temp, value_type());
 			iterator it = begin();
