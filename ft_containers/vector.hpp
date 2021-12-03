@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:56:26 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/03 16:30:43 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/03 18:43:12 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,46 +52,47 @@ public:
 	{
 		_data = _allocator.allocate(n);
 		for (size_type i = 0; i < n; ++i)
-			_allocator.construct(&_data[i], val);
+			_allocator.construct(_data + i, val);
 		// _allocator.construct(_data, val);
-
 	}
 	template <class InputIterator>
     vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type() ,
-			typename ft::EnableIfFalse<ft::IsIntegral<InputIterator>::value , T>::type = 0,
-			typename ft::EnableIfFalse<ft::IsFloatingPoint<InputIterator>::value , T>::type = 0)
+			typename ft::EnableIfFalse<ft::IsIntegral<InputIterator>::value , T>::type = 0)//,
+			// typename ft::EnableIfFalse<ft::IsFloatingPoint<InputIterator>::value , T>::type = 0)
 	: _allocator(alloc) 
 	{
 		size_t len = 0;
-		for (InputIterator temp = first; temp != last; temp++) 
+		for (InputIterator it = first; it != last; it++)
 			len++;
 		// std::cout <<"END" << std::endl;
 		_data = (_allocator.allocate(len));
-		_allocator.construct(_data, value_type());
+		for (size_t i = 0; i < len; ++i)
+			_allocator.construct(_data + i, *first++);
 		// if (last - first < 0)
 		// 	throw std::length_error("vector");
-		InputIterator it = first;
-		pointer my = _data;
-		for (; it != last; ++it, ++my)
-			*my = *it;
+		// InputIterator it = first;
+		// pointer my = _data;
+		// for (; it != last; ++it, ++my)
+		// 	*my = *it;
 		_size = len;
-		_capacity = size();
+		_capacity = len;
 	}
 	vector (const vector& x) : _allocator(x._allocator), _size(x.size()), _capacity(x.size())
 	{
 		const_iterator it = x.begin();
 		_data = _allocator.allocate(capacity());
-		for (size_t i = 0; it != end(); ++i, ++it)
-			_allocator.construct(_data + i, *it);
+		for (size_t i = 0; i < x.size(); ++i)
+			_allocator.construct(_data + i, *it++);
 		// iterator my = _data;
 		// for (; it != x.end(); ++it, ++my)
 		// 	*my = *it;				
 	}
 	~vector()
 	{
-		if (_data)
+		if (capacity())
 		{
-			_allocator.destroy(_data);
+			for (size_t i = 0; i < capacity(); ++i)
+				_allocator.destroy(_data + i);
 			_allocator.deallocate(_data, capacity());
 			_data = 0;
 		}
@@ -100,17 +101,25 @@ public:
 	{
 		if (capacity() < x.capacity())
 		{
-			_allocator.deallocate(_data, capacity());
-			_allocator.destroy(_data);
+			if (capacity())
+			{
+				for (size_t i = 0; i < capacity(); ++i)
+					_allocator.destroy(_data + i);
+				_allocator.deallocate(_data, capacity());
+			}
 			_capacity = x.size();
 			_data = _allocator.allocate(x.capacity());
-			_allocator.construct(_data, value_type());
+			// _allocator.construct(_data, value_type());
 		}
 		_size = x.size();
+		_allocator = x.get_allocator();
+		// const_iterator it = x.begin();
+		// iterator my = _data;
+		// for (; it != x.end(); ++it, ++my)
+		// 	*my = *it;
 		const_iterator it = x.begin();
-		iterator my = _data;
-		for (; it != x.end(); ++it, ++my)
-			*my = *it;
+		for (size_t i = 0; i < size(); ++i)
+			_allocator.construct(_data + i, *it++);
 		return *this;
 	}
 	/*ITERATORS-----------------------------------------------------------------------------------*/
