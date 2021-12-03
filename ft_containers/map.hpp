@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/03 22:20:38 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/03 23:03:58 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ public:
 		while (it != end() && it->first != k)
 			++it;
 		if (it == end())
-			return insert(make_pair(k,mapped_type())).first->second;
+			return insert(ft::make_pair(k,mapped_type())).first->second;
 		return it->second;
 	}
 /*MODIFIERS-----------------------------------------------------------------------------------*/

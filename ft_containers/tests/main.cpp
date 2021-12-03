@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:13:14 by arrigo            #+#    #+#             */
-/*   Updated: 2021/12/03 21:49:53 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/03 23:04:28 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,44 +126,28 @@ T	dec(T it, int n)
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define T1 int
-#define T2 int
-typedef _pair<const T1, T2> T3;
+#define T1 char
+#define T2 foo<std::string>
 
 int		main(void)
 {
-	std::list<T3> lst;
-	unsigned int lst_size = 7;
-	for (unsigned int i = 0; i < lst_size; ++i)
-		lst.push_back(T3(lst_size - i, i));
+	TESTED_NAMESPACE::map<T1, T2> mp;
 
-	TESTED_NAMESPACE::map<T1, T2> mp(lst.begin(), lst.end());
-	TESTED_NAMESPACE::map<T1, T2>::iterator it = mp.begin(), ite = mp.end();
+	mp['a'] = "an element";
+	// mp['b'] = "another element";
+	// mp['c'] = mp['b'];
+	// mp['b'] = "old element";
 
-	TESTED_NAMESPACE::map<T1, T2> mp_range(it, --(--ite));
-	for (int i = 0; it != ite; ++it)
-		it->second = ++i * 5;
+	// printSize(mp);
 
-	it = mp.begin(); ite = --(--mp.end());
-	TESTED_NAMESPACE::map<T1, T2> mp_copy(mp);
-	for (int i = 0; it != ite; ++it)
-		it->second = ++i * 7;
+	// std::cout << "insert a new element via operator[]: " << mp['d'] << std::endl;
 
-	std::cout << "\t-- PART ONE --" << std::endl;
 	printSize(mp);
-	printSize(mp_range);
-	printSize(mp_copy);
-
-	mp = mp_copy;
-	mp_copy = mp_range;
-	mp_range.clear();
-
-	std::cout << "\t-- PART TWO --" << std::endl;
-	printSize(mp);
-	printSize(mp_range);
-	printSize(mp_copy);
 	return (0);
 }
+
+
+
 //MY
 // int main() 
 // {

@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/03 22:27:55 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/03 23:04:13 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,9 +145,9 @@ public:
 	:key_comp(key_comp), _pair_allocator(alloc)
 	{
 		_end = node_allocator().allocate(1);
-		node_allocator().construct(_end, value_type());
+		// node_allocator().construct(_end, value_type());
 		_begin = node_allocator().allocate(1);
-		node_allocator().construct(_begin, value_type());
+		// node_allocator().construct(_begin, value_type());
 		_root = _end;
 		this->_size = 0;
 	}
