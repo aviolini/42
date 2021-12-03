@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/03 23:16:47 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/04 00:28:33 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ public:
 	explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
 	_tree(comp, alloc){}									//EMPTY
 	template <class InputIterator>
-	map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type(),		//RANGE
-		typename EnableIfFalse<ft::IsIntegral<InputIterator>::value , T>::type = 0,
-		typename EnableIfFalse<ft::IsFloatingPoint<InputIterator>::value , T>::type = 0)
+	map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())//,		//RANGE
+		// typename EnableIfFalse<ft::IsIntegral<InputIterator>::value , T>::type = 0,
+		// typename EnableIfFalse<ft::IsFloatingPoint<InputIterator>::value , T>::type = 0)
 	:_tree(comp,alloc)
 	{
 		insert(first,last);

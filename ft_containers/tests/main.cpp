@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:13:14 by arrigo            #+#    #+#             */
-/*   Updated: 2021/12/03 23:16:30 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/04 00:27:05 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,23 +126,43 @@ T	dec(T it, int n)
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#define T1 char
-#define T2 foo<std::string>
+#define T1 int
+#define T2 std::string
+typedef _pair<const T1, T2> T3;
+
+// static int iter = 0;
+
+template <typename MAP, typename U>
+void	ft_erase(MAP &mp, U param)
+{
+	// std::cout << "\t-- [" << iter++ << "] --" << std::endl;
+	std::cout << "ret: " << mp.erase(param) << std::endl;
+	printSize(mp);
+}
 
 int		main(void)
 {
-	TESTED_NAMESPACE::map<T1, T2> mp;
-
-	mp['a'] = "an element";
-	mp['b'] = "another element";
-	mp['c'] = mp['b'];
-	mp['b'] = "old element";
-
+	std::list<T3> lst;
+	unsigned int lst_size = 6;
+	for (unsigned int i = 0; i < lst_size; ++i)
+		lst.push_back(T3(i, std::string((lst_size - i), i + 65)));
+	TESTED_NAMESPACE::map<T1, T2> mp(lst.begin(), lst.end());
 	printSize(mp);
 
-	std::cout << "insert a new element via operator[]: " << mp['d'] << std::endl;
+	// for (int i = 2; i < 4; ++i)
+	// 	ft_erase(mp, i);
 
-	printSize(mp);
+	// ft_erase(mp, mp.begin()->first);
+	// ft_erase(mp, (--mp.end())->first);
+
+	// mp[-1] = "Hello";
+	// mp[10] = "Hi there";
+	// mp[10] = "Hi there";
+	// printSize(mp);
+
+// 	ft_erase(mp, 0);
+// 	ft_erase(mp, 1);
+
 	return (0);
 }
 
