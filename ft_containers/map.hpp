@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/04 01:43:15 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/04 03:00:26 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,17 +149,20 @@ public:
 		iterator it = find(val.first);
 		if (it != end()) //FOUND
 			return pair<iterator,bool>(it, false);
-		return pair<iterator,bool>(++(iterator(_tree.insert(val))), true);
+		iterator(_tree.insert(val));
+		return pair<iterator,bool>(find(val.first), true);
 	}
 	iterator insert (iterator position, const value_type& val)						//WITH HINT
 	{
+		(void)position;////////////////////////////////////////////////////////////////////////////NO
 		iterator it = find(val.first);
 		if (it != end()) //FOUND
 			return it;
-		typename tree_type::pointer ptr;
-		ptr = _tree.insert(position.getNode()->_parent, position.getNode(), val);
-		it = iterator(typename tree_type::iterator(ptr));
-			return it;
+		// typename tree_type::pointer ptr;
+		// ptr = _tree.insert(position.getNode()->_parent, position.getNode(), val);///////////////FARE
+		// insert(val);
+		// it = iterator(typename tree_type::iterator(ptr));
+		return insert(val).first;
 	}
 	template <class InputIterator>													//RANGE
 	void insert (InputIterator first, InputIterator last)
