@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/04 03:00:26 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/04 03:36:50 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,27 +227,55 @@ public:
 	}
     iterator lower_bound (const key_type& k)
 	{
-		return find(k);
+		if (_tree.key_comp(k, begin()->first))
+			return begin();
+		if (_tree.key_comp((--end())->first, k))
+			return end();
+		iterator temp = end();
+		for (iterator it = begin(); it != end(); it++)
+			if (_tree.key_comp(it->first, k) || it->first == k)
+				temp = it;
+		return temp;
 	}
 	const_iterator lower_bound (const key_type& k) const
 	{
-		return find(k);
+		if (_tree.key_comp(k, begin()->first))
+			return begin();
+		if (_tree.key_comp((--end())->first, k))
+			return end();
+		const_iterator temp = end();
+		for (const_iterator it = begin(); it != end(); it++)
+			if (_tree.key_comp(it->first, k) || it->first == k)
+				temp = it;
+		return temp;
 	}
 	iterator upper_bound (const key_type& k)
 	{
-		return ++find(k);
+		for (iterator it = begin(); it != end(); it++)
+			if (_tree.key_comp(k, it->first))
+				return it;
+		return end();
 	}
 	const_iterator upper_bound (const key_type& k) const
 	{
-		return ++find(k);		
+		for (const_iterator it = begin(); it != end(); it++)
+			if (_tree.key_comp(k, it->first))
+				return it;
+		return end();
 	}
 	pair<const_iterator,const_iterator> equal_range (const key_type& k) const
 	{
-		return pair<const_iterator, const_iterator> (lower_bound(k), upper_bound(k));
+		for (iterator it = begin(); it != end(); it++)
+			if (k == it->first)
+				return pair<const_iterator, const_iterator>(it++, it);
+		return pair<const_iterator, const_iterator>(lower_bound(k), lower_bound(k));
 	}
 	pair<iterator,iterator> equal_range (const key_type& k)
 	{
-		return pair<iterator, iterator> (lower_bound(k), upper_bound(k));
+		for (iterator it = begin(); it != end(); it++)
+			if (k == it->first)
+				return pair<iterator, iterator>(it++, it);
+		return pair<iterator, iterator>(lower_bound(k), lower_bound(k));
 	}
 /*ALLOCATOR-----------------------------------------------------------------------------------*/
 	allocator_type get_allocator() const 
