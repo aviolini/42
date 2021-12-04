@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/04 01:25:01 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/04 01:43:15 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,10 +180,10 @@ public:
 	}
 	void erase (iterator first, iterator last)
 	{
-		iterator temp = first;
-		temp++;
 		if (first != last)
 		{
+			iterator temp = first;
+			temp++;
 			erase(temp, last);
 			_tree.remove(first->first);
 		}

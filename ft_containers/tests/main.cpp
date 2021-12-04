@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:13:14 by arrigo            #+#    #+#             */
-/*   Updated: 2021/12/04 01:25:53 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/04 01:37:26 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,12 +170,12 @@ int		main(void)
 	printSize(mp);
 	ft_erase(mp, --(--(--mp.end())), mp.end());
 
-	mp[12] = "ONE";
-	mp[13] = "TWO";
-	mp[14] = "THREE";
-	mp[15] = "FOUR";
-	printSize(mp);
-	ft_erase(mp, mp.begin(), mp.end());
+	// mp[12] = "ONE";
+	// mp[13] = "TWO";
+	// mp[14] = "THREE";
+	// mp[15] = "FOUR";
+	// printSize(mp);
+	// ft_erase(mp, mp.begin(), mp.end());
 
 	return (0);
 }
