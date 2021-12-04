@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/03 23:04:13 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/04 01:12:33 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,10 +293,10 @@ public:
 	void destroy_tree()
 	{
 		clear(_root);
+		// node_allocator().destroy(_end);
 		node_allocator().deallocate(_end, 1);
-		node_allocator().destroy(_end);
+		// node_allocator().destroy(_begin);
 		node_allocator().deallocate(_begin, 1);
-		node_allocator().destroy(_begin);
 		_end = 0;
 		_begin = 0;
 		_root = 0;
@@ -311,8 +311,8 @@ public:
 		{
 			clear(node->_left);
 			clear(node->_right);
-			node_allocator().deallocate(node, 1);
 			node_allocator().destroy(node);
+			node_allocator().deallocate(node, 1);
 			_size = 0;
 			_root = _end;
 		}
@@ -366,16 +366,16 @@ public:
 			_size--;
 			if ((node->_left == 0 && node->_right == 0) || _size == 0)	//NO CHILDREN
 			{
-				node_allocator().deallocate(node, 1);
 				node_allocator().destroy(node);
+				node_allocator().deallocate(node, 1);
 				return 0;
 			}
 		  	if (node->_left == 0)										//RIGHT CHILD
 			{
 				pointer right_subtree = node->_right;
 				right_subtree->_parent = node->_parent;
-				node_allocator().deallocate(node, 1);
 				node_allocator().destroy(node);
+				node_allocator().deallocate(node, 1);
 				return right_subtree;
 			}
 		  	if (node->_left == _begin)									//LEFT BEGIN
@@ -387,21 +387,21 @@ public:
 					pointer min_node = find_min(right_subtree);
 					min_node->_left = _begin;
 					_begin->_parent = min_node;
-					node_allocator().deallocate(node, 1);
 					node_allocator().destroy(node);
+					node_allocator().deallocate(node, 1);
 					return right_subtree;
 				}
 				_begin->_parent = node->_parent;
-				node_allocator().deallocate(node, 1);
 				node_allocator().destroy(node);
+				node_allocator().deallocate(node, 1);
 				return _begin;
 			}
 			if (node->_right == 0)										//LEFT CHILD
 			{
 				pointer left_subtree = node->_left;
 				left_subtree->_parent = node->_parent;
-				node_allocator().deallocate(node, 1);
 				node_allocator().destroy(node);
+				node_allocator().deallocate(node, 1);
 				return left_subtree;
 			}
 		  	if (node->_right == _end)									//LEFT BEGIN
@@ -413,13 +413,13 @@ public:
 					pointer max_node = find_max(left_subtree);
 					max_node->_right = _end;
 					_end->_parent = max_node;
-					node_allocator().deallocate(node, 1);
 					node_allocator().destroy(node);
+					node_allocator().deallocate(node, 1);
 					return left_subtree;
 				}
 				_end->_parent = node->_parent;
-				node_allocator().deallocate(node, 1);
 				node_allocator().destroy(node);
+				node_allocator().deallocate(node, 1);
 				return _end;
 			}
 																		//LEFT AND RIGHT CHILDREN
@@ -428,8 +428,8 @@ public:
 			{																	/*	/\	*/
 				node->_right->_parent = max_node;								/* d t	*/
 				max_node->_right = node->_right;								/*si rimuove m */
-				node_allocator().deallocate(node, 1);
 				node_allocator().destroy(node);
+				node_allocator().deallocate(node, 1);
 				return max_node;
 			}
 			max_node->_left = remove_max_node(node->_left, max_node);
@@ -437,8 +437,8 @@ public:
 			max_node->_right = node->_right;
 			node->_right->_parent = max_node;
 			max_node->_parent = node->_parent;
-			node_allocator().deallocate(node, 1);
 			node_allocator().destroy(node);
+			node_allocator().deallocate(node, 1);
 			return max_node;
 		}
 		else if (key < node->_value.first)

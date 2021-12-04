@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:13:14 by arrigo            #+#    #+#             */
-/*   Updated: 2021/12/04 00:27:05 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/04 01:12:44 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,19 +149,19 @@ int		main(void)
 	TESTED_NAMESPACE::map<T1, T2> mp(lst.begin(), lst.end());
 	printSize(mp);
 
-	// for (int i = 2; i < 4; ++i)
-	// 	ft_erase(mp, i);
+	for (int i = 2; i < 4; ++i)
+		ft_erase(mp, i);
 
-	// ft_erase(mp, mp.begin()->first);
-	// ft_erase(mp, (--mp.end())->first);
+	ft_erase(mp, mp.begin()->first);
+	ft_erase(mp, (--mp.end())->first);
 
-	// mp[-1] = "Hello";
-	// mp[10] = "Hi there";
-	// mp[10] = "Hi there";
-	// printSize(mp);
+	mp[-1] = "Hello";
+	mp[10] = "Hi there";
+	mp[10] = "Hi there";
+	printSize(mp);
 
-// 	ft_erase(mp, 0);
-// 	ft_erase(mp, 1);
+	ft_erase(mp, 0);
+	ft_erase(mp, 1);
 
 	return (0);
 }
