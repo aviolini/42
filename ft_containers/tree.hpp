@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/04 01:12:33 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/04 02:21:49 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -428,6 +428,7 @@ public:
 			{																	/*	/\	*/
 				node->_right->_parent = max_node;								/* d t	*/
 				max_node->_right = node->_right;								/*si rimuove m */
+				max_node->_parent = node->_parent;
 				node_allocator().destroy(node);
 				node_allocator().deallocate(node, 1);
 				return max_node;
