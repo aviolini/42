@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/12/05 23:31:50 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/06 00:10:04 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,27 @@ public:
 	}
 /*MEMBER OPERATORS--------------------------------------------------*/
 // private:
-public:
-	pointer node() const
-	{
-		return _ptr;
-	}
-	pointer parent() const
-	{
-		return _ptr->_parent;
-	}
-	pointer right() const
-	{
-		return _ptr->_right;
-	}
-	pointer left() const
-	{
-		return _ptr->_left;
-	}
-	Pair & value() const
-	{
-		return _ptr->_value;
-	}
+// public:
+// 	pointer node() const
+// 	{
+// 		return _ptr;
+// 	}
+// 	pointer parent() const
+// 	{
+// 		return _ptr->_parent;
+// 	}
+// 	pointer right() const
+// 	{
+// 		return _ptr->_right;
+// 	}
+// 	pointer left() const
+// 	{
+// 		return _ptr->_left;
+// 	}
+// 	Pair & value() const
+// 	{
+// 		return _ptr->_value;
+// 	}
 public:
 	Pair* operator -> () const
 	{

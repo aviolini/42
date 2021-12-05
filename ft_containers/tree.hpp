@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/05 23:25:42 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/06 00:12:10 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,36 @@ struct node
 	int c;						///SERVE PER MAX_SIZE() (SOLO LINUX)
 };
 
+template <class tree>
+class treeIterator : public mapIterator<tree>
+{
+public:
+	typedef mapIterator<tree>						mapIterator;
+	typedef typename mapIterator::iterator_category	iterator_category;
+	typedef typename mapIterator::value_type		value_type;
+	typedef typename mapIterator::pointer			pointer;
+	typedef typename mapIterator::reference			reference;
+	typedef typename mapIterator::difference_type	difference_type;
+	typedef typename mapIterator::Pair				Pair;
+	treeIterator () : mapIterator(0) {}
+	treeIterator (pointer initLoc) : mapIterator(initLoc) {}
+	~treeIterator(){}
+	// treeIterator(treeIterator const & rhs) : mapIterator(rhs._ptr) {}
+	// treeIterator operator = (const treeIterator & rhs)
+	// {
+	// 	this->_ptr = rhs._ptr;
+	// 	return *this;
+	// }
+	pointer operator -> () const
+	{
+		return this->_ptr;
+	}
+	reference operator *() const
+	{
+		return *this->_ptr;
+	}
+};
+
 template < class P, class Compare = std::less<typename P::first_type>, class Alloc = std::allocator<P> >
 class tree
 {
@@ -131,8 +161,8 @@ public:
     typedef typename node_allocator::difference_type	difference_type;
     typedef typename node_allocator::pointer			pointer;
     typedef typename node_allocator::const_pointer		const_pointer;
-	typedef mapIterator<tree>							const_iterator;
-	typedef mapIterator<tree>							iterator;
+	typedef treeIterator<tree>							const_iterator;
+	typedef treeIterator<tree>							iterator;
 	typedef P Pair;
 
 	key_compare		key_comp;
@@ -166,7 +196,7 @@ public:
 		iterator it = x.begin();
 		// it++;
 		for (; it != x.end(); ++it)
-			insert(it.value());
+			insert(it->_value);
 	}																															//COPY
 	tree& operator= (const tree& x)
 	{
@@ -178,7 +208,7 @@ public:
 			iterator it = x.begin();
 			// it++;
 			for (; it != x.end(); ++it)
-				insert(it.value());
+				insert(it->_value);
     	}
     	return *this;
 	}
