@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/05 23:05:01 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/05 23:33:10 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ public:
 	// typedef mapIterator<ft::treeIterator<ft::node<const value_type> > >		const_iterator;
 	typedef mapIterator<tree_type >							const_iterator;
 	typedef mapIterator<tree_type >							iterator;
-	// typedef mapReverseIterator<const_iterator> 				const_reverse_iterator;
-	// typedef mapReverseIterator<iterator> 					reverse_iterator;
+	typedef mapReverseIterator<const_iterator> 				const_reverse_iterator;
+	typedef mapReverseIterator<iterator> 					reverse_iterator;
 	class value_compare
 	{
 	//   friend class map;
@@ -102,22 +102,22 @@ public:
 	{
 		return const_iterator(_tree.end());
 	}
-    // reverse_iterator rbegin()
-	// {
-	// 	return reverse_iterator(--iterator(_tree.end()));
-	// }
-	// const_reverse_iterator rbegin() const
-	// {
-	// 	return const_reverse_iterator(--const_iterator(_tree.end()));
-	// }
-    // reverse_iterator rend()
-	// {
-	// 	return reverse_iterator(--iterator(_tree.begin()));		
-	// }
-	// const_reverse_iterator rend() const
-	// {
-	// 	return const_reverse_iterator(--const_iterator(_tree.begin()));
-	// }
+    reverse_iterator rbegin()
+	{
+		return reverse_iterator(--iterator(_tree.end()));
+	}
+	const_reverse_iterator rbegin() const
+	{
+		return const_reverse_iterator(--const_iterator(_tree.end()));
+	}
+    reverse_iterator rend()
+	{
+		return reverse_iterator(--iterator(_tree.begin()));		
+	}
+	const_reverse_iterator rend() const
+	{
+		return const_reverse_iterator(--const_iterator(_tree.begin()));
+	}
 /*CAPACITY-----------------------------------------------------------------------------------*/
 	bool empty() const
 	{

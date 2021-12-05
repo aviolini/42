@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/12/05 23:26:20 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/05 23:31:50 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,58 +119,74 @@ public:
 	}
 };
 
-// template <class Iterator>
-// class mapReverseIterator : public Iterator 
-// {
-// public:
-// 	typedef Iterator									iterator_type;
-// 	typedef typename iterator_type::value_type 			value_type;
-// 	typedef typename iterator_type::pointer				pointer;
-// 	typedef typename iterator_type::reference			reference;
-// 	typedef typename iterator_type::difference_type		difference_type;
-// 	typedef typename iterator_type::iterator_category	iterator_category;
-// public:	
-// /*CANONICAL-----------------------------------------------------------------------------------*/		
-// 	mapReverseIterator () : Iterator(0) {}
-// 	mapReverseIterator (Iterator initLoc) : Iterator(initLoc) {}
-// 	~mapReverseIterator(){}
-// 	mapReverseIterator(mapReverseIterator const & rhs) : Iterator(rhs._data) {}
-// 	mapReverseIterator operator = (const mapReverseIterator & rhs)
-// 	{
-// 		this->_data = rhs._data;
-// 		return *this;
-// 	}
-// /*MEMBER OPERATORS--------------------------------------------------*/
-// 	// value_type operator -> () const
-// 	// {
-// 	// 	return &this->_data->_value;
-// 	// }
-// 	// reference operator *() const
-// 	// {
-// 	// 	return (this->_data->_value);
-// 	// }	
-// 	mapReverseIterator &operator ++()			//PREFIX
-// 	{
-// 		--this->_data;
-// 		return *this;
-// 	}
-// 	mapReverseIterator operator ++(int)			//POSTFIX
-// 	{
-// 		mapReverseIterator t(*this);
-// 		++(*this);
-// 		return t;
-// 	}
-// 	mapReverseIterator &operator --()			//PREFIX
-// 	{
-// 		++this->_data;
-// 		return *this;
-// 	}
-// 	mapReverseIterator operator --(int)			//POSTFIX
-// 	{
-// 		mapReverseIterator t(*this);
-// 		--(*this);
-// 		return t;
-// 	}
-// };
+template <class Iterator>
+class mapReverseIterator : public Iterator 
+{
+public:
+	typedef Iterator									iterator_type;
+	typedef typename iterator_type::value_type 			value_type;
+	typedef typename iterator_type::pointer				pointer;
+	typedef typename iterator_type::reference			reference;
+	typedef typename iterator_type::difference_type		difference_type;
+	typedef typename iterator_type::iterator_category	iterator_category;
+public:	
+/*CANONICAL-----------------------------------------------------------------------------------*/		
+	mapReverseIterator () : Iterator(0) {}
+	mapReverseIterator (Iterator initLoc) : Iterator(initLoc) {}
+	~mapReverseIterator(){}
+	mapReverseIterator(mapReverseIterator const & rhs) : Iterator(rhs._ptr) {}
+	mapReverseIterator operator = (const mapReverseIterator & rhs)
+	{
+		this->_ptr = rhs._ptr;
+		return *this;
+	}
+/*MEMBER OPERATORS--------------------------------------------------*/
+	// value_type operator -> () const
+	// {
+	// 	return &this->_ptr->_value;
+	// }
+	// reference operator *() const
+	// {
+	// 	return (this->_ptr->_value);
+	// }	
+	mapReverseIterator &operator ++()			//PREFIX
+	{
+		if (this->_ptr->_left != 0)
+		{
+			this->_ptr = this->_ptr->_left;
+			while (this->_ptr->_right != 0)
+				this->_ptr = this->_ptr->_right;
+			return *this;		
+		}
+		this->_ptr = this->_ptr->_parent;
+		return *this;
+	}
+	mapReverseIterator operator ++(int)			//POSTFIX
+	{
+		mapReverseIterator t(*this);
+		++(*this);
+		return t;
+	}
+	mapReverseIterator &operator --()			//PREFIX
+	{
+		if (this->_ptr->_right != 0)
+		{
+			this->_ptr = this->_ptr->_right;
+			while (this->_ptr->_left != 0)
+				this->_ptr = this->_ptr->_left;
+			return *this;		
+		}
+		while ( this->_ptr != this->_ptr->_parent->_left)
+			this->_ptr = this->_ptr->_parent;
+		this->_ptr = this->_ptr->_parent;
+		return *this;
+	}
+	mapReverseIterator operator --(int)			//POSTFIX
+	{
+		mapReverseIterator t(*this);
+		--(*this);
+		return t;
+	}
+};
 
 #endif
