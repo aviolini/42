@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapIterators.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/12/02 11:08:47 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/05 23:26:20 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,45 +15,73 @@
 
 #include "utils.hpp"
 
-template <class treeIterator>
+template <class tree>
 class mapIterator
 {
 public:
-	typedef typename treeIterator::iterator_category	iterator_category;
-	typedef typename treeIterator::value_type			value_type;
-	typedef typename treeIterator::pointer				pointer;
-	typedef typename treeIterator::reference			reference;
-	typedef typename treeIterator::difference_type		difference_type;
-	typedef typename treeIterator::Pair					Pair;
+	typedef ft::Bidirectional_iterator_tag	iterator_category;
+	typedef typename tree::value_type			value_type;
+	typedef typename tree::pointer				pointer;
+	typedef typename tree::reference			reference;
+	typedef typename tree::difference_type		difference_type;
+	typedef typename tree::Pair					Pair;
 protected:
-	treeIterator _data;
+	pointer _ptr;
 public:	
 /*CANONICAL-----------------------------------------------------------------------------------*/		
-	mapIterator () : _data(0) {}
-	mapIterator (treeIterator initLoc) : _data(initLoc) {}
-	~mapIterator(){}
-	mapIterator(mapIterator const & rhs) : _data(rhs._data) {}
+	mapIterator () : _ptr(0) {}
+	mapIterator (pointer initLoc) : _ptr(initLoc) {}
+	virtual ~mapIterator(){}
+	mapIterator(mapIterator const & rhs) : _ptr(rhs._ptr) {}
 	mapIterator operator = (const mapIterator & rhs)
 	{
-		this->_data = rhs._data;
+		this->_ptr = rhs._ptr;
 		return *this;
 	}
 /*MEMBER OPERATORS--------------------------------------------------*/
-	pointer getNode() const
+// private:
+public:
+	pointer node() const
 	{
-		return _data.getNode();
+		return _ptr;
 	}
+	pointer parent() const
+	{
+		return _ptr->_parent;
+	}
+	pointer right() const
+	{
+		return _ptr->_right;
+	}
+	pointer left() const
+	{
+		return _ptr->_left;
+	}
+	Pair & value() const
+	{
+		return _ptr->_value;
+	}
+public:
 	Pair* operator -> () const
 	{
-		return &(this->_data->_value);
+		return &(this->_ptr->_value);
 	}
 	Pair &operator *() const
 	{
-		return (this->_data->_value);
+		return (this->_ptr->_value);
 	}
 	mapIterator &operator ++()			//PREFIX
 	{
-		++this->_data;
+		if (_ptr->_right != 0)
+		{
+			_ptr = _ptr->_right;
+			while (_ptr->_left != 0)
+				_ptr = _ptr->_left;
+			return *this;		
+		}
+		while ( _ptr != _ptr->_parent->_left)
+			_ptr = _ptr->_parent;
+		_ptr = _ptr->_parent;
 		return *this;
 	}
 	mapIterator operator ++(int)		//POSTFIX
@@ -64,7 +92,14 @@ public:
 	}
 	mapIterator &operator --()			//PREFIX
 	{
-		--this->_data;
+		if (_ptr->_left != 0)
+		{
+			_ptr = _ptr->_left;
+			while (_ptr->_right != 0)
+				_ptr = _ptr->_right;
+			return *this;		
+		}
+		_ptr = _ptr->_parent;
 		return *this;
 	}
 	mapIterator operator --(int)		//POSTFIX
@@ -76,66 +111,66 @@ public:
 /*RELATIONAL OPERATORS--------------------------------------------------*/
 	bool operator == (const mapIterator & rhs)
 	{
-		return (this->_data == rhs._data);
+		return (this->_ptr == rhs._ptr);
 	}
 	bool operator != (const mapIterator & rhs)
 	{
-		return !(this->_data == rhs._data);
+		return !(this->_ptr == rhs._ptr);
 	}
 };
 
-template <class Iterator>
-class mapReverseIterator : public Iterator 
-{
-public:
-	typedef Iterator									iterator_type;
-	typedef typename iterator_type::value_type 			value_type;
-	typedef typename iterator_type::pointer				pointer;
-	typedef typename iterator_type::reference			reference;
-	typedef typename iterator_type::difference_type		difference_type;
-	typedef typename iterator_type::iterator_category	iterator_category;
-public:	
-/*CANONICAL-----------------------------------------------------------------------------------*/		
-	mapReverseIterator () : Iterator(0) {}
-	mapReverseIterator (Iterator initLoc) : Iterator(initLoc) {}
-	~mapReverseIterator(){}
-	mapReverseIterator(mapReverseIterator const & rhs) : Iterator(rhs._data) {}
-	mapReverseIterator operator = (const mapReverseIterator & rhs)
-	{
-		this->_data = rhs._data;
-		return *this;
-	}
-/*MEMBER OPERATORS--------------------------------------------------*/
-	// value_type operator -> () const
-	// {
-	// 	return &this->_data->_value;
-	// }
-	// reference operator *() const
-	// {
-	// 	return (this->_data->_value);
-	// }	
-	mapReverseIterator &operator ++()			//PREFIX
-	{
-		--this->_data;
-		return *this;
-	}
-	mapReverseIterator operator ++(int)			//POSTFIX
-	{
-		mapReverseIterator t(*this);
-		++(*this);
-		return t;
-	}
-	mapReverseIterator &operator --()			//PREFIX
-	{
-		++this->_data;
-		return *this;
-	}
-	mapReverseIterator operator --(int)			//POSTFIX
-	{
-		mapReverseIterator t(*this);
-		--(*this);
-		return t;
-	}
-};
+// template <class Iterator>
+// class mapReverseIterator : public Iterator 
+// {
+// public:
+// 	typedef Iterator									iterator_type;
+// 	typedef typename iterator_type::value_type 			value_type;
+// 	typedef typename iterator_type::pointer				pointer;
+// 	typedef typename iterator_type::reference			reference;
+// 	typedef typename iterator_type::difference_type		difference_type;
+// 	typedef typename iterator_type::iterator_category	iterator_category;
+// public:	
+// /*CANONICAL-----------------------------------------------------------------------------------*/		
+// 	mapReverseIterator () : Iterator(0) {}
+// 	mapReverseIterator (Iterator initLoc) : Iterator(initLoc) {}
+// 	~mapReverseIterator(){}
+// 	mapReverseIterator(mapReverseIterator const & rhs) : Iterator(rhs._data) {}
+// 	mapReverseIterator operator = (const mapReverseIterator & rhs)
+// 	{
+// 		this->_data = rhs._data;
+// 		return *this;
+// 	}
+// /*MEMBER OPERATORS--------------------------------------------------*/
+// 	// value_type operator -> () const
+// 	// {
+// 	// 	return &this->_data->_value;
+// 	// }
+// 	// reference operator *() const
+// 	// {
+// 	// 	return (this->_data->_value);
+// 	// }	
+// 	mapReverseIterator &operator ++()			//PREFIX
+// 	{
+// 		--this->_data;
+// 		return *this;
+// 	}
+// 	mapReverseIterator operator ++(int)			//POSTFIX
+// 	{
+// 		mapReverseIterator t(*this);
+// 		++(*this);
+// 		return t;
+// 	}
+// 	mapReverseIterator &operator --()			//PREFIX
+// 	{
+// 		++this->_data;
+// 		return *this;
+// 	}
+// 	mapReverseIterator operator --(int)			//POSTFIX
+// 	{
+// 		mapReverseIterator t(*this);
+// 		--(*this);
+// 		return t;
+// 	}
+// };
 
 #endif

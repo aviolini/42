@@ -18,3 +18,5 @@ git clone https://github.com/mli42/containers_test.git && cd ./containers_test/
 NAMESPACE IN VECTOR ITERATORS
 CAMBIARE I CONST ITERATOR DI MAP
 SISTEMARE CON IL FOR NEI COSTRUTTORI DI VECTOR                 _allocator.construct(_data, value_type());   
+IN MAP ITERATOR RENDERE PRIVATE I GETTER INTERNI
+IN MAP METTERE FRIEND NELLA CLASSE INTERNA

@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/05 22:24:58 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/05 23:25:42 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,92 +14,93 @@
 #define TREE_H
 
 #include "./utils.hpp"
+#include "./mapIterators.hpp"
 
 namespace ft
 {
-template <class _Tp>
-class treeIterator
-{
-public:
-    typedef ft::Bidirectional_iterator_tag	iterator_category;
-    typedef _Tp                         	value_type;
-	typedef value_type*						pointer;
-	typedef value_type&						reference;
-    typedef ft::ptrdiff_t					difference_type;
-	typedef typename _Tp::Pair_type 		Pair;
-private:
-    pointer _ptr;
-public:
-	treeIterator() : _ptr(0){}
-	treeIterator (pointer initLoc) : _ptr(initLoc){}
-	~treeIterator(){}
-	treeIterator(treeIterator const & rhs) : _ptr(rhs._ptr) {}
-	treeIterator operator = (const treeIterator & rhs)
-	{
-		_ptr = rhs._ptr;
-		return *this;		
-	}
-/*MEMBER OPERATORS--------------------------------------------------*/
-	pointer getNode() const
-	{
-		return _ptr;	
-	}
-	pointer operator -> () const
-	{
-		return _ptr;
-	}
-	reference operator *() const
-	{
-		return *_ptr;
-	}
-	treeIterator &operator ++()				//PREFIX
-	{
-		if (_ptr->_right != 0)
-		{
-			_ptr = _ptr->_right;
-			while (_ptr->_left != 0)
-				_ptr = _ptr->_left;
-			return *this;		
-		}
-		while ( _ptr != _ptr->_parent->_left)
-			_ptr = _ptr->_parent;
-		_ptr = _ptr->_parent;
-		return *this;
-	}
-	treeIterator operator ++(int)			//POSTFIX
-	{
-		treeIterator t;
-		++(*this);
-		return t;
-	}
-	treeIterator &operator --()				//PREFIX
-	{
-		if (_ptr->_left != 0)
-		{
-			_ptr = _ptr->_left;
-			while (_ptr->_right != 0)
-				_ptr = _ptr->_right;
-			return *this;		
-		}
-		_ptr = _ptr->_parent;
-		return *this;
-	}
-	treeIterator operator --(int)			//POSTFIX
-	{
-		treeIterator t;
-		--(*this);
-		return t;
-	}
-/*RELATIONAL OPERATORS--------------------------------------------------*/
-	bool operator == (const treeIterator & rhs)
-	{
-		return (_ptr == rhs._ptr);
-	}
-	bool operator != (const treeIterator & rhs)
-	{
-		return !(_ptr == rhs._ptr);
-	}
-};
+// template <class _Tp>
+// class treeIterator
+// {
+// public:
+//     typedef ft::Bidirectional_iterator_tag	iterator_category;
+//     typedef _Tp                         	value_type;
+// 	typedef value_type*						pointer;
+// 	typedef value_type&						reference;
+//     typedef ft::ptrdiff_t					difference_type;
+// 	typedef typename _Tp::Pair_type 		Pair;
+// private:
+//     pointer _ptr;
+// public:
+// 	treeIterator() : _ptr(0){}
+// 	treeIterator (pointer initLoc) : _ptr(initLoc){}
+// 	~treeIterator(){}
+// 	treeIterator(treeIterator const & rhs) : _ptr(rhs._ptr) {}
+// 	treeIterator operator = (const treeIterator & rhs)
+// 	{
+// 		_ptr = rhs._ptr;
+// 		return *this;		
+// 	}
+// /*MEMBER OPERATORS--------------------------------------------------*/
+// 	pointer getNode() const
+// 	{
+// 		return _ptr;	
+// 	}
+// 	pointer operator -> () const
+// 	{
+// 		return _ptr;
+// 	}
+// 	reference operator *() const
+// 	{
+// 		return *_ptr;
+// 	}
+// 	treeIterator &operator ++()				//PREFIX
+// 	{
+// 		if (_ptr->_right != 0)
+// 		{
+// 			_ptr = _ptr->_right;
+// 			while (_ptr->_left != 0)
+// 				_ptr = _ptr->_left;
+// 			return *this;		
+// 		}
+// 		while ( _ptr != _ptr->_parent->_left)
+// 			_ptr = _ptr->_parent;
+// 		_ptr = _ptr->_parent;
+// 		return *this;
+// 	}
+// 	treeIterator operator ++(int)			//POSTFIX
+// 	{
+// 		treeIterator t;
+// 		++(*this);
+// 		return t;
+// 	}
+// 	treeIterator &operator --()				//PREFIX
+// 	{
+// 		if (_ptr->_left != 0)
+// 		{
+// 			_ptr = _ptr->_left;
+// 			while (_ptr->_right != 0)
+// 				_ptr = _ptr->_right;
+// 			return *this;		
+// 		}
+// 		_ptr = _ptr->_parent;
+// 		return *this;
+// 	}
+// 	treeIterator operator --(int)			//POSTFIX
+// 	{
+// 		treeIterator t;
+// 		--(*this);
+// 		return t;
+// 	}
+// /*RELATIONAL OPERATORS--------------------------------------------------*/
+// 	bool operator == (const treeIterator & rhs)
+// 	{
+// 		return (_ptr == rhs._ptr);
+// 	}
+// 	bool operator != (const treeIterator & rhs)
+// 	{
+// 		return !(_ptr == rhs._ptr);
+// 	}
+// };
 
 
 template < class Pair >
@@ -116,13 +117,13 @@ struct node
 	int c;						///SERVE PER MAX_SIZE() (SOLO LINUX)
 };
 
-template < class Pair, class Compare = std::less<typename Pair::first_type>, class Alloc = std::allocator<Pair> >
+template < class P, class Compare = std::less<typename P::first_type>, class Alloc = std::allocator<P> >
 class tree
 {
 public:
 	typedef Alloc										pair_allocator;
 	typedef Compare										key_compare;
-	typedef std::allocator<node<Pair> >					node_allocator;
+	typedef std::allocator<node<P> >					node_allocator;
 	typedef typename node_allocator::value_type			value_type;
     typedef typename node_allocator::size_type		    size_type;
     typedef typename node_allocator::reference			reference;
@@ -130,8 +131,9 @@ public:
     typedef typename node_allocator::difference_type	difference_type;
     typedef typename node_allocator::pointer			pointer;
     typedef typename node_allocator::const_pointer		const_pointer;
-	typedef treeIterator<value_type>					const_iterator;
-	typedef treeIterator<value_type>					iterator;
+	typedef mapIterator<tree>							const_iterator;
+	typedef mapIterator<tree>							iterator;
+	typedef P Pair;
 
 	key_compare		key_comp;
 private:
@@ -164,7 +166,7 @@ public:
 		iterator it = x.begin();
 		// it++;
 		for (; it != x.end(); ++it)
-			insert(it->_value);
+			insert(it.value());
 	}																															//COPY
 	tree& operator= (const tree& x)
 	{
@@ -176,7 +178,7 @@ public:
 			iterator it = x.begin();
 			// it++;
 			for (; it != x.end(); ++it)
-				insert(it->_value);
+				insert(it.value());
     	}
     	return *this;
 	}
