@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/04 03:36:50 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/05 01:37:35 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ public:
 	typedef tree<value_type,key_compare,allocator_type> 	tree_type;
 	// typedef typename tree_type::value_compare				value_compare;
 	typedef ft::node<value_type>							node_type;
-	typedef mapIterator<ft::treeIterator<node_type> >		const_iterator;
+	// typedef mapIterator<ft::treeIterator<ft::node<const value_type> > >		const_iterator;
+	typedef mapIterator<ft::treeIterator<ft::node<value_type> > >		const_iterator;
 	typedef mapIterator<ft::treeIterator<node_type> >		iterator;
 	typedef mapReverseIterator<const_iterator> 				const_reverse_iterator;
 	typedef mapReverseIterator<iterator> 					reverse_iterator;
