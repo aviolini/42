@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/04 02:21:49 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/05 22:24:58 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ public:
 		return !(_ptr == rhs._ptr);
 	}
 };
+
 
 template < class Pair >
 struct node
