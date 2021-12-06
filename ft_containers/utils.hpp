@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 16:38:56 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/29 16:00:04 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/06 15:40:22 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,34 @@ bool equal (InputIterator1 first1, InputIterator1 last1, InputIterator2 first2)
   	}
   	return true;
 }
+
+template <class InputIterator1, class InputIterator2>
+bool lexicographical_comparePair (InputIterator1 first1, InputIterator1 last1, InputIterator2 first2, InputIterator2 last2)
+{
+	while (first1!=last1)
+	{
+		if (first2==last2 || first2->first<first1->first)
+			return false;
+		else if (first1->first<first2->first)
+			return true;
+		++first1;
+		++first2;
+  }
+  return (first2!=last2);
+}
+template <class InputIterator1, class InputIterator2>
+bool equalPair (InputIterator1 first1, InputIterator1 last1, InputIterator2 first2)
+{
+	while (first1!=last1)
+	{
+		if (!(first1->first == first2->first))
+			return false;
+		++first1;
+		++first2;
+  	}
+  	return true;
+}
+
 };
 
 template <class T1, class T2>
