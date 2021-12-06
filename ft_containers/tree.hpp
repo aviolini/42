@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/06 00:12:10 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/06 14:02:47 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ struct node
 	node		*_parent;
 	node 		*_left;
 	node 		*_right;
-	int c;						///SERVE PER MAX_SIZE() (SOLO LINUX)
+	int 		c;						///SERVE PER MAX_SIZE()
 };
 
 template <class tree>
@@ -178,9 +178,11 @@ public:
 	:key_comp(key_comp), _pair_allocator(alloc)
 	{
 		_end = node_allocator().allocate(1);
-		// node_allocator().construct(_end, value_type());
+		node_allocator().construct(_end, ft::make_pair<typename P::first_type,typename P::second_type>
+											(typename P::first_type(), typename P::second_type()));
 		_begin = node_allocator().allocate(1);
-		// node_allocator().construct(_begin, value_type());
+		node_allocator().construct(_begin, ft::make_pair<typename P::first_type,typename P::second_type>
+											(typename P::first_type(), typename P::second_type()));
 		_root = _end;
 		this->_size = 0;
 	}
@@ -188,9 +190,11 @@ public:
 	:key_comp(x.key_comp),  _pair_allocator(x._pair_allocator)
 	{
 		_end = node_allocator().allocate(1);
-		node_allocator().construct(_end, value_type());
+		node_allocator().construct(_end, ft::make_pair<typename P::first_type,typename P::second_type>
+											(typename P::first_type(), typename P::second_type()));
 		_begin = node_allocator().allocate(1);
-		node_allocator().construct(_begin, value_type());
+		node_allocator().construct(_begin, ft::make_pair<typename P::first_type,typename P::second_type>
+											(typename P::first_type(), typename P::second_type()));
 		_root = _end;
 		this->_size = 0;
 		iterator it = x.begin();
