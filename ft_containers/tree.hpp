@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/06 16:08:30 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/06 17:47:26 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,91 +18,6 @@
 
 namespace ft
 {
-// template <class _Tp>
-// class treeIterator
-// {
-// public:
-//     typedef ft::Bidirectional_iterator_tag	iterator_category;
-//     typedef _Tp                         	value_type;
-// 	typedef value_type*						pointer;
-// 	typedef value_type&						reference;
-//     typedef ft::ptrdiff_t					difference_type;
-// 	typedef typename _Tp::Pair_type 		Pair;
-// private:
-//     pointer _ptr;
-// public:
-// 	treeIterator() : _ptr(0){}
-// 	treeIterator (pointer initLoc) : _ptr(initLoc){}
-// 	~treeIterator(){}
-// 	treeIterator(treeIterator const & rhs) : _ptr(rhs._ptr) {}
-// 	treeIterator operator = (const treeIterator & rhs)
-// 	{
-// 		_ptr = rhs._ptr;
-// 		return *this;		
-// 	}
-// /*MEMBER OPERATORS--------------------------------------------------*/
-// 	pointer getNode() const
-// 	{
-// 		return _ptr;	
-// 	}
-// 	pointer operator -> () const
-// 	{
-// 		return _ptr;
-// 	}
-// 	reference operator *() const
-// 	{
-// 		return *_ptr;
-// 	}
-// 	treeIterator &operator ++()				//PREFIX
-// 	{
-// 		if (_ptr->_right != 0)
-// 		{
-// 			_ptr = _ptr->_right;
-// 			while (_ptr->_left != 0)
-// 				_ptr = _ptr->_left;
-// 			return *this;		
-// 		}
-// 		while ( _ptr != _ptr->_parent->_left)
-// 			_ptr = _ptr->_parent;
-// 		_ptr = _ptr->_parent;
-// 		return *this;
-// 	}
-// 	treeIterator operator ++(int)			//POSTFIX
-// 	{
-// 		treeIterator t;
-// 		++(*this);
-// 		return t;
-// 	}
-// 	treeIterator &operator --()				//PREFIX
-// 	{
-// 		if (_ptr->_left != 0)
-// 		{
-// 			_ptr = _ptr->_left;
-// 			while (_ptr->_right != 0)
-// 				_ptr = _ptr->_right;
-// 			return *this;		
-// 		}
-// 		_ptr = _ptr->_parent;
-// 		return *this;
-// 	}
-// 	treeIterator operator --(int)			//POSTFIX
-// 	{
-// 		treeIterator t;
-// 		--(*this);
-// 		return t;
-// 	}
-// /*RELATIONAL OPERATORS--------------------------------------------------*/
-// 	bool operator == (const treeIterator & rhs)
-// 	{
-// 		return (_ptr == rhs._ptr);
-// 	}
-// 	bool operator != (const treeIterator & rhs)
-// 	{
-// 		return !(_ptr == rhs._ptr);
-// 	}
-// };
-
-
 template < class Pair >
 struct node
 {
@@ -114,7 +29,7 @@ struct node
 	node		*_parent;
 	node 		*_left;
 	node 		*_right;
-	int 		c;						///SERVE PER MAX_SIZE()
+	int 		empty_var;						///TO DECREMENT SIZE FOR MAX_SIZE()
 };
 
 template <class tree>
@@ -131,12 +46,12 @@ public:
 	treeIterator () : mapIterator(0) {}
 	treeIterator (pointer initLoc) : mapIterator(initLoc) {}
 	~treeIterator(){}
-	// treeIterator(treeIterator const & rhs) : mapIterator(rhs._ptr) {}
-	// treeIterator operator = (const treeIterator & rhs)
-	// {
-	// 	this->_ptr = rhs._ptr;
-	// 	return *this;
-	// }
+	treeIterator(treeIterator const & rhs) : mapIterator(rhs._ptr) {}
+	treeIterator operator = (const treeIterator & rhs)
+	{
+		this->_ptr = rhs._ptr;
+		return *this;
+	}
 	pointer operator -> () const
 	{
 		return this->_ptr;
