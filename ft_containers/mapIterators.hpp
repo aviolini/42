@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapIterators.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/12/06 02:48:44 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/06 17:58:46 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,6 @@ public:
 		return *this;
 	}
 /*MEMBER OPERATORS--------------------------------------------------*/
-// private:
-// public:
-// 	pointer node() const
-// 	{
-// 		return _ptr;
-// 	}
-// 	pointer parent() const
-// 	{
-// 		return _ptr->_parent;
-// 	}
-// 	pointer right() const
-// 	{
-// 		return _ptr->_right;
-// 	}
-// 	pointer left() const
-// 	{
-// 		return _ptr->_left;
-// 	}
-// 	Pair & value() const
-// 	{
-// 		return _ptr->_value;
-// 	}
 public:
 	pointer base() const
 	{
@@ -146,18 +124,6 @@ public:
 		return *this;
 	}
 /*MEMBER OPERATORS--------------------------------------------------*/
-	// value_type operator -> () const
-	// {
-	// 	return &this->_ptr->_value;
-	// }
-	// reference operator *() const
-	// {
-	// 	return (this->_ptr->_value);
-	// }
-	mapReverseIterator base() const
-	{
-		return mapReverseIterator(this->_ptr);
-	}
 	mapReverseIterator &operator ++()			//PREFIX
 	{
 		if (this->_ptr->_left != 0)
