@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:13:14 by arrigo            #+#    #+#             */
-/*   Updated: 2021/12/06 17:03:43 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/06 18:06:44 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ namespace ft = std;
 int main() 
 {
 
-	stackTest< ft::stack<int, ft::vector<int> > > ();
+	stackTest< ft::stack<int, ft::vector<int> > > ();			//LEAKS
 	stackTest< ft::stack<int, std::deque<int> > > ();
 
-	vectorTest< ft::vector<int> >();
+	vectorTest< ft::vector<int> >();							//LEAKS
 
 	ft::pair<const char, int> (*ptr)(const char, int) = &ft::make_pair<const char, int>;
 	mapTest< ft::map<char,int, std::less<char>, std::allocator<ft::pair <const char, int > > >, ft::pair<const char, int> >(ptr);

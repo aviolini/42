@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/06 16:07:26 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/06 18:05:25 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ template < class Key, class T, class Compare = std::less<Key>, class Alloc = std
 class map
 {
 public:
-	typedef Key												key_type;		//THE TYPE OF THE KEY
-	typedef T												mapped_type;	//THE TYPE OF THE VALUES
+	typedef Key												key_type;
+	typedef T												mapped_type;
 	typedef Alloc											allocator_type;
 	typedef Compare											key_compare;
 	typedef typename allocator_type::value_type				value_type;	
@@ -39,16 +39,14 @@ public:
     typedef typename allocator_type::difference_type		difference_type;
     typedef typename allocator_type::size_type		   		size_type;
 	typedef tree<value_type,key_compare,allocator_type> 	tree_type;
-	// typedef typename tree_type::value_compare				value_compare;
-	typedef ft::node<value_type>							node_type;
-	// typedef mapIterator<ft::treeIterator<ft::node<const value_type> > >		const_iterator;
 	typedef mapIterator<tree_type >							const_iterator;
 	typedef mapIterator<tree_type >							iterator;
 	typedef mapReverseIterator<const_iterator> 				const_reverse_iterator;
 	typedef mapReverseIterator<iterator> 					reverse_iterator;
+
 	class value_compare
 	{
-	//   friend class map;
+	//   friend class map< Key, T, Compare, Alloc>;	//TO DO
 	// protected:
 	public:
 	  Compare key_comp;
@@ -62,8 +60,9 @@ public:
 	  {
 	    return key_comp(x.first, y.first);
 	  }
+
 	};
-// private:
+private:
 	tree_type	_tree;
 
 public:
@@ -71,9 +70,7 @@ public:
 	explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type()) :
 	_tree(comp, alloc){}									//EMPTY
 	template <class InputIterator>
-	map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())//,		//RANGE
-		// typename EnableIfFalse<ft::IsIntegral<InputIterator>::value , T>::type = 0,
-		// typename EnableIfFalse<ft::IsFloatingPoint<InputIterator>::value , T>::type = 0)
+	map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
 	:_tree(comp,alloc)
 	{
 		insert(first,last);
@@ -131,7 +128,6 @@ public:
 	}
 	size_type max_size() const
 	{
-		// return allocator_type().max_size();
 		return typename tree_type::node_allocator().max_size();
 	}
 /*ELEMENT ACCESS-------------------------------------------------------------------------------*/
@@ -142,7 +138,6 @@ public:
 			return it ->second;
 		insert(ft::make_pair(k,mapped_type()));
 		return find(k)->second;
-		// return (--(insert(ft::make_pair(k,mapped_type())).first))->second;/////////////////FARE UN TEST
 	}
 /*MODIFIERS-----------------------------------------------------------------------------------*/
 	pair<iterator,bool> insert (const value_type& val)								//SINGLE ELEMENT
@@ -155,14 +150,10 @@ public:
 	}
 	iterator insert (iterator position, const value_type& val)						//WITH HINT
 	{
-		(void)position;////////////////////////////////////////////////////////////////////////////NO
-		iterator it = find(val.first);
+		iterator it = position; //TO DO
+		it = find(val.first);
 		if (it != end()) //FOUND
 			return it;
-		// typename tree_type::pointer ptr;
-		// ptr = _tree.insert(position.getNode()->_parent, position.getNode(), val);///////////////FARE
-		// insert(val);
-		// it = iterator(typename tree_type::iterator(ptr));
 		return insert(val).first;
 	}
 	template <class InputIterator>													//RANGE
@@ -194,12 +185,6 @@ public:
 	}
 	void swap (map& x)
 	{
-		// map temp(x);
-		// x = *this;
-		// *this = temp;
-		// pointer temp = &_tree;
-		// _tree = x._tree;
-		// x._tree = temp;
 		this->_tree.swap(x._tree);
 	}
 	void clear()
@@ -295,8 +280,8 @@ public:
 };
 };
 
-
 /*Non-member function overloads*/
+/*SWAP-----------------------------------------------------------------------------------*/
 template < class Key, class T, class C, class A>
 void swap (ft::map<Key,T,C,A>& x, ft::map<Key,T,C,A>& y)
 {
@@ -336,6 +321,5 @@ bool operator>= (const ft::map<Key,T,C,A>& lhs, const ft::map<Key,T,C,A>& rhs)
 {
 	return ((lhs == rhs) || (lhs > rhs));
 }
-
 
 #endif
