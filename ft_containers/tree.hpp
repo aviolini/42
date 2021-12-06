@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/06 14:02:47 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/06 16:08:30 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,7 @@ private:
 	size_type		_size;
 public:
 /*CANONICAL-----------------------------------------------------------------------------------*/
+
 	explicit tree (const key_compare& key_comp = key_compare(), const pair_allocator& alloc = pair_allocator())
 	:key_comp(key_comp), _pair_allocator(alloc)
 	{
@@ -484,6 +485,21 @@ public:
 		else
 			node->_right = remove(node->_right, key);
 		return node;
+	}
+	void swap (tree &x)
+	{
+		pointer tempPointer = _root;
+		pointer tempEnd = _end;
+		pointer tempBegin = _begin;
+		size_type tempSize = _size;
+		_root = x._root;
+		_end = x._end;
+		_begin = x._begin;
+		_size = x._size;
+		x._root = tempPointer;
+		x._end = tempEnd;
+		x._begin = tempBegin;
+		x._size = tempSize;
 	}
 	//PRINT TREE//////////////////////////////////////////////////////////////////////////////////////
 	void print( std::string name)

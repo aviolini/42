@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/06 15:46:07 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/06 16:07:26 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,9 +194,13 @@ public:
 	}
 	void swap (map& x)
 	{
-		map temp(x);
-		x = *this;
-		*this = temp;
+		// map temp(x);
+		// x = *this;
+		// *this = temp;
+		// pointer temp = &_tree;
+		// _tree = x._tree;
+		// x._tree = temp;
+		this->_tree.swap(x._tree);
 	}
 	void clear()
 	{
@@ -293,6 +297,11 @@ public:
 
 
 /*Non-member function overloads*/
+template < class Key, class T, class C, class A>
+void swap (ft::map<Key,T,C,A>& x, ft::map<Key,T,C,A>& y)
+{
+	x.swap(y);
+}
 /*RELATIONAL OPERATOR--------------------------------------------------------------------*/
 template < class Key, class T, class C, class A>
 bool operator== (const ft::map<Key,T,C,A>& lhs, const ft::map<Key,T,C,A>& rhs)
