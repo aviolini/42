@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/06 17:47:26 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/06 17:57:23 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,11 @@ public:
     typedef typename node_allocator::const_pointer		const_pointer;
 	typedef treeIterator<tree>							const_iterator;
 	typedef treeIterator<tree>							iterator;
-	typedef P Pair;
+	typedef P 											Pair;
+	typedef typename P::first_type								PairFirst_type;
+	typedef typename P::second_type								PairSecond_type;
 
+	
 	key_compare		key_comp;
 private:
 	pair_allocator	_pair_allocator;
@@ -89,16 +92,13 @@ private:
 	size_type		_size;
 public:
 /*CANONICAL-----------------------------------------------------------------------------------*/
-
 	explicit tree (const key_compare& key_comp = key_compare(), const pair_allocator& alloc = pair_allocator())
 	:key_comp(key_comp), _pair_allocator(alloc)
 	{
 		_end = node_allocator().allocate(1);
-		node_allocator().construct(_end, ft::make_pair<typename P::first_type,typename P::second_type>
-											(typename P::first_type(), typename P::second_type()));
+		node_allocator().construct(_end, ft::make_pair<PairFirst_type, PairSecond_type>(PairFirst_type(), PairSecond_type()));
 		_begin = node_allocator().allocate(1);
-		node_allocator().construct(_begin, ft::make_pair<typename P::first_type,typename P::second_type>
-											(typename P::first_type(), typename P::second_type()));
+		node_allocator().construct(_begin, ft::make_pair<PairFirst_type, PairSecond_type>(PairFirst_type(), PairSecond_type()));
 		_root = _end;
 		this->_size = 0;
 	}
@@ -106,11 +106,9 @@ public:
 	:key_comp(x.key_comp),  _pair_allocator(x._pair_allocator)
 	{
 		_end = node_allocator().allocate(1);
-		node_allocator().construct(_end, ft::make_pair<typename P::first_type,typename P::second_type>
-											(typename P::first_type(), typename P::second_type()));
+		node_allocator().construct(_end, ft::make_pair<PairFirst_type, PairSecond_type>(PairFirst_type(), PairSecond_type()));
 		_begin = node_allocator().allocate(1);
-		node_allocator().construct(_begin, ft::make_pair<typename P::first_type,typename P::second_type>
-											(typename P::first_type(), typename P::second_type()));
+		node_allocator().construct(_begin, ft::make_pair<PairFirst_type, PairSecond_type>(PairFirst_type(), PairSecond_type()));
 		_root = _end;
 		this->_size = 0;
 		iterator it = x.begin();
@@ -136,7 +134,6 @@ public:
 	{
 		destroy_tree();
 	}
-
 /*ITERATORS-----------------------------------------------------------------------------------*/
 	iterator begin()
 	{
@@ -154,7 +151,6 @@ public:
 	{
 		return const_iterator(_end);
 	}
-
 /*METHODS-----------------------------------------------------------------------------------*/
 	size_type size() const
 	{
@@ -171,7 +167,7 @@ public:
 	}
 	pointer insert ( pointer parent, pointer node, const Pair & obj)
 	{
-		if (parent == 0 && node == _end)				// PRIMO GIRO
+		if (parent == 0 && node == _end)
 		{
 			pointer temp = node_allocator().allocate(1);
 			node_allocator().construct(temp, obj);
@@ -183,7 +179,7 @@ public:
 			_size++;
 			return temp;			
 		}
-		if (node == _begin)								//SE ARRIVA AL NODO CON VALUE MINORE
+		if (node == _begin)
 		{
 			pointer temp = node_allocator().allocate(1);
 			node_allocator().construct(temp, obj);
@@ -194,7 +190,7 @@ public:
 			_size++;
 			return temp;
 		}	
-		if (node == _end)								//SE ARRIVA AL NODO CON VALUE MAGGIORE
+		if (node == _end)
 		{
 			pointer temp = node_allocator().allocate(1);
 			node_allocator().construct(temp, obj);
@@ -205,7 +201,7 @@ public:
 			_size++;
 			return temp;
 		}		
-		if ( node == 0 )								//SE ARRIVA ALLA FINE DI UN SUBTREE
+		if ( node == 0 )
 		{
 			pointer temp = node_allocator().allocate(1);
 			node_allocator().construct(temp, obj);
@@ -246,9 +242,9 @@ public:
 	void destroy_tree()
 	{
 		clear(_root);
-		// node_allocator().destroy(_end);
+		node_allocator().destroy(_end);
 		node_allocator().deallocate(_end, 1);
-		// node_allocator().destroy(_begin);
+		node_allocator().destroy(_begin);
 		node_allocator().deallocate(_begin, 1);
 		_end = 0;
 		_begin = 0;
@@ -380,7 +376,7 @@ public:
 			if (max_node == node->_left)										/*	 m	*/
 			{																	/*	/\	*/
 				node->_right->_parent = max_node;								/* d t	*/
-				max_node->_right = node->_right;								/*si rimuove m */
+				max_node->_right = node->_right;								/*remove m */
 				max_node->_parent = node->_parent;
 				node_allocator().destroy(node);
 				node_allocator().deallocate(node, 1);
