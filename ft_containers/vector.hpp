@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:56:26 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/06 17:39:15 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/06 17:42:11 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -421,7 +421,7 @@ public:
 			newCap = capacity() * 2;
 		pointer temp;
 		temp = _allocator.allocate(newCap);
-		_allocator.construct(temp, value_type());
+		// _allocator.construct(temp, value_type());
 		size_type i = 0;
 		size_type k = 0;
 		iterator it = begin();
@@ -471,18 +471,19 @@ public:
 			newCap = capacity() * 2;
 		pointer temp;
 		temp = _allocator.allocate(newCap);
-		_allocator.construct(temp, value_type());
+		// _allocator.construct(temp, value_type());
 		size_type i = 0;
 		size_type k = 0;
 		iterator it = begin();
 		for (; it != position; ++it, ++i, ++k)
-			temp[k] = _data[i];
+			_allocator.construct(temp + k, _data[i]);
 		for (size_type i = 0; i  < len; ++i, ++k, first++)
-			temp[k] = *first;
+			_allocator.construct(temp + k, *first);
 		for (; it != end(); ++it, ++i, ++k)
-			temp[k] = _data[i];		
+			_allocator.construct(temp + k, _data[i]);
+		for (size_type i = 0; i < size(); ++i)
+			_allocator.destroy(_data + i);		
 		_allocator.deallocate(_data, capacity());
-		_allocator.destroy(_data);
 		_capacity = newCap;
 		_data = temp;
 		_size+=len;	
