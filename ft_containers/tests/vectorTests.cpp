@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectorTests.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:27:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/30 21:37:42 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/06 17:03:29 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -513,30 +513,11 @@ void vectorTest()
 		int c = 5;
 		test25.assign(a,c);
 		printVec(test25, "TEST25");
-		try
-		{
-			test25.assign(&a,&c);
-			printVec(test25, "TEST25");
-		}
-		catch(const std::exception& e)
-		{
-			std::cerr << e.what() << '\n';
-		}
 		C test28(8,9);
 		printVec(test28, "TEST28");
 		C test29;
 		test29.assign(test28.begin(), test28.end());
 		printVec(test29, "TEST29");
-		C test30;
-		try
-		{
-			test30.assign(test28.end(), test28.begin());
-			printVec(test30, "TEST30");
-		}
-		catch(const std::exception& e)
-		{
-			std::cerr << e.what() << '\n';
-		}
 
 	std::cout << "======================END VECTOR TEST==================" << std::endl;
 	
