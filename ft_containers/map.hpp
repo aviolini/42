@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/05 23:33:10 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/06 02:34:23 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,5 +290,61 @@ public:
 	}
 };
 };
+
+
+/*Non-member function overloads*/
+/*RELATIONAL OPERATOR--------------------------------------------------------------------*/
+template < class Key, class T, class C, class A>
+bool operator== (const ft::map<Key,T,C,A>& lhs, const ft::map<Key,T,C,A>& rhs)
+{
+	// if (lhs.size() != rhs.size())
+	// 	return false;
+	// return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+	(void)lhs;
+	(void)rhs;
+	return 1;
+}
+template < class Key, class T, class C, class A>
+bool operator!= (const ft::map<Key,T,C,A>& lhs, const ft::map<Key,T,C,A>& rhs)
+{
+	// return !(lhs == rhs);
+	(void)lhs;
+	(void)rhs;
+	return 1;
+}
+template < class Key, class T, class C, class A>
+bool operator< (const ft::map<Key,T,C,A>& lhs, const ft::map<Key,T,C,A>& rhs)
+{
+	// return ft::lexicographical_compare<typename ft::map<Key,T,C,A>::const_iterator, typename ft::map<Key,T,C,A>::const_iterator>
+	// (lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+	(void)lhs;
+	(void)rhs;
+	return 1;
+}
+template < class Key, class T, class C, class A>
+bool operator<= (const ft::map<Key,T,C,A>& lhs, const ft::map<Key,T,C,A>& rhs)
+{
+	// return ((lhs == rhs) || (lhs < rhs));
+	(void)lhs;
+	(void)rhs;
+	return 1;
+}
+template < class Key, class T, class C, class A>
+bool operator> (const ft::map<Key,T,C,A>& lhs, const ft::map<Key,T,C,A>& rhs)
+{
+	// return !(lhs<=rhs);
+	(void)lhs;
+	(void)rhs;
+	return 1;
+}
+template < class Key, class T, class C, class A>
+bool operator>= (const ft::map<Key,T,C,A>& lhs, const ft::map<Key,T,C,A>& rhs)
+{
+	// return ((lhs == rhs) || (lhs > rhs));
+	(void)lhs;
+	(void)rhs;
+	return 1;
+}
+
 
 #endif

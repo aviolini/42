@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/12/06 00:10:04 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/06 02:48:44 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ public:
 // 		return _ptr->_value;
 // 	}
 public:
+	pointer base() const
+	{
+		return _ptr;
+	}
 	Pair* operator -> () const
 	{
 		return &(this->_ptr->_value);
@@ -133,6 +137,7 @@ public:
 /*CANONICAL-----------------------------------------------------------------------------------*/		
 	mapReverseIterator () : Iterator(0) {}
 	mapReverseIterator (Iterator initLoc) : Iterator(initLoc) {}
+	mapReverseIterator (pointer initLoc) : Iterator(initLoc) {}
 	~mapReverseIterator(){}
 	mapReverseIterator(mapReverseIterator const & rhs) : Iterator(rhs._ptr) {}
 	mapReverseIterator operator = (const mapReverseIterator & rhs)
@@ -148,7 +153,11 @@ public:
 	// reference operator *() const
 	// {
 	// 	return (this->_ptr->_value);
-	// }	
+	// }
+	mapReverseIterator base() const
+	{
+		return mapReverseIterator(this->_ptr);
+	}
 	mapReverseIterator &operator ++()			//PREFIX
 	{
 		if (this->_ptr->_left != 0)
