@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:56:26 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/06 17:35:50 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/06 17:39:15 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -426,13 +426,14 @@ public:
 		size_type k = 0;
 		iterator it = begin();
 		for (; it != position; ++it, ++i, ++k)
-			temp[k] = _data[i];
+			_allocator.construct(temp + k, _data[i]);
 		for (size_type i = 0; i  < n; ++i, ++k)
-			temp[k] = val;
+			_allocator.construct(temp + k, val);
 		for (; it != end(); ++it, ++i, ++k)
-			temp[k] = _data[i];		
+			_allocator.construct(temp + k, _data[i]);		
+		for (size_type i = 0; i < size(); ++i)
+			_allocator.destroy(_data + i);
 		_allocator.deallocate(_data, capacity());
-		_allocator.destroy(_data);
 		_capacity = newCap;
 		_data = temp;
 		_size+=n;
