@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:56:26 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/03 19:31:45 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/06 17:23:57 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ public:
 			pointer temp;
 			size_type newCap = n;
 			temp = _allocator.allocate(newCap);
-			_allocator.construct(temp, value_type());
+			// _allocator.construct(temp, value_type());
 			size_type i = 0;
 			for (; i < size(); i++)
 				temp[i] = _data[i];
@@ -272,18 +272,25 @@ public:
 			_allocator.deallocate(_data, capacity());
 			_allocator.destroy(_data);
 			_data = _allocator.allocate(n);
-			_allocator.construct(_data, value_type());
+			// _allocator.construct(_data, value_type());
 			_capacity = n;
 		}
 		_size = n;
-		iterator it = begin();
-		for (; it != end(); ++it)
-			*it = val;
+		// iterator it = begin();
+		// for (; it != end(); ++it)
+		// 	*it = val;
+
+		// 	iterator it = begin();
+		// 	for (size_type i = 0; i < size(); i++)
+		// 		_allocator.construct(temp + i, *it++ );
+
+		for (size_t i = 0; i < size(); ++i)
+			_allocator.construct(_data + i, val);
 	}
 	template <class InputIterator>
 	void assign (InputIterator first, InputIterator last, 
-				typename ft::EnableIfFalse<ft::IsIntegral<InputIterator>::value , T>::type = 0,
-				typename ft::EnableIfFalse<ft::IsFloatingPoint<InputIterator>::value , T>::type = 0)	
+				typename ft::EnableIfFalse<ft::IsIntegral<InputIterator>::value , T>::type = 0)//,
+				// typename ft::EnableIfFalse<ft::IsFloatingPoint<InputIterator>::value , T>::type = 0)	
 	{
 		// if (last - first < 0)																								
 		// 	throw std::length_error("vector");	
@@ -292,17 +299,20 @@ public:
 			len++;
 		if (capacity() < len)
 		{
-			_allocator.deallocate(_data, capacity());
 			_allocator.destroy(_data);
+			_allocator.deallocate(_data, capacity());
 			_data = _allocator.allocate(len);
-			_allocator.construct(_data, value_type());
+			// _allocator.construct(_data, value_type());
 			_capacity = len;
 		}
 		_size = len;
-		InputIterator it = first;
-		pointer my = _data;
-		for (; it != last; ++it, ++my)
-			*my = *it;
+		// InputIterator it = first;
+		
+		// pointer my = _data;
+		// for (; it != last; ++it, ++my)
+		// 	*my = *it;
+		for (size_t i = 0; i < len; ++i)
+			_allocator.construct(_data + i, *first++);
 	}
 	void push_back (const value_type& val)
 	{
@@ -315,20 +325,26 @@ public:
 			else
 				newCap = capacity() * 2;
 			temp = _allocator.allocate(newCap);
-			size_type i = 0;
-			_allocator.construct(temp, value_type());
-			for (; i < size(); i++)
-				temp[i] = _data[i];
+			// size_type i = 0;
+			// _allocator.construct(temp, value_type());
+			// for (; i < size(); i++)
+			// 	temp[i] = _data[i];
+			for (size_t i = 0; i < size(); ++i)
+				_allocator.construct(temp + i, _data[i]);
 			// _allocator.construct(&temp[i], _data[i]);
 			if (_data)
 			{
-				_allocator.destroy(_data);
+				for (size_t i = 0; i < size(); ++i)
+				// _allocator.construct(temp + i, _data[i]);
+					_allocator.destroy(_data + i);
 				_allocator.deallocate(_data, capacity());
 			}
 			_capacity = newCap;
 			_data = temp;	
 		}
-		_data[size()] = val;
+		_allocator.construct(_data + size(), val);
+
+		// _data[size()] = val;
 		_size++;
 	}
 	void pop_back()
@@ -421,8 +437,8 @@ public:
 	}
 	template <class InputIterator>
 	void insert (iterator position, InputIterator first, InputIterator last,
-				typename ft::EnableIfFalse<ft::IsIntegral<InputIterator>::value , T>::type = 0,
-				typename ft::EnableIfFalse<ft::IsFloatingPoint<InputIterator>::value , T>::type = 0)
+				typename ft::EnableIfFalse<ft::IsIntegral<InputIterator>::value , T>::type = 0)//,
+				// typename ft::EnableIfFalse<ft::IsFloatingPoint<InputIterator>::value , T>::type = 0)
 	{
 		size_t len = 0;
 		for (InputIterator temp = first; temp != last; temp++) 
