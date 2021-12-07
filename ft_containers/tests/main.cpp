@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:13:14 by arrigo            #+#    #+#             */
-/*   Updated: 2021/12/06 18:06:44 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/07 01:02:27 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,18 @@ namespace ft = std;
 #include "stackTests.cpp"
 #include "mapTests.cpp"
 
-
 //MY
 int main() 
 {
 
-	stackTest< ft::stack<int, ft::vector<int> > > ();			//LEAKS
-	stackTest< ft::stack<int, std::deque<int> > > ();
+	// stackTest< ft::stack<int, ft::vector<int> > > ();			//LEAKS
+	// stackTest< ft::stack<int, std::deque<int> > > ();
 
 	vectorTest< ft::vector<int> >();							//LEAKS
 
-	ft::pair<const char, int> (*ptr)(const char, int) = &ft::make_pair<const char, int>;
-	mapTest< ft::map<char,int, std::less<char>, std::allocator<ft::pair <const char, int > > >, ft::pair<const char, int> >(ptr);
+	// ft::pair<const char, int> (*ptr)(const char, int) = &ft::make_pair<const char, int>;
+	// mapTest< ft::map<char,int, std::less<char>, std::allocator<ft::pair <const char, int > > >, ft::pair<const char, int> >(ptr);
+	// ft::vector<int> ciao(5);
 
 	return (0);
 }

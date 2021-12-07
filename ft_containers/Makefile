@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+         #
+#    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 09:43:32 by aviolini          #+#    #+#              #
-#    Updated: 2021/11/30 12:31:48 by aviolini         ###   ########.fr        #
+#    Updated: 2021/12/06 23:37:11 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,7 @@ leaks		:	cl fclean ft
 				
 #LEAKS CHECK LINUX
 valgrind	:	cl fclean ft
-				valgrind -s --leak-check=full ./$(FTNAME)
+				valgrind --leak-check=full ./$(FTNAME)
 
 #CLEAN
 clean		:	

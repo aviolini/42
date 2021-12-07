@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectorTests.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:27:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/06 17:03:29 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/07 00:54:11 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ void printVec(C &v, std::string name)
 	std::cout << "---------" << name << "----------------" << std::endl;
 	std::cout << "size:" << v.size() << "\tcapacity:" << v.capacity() << std::endl;
 	std::cout << "content: ";
-	typename C::iterator it = v.begin();;
-	for (; it != v.end() ; ++it)
-		std::cout << *it << " ";
+	typename C::iterator it;
+	if (v.size())
+		for (it = v.begin(); it != v.end() ; ++it)
+			std::cout << *it << " ";
 	std::cout << std::endl << "-------------------------------" << std::endl;
 }
 
@@ -51,8 +52,8 @@ void vectorTest()
 		printVec(copy1,"COPY1");
 		C empty1;
 		C empty2(empty1);
-		printVec(empty1,"EMPTY1");
 		printVec(empty2,"EMPTY2");
+		printVec(empty1,"EMPTY1");
 	std::cout << "--------------ASSIGNMENT OPERATOR" << std::endl;
 		C test7(10,5);									//FILL
 		printVec(test7,"TEST7");
@@ -221,7 +222,7 @@ void vectorTest()
 			data4.insert(data4.begin(), 4);
 		printVec(data4,"DATA4");
 		//	INSERT FILL
-		// /*												//MAC NO LINUX
+		// 												//MAC NO LINUX
 		C data5;
 		for (int i = 0; i < 100; ++i)
 			data5.push_back(i);
@@ -236,7 +237,7 @@ void vectorTest()
 		printVec(data5,"DATA5");
 		data5.insert(data5.begin(), 258, 2);
 		printVec(data5,"DATA5");
-		// */												//MAC NO LINUX
+		// 												//MAC NO LINUX
 	//	INSERT RANGE
 		C data6;
 		for (int i = 0; i < 100; ++i)
@@ -252,6 +253,7 @@ void vectorTest()
 			data6.push_back(i);
 		test20.insert(test20.begin(), data6.begin(), data6.end());
 		printVec(test20,"TEST20");
+/*		
 	// ERASE
 		C data7;
 		data7.push_back(0);
@@ -372,7 +374,7 @@ void vectorTest()
 		else
 			std::cout << "FALSE" << std::endl;
 		///////////////////////////////////////////////////
-	// /*														MAC NO LINUX
+	// 														MAC NO LINUX
 	std::cout << ">" << std::endl;
 		if (data1 > data2)
 			std::cout << "TRUE" << std::endl;
@@ -389,7 +391,7 @@ void vectorTest()
 			std::cout << "TRUE" << std::endl;
 		else
 			std::cout << "FALSE" << std::endl;
-		// */														MAC NO LINUX
+		// 														MAC NO LINUX
 		///////////////////////////////////////////////////
 	std::cout << ">=" << std::endl;
 		if (data1 >= data2)
@@ -518,7 +520,7 @@ void vectorTest()
 		C test29;
 		test29.assign(test28.begin(), test28.end());
 		printVec(test29, "TEST29");
-
+*/
 	std::cout << "======================END VECTOR TEST==================" << std::endl;
 	
 	return ;

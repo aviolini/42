@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:56:26 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/06 17:42:11 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/07 01:00:19 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,13 @@ public:
 	}
 	vector (const vector& x) : _allocator(x._allocator), _size(x.size()), _capacity(x.size())
 	{
-		const_iterator it = x.begin();
-		_data = _allocator.allocate(capacity());
-		for (size_t i = 0; i < x.size(); ++i)
-			_allocator.construct(_data + i, *it++);
+		if (size())
+		{
+			const_iterator it = x.begin();
+			_data = _allocator.allocate(capacity());
+			for (size_t i = 0; i < x.size(); ++i)
+				_allocator.construct(_data + i, *it++);
+		}
 		// iterator my = _data;
 		// for (; it != x.end(); ++it, ++my)
 		// 	*my = *it;				
@@ -355,13 +358,18 @@ public:
 	{
 		if (size() < capacity())
 		{
+			//////////////////////////////////////////////////////////////////
 			iterator it = begin();
 			for (;it != position; ++it){}
 			iterator save = it;
-			iterator temp = end();		
-			for (;temp != (save -1); --temp)
-				*(temp+1)=*temp;
-			*save = val;
+			value_type temp = *it;			
+			*it = val;
+			for(;it != end();)
+			{
+				value_type temp2 = *(++it);
+				*it = temp;
+				temp = temp2;
+			}
 			_size++;
 			return save;
 		}
@@ -376,13 +384,12 @@ public:
 		size_type i = 0;
 		size_type k = 0;
 		iterator it = begin();
-		iterator save;
 		for (; it != position; ++it, ++i, ++k)
 			_allocator.construct(temp + k, _data[i]);
 		_allocator.construct(temp + k, val);
 		// temp[k] = val;
-		save = &(temp[k]);
-		k++;
+		iterator save = temp + k++;
+		// k++;
 		for (; it != end(); ++it, ++i, ++k)
 			_allocator.construct(temp + k, _data[i]);
 		for (size_type i = 0; i < size(); ++i)	
@@ -397,18 +404,14 @@ public:
 	{
 		if ((size() + n) <= capacity())
 		{
+			size_type i = 0;
 			iterator it = begin();
-			for (;it != position; ++it){}
-			iterator save = it;
-			iterator temp = end();
-			
-			for (;temp != (save - n); --temp)
-				*(temp + n)=*temp;
-			for (size_type i = 0;i < n; ++i)
-			{
-				*it = val;
-				it++;
-			}
+			for (;it != position; ++it, ++i){}
+			vector copy(it,end());			
+			for (size_type x = 0; x < n; ++x, ++i)
+				*it++ = val;
+			for(size_type x = 0; x < copy.size(); ++x, ++i)
+				_data[i] = copy._data[x];
 			_size+=n;
 			return ;
 		}
@@ -421,7 +424,6 @@ public:
 			newCap = capacity() * 2;
 		pointer temp;
 		temp = _allocator.allocate(newCap);
-		// _allocator.construct(temp, value_type());
 		size_type i = 0;
 		size_type k = 0;
 		iterator it = begin();
@@ -446,22 +448,40 @@ public:
 		size_t len = 0;
 		for (InputIterator temp = first; temp != last; temp++) 
 			len++;
+		// if ((size() + len) <= capacity())
+		// {
+		// 	iterator it = begin();
+		// 	for (;it != position; ++it){}
+		// 	iterator save = it;
+		// 	iterator temp = end();		
+		// 	for (;temp != (save - len); --temp)
+		// 		*(temp + len)=*temp;
+		// 	for (size_type i = 0;i < len; ++i)
+		// 	{
+		// 		*it = *first;
+		// 		first++;
+		// 	}
+		// 	_size+=len;
+		// 	return ;
+		// }
+
 		if ((size() + len) <= capacity())
 		{
+			size_type i = 0;
 			iterator it = begin();
-			for (;it != position; ++it){}
-			iterator save = it;
-			iterator temp = end();		
-			for (;temp != (save - len); --temp)
-				*(temp + len)=*temp;
-			for (size_type i = 0;i < len; ++i)
-			{
-				*it = *first;
-				first++;
-			}
+			for (;it != position; ++it, ++i){}
+			vector copy(it,end());			
+			for (i = 0; i < len; ++i)
+				*it++ = *first++;
+			for(size_type x = 0; x < copy.size(); ++x, ++i)
+				_data[i] = copy._data[x];
 			_size+=len;
 			return ;
 		}
+
+
+
+		
 		size_type newCap;
 		if (!capacity())
 			newCap = len;
