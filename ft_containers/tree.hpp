@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 11:55:32 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/06 17:57:23 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/07 11:55:30 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ struct node
 	node		*_parent;
 	node 		*_left;
 	node 		*_right;
-	int 		empty_var;						///TO DECREMENT SIZE FOR MAX_SIZE()
+	int 		empty_var;						///TO DECREMENT SIZE FOR MAX_SIZE() TEST
 };
 
 template <class tree>

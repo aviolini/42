@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapIterators.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/12/07 02:17:43 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/07 11:46:42 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ template <class tree>
 class mapIterator
 {
 public:
-	typedef ft::Bidirectional_iterator_tag	iterator_category;
+	typedef ft::Bidirectional_iterator_tag		iterator_category;
 	typedef typename tree::value_type			value_type;
 	typedef typename tree::pointer				pointer;
 	typedef typename tree::reference			reference;
@@ -128,10 +128,6 @@ public:
 	{
 		return Iterator(this->_ptr);
 	}
-	// mapReverseIterator base() const
-	// {
-	// 	return mapReverseIterator(this->_ptr);
-	// }
 	mapReverseIterator &operator ++()			//PREFIX
 	{
 		if (this->_ptr->_left != 0)

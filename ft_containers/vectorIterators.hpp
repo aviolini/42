@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectorIterators.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 10:44:33 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/02 00:31:35 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/07 11:54:14 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ public:
 	/*CANONICAL-----------------------------------------------------------------------------------*/		
 	vectorIterator () : _data(0){}
 	vectorIterator (pointer initLoc) : _data(initLoc){}
-	// vectorIterator (T* initLoc) : _data(initLoc){}
 	virtual ~vectorIterator(){}
 	vectorIterator(vectorIterator<Category, T, Distance, T*, T&> const & rhs) : _data(rhs.base()){}
 	vectorIterator &operator= (const vectorIterator & rhs)
@@ -87,58 +86,54 @@ public:
 	{
 		return *(_data + index);
 	}
-
 /*Non-member function overloads*/
 // /*ARITHMETIC OPERATORS--------------------------------------------------*/
-	friend vectorIterator	operator+(const vectorIterator& it, difference_type n) 
-	{ return vectorIterator(it._data + n); }
-	friend vectorIterator	operator+(difference_type n, const vectorIterator& it) 
-	{ return vectorIterator(it._data + n); }
-	friend vectorIterator	operator-(const vectorIterator& it, difference_type n) 
-	{ return vectorIterator(it._data - n); }
-	friend vectorIterator	operator-(difference_type n, const vectorIterator& it) 
-	{ return vectorIterator(it._data - n); }
-	friend difference_type	operator-(const vectorIterator& a, const vectorIterator& b) 
-	{ return (a._data - b._data); }
+	friend vectorIterator	operator+(const vectorIterator& it, difference_type n)
+	{
+		return vectorIterator(it._data + n);
+	}
+	friend vectorIterator	operator+(difference_type n, const vectorIterator& it)
+	{
+		return vectorIterator(it._data + n);
+	}
+	friend vectorIterator	operator-(const vectorIterator& it, difference_type n)
+	{
+		return vectorIterator(it._data - n);
+	}
+	friend vectorIterator	operator-(difference_type n, const vectorIterator& it)
+	{
+		return vectorIterator(it._data - n);
+	}
+	friend difference_type	operator-(const vectorIterator& a, const vectorIterator& b)
+	{
+		return (a._data - b._data);
+	}
 /*RELATIONAL OPERATOR--------------------------------------------------------------------*/
 	friend bool operator== (const vectorIterator& lhs, const vectorIterator& rhs) 
-	{ return lhs._data == rhs._data; }
+	{
+		return lhs._data == rhs._data;
+	}
 	friend bool operator!= (const vectorIterator& lhs, const vectorIterator& rhs) 
-	{ return lhs._data != rhs._data; }
+	{
+		return lhs._data != rhs._data;
+	}
 	friend bool operator< (const vectorIterator& lhs, const vectorIterator& rhs) 
-	{ return lhs._data < rhs._data; }
+	{
+		return lhs._data < rhs._data;
+	}
 	friend bool operator<= (const vectorIterator& lhs, const vectorIterator& rhs) 
-	{ return lhs._data <= rhs._data; }
+	{
+		return lhs._data <= rhs._data;
+	}
 	friend bool operator> (const vectorIterator& lhs, const vectorIterator& rhs) 
-	{ return lhs._data > rhs._data; }
+	{
+		return lhs._data > rhs._data;
+	}
 	friend bool operator>= (const vectorIterator& lhs, const vectorIterator& rhs) 
-	{ return lhs._data >= rhs._data; }
+	{
+		return lhs._data >= rhs._data;
+	}
 };
-
-	// template<class C, class It1>
-	// bool operator== (const vectorIterator<C,It1>& lhs, const vectorIterator<C,It1>& rhs) 
-	// { return lhs.base() == rhs.base(); }
-	
-	// template<class C, class It1>
-	// bool operator!= (const vectorIterator<C,It1>& lhs, const vectorIterator<C,It1>& rhs) 
-	// { return lhs.base() != rhs.base(); }
-	
-	// template<class C, class It1>
-	// bool operator< (const vectorIterator<C,It1>& lhs, const vectorIterator<C,It1>& rhs) 
-	// { return lhs.base() > rhs.base(); }
-	
-	// template<class C, class It1>
-	// bool operator<= (const vectorIterator<C,It1>& lhs, const vectorIterator<C,It1>& rhs) 
-	// { return lhs.base() >= rhs.base(); }
-	
-	// template<class C, class It1>
-	// bool operator> (const vectorIterator<C,It1>& lhs, const vectorIterator<C,It1>& rhs) 
-	// { return lhs.base() < rhs.base(); }
-	
-	// template<class C, class It1>
-	// bool operator>= (const vectorIterator<C,It1>& lhs, const vectorIterator<C,It1>& rhs) 
-	// { return lhs.base() <= rhs.base(); }
-	
 
 template <class Iterator> 
 class vectorReverseIterator : public Iterator
@@ -154,12 +149,12 @@ public:
 	vectorReverseIterator () : Iterator(0){}
 	explicit vectorReverseIterator (iterator_type it) : Iterator(it - 1){}
 	template <class Iter>
-  	vectorReverseIterator (const vectorReverseIterator<Iter>& rev_it)//, typename ft::EnableIfTrue<ft::HasIteratorCategory<Iter>::value, value_type>::type = 0)
+  	vectorReverseIterator (const vectorReverseIterator<Iter>& rev_it)
 	{
 		this->_data = rev_it.base() - 1;
 	}
 	~vectorReverseIterator(){}
-	vectorReverseIterator(vectorReverseIterator const & rhs)// : Iterator::_data(rhs.base()){}
+	vectorReverseIterator(vectorReverseIterator const & rhs)
 	{
 		this->_data = rhs.base() - 1;
 	}
@@ -168,11 +163,6 @@ public:
 		this->_data = rhs.base() - 1;
 		return *this;
 	}
-	// vectorReverseIterator & operator =(const pointer& ptr)
-	// {
-	// 	this->_data = ptr;
-	// 	return *this;
-	// }
 	/*MEMBER OPERATORS--------------------------------------------------*/
 	pointer base() const
 	{
@@ -221,40 +211,43 @@ public:
 /*Non-member function overloads*/
 // /*ARITHMETIC OPERATORS--------------------------------------------------*/
 	friend vectorReverseIterator	operator+(const vectorReverseIterator& it, difference_type n) 
-	{ return vectorReverseIterator(it.base() - n); }
+	{
+		return vectorReverseIterator(it.base() - n);
+	}
 	friend vectorReverseIterator	operator+(difference_type n, const vectorReverseIterator& it) 
-	{ return vectorReverseIterator(it.base() - n); }
+	{
+		return vectorReverseIterator(it.base() - n);
+	}
 	friend vectorReverseIterator	operator-(const vectorReverseIterator& it, difference_type n) 
-	{ return vectorReverseIterator(it.base() + n); }
+	{
+		return vectorReverseIterator(it.base() + n);
+	}
 	friend vectorReverseIterator	operator-(difference_type n, const vectorReverseIterator& it) 
-	{ return vectorReverseIterator(it.base() + n); }
-
-/*RELATIONAL OPERATOR--------------------------------------------------------------------*/
-	// friend bool operator< (const vectorReverseIterator& lhs, const vectorReverseIterator& rhs) 
-	// { return lhs._data >= rhs._data; }
-	// friend bool operator<= (const vectorReverseIterator& lhs, const vectorReverseIterator& rhs) 
-	// { return lhs._data > rhs._data; }
-	// friend bool operator> (const vectorReverseIterator& lhs, const vectorReverseIterator& rhs) 
-	// { return lhs._data <= rhs._data; }
-	// friend bool operator>= (const vectorReverseIterator& lhs, const vectorReverseIterator& rhs) 
-	// { return lhs._data < rhs._data; }
+	{
+		return vectorReverseIterator(it.base() + n);
+	}
 };
-	
-	template< class It1, class It2 >
-	bool operator< (const vectorReverseIterator<It1>& lhs, const vectorReverseIterator<It2>& rhs)
-	{ return lhs.base() > rhs.base(); }
-	
-	template< class It1, class It2 >
-	bool operator> (const vectorReverseIterator<It1>& lhs, const vectorReverseIterator<It2>& rhs)
-	{ return lhs.base() < rhs.base(); }
-	
-	template< class It1, class It2 >
-	bool operator<= (const vectorReverseIterator<It1>& lhs, const vectorReverseIterator<It2>& rhs)
-	{ return lhs.base() >= rhs.base(); }
-	
-	template< class It1, class It2 >
-	bool operator>= (const vectorReverseIterator<It1>& lhs, const vectorReverseIterator<It2>& rhs)
-	{ return lhs.base() <= rhs.base(); }
-	
+/*Non-member function overloads*/
+/*RELATIONAL OPERATOR--------------------------------------------------------------------*/
+template< class It1, class It2 >
+bool operator< (const vectorReverseIterator<It1>& lhs, const vectorReverseIterator<It2>& rhs)
+{
+	return lhs.base() > rhs.base();
+}
+template< class It1, class It2 >
+bool operator> (const vectorReverseIterator<It1>& lhs, const vectorReverseIterator<It2>& rhs)
+{
+	return lhs.base() < rhs.base();
+}
+template< class It1, class It2 >
+bool operator<= (const vectorReverseIterator<It1>& lhs, const vectorReverseIterator<It2>& rhs)
+{
+	return lhs.base() >= rhs.base();
+}
+template< class It1, class It2 >
+bool operator>= (const vectorReverseIterator<It1>& lhs, const vectorReverseIterator<It2>& rhs)
+{
+	return lhs.base() <= rhs.base();
+}
 
 #endif

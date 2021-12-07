@@ -6,7 +6,7 @@
 /*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 12:46:50 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/30 12:32:06 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/07 11:56:41 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ public:
 	typedef typename C::const_reference	const_reference;
 	typedef typename C::size_type		size_type;
 protected:
-// public:
 	container_type c;
 public:	
 	/*CANONICAL-----------------------------------------------------------------------------------*/

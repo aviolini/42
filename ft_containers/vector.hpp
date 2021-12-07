@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:56:26 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/07 01:28:46 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/07 11:44:05 by aviolini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,18 @@ public:
 		_data = _allocator.allocate(n);
 		for (size_type i = 0; i < n; ++i)
 			_allocator.construct(_data + i, val);
-		// _allocator.construct(_data, val);
 	}
 	template <class InputIterator>
     vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type() ,
-			typename ft::EnableIfFalse<ft::IsIntegral<InputIterator>::value , T>::type = 0)//,
-			// typename ft::EnableIfFalse<ft::IsFloatingPoint<InputIterator>::value , T>::type = 0)
+			typename ft::EnableIfFalse<ft::IsIntegral<InputIterator>::value , T>::type = 0)
 	: _allocator(alloc) 
 	{
 		size_t len = 0;
 		for (InputIterator it = first; it != last; it++)
 			len++;
-		// std::cout <<"END" << std::endl;
 		_data = (_allocator.allocate(len));
 		for (size_t i = 0; i < len; ++i)
 			_allocator.construct(_data + i, *first++);
-		// if (last - first < 0)
-		// 	throw std::length_error("vector");
-		// InputIterator it = first;
-		// pointer my = _data;
-		// for (; it != last; ++it, ++my)
-		// 	*my = *it;
 		_size = len;
 		_capacity = len;
 	}
@@ -86,9 +77,6 @@ public:
 			for (size_t i = 0; i < x.size(); ++i)
 				_allocator.construct(_data + i, *it++);
 		}
-		// iterator my = _data;
-		// for (; it != x.end(); ++it, ++my)
-		// 	*my = *it;				
 	}
 	~vector()
 	{
@@ -112,14 +100,9 @@ public:
 			}
 			_capacity = x.size();
 			_data = _allocator.allocate(x.capacity());
-			// _allocator.construct(_data, value_type());
 		}
 		_size = x.size();
 		_allocator = x.get_allocator();
-		// const_iterator it = x.begin();
-		// iterator my = _data;
-		// for (; it != x.end(); ++it, ++my)
-		// 	*my = *it;
 		const_iterator it = x.begin();
 		for (size_t i = 0; i < size(); ++i)
 			_allocator.construct(_data + i, *it++);
@@ -187,14 +170,11 @@ public:
 			if (newCap < n)
 				newCap = n;
 			temp = _allocator.allocate(newCap);
-			// _allocator.construct(temp, value_type());
 			iterator it = begin();
 			for (size_type i = 0; i < size(); i++)
 				_allocator.construct(temp + i, *it++ );
-				// temp[i] = _data[i];
 			for(size_type i = size(); i < n; i++)
 				_allocator.construct(temp + i, val );
-				// temp[i] = val;
 			for (size_t i = 0; i < capacity(); ++i)
 				_allocator.destroy(_data + i);
 			_allocator.deallocate(_data, capacity());
@@ -220,7 +200,6 @@ public:
 			pointer temp;
 			size_type newCap = n;
 			temp = _allocator.allocate(newCap);
-			// _allocator.construct(temp, value_type());
 			size_type i = 0;
 			for (; i < size(); i++)
 				temp[i] = _data[i];
@@ -275,28 +254,16 @@ public:
 			_allocator.deallocate(_data, capacity());
 			_allocator.destroy(_data);
 			_data = _allocator.allocate(n);
-			// _allocator.construct(_data, value_type());
 			_capacity = n;
 		}
 		_size = n;
-		// iterator it = begin();
-		// for (; it != end(); ++it)
-		// 	*it = val;
-
-		// 	iterator it = begin();
-		// 	for (size_type i = 0; i < size(); i++)
-		// 		_allocator.construct(temp + i, *it++ );
-
 		for (size_t i = 0; i < size(); ++i)
 			_allocator.construct(_data + i, val);
 	}
 	template <class InputIterator>
 	void assign (InputIterator first, InputIterator last, 
-				typename ft::EnableIfFalse<ft::IsIntegral<InputIterator>::value , T>::type = 0)//,
-				// typename ft::EnableIfFalse<ft::IsFloatingPoint<InputIterator>::value , T>::type = 0)	
+				typename ft::EnableIfFalse<ft::IsIntegral<InputIterator>::value , T>::type = 0)
 	{
-		// if (last - first < 0)																								
-		// 	throw std::length_error("vector");	
 		size_t len = 0;
 		for (InputIterator temp = first; temp != last; temp++) 
 			len++;
@@ -305,15 +272,9 @@ public:
 			_allocator.destroy(_data);
 			_allocator.deallocate(_data, capacity());
 			_data = _allocator.allocate(len);
-			// _allocator.construct(_data, value_type());
 			_capacity = len;
 		}
 		_size = len;
-		// InputIterator it = first;
-		
-		// pointer my = _data;
-		// for (; it != last; ++it, ++my)
-		// 	*my = *it;
 		for (size_t i = 0; i < len; ++i)
 			_allocator.construct(_data + i, *first++);
 	}
@@ -328,17 +289,11 @@ public:
 			else
 				newCap = capacity() * 2;
 			temp = _allocator.allocate(newCap);
-			// size_type i = 0;
-			// _allocator.construct(temp, value_type());
-			// for (; i < size(); i++)
-			// 	temp[i] = _data[i];
 			for (size_t i = 0; i < size(); ++i)
 				_allocator.construct(temp + i, _data[i]);
-			// _allocator.construct(&temp[i], _data[i]);
 			if (capacity())
 			{
 				for (size_t i = 0; i < size(); ++i)
-				// _allocator.construct(temp + i, _data[i]);
 					_allocator.destroy(_data + i);
 				_allocator.deallocate(_data, capacity());
 			}
@@ -346,8 +301,6 @@ public:
 			_data = temp;	
 		}
 		_allocator.construct(_data + size(), val);
-
-		// _data[size()] = val;
 		_size++;
 	}
 	void pop_back()
@@ -358,38 +311,17 @@ public:
 	{
 		if (size() < capacity())
 		{
-			//////////////////////////////////////////////////////////////////
-		// 	iterator it = begin();
-		// 	for (;it != position; ++it){}
-		// 	iterator save = it;
-		// 	value_type temp = *it;			
-		// 	*it = val;
-		// 	for(;it != end();)
-		// 	{
-		// 		value_type temp2 = *(++it);
-		// 		*it = temp;
-		// 		temp = temp2;
-		// 	}
-		// 	_size++;
-		// 	return save;
-		// }
-
 			size_type i = 0;
 			iterator it = begin();
 			for (;it != position; ++it, ++i){}
 			vector copy(it,end());
 			iterator save = it;		
-			// for (size_type x = 0; x < n; ++x, ++i)
 			_allocator.construct(_data + i++, val);
-				// *it++ = val;
 			for(it = copy.begin(); it != copy.end(); ++i)
 				_allocator.construct(_data + i, *it++);
-			// for(size_type x = 0; x < copy.size(); ++x, ++i)
-			// 	_data[i] = copy._data[x];
 			_size++;
 			return save;
 		}
-		
 		size_type newCap;
 		if (!capacity())
 			newCap = 1;
@@ -397,16 +329,13 @@ public:
 			newCap = capacity() * 2;		
 		pointer temp;
 		temp = _allocator.allocate(newCap);
-		// _allocator.construct(temp, value_type());
 		size_type i = 0;
 		size_type k = 0;
 		iterator it = begin();
 		for (; it != position; ++it, ++i, ++k)
 			_allocator.construct(temp + k, _data[i]);
 		_allocator.construct(temp + k, val);
-		// temp[k] = val;
 		iterator save = temp + k++;
-		// k++;
 		for (; it != end(); ++it, ++i, ++k)
 			_allocator.construct(temp + k, _data[i]);
 		for (size_type i = 0; i < size(); ++i)	
@@ -430,8 +359,6 @@ public:
 				// *it++ = val;
 			for(it = copy.begin(); it != copy.end(); ++i)
 				_allocator.construct(_data + i, *it++);
-			// for(size_type x = 0; x < copy.size(); ++x, ++i)
-			// 	_data[i] = copy._data[x];
 			_size+=n;
 			return ;
 		}
@@ -462,29 +389,11 @@ public:
 	}
 	template <class InputIterator>
 	void insert (iterator position, InputIterator first, InputIterator last,
-				typename ft::EnableIfFalse<ft::IsIntegral<InputIterator>::value , T>::type = 0)//,
-				// typename ft::EnableIfFalse<ft::IsFloatingPoint<InputIterator>::value , T>::type = 0)
+				typename ft::EnableIfFalse<ft::IsIntegral<InputIterator>::value , T>::type = 0)
 	{
 		size_t len = 0;
 		for (InputIterator temp = first; temp != last; temp++) 
 			len++;
-		// if ((size() + len) <= capacity())
-		// {
-		// 	iterator it = begin();
-		// 	for (;it != position; ++it){}
-		// 	iterator save = it;
-		// 	iterator temp = end();		
-		// 	for (;temp != (save - len); --temp)
-		// 		*(temp + len)=*temp;
-		// 	for (size_type i = 0;i < len; ++i)
-		// 	{
-		// 		*it = *first;
-		// 		first++;
-		// 	}
-		// 	_size+=len;
-		// 	return ;
-		// }
-
 		if ((size() + len) <= capacity())
 		{
 			size_type i = 0;
@@ -493,17 +402,11 @@ public:
 			vector copy(it,end());			
 			for (i = 0; i < len; ++i)
 				_allocator.construct(_data + i, *first);
-				// *it++ = *first++;
 			for(it = copy.begin(); it != copy.end(); ++i)
 				_allocator.construct(_data + i, *it++);
-				// _data[i] = copy._data[x];
 			_size+=len;
 			return ;
 		}
-
-
-
-		
 		size_type newCap;
 		if (!capacity())
 			newCap = len;
@@ -513,7 +416,6 @@ public:
 			newCap = capacity() * 2;
 		pointer temp;
 		temp = _allocator.allocate(newCap);
-		// _allocator.construct(temp, value_type());
 		size_type i = 0;
 		size_type k = 0;
 		iterator it = begin();
