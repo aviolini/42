@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:56:26 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/07 01:00:19 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/07 01:12:12 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -359,20 +359,37 @@ public:
 		if (size() < capacity())
 		{
 			//////////////////////////////////////////////////////////////////
+		// 	iterator it = begin();
+		// 	for (;it != position; ++it){}
+		// 	iterator save = it;
+		// 	value_type temp = *it;			
+		// 	*it = val;
+		// 	for(;it != end();)
+		// 	{
+		// 		value_type temp2 = *(++it);
+		// 		*it = temp;
+		// 		temp = temp2;
+		// 	}
+		// 	_size++;
+		// 	return save;
+		// }
+
+			size_type i = 0;
 			iterator it = begin();
-			for (;it != position; ++it){}
-			iterator save = it;
-			value_type temp = *it;			
-			*it = val;
-			for(;it != end();)
-			{
-				value_type temp2 = *(++it);
-				*it = temp;
-				temp = temp2;
-			}
+			for (;it != position; ++it, ++i){}
+			vector copy(it,end());
+			iterator save = it;		
+			// for (size_type x = 0; x < n; ++x, ++i)
+			_allocator.construct(_data + i++, val);
+				// *it++ = val;
+			for(it = copy.begin(); it != copy.end(); ++i)
+				_allocator.construct(_data + i, *it++);
+			// for(size_type x = 0; x < copy.size(); ++x, ++i)
+			// 	_data[i] = copy._data[x];
 			_size++;
 			return save;
 		}
+		
 		size_type newCap;
 		if (!capacity())
 			newCap = 1;
@@ -409,9 +426,12 @@ public:
 			for (;it != position; ++it, ++i){}
 			vector copy(it,end());			
 			for (size_type x = 0; x < n; ++x, ++i)
-				*it++ = val;
-			for(size_type x = 0; x < copy.size(); ++x, ++i)
-				_data[i] = copy._data[x];
+				_allocator.construct(_data + i, val);
+				// *it++ = val;
+			for(it = copy.begin(); it != copy.end(); ++i)
+				_allocator.construct(_data + i, *it++);
+			// for(size_type x = 0; x < copy.size(); ++x, ++i)
+			// 	_data[i] = copy._data[x];
 			_size+=n;
 			return ;
 		}
@@ -472,9 +492,11 @@ public:
 			for (;it != position; ++it, ++i){}
 			vector copy(it,end());			
 			for (i = 0; i < len; ++i)
-				*it++ = *first++;
-			for(size_type x = 0; x < copy.size(); ++x, ++i)
-				_data[i] = copy._data[x];
+				_allocator.construct(_data + i, *first);
+				// *it++ = *first++;
+			for(it = copy.begin(); it != copy.end(); ++i)
+				_allocator.construct(_data + i, *it++);
+				// _data[i] = copy._data[x];
 			_size+=len;
 			return ;
 		}
