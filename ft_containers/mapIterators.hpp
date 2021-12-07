@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapIterators.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:59:04 by arrigo            #+#    #+#             */
-/*   Updated: 2021/12/06 17:58:46 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/07 02:17:43 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,14 @@ public:
 		return *this;
 	}
 /*MEMBER OPERATORS--------------------------------------------------*/
+	Iterator base() const
+	{
+		return Iterator(this->_ptr);
+	}
+	// mapReverseIterator base() const
+	// {
+	// 	return mapReverseIterator(this->_ptr);
+	// }
 	mapReverseIterator &operator ++()			//PREFIX
 	{
 		if (this->_ptr->_left != 0)
