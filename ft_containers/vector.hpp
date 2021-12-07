@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:56:26 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/07 01:12:12 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/07 01:19:16 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -543,6 +543,11 @@ public:
 	}
 	iterator erase (iterator first, iterator last)
 	{
+		if (begin() == first && end() == last)
+		{
+			clear();
+			return begin();
+		}
 		iterator it;
 		iterator save;
 		size_type n = last - first;

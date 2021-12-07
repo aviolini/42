@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 11:27:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/07 00:54:11 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/07 01:21:15 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,7 +253,6 @@ void vectorTest()
 			data6.push_back(i);
 		test20.insert(test20.begin(), data6.begin(), data6.end());
 		printVec(test20,"TEST20");
-/*		
 	// ERASE
 		C data7;
 		data7.push_back(0);
@@ -520,7 +519,6 @@ void vectorTest()
 		C test29;
 		test29.assign(test28.begin(), test28.end());
 		printVec(test29, "TEST29");
-*/
 	std::cout << "======================END VECTOR TEST==================" << std::endl;
 	
 	return ;

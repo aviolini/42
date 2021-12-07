@@ -6,7 +6,7 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 09:43:32 by aviolini          #+#    #+#              #
-#    Updated: 2021/12/06 23:37:11 by arrigo           ###   ########.fr        #
+#    Updated: 2021/12/07 01:22:26 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,7 @@ leaks		:	cl fclean ft
 				
 #LEAKS CHECK LINUX
 valgrind	:	cl fclean ft
-				valgrind --leak-check=full ./$(FTNAME)
+				valgrind --leak-check=full --track-origins=yes -s ./$(FTNAME)
 
 #CLEAN
 clean		:	
