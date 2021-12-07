@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:25:40 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/06 18:05:25 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/07 01:34:37 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ public:
 
 	class value_compare
 	{
-	//   friend class map< Key, T, Compare, Alloc>;	//TO DO
+	//   friend class map< Key, T, Compare, Alloc>;	//TODO
 	// protected:
 	public:
 	  Compare key_comp;
@@ -150,7 +150,7 @@ public:
 	}
 	iterator insert (iterator position, const value_type& val)						//WITH HINT
 	{
-		iterator it = position; //TO DO
+		iterator it = position; //TODO
 		it = find(val.first);
 		if (it != end()) //FOUND
 			return it;
