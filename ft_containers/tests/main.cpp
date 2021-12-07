@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 00:13:14 by arrigo            #+#    #+#             */
-/*   Updated: 2021/12/07 01:23:24 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/07 01:33:06 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ namespace ft = std;
 int main() 
 {
 
-	// stackTest< ft::stack<int, ft::vector<int> > > ();			//LEAKS
+	stackTest< ft::stack<int, ft::vector<int> > > ();
 	stackTest< ft::stack<int, std::deque<int> > > ();
 
 	vectorTest< ft::vector<int> >();

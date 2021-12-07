@@ -6,7 +6,7 @@
 /*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:56:26 by aviolini          #+#    #+#             */
-/*   Updated: 2021/12/07 01:19:16 by arrigo           ###   ########.fr       */
+/*   Updated: 2021/12/07 01:28:46 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -335,7 +335,7 @@ public:
 			for (size_t i = 0; i < size(); ++i)
 				_allocator.construct(temp + i, _data[i]);
 			// _allocator.construct(&temp[i], _data[i]);
-			if (_data)
+			if (capacity())
 			{
 				for (size_t i = 0; i < size(); ++i)
 				// _allocator.construct(temp + i, _data[i]);

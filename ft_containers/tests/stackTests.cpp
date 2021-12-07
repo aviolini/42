@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stackTests.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 14:03:25 by aviolini          #+#    #+#             */
-/*   Updated: 2021/11/30 14:40:56 by aviolini         ###   ########.fr       */
+/*   Updated: 2021/12/07 01:32:55 by arrigo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ void printStack(S &s)
 {
 	MutantStack< S, typename S::container_type > ms(s);
 	typename MutantStack< S , typename S::container_type >::iterator it;
-	for (it = ms.begin();it != ms.end(); ++it)
-		std::cout << *it << std::endl;
+	if (s.size())
+		for (it = ms.begin();it != ms.end(); ++it)
+			std::cout << *it << std::endl;
 }
 
 template<typename S>
