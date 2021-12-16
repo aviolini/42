@@ -7,3 +7,6 @@ INSTALL SHUTDOWN COMMAND
 TLS 
 https://www.vultr.com/docs/how-to-enable-tls-1-3-in-apache-on-debian-10/
 
+VIRTUAL BOX NETWORK
+https://serverfault.com/questions/225155/virtualbox-how-to-set-up-networking-so-both-host-and-guest-can-access-internet
+

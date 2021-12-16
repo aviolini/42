@@ -6,7 +6,7 @@
 #    By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2021/12/16 12:21:09 by aviolini         ###   ########.fr        #
+#    Updated: 2021/12/16 17:27:25 by aviolini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,14 +36,16 @@ start	:
 re		:	fclean all
 
 status	:
-			@printf "$(BLUE)docker-compose images\n$(NONE)"
-			@$(DC) -f $(SRCS)/$(DCY) images
-			@printf "$(BLUE)docker-compose containers\n$(NONE)"
-			@$(DC) -f $(SRCS)/$(DCY) ps
 			@printf "$(GREEN)docker images\n$(NONE)"
 			@$(D) images
 			@printf "$(GREEN)docker containers\n$(NONE)"
 			@$(D) ps -a
+			@printf "$(BLUE)docker-compose images\n$(NONE)"
+			@$(DC) -f $(SRCS)/$(DCY) images
+			@printf "$(BLUE)docker-compose containers\n$(NONE)"
+			@$(DC) -f $(SRCS)/$(DCY) ps
+			@printf "$(YELLOW)docker volumes\n$(NONE)"
+			@$(DC) -f $(SRCS)/$(DCY) config | grep volumes -A1 --color='auto'
 
 install	:
 			@apt list docker | grep installed && echo "" || apt install -y docker
