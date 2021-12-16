@@ -6,7 +6,7 @@
 #    By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2021/12/16 11:45:01 by aviolini         ###   ########.fr        #
+#    Updated: 2021/12/16 12:21:09 by aviolini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,15 +21,15 @@ YELLOW	=	\e[1;33m
 BLUE	=	\e[0;36m
 RED		=	\e[0;31m
 
-all		:	
+all		:	install
 			$(DC) -f $(SRCS)/$(DCY) up -d --build
 #--force-recreate
 #--build
 stop	:
 			$(DC) -f $(SRCS)/$(DCY) stop
-			
+
 start	:
-			$(DC) -f $(SRCS)/$(DCY) start  
+			$(DC) -f $(SRCS)/$(DCY) start
 #$(DC) -f $(SRCS)/$(DCY) up -d 
 #con up se non sono creati li crea bypassando all
 
@@ -43,7 +43,15 @@ status	:
 			@printf "$(GREEN)docker images\n$(NONE)"
 			@$(D) images
 			@printf "$(GREEN)docker containers\n$(NONE)"
-			@$(D) ps -a		
+			@$(D) ps -a
+
+install	:
+			@apt list docker | grep installed && echo "" || apt install -y docker
+			@systemctl start docker
+			@apt list docker-compose | grep installed && echo "" || apt install -y docker-compose
+			
+remove	:
+			@apt remove -y docker docker-compose
 
 clean	:
 			$(DC) -f $(SRCS)/$(DCY) rm --stop --force -v
