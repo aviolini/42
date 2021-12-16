@@ -1,11 +1,18 @@
 version: '3'
 
 services:
-  web:
-    image: nginx
-    build: 
-      ports:
-      -"8080:80"
-      
-  database:
-    image: mariadb
+  nginx:
+    image: nginx_img:1.0
+    build: ./requirements/nginx/
+    ports:
+      - "80:80"           #remove, anche nel Dockerfile
+      - "443:443"
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    # depends_on:
+    #   - mariadb
+  mariadb:
+    image: mariadb_img:1.0
+    build: ./requirements/mariadb/
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
