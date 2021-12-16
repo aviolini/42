@@ -6,7 +6,7 @@
 #    By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2021/12/16 17:27:25 by aviolini         ###   ########.fr        #
+#    Updated: 2021/12/16 17:55:06 by aviolini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,8 @@ status	:
 			@$(DC) -f $(SRCS)/$(DCY) images
 			@printf "$(BLUE)docker-compose containers\n$(NONE)"
 			@$(DC) -f $(SRCS)/$(DCY) ps
-			@printf "$(YELLOW)docker volumes\n$(NONE)"
-			@$(DC) -f $(SRCS)/$(DCY) config | grep volumes -A1 --color='auto'
+# @printf "$(YELLOW)docker volumes\n$(NONE)"
+# @$(DC) -f $(SRCS)/$(DCY) config | grep volumes -A1 --color='auto'
 
 install	:
 			@apt list docker | grep installed && echo "" || apt install -y docker
@@ -56,10 +56,11 @@ remove	:
 			@apt remove -y docker docker-compose
 
 clean	:
-			$(DC) -f $(SRCS)/$(DCY) rm --stop --force -v
+			$(DC) -f $(SRCS)/$(DCY) rm --stop --force
 # $(D) system prune
 
 fclean	:	clean
-			$(D) system prune -a --force
-
+			$(DC) -f $(SRCS)/$(DCY) down -v --rmi all
+#$(D) system prune -a --force
+			
 .PHONY	: all stop re status clean fclean
