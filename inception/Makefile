@@ -6,7 +6,7 @@
 #    By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2021/12/16 17:55:06 by aviolini         ###   ########.fr        #
+#    Updated: 2021/12/17 14:56:23 by aviolini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ BLUE	=	\e[0;36m
 RED		=	\e[0;31m
 
 all		:	install
-			$(DC) -f $(SRCS)/$(DCY) up -d --build
+			$(DC) -f $(SRCS)/$(DCY) up -d --build --force
 #--force-recreate
 #--build
 stop	:
