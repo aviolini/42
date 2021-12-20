@@ -42,21 +42,21 @@ services:
     depends_on:
       - nginx
 ################################################
-volumes:
-  # mariadb_data:
-  #   external: false
-  # wordpress_data:
-  #   external: false
-  wordpress_data:
-      driver: local
-      driver_opts:
-          type: none
-          o: bind
-          device: "home/${USER}/data/wordpress/"
-  mariadb_data:
-    driver: local
-    driver_opts:
-        type: none
-        o: bind
-        device: "home/${USER}/data/mariadb/"
+# volumes:
+#   # mariadb_data:
+#   #   external: false
+#   # wordpress_data:
+#   #   external: false
+#   wordpress_data:
+#       driver: local
+#       driver_opts:
+#           type: none
+#           o: bind
+#           device: "home/${USER}/data/wordpress/"
+#   mariadb_data:
+#     driver: local
+#     driver_opts:
+#         type: none
+#         o: bind
+#         device: "home/${USER}/data/mariadb/"
 ################################################
