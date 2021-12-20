@@ -6,7 +6,7 @@
 #    By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2021/12/17 14:56:23 by aviolini         ###   ########.fr        #
+#    Updated: 2021/12/20 11:12:00 by aviolini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,9 @@ YELLOW	=	\e[1;33m
 BLUE	=	\e[0;36m
 RED		=	\e[0;31m
 
-all		:	install
+all		:	clean install
+# docker volume rm srcs_wordpress_data
+# docker volume rm srcs_mariadb_data
 			$(DC) -f $(SRCS)/$(DCY) up -d --build --force
 #--force-recreate
 #--build
@@ -62,5 +64,8 @@ clean	:
 fclean	:	clean
 			$(DC) -f $(SRCS)/$(DCY) down -v --rmi all
 #$(D) system prune -a --force
-			
+
+prune	:	fclean
+			$(D) system prune -a --force
+
 .PHONY	: all stop re status clean fclean

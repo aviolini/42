@@ -11,9 +11,10 @@ services:
     tty: true        # docker run -t
     restart: always
     volumes:
-      - wordpress_data:/srv/wordpress_data
-    depends_on:
-      - wordpress
+    #   # - wordpress_data:/srv/wordpress_data
+      - wordpress_data:/var/www/html/
+    # depends_on:
+    #   - wordpress
   #####################
   mariadb:
     image: mariadb_img:1.0
@@ -24,7 +25,8 @@ services:
     tty: true        # docker run -t
     restart: always
     volumes:
-      - mariadb_data:/srv/mariadb_data
+      - mariadb_data:/srv/mariadb/
+      # - /home/${USER}/data/mariadb:/mariadb
   #####################
   wordpress:
     image: wordpress_img:1.0
@@ -35,11 +37,26 @@ services:
     tty: true        # docker run -t
     restart: always
     volumes:
-      - wordpress_data:/srv/wordpress_data
+      - wordpress_data:/var/www/html/wordpress/
+      # - /home/${USER}/data/wordpress:/var/www/html/wordpress/
+    depends_on:
+      - nginx
 ################################################
 volumes:
-  mariadb_data:
-    external: false
+  # mariadb_data:
+  #   external: false
+  # wordpress_data:
+  #   external: false
   wordpress_data:
-    external: false
+      driver: local
+      driver_opts:
+          type: none
+          o: bind
+          device: "home/${USER}/data/wordpress/"
+  mariadb_data:
+    driver: local
+    driver_opts:
+        type: none
+        o: bind
+        device: "home/${USER}/data/mariadb/"
 ################################################
