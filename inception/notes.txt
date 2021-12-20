@@ -11,3 +11,6 @@ VIRTUAL BOX NETWORK
 https://serverfault.com/questions/225155/virtualbox-how-to-set-up-networking-so-both-host-and-guest-can-access-internet
 
 FCLEAN NON ELIMINA DEBIAN PERCHÉ FA PARTE DEL DOCKERFILE E NON DEL DOCKER COMPOSE
+
+DOCKER-COMPOSE-> EXPOSE VS PORTS
+https://stackoverflow.com/questions/40801772/what-is-the-difference-between-docker-compose-ports-vs-expose

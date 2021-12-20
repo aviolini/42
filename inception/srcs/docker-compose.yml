@@ -6,15 +6,14 @@ services:
     image: nginx_img:1.0
     build: ./requirements/nginx/
     ports:
-      - "80:80"           #remove, anche nel Dockerfile
       - "443:443"
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     restart: always
     volumes:
       - wordpress_data:/srv/wordpress_data
-    # depends_on:
-    #   - mariadb
+    depends_on:
+      - wordpress
   #####################
   mariadb:
     image: mariadb_img:1.0
