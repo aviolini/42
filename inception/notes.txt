@@ -14,3 +14,6 @@ FCLEAN NON ELIMINA DEBIAN PERCHÉ FA PARTE DEL DOCKERFILE E NON DEL DOCKER COMPO
 
 DOCKER-COMPOSE-> EXPOSE VS PORTS
 https://stackoverflow.com/questions/40801772/what-is-the-difference-between-docker-compose-ports-vs-expose
+
+VOLUMES
+https://towardsdatascience.com/the-complete-guide-to-docker-volumes-1a06051d2cce
