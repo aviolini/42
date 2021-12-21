@@ -15,4 +15,4 @@ service nginx start								#grazie all'aggiunta di "daemon off;" in nginx.conf n
 												#senza il bisogno di avviare /bin/bash per non far uscire il container 
 # nginx -g 'daemon off;'						# altro parametro giusto senza il bisogno di aggiungere "daemon off;" in nginx.conf
 # nginx											# equivale a "service nginx start"		
-# /bin/bash"									# è stato tolto grazie all'aggiunta del parametro "daemon off"
+# /bin/bash"			
