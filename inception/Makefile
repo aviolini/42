@@ -6,7 +6,7 @@
 #    By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2021/12/20 15:55:43 by aviolini         ###   ########.fr        #
+#    Updated: 2021/12/21 11:09:20 by aviolini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,8 @@ fclean	:	clean
 #$(D) system prune -a --force
 
 prune	:	fclean
-			rm -rf /var/lib/docker/volumes/*
+			rm -rf /home/root 							#////////////////////////////////////
+			rm -rf /var/lib/docker/volumes/*			#///////////////////////////////////
 			$(D) system prune -a --force
 
 .PHONY	: all stop re status clean fclean

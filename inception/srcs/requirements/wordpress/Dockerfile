@@ -1,5 +1,5 @@
 FROM debian:10.10
-RUN apt update && apt -y install php-fpm wget
+RUN apt update && apt -y install php-fpm wget less vim
 				#php-mysql php-mbstring
 
 #conf phpmyadmin
