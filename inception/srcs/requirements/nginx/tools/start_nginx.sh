@@ -11,6 +11,8 @@ mv nginx.conf /etc/nginx/
 
 chown -R www-data:www-data /var/www/html/
 
+# service php7.3-fpm start
+
 service nginx start								#grazie all'aggiunta di "daemon off;" in nginx.conf nginx funziona in modalità foreground
 												#senza il bisogno di avviare /bin/bash per non far uscire il container 
 # nginx -g 'daemon off;'						# altro parametro giusto senza il bisogno di aggiungere "daemon off;" in nginx.conf

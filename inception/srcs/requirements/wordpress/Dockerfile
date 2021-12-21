@@ -1,12 +1,10 @@
 FROM debian:10.10
-RUN apt-get update && apt-get -y install php-fpm wget less vim procps
-				#php-mysql php-mbstring
+RUN apt-get update && apt-get -y install php-fpm wget less vim procps php-mysql php-mbstring
 
 #conf phpmyadmin
 COPY ["conf/config.inc.php", "/"]
-# RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.7/phpMyAdmin-4.9.7-all-languages.tar.gz -P /tmp
-# RUN mkdir -p /var/www/html
-# RUN tar -zxf /tmp/phpMyAdmin-4.9.7-all-languages.tar.gz
+RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.7/phpMyAdmin-4.9.7-all-languages.tar.gz -P /tmp
+RUN tar -zxf /tmp/phpMyAdmin-4.9.7-all-languages.tar.gz
 # RUN mv phpMyAdmin-4.9.7-all-languages /var/www/html/phpmyadmin
 # RUN rm -f /tmp/phpMyAdmin-4.9.7-all-languages.tar.gz
 # # RUN mkdir /etc/phpmyadmin/upload -p
@@ -20,7 +18,7 @@ COPY ["conf/config.inc.php", "/"]
 # RUN mv config.inc.php /var/www/html/phpmyadmin/config.inc.php
 
 #conf wordpress
-COPY ["conf/wp-config.php", "/"]
+# COPY ["conf/wp-config.php", "/"]
 # RUN wget https://wordpress.org/wordpress-5.8.2.tar.gz -P /tmp
 # RUN tar -xzf /tmp/wordpress-5.8.2.tar.gz
 # RUN mv /wordpress /var/www/html/

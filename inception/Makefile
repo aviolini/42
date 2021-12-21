@@ -6,7 +6,7 @@
 #    By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2021/12/21 11:09:20 by aviolini         ###   ########.fr        #
+#    Updated: 2021/12/21 15:16:13 by aviolini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ start	:
 #$(DC) -f $(SRCS)/$(DCY) up -d 
 #con up se non sono creati li crea bypassando all
 
-re		:	fclean all
+re		:	fclean cleanvol all
 
 status	:
 			@printf "$(GREEN)docker images\n$(NONE)"
@@ -65,9 +65,11 @@ fclean	:	clean
 			$(DC) -f $(SRCS)/$(DCY) down -v --rmi all
 #$(D) system prune -a --force
 
-prune	:	fclean
+cleanvol:	
 			rm -rf /home/root 							#////////////////////////////////////
 			rm -rf /var/lib/docker/volumes/*			#///////////////////////////////////
+
+prune	:	fclean cleanvol
 			$(D) system prune -a --force
 
 .PHONY	: all stop re status clean fclean

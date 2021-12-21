@@ -1,19 +1,27 @@
 #! /bin/bash
 
-#conf phpmyadmin
-wget https://files.phpmyadmin.net/phpMyAdmin/4.9.7/phpMyAdmin-4.9.7-all-languages.tar.gz -P /tmp
+mv -f phpMyAdmin-4.9.7-all-languages /var/www/html/phpmyadmin
+mv config.inc.php /var/www/html/phpmyadmin/config.inc.php
+
+
+chmod 660 /var/www/html/phpmyadmin/config.inc.php
+chown -R www-data:www-data /var/www/html/phpmyadmin
+
+
+# mkdir /etc/phpmyadmin/upload -p
+# mkdir /etc/phpmyadmin/save
+# mkdir /etc/phpmyadmin/tmp
+# mkdir /var/www/html/phpmyadmin/tmp
+# chown www-data:www-data /var/www/html/phpmyadmin -R
+# chown www-data:www-data /etc/phpmyadmin -R
+# chmod 660  /etc/phpmyadmin -R
+# chmod 777 /var/www/html/phpmyadmin/tmp -R
 
 
 
 
-
-
-
-#conf wordpress
-wget https://wordpress.org/wordpress-5.8.2.tar.gz -P /tmp
-
-
-
+# mv wordpress /var/www/html/
+# mv wp-config.php /var/www/html/wordpress/wp-config.php
 
 service php7.3-fpm start
 
