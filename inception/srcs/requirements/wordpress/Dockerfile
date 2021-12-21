@@ -3,6 +3,11 @@ RUN apt-get update && apt-get -y install php-fpm wget less vim procps php-mysql 
 
 #conf phpmyadmin
 COPY ["conf/config.inc.php", "/"]
+
+
+COPY ["conf/php-fpm.conf", "/"]    #////////////////////////////
+
+
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.7/phpMyAdmin-4.9.7-all-languages.tar.gz -P /tmp
 RUN tar -zxf /tmp/phpMyAdmin-4.9.7-all-languages.tar.gz
 # RUN mv phpMyAdmin-4.9.7-all-languages /var/www/html/phpmyadmin

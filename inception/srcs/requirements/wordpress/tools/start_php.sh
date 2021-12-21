@@ -1,5 +1,8 @@
 #! /bin/bash
 
+# cp /etc/php/7.3/fpm/php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf.copy #////////////
+# mv php-fpm.conf /etc/php/7.3/fpm/ #//////////////////////////////////////////////
+
 mv -f phpMyAdmin-4.9.7-all-languages /var/www/html/phpmyadmin
 mv config.inc.php /var/www/html/phpmyadmin/config.inc.php
 
