@@ -18,37 +18,37 @@ services:
     depends_on:
       - php-fpm
   #####################
-  # mariadb:
-  #   image: mariadb_img:1.0
-  #   build: ./requirements/mariadb/
-  #   # ports:
-  #   #   - "80:3386"
-  #   stdin_open: true # docker run -i
-  #   tty: true        # docker run -t
-  #   restart: always
-  #   volumes:
-  #     # - mariadb_data:/srv/mariadb/
-  #     - /home/${USER}/data/mariadb:/mariadb/
-  #   networks:
-  #     - lemp_net
+  mariadb:
+    image: mariadb_img:1.0
+    build: ./requirements/mariadb/
+    ports:
+      - "3306:3306"
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    restart: always
+    volumes:
+      # - mariadb_data:/srv/mariadb/
+      - /home/${USER}/data/mariadb:/mariadb/
+    networks:
+      - lemp_net
   #####################
   php-fpm:
     image: php-fpm_img:1.0
     build: ./requirements/php-fpm/
-    # ports:
-    #   - "80:9000"
+    ports:
+      - "9000:9000"
     stdin_open: true # docker run -i
     tty: true        # docker run -t
-    # restart: always
+    restart: always
     volumes:
       # - wordpress_data:/var/www/html/wordpress/
       - /home/${USER}/data/wordpress:/var/www/html/
     # depends_on:
     #   - nginx
-    ports:
-      - "9000:9000"
     networks:
       - lemp_net
+    depends_on:
+      - mariadb
 ################################################
 # volumes:
 #   # mariadb_data:
