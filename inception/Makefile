@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+         #
+#    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2021/12/21 15:16:13 by aviolini         ###   ########.fr        #
+#    Updated: 2021/12/28 12:08:14 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,8 @@ status	:
 			@$(DC) -f $(SRCS)/$(DCY) images
 			@printf "$(BLUE)docker-compose containers\n$(NONE)"
 			@$(DC) -f $(SRCS)/$(DCY) ps
+			@printf "$(YELLOW)disk usage\n$(NONE)"
+			@$(D) system df
 # @printf "$(YELLOW)docker volumes\n$(NONE)"
 # @$(DC) -f $(SRCS)/$(DCY) config | grep volumes -A1 --color='auto'
 
@@ -71,5 +73,19 @@ cleanvol:
 
 prune	:	fclean cleanvol
 			$(D) system prune -a --force
+
+help	:	
+			@printf "make all\t -> $(GREEN)to build containers\n$(NONE)"
+			@printf "make status\t -> $(GREEN)to view the status of containers\n$(NONE)"
+			@printf "make start\t -> $(GREEN)to start containers\n$(NONE)"
+			@printf "make stop\t -> $(GREEN)to stop containers\n$(NONE)"
+			@printf "make re\t\t -> $(GREEN)to clean containers and volumes and rebuild containers\n$(NONE)"
+			@printf "make clean\t -> $(GREEN)to stop and clean containers\n$(NONE)"
+			@printf "make fclean\t -> $(GREEN)to stop and clean containers and volumes\n$(NONE)"
+			@printf "make cleanvol\t -> $(GREEN)to clean volumes\n$(NONE)"
+			@printf "make prune\t -> $(GREEN)to clean all\n$(NONE)"
+			@printf "make install\t -> $(GREEN)to install docker and docker-compose pkgs\n$(NONE)"
+			@printf "make remove\t -> $(GREEN)to remove docker and docker-compose pkgs\n$(NONE)"
+			@printf "make help\t -> $(GREEN)to view this\n$(NONE)"
 
 .PHONY	: all stop re status clean fclean
