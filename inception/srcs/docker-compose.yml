@@ -39,7 +39,7 @@ services:
     #   - "80:9000"
     stdin_open: true # docker run -i
     tty: true        # docker run -t
-    restart: always
+    # restart: always
     volumes:
       # - wordpress_data:/var/www/html/wordpress/
       - /home/${USER}/data/wordpress:/var/www/html/

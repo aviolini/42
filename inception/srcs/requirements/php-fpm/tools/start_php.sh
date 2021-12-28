@@ -12,7 +12,6 @@ chmod 660 /var/www/html/phpmyadmin/config.inc.php
 chown -R www-data:www-data /var/www/html/phpmyadmin
 
 
-
 # mkdir /etc/phpmyadmin/upload -p
 # mkdir /etc/phpmyadmin/save
 # mkdir /etc/phpmyadmin/tmp
@@ -23,13 +22,9 @@ chown -R www-data:www-data /var/www/html/phpmyadmin
 # chmod 777 /var/www/html/phpmyadmin/tmp -R
 
 
-
-
 # mv wordpress /var/www/html/
 # mv wp-config.php /var/www/html/wordpress/wp-config.php
 
-service php7.3-fpm start
 
-/bin/bash
-				# && /bin/bash togliere dal momento che
-				# nel file init_mariaDB.sh c'è -it?
+mkdir /run/php		#e' richiesta da php-fpm7.3
+php-fpm7.3

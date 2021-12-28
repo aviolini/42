@@ -1,6 +1,7 @@
 FROM debian:10.10
 RUN apt-get update && apt-get -y install php-fpm wget less vim procps php-mysql php-mbstring
 
+#####################################################################################
 #conf php-fpm pool directives
 COPY ["conf/www.conf", "/"]
 RUN cp /etc/php/7.3/fpm/pool.d/www.conf /etc/php/7.3/fpm/pool.d/www.conf.original
@@ -9,12 +10,11 @@ RUN mv www.conf /etc/php/7.3/fpm/pool.d/www.conf
 COPY ["conf/php-fpm.conf", "/"]
 RUN cp /etc/php/7.3/fpm/php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf.original
 RUN mv php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
-#copy example file phpinfo()
-COPY ["conf/info.php", "/"]
-
-#conf phpmyadmin
+#copy example file phpinfo() #it will be managed later by the start_php.sh script
+COPY ["conf/info.php", "/"] 
+#####################################################################################
+#conf phpmyadmin #it will be managed later by the start_php.sh script
 COPY ["conf/config.inc.php", "/"]
-
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.7/phpMyAdmin-4.9.7-all-languages.tar.gz -P /tmp
 RUN tar -zxf /tmp/phpMyAdmin-4.9.7-all-languages.tar.gz
 # RUN mv phpMyAdmin-4.9.7-all-languages /var/www/html/phpmyadmin
@@ -28,8 +28,8 @@ RUN tar -zxf /tmp/phpMyAdmin-4.9.7-all-languages.tar.gz
 # # RUN chmod 660  /etc/phpmyadmin -R
 # # RUN chmod 777 /var/www/html/phpmyadmin/tmp -R
 # RUN mv config.inc.php /var/www/html/phpmyadmin/config.inc.php
-
-#conf wordpress
+#####################################################################################
+#conf wordpress #it will be managed later by the start_php.sh script
 # COPY ["conf/wp-config.php", "/"]
 # RUN wget https://wordpress.org/wordpress-5.8.2.tar.gz -P /tmp
 # RUN tar -xzf /tmp/wordpress-5.8.2.tar.gz
@@ -37,10 +37,6 @@ RUN tar -zxf /tmp/phpMyAdmin-4.9.7-all-languages.tar.gz
 # # RUN rm -f latest.tar.gz
 # RUN mv wp-config.php /var/www/html/wordpress/
 # # RUN rm /var/www/html/index.*
-
+#####################################################################################
 COPY ["./tools/start_php.sh", "/"]
 ENTRYPOINT ./start_php.sh
-
-# ENTRYPOINT service php7.3-fpm start && /bin/bash
-				# && /bin/bash togliere dal momento che
-				# nel file init_mariaDB.sh c'è -it?
