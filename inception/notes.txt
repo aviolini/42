@@ -17,3 +17,14 @@ https://stackoverflow.com/questions/40801772/what-is-the-difference-between-dock
 
 VOLUMES
 https://towardsdatascience.com/the-complete-guide-to-docker-volumes-1a06051d2cce
+
+NGINX AND PHP
+https://www.digitalocean.com/community/tutorials/understanding-and-implementing-fastcgi-proxying-in-nginx
+http://geekyplatypus.com/dockerise-your-php-application-with-nginx-and-php7-fpm/
+https://www.freecodecamp.org/news/the-nginx-handbook/#php-with-nginx
+
+https://doc.lagout.org/network/2015_NGINX_a_practical_guide.pdf
+https://appuntidiadam.altervista.org/wp-content/uploads/2017/02/E-book-NGINX.pdf
+https://static.poul.org/wp-content/uploads/2011/11/nginx.pdf
+
+https://www.youtube.com/watch?v=sZO_KF8FdSM

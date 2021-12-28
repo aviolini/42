@@ -6,7 +6,7 @@ services:
     image: nginx_img:1.0
     build: ./requirements/nginx/
     ports:
-      - "443:443"
+      - 80:80
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     restart: always
@@ -14,23 +14,23 @@ services:
       # - wordpress_data:/var/www/html/
       - /home/${USER}/data/wordpress:/var/www/html/
     networks:
-      - lamp_net
+      - lemp_net
     # depends_on:
     #   - wordpress
   #####################
-  mariadb:
-    image: mariadb_img:1.0
-    build: ./requirements/mariadb/
-    # ports:
-    #   - "80:3386"
-    stdin_open: true # docker run -i
-    tty: true        # docker run -t
-    restart: always
-    volumes:
-      # - mariadb_data:/srv/mariadb/
-      - /home/${USER}/data/mariadb:/mariadb/
-    networks:
-      - lamp_net
+  # mariadb:
+  #   image: mariadb_img:1.0
+  #   build: ./requirements/mariadb/
+  #   # ports:
+  #   #   - "80:3386"
+  #   stdin_open: true # docker run -i
+  #   tty: true        # docker run -t
+  #   restart: always
+  #   volumes:
+  #     # - mariadb_data:/srv/mariadb/
+  #     - /home/${USER}/data/mariadb:/mariadb/
+  #   networks:
+  #     - lemp_net
   #####################
   wordpress:
     image: wordpress_img:1.0
@@ -48,7 +48,7 @@ services:
     expose:
       - "9000"
     networks:
-      - lamp_net
+      - lemp_net
 ################################################
 # volumes:
 #   # mariadb_data:
@@ -69,4 +69,4 @@ services:
 #         device: "home/${USER}/data/mariadb/"
 ################################################
 networks:
-  lamp_net:
+  lemp_net:
