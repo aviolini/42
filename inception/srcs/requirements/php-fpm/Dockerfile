@@ -1,4 +1,4 @@
-FROM debian:10.10
+FROM debian:buster
 RUN apt-get update && apt-get -y install php-fpm wget less vim procps php-mysql php-mbstring
 
 #####################################################################################
