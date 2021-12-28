@@ -1,17 +1,15 @@
 #! /bin/bash
 
-# cp /etc/php/7.3/fpm/php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf.copy #////////////
-# mv php-fpm.conf /etc/php/7.3/fpm/ #//////////////////////////////////////////////
-
-mv -f phpMyAdmin-4.9.7-all-languages /var/www/html/phpmyadmin
-mv config.inc.php /var/www/html/phpmyadmin/config.inc.php
-
-
-chmod 660 /var/www/html/phpmyadmin/config.inc.php
-chown -R www-data:www-data /var/www/html/phpmyadmin
-
+#move example file phpinfo in volume /var/www/html/
 mv info.php /var/www/html/
 chown www-data:www-data /var/www/html/info.php
+
+#move phpMyAdmin dir in volume /var/www/html/
+mv -f phpMyAdmin-4.9.7-all-languages /var/www/html/phpmyadmin
+
+mv config.inc.php /var/www/html/phpmyadmin/config.inc.php
+chmod 660 /var/www/html/phpmyadmin/config.inc.php
+chown -R www-data:www-data /var/www/html/phpmyadmin
 
 
 

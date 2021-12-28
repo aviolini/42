@@ -1,17 +1,19 @@
 FROM debian:10.10
 RUN apt-get update && apt-get -y install php-fpm wget less vim procps php-mysql php-mbstring
 
-#conf phpmyadmin
-COPY ["conf/config.inc.php", "/"]
-
+#conf php-fpm pool directives
 COPY ["conf/www.conf", "/"]
+RUN cp /etc/php/7.3/fpm/pool.d/www.conf /etc/php/7.3/fpm/pool.d/www.conf.original
 RUN mv www.conf /etc/php/7.3/fpm/pool.d/www.conf
-
+#conf php-fpm
+COPY ["conf/php-fpm.conf", "/"]
+RUN cp /etc/php/7.3/fpm/php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf.original
+RUN mv php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
+#copy example file phpinfo()
 COPY ["conf/info.php", "/"]
 
-
-COPY ["conf/php-fpm.conf", "/"]    #////////////////////////////
-
+#conf phpmyadmin
+COPY ["conf/config.inc.php", "/"]
 
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.7/phpMyAdmin-4.9.7-all-languages.tar.gz -P /tmp
 RUN tar -zxf /tmp/phpMyAdmin-4.9.7-all-languages.tar.gz
