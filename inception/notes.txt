@@ -28,3 +28,6 @@ https://appuntidiadam.altervista.org/wp-content/uploads/2017/02/E-book-NGINX.pdf
 https://static.poul.org/wp-content/uploads/2011/11/nginx.pdf
 
 https://www.youtube.com/watch?v=sZO_KF8FdSM
+
+	SOLUZIONE ERRORE 502:
+	https://www.datadoghq.com/blog/nginx-502-bad-gateway-errors-php-fpm/

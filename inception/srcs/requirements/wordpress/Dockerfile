@@ -4,6 +4,11 @@ RUN apt-get update && apt-get -y install php-fpm wget less vim procps php-mysql 
 #conf phpmyadmin
 COPY ["conf/config.inc.php", "/"]
 
+COPY ["conf/www.conf", "/"]
+RUN mv www.conf /etc/php/7.3/fpm/pool.d/www.conf
+
+COPY ["conf/info.php", "/"]
+
 
 COPY ["conf/php-fpm.conf", "/"]    #////////////////////////////
 

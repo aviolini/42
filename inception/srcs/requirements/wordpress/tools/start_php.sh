@@ -10,6 +10,10 @@ mv config.inc.php /var/www/html/phpmyadmin/config.inc.php
 chmod 660 /var/www/html/phpmyadmin/config.inc.php
 chown -R www-data:www-data /var/www/html/phpmyadmin
 
+mv info.php /var/www/html/
+chown www-data:www-data /var/www/html/info.php
+
+
 
 # mkdir /etc/phpmyadmin/upload -p
 # mkdir /etc/phpmyadmin/save

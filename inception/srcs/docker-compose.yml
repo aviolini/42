@@ -6,7 +6,7 @@ services:
     image: nginx_img:1.0
     build: ./requirements/nginx/
     ports:
-      - 80:80
+      - "443:443"
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     restart: always
@@ -16,7 +16,7 @@ services:
     networks:
       - lemp_net
     # depends_on:
-    #   - wordpress
+    #   - php
   #####################
   # mariadb:
   #   image: mariadb_img:1.0
