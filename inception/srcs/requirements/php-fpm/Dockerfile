@@ -19,14 +19,10 @@ COPY ["conf/info.php", "/"]
 # COPY ["./phpmyadmin/tools/start_phpmyadmin.sh", "/"]
 
 #####################################################################################
-#conf wordpress #it will be managed later by the start_php.sh script
-# COPY ["conf/wp-config.php", "/"]
-# RUN wget https://wordpress.org/wordpress-5.8.2.tar.gz -P /tmp
-# RUN tar -xzf /tmp/wordpress-5.8.2.tar.gz
-# RUN mv /wordpress /var/www/html/
-# # RUN rm -f latest.tar.gz
-# RUN mv wp-config.php /var/www/html/wordpress/
-# # RUN rm /var/www/html/index.*
+#only for wordpress
+COPY ["wordpress/conf/wp-config.php", "/"]
+RUN wget https://wordpress.org/wordpress-5.8.2.tar.gz -P /tmp
+COPY ["./wordpress/tools/start_wordpress.sh", "/"]
 
 #####################################################################################
 COPY ["./tools/start_php.sh", "/"]

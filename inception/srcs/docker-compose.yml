@@ -5,6 +5,7 @@ services:
   nginx:
     image: nginx_img:1.0
     build: ./requirements/nginx/
+    container_name: nginx
     ports:
       - "443:443"
     stdin_open: true # docker run -i
@@ -21,13 +22,14 @@ services:
   mariadb:
     image: mariadb_img:1.0
     build: ./requirements/mariadb/
+    container_name: mariadb
     # ports:
     #   - "3306:3306"
     expose:
         - "3306"
     stdin_open: true # docker run -i
     tty: true        # docker run -t
-    restart: always
+    # restart: always
     volumes:
       # - mariadb_data:/srv/mariadb/
       - /home/${USER}/data/mariadb:/mariadb/
@@ -41,6 +43,7 @@ services:
   php-fpm:
     image: php-fpm_img:1.0
     build: ./requirements/php-fpm/
+    container_name: php-fpm
     ports:
       - "9000:9000"
     stdin_open: true # docker run -i
