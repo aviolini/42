@@ -5,6 +5,8 @@ COPY ["conf/50-server.cnf", "/"]
 RUN cp /etc/mysql/mariadb.conf.d/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf.original
 RUN mv 50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
+COPY ["conf/wp_dump.sql", "/"]
+
 COPY ["tools/start_mariadb.sh", "/"]
 # ENTRYPOINT service mysql start
 ENTRYPOINT ./start_mariadb.sh

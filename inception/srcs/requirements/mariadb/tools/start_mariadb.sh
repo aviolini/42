@@ -10,6 +10,9 @@ mysql -u root -e "GRANT USAGE ON wordpress.* TO '$MYSQL_USER'@'%' IDENTIFIED BY 
 mysql -u root -e "GRANT ALL ON wordpress.* TO '$MYSQL_USER'@'%';"
 mysql -u root -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('$MYSQL_ROOT_PASSWORD');"
 
+
+mysql -u $MYSQL_USER -p$MYSQL_USER_PASSWORD wordpress < wp_dump.sql
+
 #https://serverfault.com/questions/634277/installing-configuring-and-running-mariadb-in-foreground-on-centos-7-via-docker
 # mysqladmin -u root password "$MYSQL_ROOT_PASSWORD"
 # mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "UPDATE mysql.user SET Password=PASSWORD('$MYSQL_ROOT_PASSWORD') WHERE User='root'"
