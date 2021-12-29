@@ -14,7 +14,7 @@ RUN mv php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
 COPY ["conf/info.php", "/"] 
 #####################################################################################
 #conf phpmyadmin #it will be managed later by the start_php.sh script
-COPY ["conf/config.inc.php", "/"]
+COPY ["phpmyadmin/conf/config.inc.php", "/"]
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.7/phpMyAdmin-4.9.7-all-languages.tar.gz -P /tmp
 RUN tar -zxf /tmp/phpMyAdmin-4.9.7-all-languages.tar.gz
 # RUN mv phpMyAdmin-4.9.7-all-languages /var/www/html/phpmyadmin
@@ -39,4 +39,5 @@ RUN tar -zxf /tmp/phpMyAdmin-4.9.7-all-languages.tar.gz
 # # RUN rm /var/www/html/index.*
 #####################################################################################
 COPY ["./tools/start_php.sh", "/"]
+COPY ["./phpmyadmin/tools/conf_phpmyadmin.sh", "/"]
 ENTRYPOINT ./start_php.sh
