@@ -1,7 +1,9 @@
 #! /bin/bash
 
-./conf_phpmyadmin.sh
-
+#####################################################################################
+#only for phpmyadmin
+#./start_phpmyadmin.sh
+#####################################################################################
 
 #move example file phpinfo in volume /var/www/html/
 mv info.php /var/www/html/
