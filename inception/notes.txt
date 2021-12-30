@@ -31,3 +31,12 @@ https://www.youtube.com/watch?v=sZO_KF8FdSM
 
 	SOLUZIONE ERRORE 502:
 	https://www.datadoghq.com/blog/nginx-502-bad-gateway-errors-php-fpm/
+
+
+///in wp-config.php:
+// PER UTILIZZARE GETENV E FAR PASSARE LE VARIABILI
+// ATTRAVERSO IL BROWSER HO DOVUTO DECOMMENTARE
+// clear_env = no in www.conf di php-fpm
+// https://stackoverflow.com/questions/30822695/how-to-get-php-to-be-able-to-read-system-environment-variables
+// https://medium.com/@tomahock/passing-system-environment-variables-to-php-fpm-when-using-nginx-a70045370fad
+//////////////////////////////////////////////////
