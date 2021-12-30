@@ -40,3 +40,6 @@ https://www.youtube.com/watch?v=sZO_KF8FdSM
 // https://stackoverflow.com/questions/30822695/how-to-get-php-to-be-able-to-read-system-environment-variables
 // https://medium.com/@tomahock/passing-system-environment-variables-to-php-fpm-when-using-nginx-a70045370fad
 //////////////////////////////////////////////////
+
+VOLUMES
+https://stackoverflow.com/questions/39175194/docker-compose-persistent-data-mysql
