@@ -39,6 +39,10 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_USER_PASSWORD: ${MYSQL_USER_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      WP_ADMIN: ${WP_ADMIN}
+      WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
+      WP_USER: ${WP_USER}
+      WP_USER_PASSWORD: ${WP_USER_PASSWORD}
   #####################
   php-fpm:
     image: php-fpm_img:1.0
