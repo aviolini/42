@@ -5,3 +5,6 @@ mv /wordpress /var/www/html/
 
 mv wp-config.php /var/www/html/wordpress/
 chown -R www-data:www-data /var/www/html/wordpress/
+
+ln -s /var/www/html/wordpress/wp-login.php /var/www/html/wp-login.php 
+chown -R www-data:www-data /var/www/html/wp-login.php 
