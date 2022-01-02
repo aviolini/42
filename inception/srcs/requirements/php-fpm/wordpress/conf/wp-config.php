@@ -24,21 +24,11 @@
 // clear_env = no in www.conf di php-fpm
 // https://stackoverflow.com/questions/30822695/how-to-get-php-to-be-able-to-read-system-environment-variables
 // https://medium.com/@tomahock/passing-system-environment-variables-to-php-fpm-when-using-nginx-a70045370fad
+define( 'DB_NAME', getenv('MYSQL_DATABASE'));													//ADDING SETTING
+define( 'DB_USER', getenv('MYSQL_USER'));														//ADDING SETTING
+define( 'DB_PASSWORD', getenv('MYSQL_USER_PASSWORD'));											//ADDING SETTING
+define( 'DB_HOST', 'mariadb' );																	//ADDING SETTING
 //////////////////////////////////////////////////
-
-
-// ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
-define( 'DB_NAME', getenv('MYSQL_DATABASE'));
-
-/** MySQL database username */
-define( 'DB_USER', getenv('MYSQL_USER'));
-
-/** MySQL database password */
-define( 'DB_PASSWORD', getenv('MYSQL_USER_PASSWORD'));
-
-/** MySQL hostname */
-define( 'DB_HOST', 'mariadb' );
 
 /** Database Charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
