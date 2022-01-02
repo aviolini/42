@@ -6,7 +6,7 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2022/01/02 19:39:46 by arrigo           ###   ########.fr        #
+#    Updated: 2022/01/02 19:54:18 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,10 +49,10 @@ status	:
 			@2>/dev/null $(DC) -f $(SRCS)/$(DCY) ps
 			@printf "\n$(YELLOW)disk usage\n$(NONE)"
 			@$(D) system df
-			@printf "\n$(YELLOW)docker volumes\n$(NONE)"
-			@$(D) volume ls
-			@printf "\n$(YELLOW)docker bind mounts\n$(NONE)"
-			@2>/dev/null $(DC) -f $(SRCS)/$(DCY) config | grep -e ':rw' -e '_name'
+# @printf "\n$(YELLOW)docker volumes\n$(NONE)"
+# @$(D) volume ls
+# @printf "\n$(YELLOW)docker bind mounts\n$(NONE)"
+# @2>/dev/null $(DC) -f $(SRCS)/$(DCY) config | grep -e ':rw' -e '_name'
 
 install	:
 			@apt list docker | grep installed && echo "" || apt install -y docker

@@ -1,7 +1,8 @@
-version: '3'
+version: '3.5'
 
 networks:
   lemp_net:
+    name: lemp-net
 services:
   #####################
   mariadb:
@@ -19,7 +20,7 @@ services:
     expose:
         - "3306"
     restart: always
-    image: mariadb_img:1.0
+    image: mariadb
     networks:
       - lemp_net
     volumes:
@@ -34,7 +35,7 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_USER_PASSWORD: ${MYSQL_USER_PASSWORD}
-    image: php-fpm_img:1.0
+    image: php-fpm
     networks:
       - lemp_net
     expose:
@@ -50,7 +51,7 @@ services:
       - /home/${USER}/data/wordpress:/var/www/html/
     depends_on:
       - php-fpm
-    image: nginx_img:1.0
+    image: nginx
     networks:
       - lemp_net
     ports:
