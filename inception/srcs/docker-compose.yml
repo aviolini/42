@@ -16,19 +16,15 @@ services:
       WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
       WP_USER: ${WP_USER}
       WP_USER_PASSWORD: ${WP_USER_PASSWORD}
-    # ports:
-    #   - "3306:3306"
     expose:
         - "3306"
     image: mariadb_img:1.0
     networks:
       - lemp_net
-    stdin_open: true # docker run -i
-    tty: true        # docker run -t
+    # stdin_open: true # docker run -i
+    # tty: true        # docker run -t
     volumes:
-      # - mariadb_data:/srv/mariadb/
       - /home/${USER}/data/mariadb:/mariadb/
-    # restart: always
   #####################
   php-fpm:
     build: ./requirements/php-fpm/
@@ -45,19 +41,15 @@ services:
     ports:
       - "9000:9000"
     restart: always
-    stdin_open: true # docker run -i
-    tty: true        # docker run -t
+    # stdin_open: true # docker run -i
+    # tty: true        # docker run -t
     volumes:
-      # - wordpress_data:/var/www/html/wordpress/
       - /home/${USER}/data/wordpress:/var/www/html/
-    # depends_on:
-    #   - nginx
   #####################
   nginx:
     build: ./requirements/nginx/
     container_name: nginx
     volumes:
-      # - wordpress_data:/var/www/html/
       - /home/${USER}/data/wordpress:/var/www/html/
     depends_on:
       - php-fpm
@@ -67,5 +59,5 @@ services:
     ports:
       - "443:443"
     restart: always
-    tty: true        # docker run -t
-    stdin_open: true # docker run -i
+    # tty: true        # docker run -t
+    # stdin_open: true # docker run -i

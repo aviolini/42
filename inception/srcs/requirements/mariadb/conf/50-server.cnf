@@ -30,7 +30,7 @@ lc-messages-dir         = /usr/share/mysql
 skip-bind-address
 #bind-address            = 127.0.0.1
 
-skip-networking	= false
+#skip-networking	= false
 
 
 #

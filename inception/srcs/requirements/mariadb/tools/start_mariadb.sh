@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 service mysql start
 
 mysql -u root -e "CREATE DATABASE $MYSQL_DATABASE;"
@@ -25,8 +24,7 @@ ln -s /var/lib/mysql/* /mariadb
 # mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%'"
 # mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES"
 
-#to run mariadb in foreground
-# mysqld_safe
-/bin/bash
+mysqld_safe
+# /bin/bash
 
 #

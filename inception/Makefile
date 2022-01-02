@@ -6,7 +6,7 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2022/01/02 17:09:22 by arrigo           ###   ########.fr        #
+#    Updated: 2022/01/02 17:41:22 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,24 +21,18 @@ YELLOW	=	\e[1;33m
 BLUE	=	\e[0;36m
 RED		=	\e[0;31m
 
-EXPR	=	0.0.0.0 $(USER).42.fr
+EXPR	=	127.0.0.1 $(USER).42.fr
 
 all		:	clean cleanvol install
-# docker volume rm srcs_wordpress_data
-# docker volume rm srcs_mariadb_data
 			$(DC) --env-file $(SRCS)/.env -f $(SRCS)/$(DCY) up -d --build --force &&\
 			cat /etc/hosts | grep "$(EXPR)" && echo -n ||\
 			echo "$(EXPR)" >> /etc/hosts
 
-#--force-recreate
-#--build
 stop	:
 			$(DC) -f $(SRCS)/$(DCY) stop
 
 start	:
 			$(DC) -f $(SRCS)/$(DCY) start
-#$(DC) -f $(SRCS)/$(DCY) up -d 
-#con up se non sono creati li crea bypassando all
 
 re		:	fclean cleanvol all
 
@@ -68,13 +62,10 @@ remove	:
 
 clean	:
 			$(DC) -f $(SRCS)/$(DCY) rm --stop --force
-			sed -i '/$(EXPR)/d' /etc/hosts
-
-# $(D) system prune
+			@sed -i '/$(EXPR)/d' /etc/hosts
 
 fclean	:	clean
 			$(DC) -f $(SRCS)/$(DCY) down -v --rmi all
-#$(D) system prune -a --force
 
 cleanvol:	
 			rm -rf /home/root 							#CLEAN BIND MOUNTS
@@ -97,4 +88,4 @@ help	:
 			@printf "make remove\t -> $(GREEN)to remove docker and docker-compose pkgs\n$(NONE)"
 			@printf "make help\t -> $(GREEN)to view this\n$(NONE)"
 
-.PHONY	: all stop re status clean fclean
+.PHONY	: all stop re status install remove clean fclean cleanvol prune help
