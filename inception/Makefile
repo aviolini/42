@@ -6,7 +6,7 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2022/01/02 13:19:46 by arrigo           ###   ########.fr        #
+#    Updated: 2022/01/02 17:09:22 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,15 @@ YELLOW	=	\e[1;33m
 BLUE	=	\e[0;36m
 RED		=	\e[0;31m
 
-all		:	clean cleanvol #install
+EXPR	=	0.0.0.0 $(USER).42.fr
+
+all		:	clean cleanvol install
 # docker volume rm srcs_wordpress_data
 # docker volume rm srcs_mariadb_data
-			$(DC) --env-file $(SRCS)/.env -f $(SRCS)/$(DCY) up -d --build --force
+			$(DC) --env-file $(SRCS)/.env -f $(SRCS)/$(DCY) up -d --build --force &&\
+			cat /etc/hosts | grep "$(EXPR)" && echo -n ||\
+			echo "$(EXPR)" >> /etc/hosts
+
 #--force-recreate
 #--build
 stop	:
@@ -63,6 +68,8 @@ remove	:
 
 clean	:
 			$(DC) -f $(SRCS)/$(DCY) rm --stop --force
+			sed -i '/$(EXPR)/d' /etc/hosts
+
 # $(D) system prune
 
 fclean	:	clean

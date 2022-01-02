@@ -30,23 +30,6 @@ services:
       - /home/${USER}/data/mariadb:/mariadb/
     # restart: always
   #####################
-  nginx:
-    build: ./requirements/nginx/
-    container_name: nginx
-    volumes:
-      # - wordpress_data:/var/www/html/
-      - /home/${USER}/data/wordpress:/var/www/html/
-    depends_on:
-      - php-fpm
-    image: nginx_img:1.0
-    networks:
-      - lemp_net
-    ports:
-      - "443:443"
-    restart: always
-    tty: true        # docker run -t
-    stdin_open: true # docker run -i
-  #####################
   php-fpm:
     build: ./requirements/php-fpm/
     container_name: php-fpm
@@ -69,3 +52,20 @@ services:
       - /home/${USER}/data/wordpress:/var/www/html/
     # depends_on:
     #   - nginx
+  #####################
+  nginx:
+    build: ./requirements/nginx/
+    container_name: nginx
+    volumes:
+      # - wordpress_data:/var/www/html/
+      - /home/${USER}/data/wordpress:/var/www/html/
+    depends_on:
+      - php-fpm
+    image: nginx_img:1.0
+    networks:
+      - lemp_net
+    ports:
+      - "443:443"
+    restart: always
+    tty: true        # docker run -t
+    stdin_open: true # docker run -i
