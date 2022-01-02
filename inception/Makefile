@@ -6,9 +6,11 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2022/01/02 17:41:22 by arrigo           ###   ########.fr        #
+#    Updated: 2022/01/02 19:39:46 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+include ./srcs/.env
 
 SRCS	=	./srcs
 D		=	docker
@@ -21,7 +23,7 @@ YELLOW	=	\e[1;33m
 BLUE	=	\e[0;36m
 RED		=	\e[0;31m
 
-EXPR	=	127.0.0.1 $(USER).42.fr
+EXPR	=	127.0.0.1 $(DOMAIN_NAME)
 
 all		:	clean cleanvol install
 			$(DC) --env-file $(SRCS)/.env -f $(SRCS)/$(DCY) up -d --build --force &&\

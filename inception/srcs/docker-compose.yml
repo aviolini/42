@@ -22,8 +22,6 @@ services:
     image: mariadb_img:1.0
     networks:
       - lemp_net
-    # stdin_open: true # docker run -i
-    # tty: true        # docker run -t
     volumes:
       - /home/${USER}/data/mariadb:/mariadb/
   #####################
@@ -42,8 +40,6 @@ services:
     expose:
       - "9000"
     restart: always
-    # stdin_open: true # docker run -i
-    # tty: true        # docker run -t
     volumes:
       - /home/${USER}/data/wordpress:/var/www/html/
   #####################
@@ -60,5 +56,3 @@ services:
     ports:
       - "443:443"
     restart: always
-    # tty: true        # docker run -t
-    # stdin_open: true # docker run -i
