@@ -19,12 +19,12 @@
 # Default server configuration
 #
 server {
-	# listen 80; ////////////////////////////////////MODIF
+	# listen 80;
 	#listen [::]:80 default_server;
 
 	# SSL configuration
 	#
-	 listen 443 ssl default_server;
+	 listen 443 ssl default_server;															#ADDING SETTING
 	# listen [::]:443 ssl default_server;
 	
 	ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
@@ -59,13 +59,13 @@ server {
 
 	# pass PHP scripts to FastCGI server
 	#
-	location ~ \.php$ {
-		include snippets/fastcgi-php.conf;
+	location ~ \.php$ {																		#ADDING SETTING
+		include snippets/fastcgi-php.conf;													#ADDING SETTING
 	#
 	#	# With php-fpm (or other unix sockets):
 	#	fastcgi_pass unix:/run/php/php7.3-fpm.sock;
 	#	# With php-cgi (or other tcp sockets):
-		fastcgi_pass php-fpm:9000;
+		fastcgi_pass php-fpm:9000;															#ADDING SETTING
 	}
 
 	# deny access to .htaccess files, if Apache's document root

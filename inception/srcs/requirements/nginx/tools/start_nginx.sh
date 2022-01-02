@@ -1,20 +1,19 @@
 #! /bin/bash
 
+#COPIA FILE CONFIGURAZIONE SERVER
 cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.copy
 mv default /etc/nginx/sites-available/default
 
-cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.copy
+#COPIA DELLA PAGINA INIZIALE MODIFICATA
 mv index.nginx-debian.html /var/www/html/index.nginx-debian.html
 
+#COPIA DEL FILE DELLE IMPOSTAZIONI DI NGINX
 cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.copy
 mv nginx.conf /etc/nginx/
 
+#ACCESSO GARANTITO ALL'UTENTE www-data
 chown -R www-data:www-data /var/www/html/
 
-# service php7.3-fpm start
+service nginx start
 
-service nginx start								#grazie all'aggiunta di "daemon off;" in nginx.conf nginx funziona in modalità foreground
-												#senza il bisogno di avviare /bin/bash per non far uscire il container 
-# nginx -g 'daemon off;'						# altro parametro giusto senza il bisogno di aggiungere "daemon off;" in nginx.conf
-# nginx											# equivale a "service nginx start"		
-# /bin/bash"			
+#NEI FILES default e nginx.conf #ADDING SETTING sono i parametri modificati
