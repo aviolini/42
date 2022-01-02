@@ -9,5 +9,5 @@ RUN mv 50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 #COPIA DEL BACKUP DELLA CONFIGURAZIONE INIZIALE DI WORDPRESS PRECEDENTEMENTE EFFETTUATA
 COPY ["conf/wp_dump.sql", "/"]
 
-COPY ["tools/start_mariadb.sh", "/tmp/"]
-ENTRYPOINT /tmp/start_mariadb.sh
+COPY ["tools/start_mariadb.sh", "/"]
+ENTRYPOINT ./start_mariadb.sh

@@ -6,7 +6,7 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2022/01/02 19:54:18 by arrigo           ###   ########.fr        #
+#    Updated: 2022/01/02 23:42:20 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,11 @@ cleanvol:
 			rm -rf /var/lib/docker/volumes/*			#CLEAN VOLUMES
 
 prune	:	fclean cleanvol
+			@2>/dev/null $(D) stop $$($(D) ps -qa) || echo -n
+			@2>/dev/null $(D) rm $$($(D) ps -qa) || echo -n
+			@2>/dev/null $(D) rmi -f $$($(D) images -qa) || echo -n
+			@2>/dev/null $(D) volume rm $$($(D) volume ls -q) || echo -n
+			@2>/dev/null $(D) network rm $$($(D) network ls -q) || echo -n
 			$(D) system prune -a --force
 
 help	:	
