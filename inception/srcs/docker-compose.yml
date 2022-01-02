@@ -18,6 +18,7 @@ services:
       WP_USER_PASSWORD: ${WP_USER_PASSWORD}
     expose:
         - "3306"
+    restart: always
     image: mariadb_img:1.0
     networks:
       - lemp_net
@@ -38,8 +39,8 @@ services:
     image: php-fpm_img:1.0
     networks:
       - lemp_net
-    ports:
-      - "9000:9000"
+    expose:
+      - "9000"
     restart: always
     # stdin_open: true # docker run -i
     # tty: true        # docker run -t
