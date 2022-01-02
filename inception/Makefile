@@ -6,7 +6,7 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2021/12/31 02:01:12 by arrigo           ###   ########.fr        #
+#    Updated: 2022/01/02 13:19:46 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ YELLOW	=	\e[1;33m
 BLUE	=	\e[0;36m
 RED		=	\e[0;31m
 
-all		:	clean cleanvol install
+all		:	clean cleanvol #install
 # docker volume rm srcs_wordpress_data
 # docker volume rm srcs_mariadb_data
 			$(DC) --env-file $(SRCS)/.env -f $(SRCS)/$(DCY) up -d --build --force
@@ -40,16 +40,18 @@ re		:	fclean cleanvol all
 status	:
 			@printf "$(GREEN)docker images\n$(NONE)"
 			@$(D) images
-			@printf "$(GREEN)docker containers\n$(NONE)"
+			@printf "\n$(GREEN)docker containers\n$(NONE)"
 			@$(D) ps -a
-			@printf "$(BLUE)docker-compose images\n$(NONE)"
-			@$(DC) -f $(SRCS)/$(DCY) images
-			@printf "$(BLUE)docker-compose containers\n$(NONE)"
-			@$(DC) -f $(SRCS)/$(DCY) ps
-			@printf "$(YELLOW)disk usage\n$(NONE)"
+			@printf "\n$(BLUE)docker-compose images\n$(NONE)"
+			@2>/dev/null $(DC) -f $(SRCS)/$(DCY) images 
+			@printf "\n$(BLUE)docker-compose containers\n$(NONE)"
+			@2>/dev/null $(DC) -f $(SRCS)/$(DCY) ps
+			@printf "\n$(YELLOW)disk usage\n$(NONE)"
 			@$(D) system df
-# @printf "$(YELLOW)docker volumes\n$(NONE)"
-# @$(DC) -f $(SRCS)/$(DCY) config | grep volumes -A1 --color='auto'
+			@printf "\n$(YELLOW)docker volumes\n$(NONE)"
+			@$(D) volume ls
+			@printf "\n$(YELLOW)docker bind mounts\n$(NONE)"
+			@2>/dev/null $(DC) -f $(SRCS)/$(DCY) config | grep -e ':rw' -e '_name'
 
 install	:
 			@apt list docker | grep installed && echo "" || apt install -y docker
@@ -68,8 +70,8 @@ fclean	:	clean
 #$(D) system prune -a --force
 
 cleanvol:	
-			rm -rf /home/root 							#////////////////////////////////////
-			rm -rf /var/lib/docker/volumes/*			#///////////////////////////////////
+			rm -rf /home/root 							#CLEAN BIND MOUNTS
+			rm -rf /var/lib/docker/volumes/*			#CLEAN VOLUMES
 
 prune	:	fclean cleanvol
 			$(D) system prune -a --force

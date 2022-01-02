@@ -1,40 +1,12 @@
 version: '3'
 
+networks:
+  lemp_net:
 services:
   #####################
-  nginx:
-    image: nginx_img:1.0
-    build: ./requirements/nginx/
-    container_name: nginx
-    ports:
-      - "443:443"
-    stdin_open: true # docker run -i
-    tty: true        # docker run -t
-    restart: always
-    volumes:
-      # - wordpress_data:/var/www/html/
-      - /home/${USER}/data/wordpress:/var/www/html/
-    networks:
-      - lemp_net
-    depends_on:
-      - php-fpm
-  #####################
   mariadb:
-    image: mariadb_img:1.0
     build: ./requirements/mariadb/
     container_name: mariadb
-    # ports:
-    #   - "3306:3306"
-    expose:
-        - "3306"
-    stdin_open: true # docker run -i
-    tty: true        # docker run -t
-    # restart: always
-    volumes:
-      # - mariadb_data:/srv/mariadb/
-      - /home/${USER}/data/mariadb:/mariadb/
-    networks:
-      - lemp_net
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
@@ -44,28 +16,56 @@ services:
       WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
       WP_USER: ${WP_USER}
       WP_USER_PASSWORD: ${WP_USER_PASSWORD}
-  #####################
-  php-fpm:
-    image: php-fpm_img:1.0
-    build: ./requirements/php-fpm/
-    container_name: php-fpm
-    ports:
-      - "9000:9000"
+    # ports:
+    #   - "3306:3306"
+    expose:
+        - "3306"
+    image: mariadb_img:1.0
+    networks:
+      - lemp_net
     stdin_open: true # docker run -i
     tty: true        # docker run -t
+    volumes:
+      # - mariadb_data:/srv/mariadb/
+      - /home/${USER}/data/mariadb:/mariadb/
+    # restart: always
+  #####################
+  nginx:
+    build: ./requirements/nginx/
+    container_name: nginx
+    volumes:
+      # - wordpress_data:/var/www/html/
+      - /home/${USER}/data/wordpress:/var/www/html/
+    depends_on:
+      - php-fpm
+    image: nginx_img:1.0
+    networks:
+      - lemp_net
+    ports:
+      - "443:443"
     restart: always
+    tty: true        # docker run -t
+    stdin_open: true # docker run -i
+  #####################
+  php-fpm:
+    build: ./requirements/php-fpm/
+    container_name: php-fpm
+    depends_on:
+      - mariadb
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_USER_PASSWORD: ${MYSQL_USER_PASSWORD}
+    image: php-fpm_img:1.0
+    networks:
+      - lemp_net
+    ports:
+      - "9000:9000"
+    restart: always
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
     volumes:
       # - wordpress_data:/var/www/html/wordpress/
       - /home/${USER}/data/wordpress:/var/www/html/
     # depends_on:
     #   - nginx
-    networks:
-      - lemp_net
-    environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_USER_PASSWORD: ${MYSQL_USER_PASSWORD}
-    depends_on:
-      - mariadb
-networks:
-  lemp_net:
