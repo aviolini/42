@@ -9,5 +9,21 @@ COPY ["./conf/default", "/"]
 COPY ["./conf/index.nginx-debian.html","/"]
 COPY ["./conf/nginx.conf","/"]
 
+#COPIA FILE CONFIGURAZIONE SERVER
+RUN cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.copy
+RUN mv default /etc/nginx/sites-available/default
+
+#COPIA DELLA PAGINA INIZIALE MODIFICATA
+RUN mv index.nginx-debian.html /var/www/html/index.nginx-debian.html
+
+#COPIA DEL FILE DELLE IMPOSTAZIONI DI NGINX
+RUN cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.copy
+RUN mv nginx.conf /etc/nginx/
+
+#ACCESSO GARANTITO ALL'UTENTE www-data
+RUN chown -R www-data:www-data /var/www/html/
+
+
+
 COPY ["./tools/start_nginx.sh", "/"]
 ENTRYPOINT ./start_nginx.sh
