@@ -12,20 +12,20 @@ networks:
 #     name: wordpress_data
 #     # external: true
 volumes:
-  wordpress_data1:
+  wordpress_data:
     external: false
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/arrigo/data/wordpress1
-  mariadb_data1:
+      device: /home/${LOGIN}/data/wordpress
+  mariadb_data:
     external: false
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/arrigo/data/mariadb1
+      device: /home/${LOGIN}/data/mariadb
   #####################
 services:
   mariadb:
@@ -49,7 +49,7 @@ services:
     volumes:
       # - /home/${USER}/data/mariadb:/mariadb/
       - type: volume
-        source: mariadb_data1
+        source: mariadb_data
         target: /var/lib/mysql
       # - type: bind
       #   source: /home/${USER}/data/mariadb
@@ -76,7 +76,7 @@ services:
     volumes:
       # - /home/${USER}/data/wordpress:/var/www/html/
       - type: volume
-        source: wordpress_data1
+        source: wordpress_data
         target: /var/www/html
         # volume:
         #   nocopy: true
@@ -89,7 +89,7 @@ services:
     volumes:
       # - /home/${USER}/data/wordpress:/var/www/html/
       - type: volume
-        source: wordpress_data1
+        source: wordpress_data
         target: /var/www/html
         # volume:
         #   nocopy: true

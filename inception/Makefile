@@ -6,7 +6,7 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2022/01/03 12:51:35 by arrigo           ###   ########.fr        #
+#    Updated: 2022/01/03 12:56:09 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ RED		=	\e[0;31m
 EXPR	=	127.0.0.1 $(DOMAIN_NAME)
 
 all		:	clean cleanvol install
-			mkdir -p /home/arrigo/data/wordpress1 
-			mkdir -p /home/arrigo/data/mariadb1 
+			mkdir -p /home/$(LOGIN)/data/wordpress
+			mkdir -p /home/$(LOGIN)/data/mariadb
 			$(DC) --env-file $(SRCS)/.env -f $(SRCS)/$(DCY) up -d --build --force &&\
 			cat /etc/hosts | grep "$(EXPR)" && echo -n ||\
 			echo "$(EXPR)" >> /etc/hosts
@@ -73,7 +73,7 @@ fclean	:	clean
 
 cleanvol:
 			@2>/dev/null $(D) volume rm $$($(D) volume ls -q) || echo -n
-			rm -rf /home/root/data/						#CLEAN BIND MOUNTS
+			rm -rf /home/$(LOGIN)/data/						#CLEAN BIND MOUNTS
 			rm -rf /var/lib/docker/volumes/*			#CLEAN VOLUMES
 
 prune	:	fclean cleanvol
