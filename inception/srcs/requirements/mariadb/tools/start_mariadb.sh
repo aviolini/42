@@ -21,6 +21,7 @@ mysql -u $MYSQL_USER -p$MYSQL_USER_PASSWORD $MYSQL_DATABASE < wp_dump.sql
 mysql -u $MYSQL_USER -p$MYSQL_USER_PASSWORD $MYSQL_DATABASE -e "update wp_users set user_login = '$WP_ADMIN', user_pass = MD5('$WP_ADMIN_PASSWORD'), user_nicename = '$WP_ADMIN', user_email = '$WP_ADMIN@test.com', display_name = '$WP_ADMIN' where id = 1;"
 mysql -u $MYSQL_USER -p$MYSQL_USER_PASSWORD $MYSQL_DATABASE -e "update wp_users set user_login = '$WP_USER', user_pass = MD5('$WP_USER_PASSWORD'), user_nicename = '$WP_USER', user_email = '$WP_USER@test.com', display_name = '$WP_USER' where id = 2;"
 
+# chown -R www-data:www-data /var/lib/mysql/$MYSQL_DATABASE
 ############### COLLEGAMENTO PER CREARE IL VOLUME PERSISTENTE ACCESSIBILE DALL'ESTERNO
 # ln -s /var/lib/mysql/* /mariadb
 
@@ -34,6 +35,6 @@ mysql -u $MYSQL_USER -p$MYSQL_USER_PASSWORD $MYSQL_DATABASE -e "update wp_users 
 # mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES"
 
 ############### mysql IN FOREGROUND
-mysqld_safe
-
+# mysqld_safe
+/bin/bash
 ############### ALTRE CONFIGURAZIONI: ##ADDING SETTING in 50-server.cnf
