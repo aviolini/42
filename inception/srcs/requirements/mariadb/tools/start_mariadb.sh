@@ -22,7 +22,7 @@ mysql -u $MYSQL_USER -p$MYSQL_USER_PASSWORD $MYSQL_DATABASE -e "update wp_users 
 mysql -u $MYSQL_USER -p$MYSQL_USER_PASSWORD $MYSQL_DATABASE -e "update wp_users set user_login = '$WP_USER', user_pass = MD5('$WP_USER_PASSWORD'), user_nicename = '$WP_USER', user_email = '$WP_USER@test.com', display_name = '$WP_USER' where id = 2;"
 
 ############### COLLEGAMENTO PER CREARE IL VOLUME PERSISTENTE ACCESSIBILE DALL'ESTERNO
-ln -s /var/lib/mysql/* /mariadb
+# ln -s /var/lib/mysql/* /mariadb
 
 #IMPOSTAZIONI TIPICHE PER UN MIGLIOR LIVELLO DI SICUREZZA
 #https://serverfault.com/questions/634277/installing-configuring-and-running-mariadb-in-foreground-on-centos-7-via-docker

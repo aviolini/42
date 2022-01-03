@@ -6,7 +6,7 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2022/01/02 23:42:20 by arrigo           ###   ########.fr        #
+#    Updated: 2022/01/03 12:51:35 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ RED		=	\e[0;31m
 EXPR	=	127.0.0.1 $(DOMAIN_NAME)
 
 all		:	clean cleanvol install
+			mkdir -p /home/arrigo/data/wordpress1 
+			mkdir -p /home/arrigo/data/mariadb1 
 			$(DC) --env-file $(SRCS)/.env -f $(SRCS)/$(DCY) up -d --build --force &&\
 			cat /etc/hosts | grep "$(EXPR)" && echo -n ||\
 			echo "$(EXPR)" >> /etc/hosts
@@ -49,8 +51,8 @@ status	:
 			@2>/dev/null $(DC) -f $(SRCS)/$(DCY) ps
 			@printf "\n$(YELLOW)disk usage\n$(NONE)"
 			@$(D) system df
-# @printf "\n$(YELLOW)docker volumes\n$(NONE)"
-# @$(D) volume ls
+			@printf "\n$(YELLOW)docker volumes\n$(NONE)"
+			@$(D) volume ls
 # @printf "\n$(YELLOW)docker bind mounts\n$(NONE)"
 # @2>/dev/null $(DC) -f $(SRCS)/$(DCY) config | grep -e ':rw' -e '_name'
 
@@ -69,8 +71,9 @@ clean	:
 fclean	:	clean
 			$(DC) -f $(SRCS)/$(DCY) down -v --rmi all
 
-cleanvol:	
-			rm -rf /home/root 							#CLEAN BIND MOUNTS
+cleanvol:
+			@2>/dev/null $(D) volume rm $$($(D) volume ls -q) || echo -n
+			rm -rf /home/root/data/						#CLEAN BIND MOUNTS
 			rm -rf /var/lib/docker/volumes/*			#CLEAN VOLUMES
 
 prune	:	fclean cleanvol
