@@ -2,7 +2,7 @@
 
 service mysql start
 
-mysql -u root -e "CREATE DATABASE $MYSQL_DATABASE;" &&\
+2>/dev/null mysql -u root -e "CREATE DATABASE $MYSQL_DATABASE;" &&\
 
 ############################
 # mysql -u root -e "GRANT USAGE ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'localhost' IDENTIFIED BY '$MYSQL_USER_PASSWORD';"
@@ -19,7 +19,8 @@ mysql -u $MYSQL_USER -p$MYSQL_USER_PASSWORD $MYSQL_DATABASE < wp_dump.sql &&\
 
 ############### AGGIORNAMENTO NOME USERS E PASSWORDS
 mysql -u $MYSQL_USER -p$MYSQL_USER_PASSWORD $MYSQL_DATABASE -e "update wp_users set user_login = '$WP_ADMIN', user_pass = MD5('$WP_ADMIN_PASSWORD'), user_nicename = '$WP_ADMIN', user_email = '$WP_ADMIN@test.com', display_name = '$WP_ADMIN' where id = 1;" &&\
-mysql -u $MYSQL_USER -p$MYSQL_USER_PASSWORD $MYSQL_DATABASE -e "update wp_users set user_login = '$WP_USER', user_pass = MD5('$WP_USER_PASSWORD'), user_nicename = '$WP_USER', user_email = '$WP_USER@test.com', display_name = '$WP_USER' where id = 2;"
+mysql -u $MYSQL_USER -p$MYSQL_USER_PASSWORD $MYSQL_DATABASE -e "update wp_users set user_login = '$WP_USER', user_pass = MD5('$WP_USER_PASSWORD'), user_nicename = '$WP_USER', user_email = '$WP_USER@test.com', display_name = '$WP_USER' where id = 2;" ||\
+echo -n
 
 # chown -R www-data:www-data /var/lib/mysql/$MYSQL_DATABASE
 ############### COLLEGAMENTO PER CREARE IL VOLUME PERSISTENTE ACCESSIBILE DALL'ESTERNO
