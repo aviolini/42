@@ -1,6 +1,9 @@
 #!/bin/bash
 
+############### AVVIO DEL SERVIZIO MYSQL PER SETTARE I PARAMETRI
 service mysql start
+
+############### CREAZIONE DATABASE
 2>/dev/null mysql -u root -e "CREATE DATABASE $MYSQL_DATABASE;" &&\
 
 ############################
@@ -33,5 +36,3 @@ echo -n
 ############### mysql IN FOREGROUND
 service mysql stop
 mysqld_safe
-# /bin/bash
-############### ALTRE CONFIGURAZIONI: ##ADDING SETTING in 50-server.cnf
