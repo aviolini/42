@@ -19,6 +19,7 @@ volumes:
       type: none
       o: bind
       device: /home/${LOGIN}/data/wordpress
+    name: wordpress_data
   mariadb_data:
     # external: true
     driver: local
@@ -26,6 +27,7 @@ volumes:
       type: none
       o: bind
       device: /home/${LOGIN}/data/mariadb
+    name: mariadb_data
   #####################
 services:
   mariadb:
