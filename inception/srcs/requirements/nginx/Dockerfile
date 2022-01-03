@@ -25,5 +25,5 @@ RUN chown -R www-data:www-data /var/www/html/
 
 
 
-COPY ["./tools/start_nginx.sh", "/"]
-ENTRYPOINT ./start_nginx.sh
+# COPY ["./tools/start_nginx.sh", "/"]
+ENTRYPOINT service nginx start

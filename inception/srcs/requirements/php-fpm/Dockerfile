@@ -15,9 +15,9 @@ RUN mv php-fpm.conf /etc/php/7.3/fpm/php-fpm.conf
 COPY ["conf/info.php", "/"]
 
 ############# COPIA DEI FILE DI WORDPRESS
-COPY ["wordpress/conf/wp-config.php", "/"]
+COPY ["conf/wordpress_conf/wp-config.php", "/"]
 RUN wget https://wordpress.org/wordpress-5.8.2.tar.gz -P /tmp
-COPY ["./wordpress/tools/start_wordpress.sh", "/"]
+# COPY ["./wordpress/tools/start_wordpress.sh", "/"]
 
 
 
@@ -44,5 +44,5 @@ RUN mkdir /run/php
 #e' richiesta da php-fpm7.3
 
 
-COPY ["./tools/start_php.sh", "/"]
-ENTRYPOINT ./start_php.sh
+# COPY ["./tools/start_php.sh", "/"]
+ENTRYPOINT php-fpm7.3
