@@ -6,7 +6,7 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2022/01/03 12:56:09 by arrigo           ###   ########.fr        #
+#    Updated: 2022/01/03 13:07:04 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,8 @@ remove	:
 clean	:
 			$(DC) -f $(SRCS)/$(DCY) rm --stop --force
 			@sed -i '/$(EXPR)/d' /etc/hosts
+			@2>/dev/null $(D) volume rm $$($(D) volume ls -q) || echo -n
+			rm -rf /home/$(LOGIN)/data/
 
 fclean	:	clean
 			$(DC) -f $(SRCS)/$(DCY) down -v --rmi all
