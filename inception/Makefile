@@ -6,7 +6,7 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2022/01/03 14:29:12 by arrigo           ###   ########.fr        #
+#    Updated: 2022/01/03 15:43:39 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,15 +26,8 @@ RED		=	\e[0;31m
 EXPR	=	127.0.0.1 $(DOMAIN_NAME)
 
 all		:	clean cleanvol install
-
 			mkdir -p /home/$(LOGIN)/data/wordpress
 			mkdir -p /home/$(LOGIN)/data/mariadb
-
-# docker volume create --name=srcs_wordpress_data
-# docker volume create --name=srcs_mariadb_data
-			docker volume create --name=wordpress_data
-			docker volume create --name=mariadb_data
-
 			$(DC) --env-file $(SRCS)/.env -f $(SRCS)/$(DCY) up -d --build --force &&\
 			cat /etc/hosts | grep "$(EXPR)" && echo -n ||\
 			echo "$(EXPR)" >> /etc/hosts

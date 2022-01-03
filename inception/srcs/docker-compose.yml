@@ -13,19 +13,19 @@ networks:
 #     # external: true
 volumes:
   wordpress_data:
-    external: true
+    # external: true
     driver: local
-    # driver_opts:
-      # type: none
-      # o: bind
-      # device: /home/${LOGIN}/data/wordpress
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/${LOGIN}/data/wordpress
   mariadb_data:
-    external: true
+    # external: true
     driver: local
-    # driver_opts:
-      # type: none
-      # o: bind
-      # device: /home/${LOGIN}/data/mariadb
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/${LOGIN}/data/mariadb
   #####################
 services:
   mariadb:
