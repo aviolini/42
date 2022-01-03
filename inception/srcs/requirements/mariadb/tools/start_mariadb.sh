@@ -36,6 +36,6 @@ echo -n
 # mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES"
 
 ############### mysql IN FOREGROUND
-# mysqld_safe
-/bin/bash
+mysqld_safe
+# /bin/bash
 ############### ALTRE CONFIGURAZIONI: ##ADDING SETTING in 50-server.cnf

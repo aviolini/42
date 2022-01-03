@@ -40,8 +40,8 @@ services:
       WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
       WP_USER: ${WP_USER}
       WP_USER_PASSWORD: ${WP_USER_PASSWORD}
-    stdin_open: true # docker run -i
-    tty: true        # docker run -t
+    # stdin_open: true # docker run -i
+    # tty: true        # docker run -t
     expose:
         - "3306"
     restart: always
