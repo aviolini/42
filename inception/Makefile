@@ -6,7 +6,7 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2022/01/05 16:50:55 by arrigo           ###   ########.fr        #
+#    Updated: 2022/01/05 17:05:27 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,10 +47,10 @@ all		:	clean
 																						@#ADD DOMAIN_NAME TO HOSTS
 
 stop	:
-			$(DC) -f $(SRCS)/$(DCY) stop												#DOCKER-COMPOSE STOP
+			@$(DC) -f $(SRCS)/$(DCY) stop												#DOCKER-COMPOSE STOP
 
 start	:
-			$(DC) -f $(SRCS)/$(DCY) start												#DOCKER-COMPOSE START
+			@$(DC) -f $(SRCS)/$(DCY) start												#DOCKER-COMPOSE START
 
 re		:	fclean all
 
@@ -66,9 +66,9 @@ status	:
 				volume_name=$$i"_data";\
 				$(D) volume ls | grep $$i;\
 				printf "\t  Mountpoint: ";\
-				2>/dev/null $(D) volume inspect $$volume_name || echo -n | grep -e 'Mountpoint' | awk -F: '{print $$2}';\
+				2>/dev/null $(D) volume inspect $$volume_name | grep -e 'Mountpoint' | awk -F: '{print $$2}';\
 				printf "\t  Bind mount: ";\
-				2>/dev/null $(D) volume inspect $$volume_name || echo -n | grep -e 'device' | awk -F: '{print $$2}';\
+				2>/dev/null $(D) volume inspect $$volume_name | grep -e 'device' | awk -F: '{print $$2}';\
 			done
 			@printf "\n$(GREY)$(D) network\n$(NONE)"									#NETWORK LIST
 			@$(D) network ls | grep lemp || echo -n
@@ -88,6 +88,6 @@ prune	:	fclean
 			@2>/dev/null $(D) rmi -f $$($(D) images -qa) || echo -n						#RM ALL IMAGES
 			@2>/dev/null $(D) volume rm $$($(D) volume ls -q) || echo -n				#RM ALL VOLUMES
 			@2>/dev/null $(D) network rm $$($(D) network ls -q) || echo -n				#RM ALL NETWORKS
-			$(D) system prune -a --force												#DELETE ALL
+			@$(D) system prune -a --force												#DELETE ALL
 
 .PHONY	: all stop re status install remove clean fclean prune help
