@@ -34,5 +34,4 @@ echo -n
 # mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES"
 
 ############### mysql IN FOREGROUND
-service mysql stop
 mysqld_safe
