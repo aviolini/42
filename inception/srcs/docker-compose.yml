@@ -3,17 +3,9 @@ version: '3.7'
 networks:
   lemp_net:
     name: lemp-net
-  #####################
-# volumes:
-#   mariadb_data:
-#     name: mariadb_data
-#     # external: false
-#   wordpress_data:
-#     name: wordpress_data
-#     # external: true
+
 volumes:
   wordpress_data:
-    # external: true
     driver: local
     driver_opts:
       type: none
@@ -21,14 +13,13 @@ volumes:
       device: /home/${LOGIN}/data/wordpress
     name: wordpress_data
   mariadb_data:
-    # external: true
     driver: local
     driver_opts:
       type: none
       o: bind
       device: /home/${LOGIN}/data/mariadb
     name: mariadb_data
-  #####################
+
 services:
   mariadb:
     build: ./requirements/mariadb/
@@ -42,8 +33,6 @@ services:
       WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
       WP_USER: ${WP_USER}
       WP_USER_PASSWORD: ${WP_USER_PASSWORD}
-    # stdin_open: true # docker run -i
-    # tty: true        # docker run -t
     expose:
         - "3306"
     restart: always
@@ -51,17 +40,10 @@ services:
     networks:
       - lemp_net
     volumes:
-      # - /home/${USER}/data/mariadb:/mariadb/
       - type: volume
         source: mariadb_data
         target: /var/lib/mysql
-      # - type: bind
-      #   source: /home/${USER}/data/mariadb
-      #   target: /var/lib/mysql
-        # volume:
-        #   nocopy: true
-
-  #####################
+  
   php-fpm:
     build: ./requirements/php-fpm/
     container_name: php-fpm
@@ -78,25 +60,17 @@ services:
       - "9000"
     restart: always
     volumes:
-      # - /home/${USER}/data/wordpress:/var/www/html/
       - type: volume
         source: wordpress_data
         target: /var/www/html
-        # volume:
-        #   nocopy: true
-  #####################
+
   nginx:
     build: ./requirements/nginx/
     container_name: nginx
-    # volumes_from:
-    #   - php-fpm: rw
     volumes:
-      # - /home/${USER}/data/wordpress:/var/www/html/
       - type: volume
         source: wordpress_data
         target: /var/www/html
-        # volume:
-        #   nocopy: true
     depends_on:
       - php-fpm
     image: nginx
