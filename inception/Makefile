@@ -6,7 +6,7 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2022/01/05 17:05:27 by arrigo           ###   ########.fr        #
+#    Updated: 2022/01/05 18:45:35 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ RED		=	\e[0;35m
 
 help	:	
 			@printf "make all\t -> $(GREEN)build containers\n$(NONE)"
+			@printf "make bonus\t -> $(GREEN)build containers\n$(NONE)"
 			@printf "make status\t -> $(GREEN)view the status of containers\n$(NONE)"
 			@printf "make start\t -> $(GREEN)start containers\n$(NONE)"
 			@printf "make stop\t -> $(GREEN)stop containers\n$(NONE)"
@@ -38,6 +39,15 @@ help	:
 			@printf "make help\t -> $(GREEN)show help\n$(NONE)"
 
 all		:	clean
+			@mkdir -p /home/$(LOGIN)/data/wordpress										#CREATE DIR FOR BIND MOUNT
+			@mkdir -p /home/$(LOGIN)/data/mariadb										#CREATE DIR FOR BIND MOUNT
+			@$(DC) --env-file $(SRCS)/.env -f $(SRCS)/$(DCY) up -d --build --force mariadb php-fpm nginx &&\
+			cat /etc/hosts | grep "$(HOST)" && echo -n ||\
+			echo "$(HOST)" >> /etc/hosts												#DOCKER-COMPOSE UP
+																						@#SEARCH DOMAIN_NAME IN THE HOSTS
+																						@#ADD DOMAIN_NAME TO HOSTS
+
+bonus	:	clean
 			@mkdir -p /home/$(LOGIN)/data/wordpress										#CREATE DIR FOR BIND MOUNT
 			@mkdir -p /home/$(LOGIN)/data/mariadb										#CREATE DIR FOR BIND MOUNT
 			@$(DC) --env-file $(SRCS)/.env -f $(SRCS)/$(DCY) up -d --build --force &&\
@@ -74,13 +84,13 @@ status	:
 			@$(D) network ls | grep lemp || echo -n
 
 clean	:
-			@2>/dev/null $(DC) -f $(SRCS)/$(DCY) down -v								#STOP AND REMOVE CONTAINERS AND NETWORKS				
+			@$(DC) -f $(SRCS)/$(DCY) down -v									#STOP AND REMOVE CONTAINERS AND NETWORKS				
 			@sed -i '/$(HOST)/d' /etc/hosts												#DELETE HOST
 			@rm -rf /home/$(LOGIN)/data/mariadb											#RM BIND MOUNT
 			@rm -rf /home/$(LOGIN)/data/wordpress										#RM BIND MOUNT
 
 fclean	:	clean
-			@2>/dev/null $(DC) -f $(SRCS)/$(DCY) down --rmi all							#RM IMAGES
+			@$(DC) -f $(SRCS)/$(DCY) down --rmi all							#RM IMAGES
 
 prune	:	fclean
 			@2>/dev/null $(D) stop $$($(D) ps -qa) || echo -n							#STOP ALL CONTAINERS

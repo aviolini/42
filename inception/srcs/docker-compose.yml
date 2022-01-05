@@ -33,6 +33,8 @@ services:
       WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
       WP_USER: ${WP_USER}
       WP_USER_PASSWORD: ${WP_USER_PASSWORD}
+    # stdin_open: true # docker run -i
+    # tty: true        # docker run -t
     expose:
         - "3306"
     restart: always
@@ -79,3 +81,18 @@ services:
     ports:
       - "443:443"
     restart: always
+
+  adminer:
+    build: ./requirements/adminer/
+    container_name: adminer
+    volumes:
+      - type: volume
+        source: wordpress_data
+        target: /var/www/html
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    depends_on:
+      - nginx
+    image: adminer
+    networks:
+      - lemp_net
