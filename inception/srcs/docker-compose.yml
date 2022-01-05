@@ -96,3 +96,18 @@ services:
     image: adminer
     networks:
       - lemp_net
+
+  vsftpd:
+    build: ./requirements/vsftpd/
+    container_name: vsftpd
+    volumes:
+      - type: volume
+        source: wordpress_data
+        target: /var/www/html
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    depends_on:
+      - nginx
+    image: vsftpd
+    networks:
+      - lemp_net
