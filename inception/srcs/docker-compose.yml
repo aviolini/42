@@ -113,3 +113,6 @@ services:
       - lemp_net
     ports:
       - "20:20"
+    environment:
+      WP_ADMIN: ${WP_ADMIN}
+      WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
