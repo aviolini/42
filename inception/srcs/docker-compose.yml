@@ -111,3 +111,5 @@ services:
     image: vsftpd
     networks:
       - lemp_net
+    ports:
+      - "20:20"
