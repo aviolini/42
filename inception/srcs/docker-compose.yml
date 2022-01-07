@@ -3,6 +3,10 @@ version: '3.5'
 networks:
   lemp_net:
     name: lemp-net
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 192.168.0.0/29
 
 volumes:
   wordpress_data:
@@ -40,7 +44,8 @@ services:
     restart: always
     image: mariadb
     networks:
-      - lemp_net
+      lemp_net:
+        ipv4_address: 192.168.0.2
     volumes:
       - type: volume
         source: mariadb_data
@@ -57,7 +62,8 @@ services:
       MYSQL_USER_PASSWORD: ${MYSQL_USER_PASSWORD}
     image: php-fpm
     networks:
-      - lemp_net
+      lemp_net:
+        ipv4_address: 192.168.0.3
     expose:
       - "9000"
     restart: always
@@ -77,7 +83,8 @@ services:
       - php-fpm
     image: nginx
     networks:
-      - lemp_net
+      lemp_net:
+        ipv4_address: 192.168.0.4
     ports:
       - "443:443"
     restart: always
@@ -95,7 +102,8 @@ services:
       - nginx
     image: adminer
     networks:
-      - lemp_net
+      lemp_net:
+        ipv4_address: 192.168.0.5
 
   vsftpd:
     build: ./requirements/vsftpd/
@@ -104,13 +112,12 @@ services:
       - type: volume
         source: wordpress_data
         target: /var/www/html
-    stdin_open: true # docker run -i
-    tty: true        # docker run -t
     depends_on:
       - nginx
     image: vsftpd
     networks:
-      - lemp_net
+      lemp_net:
+        ipv4_address: 192.168.0.6
     ports:
       - "20:20"
     environment:
