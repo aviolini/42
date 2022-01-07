@@ -94,8 +94,6 @@ services:
       - type: volume
         source: wordpress_data
         target: /var/www/html
-    stdin_open: true # docker run -i
-    tty: true        # docker run -t
     depends_on:
       - php-fpm
     image: adminer
@@ -104,7 +102,11 @@ services:
         ipv4_address: 172.16.0.5
 
   vsftpd:
-    build: ./requirements/vsftpd/
+    build:
+      context: ./requirements/vsftpd/
+      args:
+        - WP_ADMIN=${WP_ADMIN}
+        - WP_ADMIN_PASSWORD=${WP_ADMIN_PASSWORD}
     container_name: vsftpd
     volumes:
       - type: volume
@@ -118,6 +120,3 @@ services:
         ipv4_address: 172.16.0.6
     ports:
       - "20:20"
-    environment:
-      WP_ADMIN: ${WP_ADMIN}
-      WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}

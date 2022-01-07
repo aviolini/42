@@ -21,11 +21,13 @@ RUN mv /wordpress /var/www/html/wordpress
 ############# COPIA FILE DI CONFIGURAZIONE WORDPRESS
 #LE IMPOSTAZIONI MODIFICATE SI TROVANO IN CORRISPONDENZA DEI COMMENTI '##ADDING SETTING'
 COPY ["conf/wordpress_conf/wp-config.php", "/var/www/html/wordpress/wp-config.php"]
-RUN chown -R www-data:www-data /var/www/html/wordpress/
 
 ############# COPIA DEL FILE DI ESEMPIO info.php
 COPY ["conf/info.php", "/var/www/html/info.php"]
-RUN chown www-data:www-data /var/www/html/info.php
+
+############# ACCESSO GARANTITO ALL'UTENTE E AL GRUPPO www-data
+RUN chown -R www-data:www-data /var/www/html/*
+RUN chmod -R 775 /var/www/html/wordpress
 
 ############# e' richiesta da php-fpm7.3
 RUN mkdir /run/php

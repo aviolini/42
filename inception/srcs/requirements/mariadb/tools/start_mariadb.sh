@@ -6,10 +6,9 @@ service mysql start
 ############### CREAZIONE DATABASE
 2>/dev/null mysql -u root -e "CREATE DATABASE $MYSQL_DATABASE;" &&\
 
-############################
-# mysql -u root -e "GRANT USAGE ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'localhost' IDENTIFIED BY '$MYSQL_USER_PASSWORD';"
-# mysql -u root -e "GRANT ALL ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'localhost';"
-############### IL METODO SOPRA E' PIU' SICURO MA NON PERMETTE LA CONNESSIONE DA REMOTO
+############################ SETUP CONNESSIONE DA LOCALHOST
+mysql -u root -e "GRANT USAGE ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'localhost' IDENTIFIED BY '$MYSQL_USER_PASSWORD';" &&\
+mysql -u root -e "GRANT ALL ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'localhost';" &&\
 ############### METTENDO '%' L'UTENTE $MYSQL_USER PUO' ACCEDERE DA QUALSIASI HOST REMOTO AL DATABASE $MYSQL_DATABASE
 mysql -u root -e "GRANT USAGE ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_USER_PASSWORD';" &&\
 mysql -u root -e "GRANT ALL ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%';" &&\
