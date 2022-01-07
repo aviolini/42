@@ -6,7 +6,7 @@ networks:
     driver: bridge
     ipam:
      config:
-       - subnet: 192.168.0.0/29
+       - subnet: 172.16.0.0/29
 
 volumes:
   wordpress_data:
@@ -37,15 +37,13 @@ services:
       WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
       WP_USER: ${WP_USER}
       WP_USER_PASSWORD: ${WP_USER_PASSWORD}
-    # stdin_open: true # docker run -i
-    # tty: true        # docker run -t
     expose:
         - "3306"
     restart: always
     image: mariadb
     networks:
       lemp_net:
-        ipv4_address: 192.168.0.2
+        ipv4_address: 172.16.0.2
     volumes:
       - type: volume
         source: mariadb_data
@@ -63,7 +61,7 @@ services:
     image: php-fpm
     networks:
       lemp_net:
-        ipv4_address: 192.168.0.3
+        ipv4_address: 172.16.0.3
     expose:
       - "9000"
     restart: always
@@ -84,7 +82,7 @@ services:
     image: nginx
     networks:
       lemp_net:
-        ipv4_address: 192.168.0.4
+        ipv4_address: 172.16.0.4
     ports:
       - "443:443"
     restart: always
@@ -99,11 +97,11 @@ services:
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     depends_on:
-      - nginx
+      - php-fpm
     image: adminer
     networks:
       lemp_net:
-        ipv4_address: 192.168.0.5
+        ipv4_address: 172.16.0.5
 
   vsftpd:
     build: ./requirements/vsftpd/
@@ -113,11 +111,11 @@ services:
         source: wordpress_data
         target: /var/www/html
     depends_on:
-      - nginx
+      - php-fpm
     image: vsftpd
     networks:
       lemp_net:
-        ipv4_address: 192.168.0.6
+        ipv4_address: 172.16.0.6
     ports:
       - "20:20"
     environment:
