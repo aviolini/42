@@ -14,7 +14,8 @@ COPY ["./conf/default", "/etc/nginx/sites-available/default"]
 RUN cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.copy
 COPY ["./conf/nginx.conf","/etc/nginx/nginx.conf"]
 
-############# ACCESSO GARANTITO ALL'UTENTE www-data
+############# ACCESSO GARANTITO ALL'UTENTE E AL GRUPPO www-data
 RUN chown -R www-data:www-data /var/www/html/
+RUN chmod -R 775 /var/www/html/
 
 ENTRYPOINT service nginx start
