@@ -6,7 +6,7 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2022/01/05 18:45:35 by arrigo           ###   ########.fr        #
+#    Updated: 2022/01/08 01:58:44 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ BLUE	=	\e[0;36m
 RED		=	\e[0;35m
 
 help	:	
-			@printf "make all\t -> $(GREEN)build containers\n$(NONE)"
-			@printf "make bonus\t -> $(GREEN)build containers\n$(NONE)"
+			@printf "make all\t -> $(GREEN)build a Linux (E)nginx Mysql Php stack \n$(NONE)"
+			@printf "make bonus\t -> $(GREEN)build LEMP stack + adminer and vsftpd server\n$(NONE)"
 			@printf "make status\t -> $(GREEN)view the status of containers\n$(NONE)"
 			@printf "make start\t -> $(GREEN)start containers\n$(NONE)"
 			@printf "make stop\t -> $(GREEN)stop containers\n$(NONE)"
