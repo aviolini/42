@@ -29,8 +29,6 @@ server {
 	
 	ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
 	ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
-#	ssl_certificate _.crt
-#	ssl_certificate_key _.key	 
 
 	# Note: You should disable gzip for SSL traffic.
 	# See: https://bugs.debian.org/773332

@@ -123,6 +123,8 @@ services:
         ipv4_address: 172.16.0.6
     ports:
       - "20:20"
+    restart: always
+
 
 #DEBUG
     # stdin_open: true # docker run -i
