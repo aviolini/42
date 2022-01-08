@@ -6,7 +6,7 @@
 #    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2022/01/08 01:58:44 by arrigo           ###   ########.fr        #
+#    Updated: 2022/01/08 02:31:18 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,13 +84,15 @@ status	:
 			@$(D) network ls | grep lemp || echo -n
 
 clean	:
-			@$(DC) -f $(SRCS)/$(DCY) down -v									#STOP AND REMOVE CONTAINERS AND NETWORKS				
+			@printf "cleaning..."
+			@2>/dev/null $(DC) -f $(SRCS)/$(DCY) down -v								#STOP AND REMOVE CONTAINERS AND NETWORKS				
 			@sed -i '/$(HOST)/d' /etc/hosts												#DELETE HOST
 			@rm -rf /home/$(LOGIN)/data/mariadb											#RM BIND MOUNT
 			@rm -rf /home/$(LOGIN)/data/wordpress										#RM BIND MOUNT
+			@printf "$(GREEN) done$(NONE)\n"
 
 fclean	:	clean
-			@$(DC) -f $(SRCS)/$(DCY) down --rmi all							#RM IMAGES
+			@2>/dev/null $(DC) -f $(SRCS)/$(DCY) down --rmi all							#RM IMAGES
 
 prune	:	fclean
 			@2>/dev/null $(D) stop $$($(D) ps -qa) || echo -n							#STOP ALL CONTAINERS
