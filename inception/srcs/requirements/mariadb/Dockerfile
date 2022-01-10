@@ -27,7 +27,10 @@ mysql -u root -e "GRANT ALL ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'localhost
 ############### METTENDO '%' L'UTENTE $MYSQL_USER PUO' ACCEDERE DA QUALSIASI HOST REMOTO AL DATABASE $MYSQL_DATABASE
 mysql -u root -e "GRANT USAGE ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_USER_PASSWORD}';" &&\
 mysql -u root -e "GRANT ALL ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';" &&\
-mysql -u root -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${MYSQL_ROOT_PASSWORD}');"&&\
+############### METTENDO '%' L'UTENTE root PUO' ACCEDERE DA QUALSIASI HOST REMOTO
+# mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';" &&\
+############### SET root PASSWORD FOR root IN localhost
+mysql -u root -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${MYSQL_ROOT_PASSWORD}');" &&\
 ############################
 ############### RESTORE DEL BACKUP DELLA CONFIGURAZIONE INIZIALE DI WP FATTA IN PRECEDENZA ALL'INTERNO DEL DATABASE $MYSQL_DATABASE
 mysql -u $MYSQL_USER -p$MYSQL_USER_PASSWORD $MYSQL_DATABASE < wp_dump.sql &&\
