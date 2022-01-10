@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
+#    By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2022/01/08 02:31:18 by arrigo           ###   ########.fr        #
+#    Updated: 2022/01/10 18:33:06 by aviolini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,17 +26,19 @@ YELLOW	=	\e[1;33m
 BLUE	=	\e[0;36m
 RED		=	\e[0;35m
 
-help	:	
-			@printf "make all\t -> $(GREEN)build a Linux (E)nginx Mysql Php stack \n$(NONE)"
-			@printf "make bonus\t -> $(GREEN)build LEMP stack + adminer and vsftpd server\n$(NONE)"
-			@printf "make status\t -> $(GREEN)view the status of containers\n$(NONE)"
-			@printf "make start\t -> $(GREEN)start containers\n$(NONE)"
-			@printf "make stop\t -> $(GREEN)stop containers\n$(NONE)"
-			@printf "make re\t\t -> $(GREEN)clean containers, volumes and rebuild containers\n$(NONE)"
-			@printf "make clean\t -> $(GREEN)stop and clean containers, volumes\n$(NONE)"
-			@printf "make fclean\t -> $(GREEN)stop and clean containers, volumes, images\n$(NONE)"
-			@printf "make prune\t -> $(GREEN)clean all containers, volumes, images in docker\n$(NONE)"
-			@printf "make help\t -> $(GREEN)show help\n$(NONE)"
+help	:
+			@printf "\nmake\n"
+			@printf "  all\t\t -> $(GREEN)build a Linux (E)nginx Mysql Php stack \n$(NONE)"
+			@printf "  bonus\t\t -> $(GREEN)build LEMP stack + adminer and vsftpd server\n$(NONE)"
+			@printf "  status\t -> $(GREEN)view the status of containers\n$(NONE)"
+			@printf "  start\t\t -> $(GREEN)start containers\n$(NONE)"
+			@printf "  stop\t\t -> $(GREEN)stop containers\n$(NONE)"
+			@printf "  att<container> -> $(GREEN)attach to container\n$(NONE)"
+			@printf "  re\t\t -> $(GREEN)clean containers, volumes and rebuild containers\n$(NONE)"
+			@printf "  clean\t\t -> $(GREEN)stop and clean containers, volumes\n$(NONE)"
+			@printf "  fclean\t -> $(GREEN)stop and clean containers, volumes, images\n$(NONE)"
+			@printf "  prune\t\t -> $(GREEN)clean all containers, volumes, images in docker\n$(NONE)"
+			@printf "  help\t\t -> $(GREEN)show help\n$(NONE)"
 
 all		:	clean
 			@mkdir -p /home/$(LOGIN)/data/wordpress										#CREATE DIR FOR BIND MOUNT
@@ -82,6 +84,15 @@ status	:
 			done
 			@printf "\n$(GREY)$(D) network\n$(NONE)"									#NETWORK LIST
 			@$(D) network ls | grep lemp || echo -n
+
+attmariadb :
+			$(DC) -f $(SRCS)/$(DCY) exec mariadb /bin/bash								#ATTACH TO MARIADB
+
+attnginx :
+			$(DC) -f $(SRCS)/$(DCY) exec nginx /bin/bash								#ATTACH TO NGINX
+
+attphp-fpm :
+			$(DC) -f $(SRCS)/$(DCY) exec php-fpm /bin/bash								#ATTACH TO PHP-FPM
 
 clean	:
 			@printf "cleaning..."

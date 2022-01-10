@@ -126,7 +126,6 @@ services:
       - "20:20"
     restart: always
 
-
 #DEBUG
     # stdin_open: true # docker run -i
     # tty: true        # docker run -t
