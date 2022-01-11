@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+         #
+#    By: arrigo <arrigo@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2022/01/11 14:42:30 by aviolini         ###   ########.fr        #
+#    Updated: 2022/01/11 23:43:53 by arrigo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,9 @@ SRCS	=	./srcs
 D		=	docker
 DC		=	docker-compose
 DCY		=	docker-compose.yml
+
+TEST	=	pidof dockerd >/dev/null 2>&1 && $(D) version >/dev/null 2>&1 && $(DC) version >/dev/null 2>&1 ||\
+			( printf "\n$(YELLOW)Install docker, docker-compose and start docker service!$(NONE)\n" && exit 1 )
 
 HOST	=	127.0.0.1 $(DOMAIN_NAME)
 
@@ -27,6 +30,7 @@ BLUE	=	\e[0;36m
 RED		=	\e[0;35m
 
 help	:
+			@$(TEST)
 			@printf "\nmake\n"
 			@printf "  all\t\t -> $(GREEN)build a Linux (E)nginx Mysql Php stack \n$(NONE)"
 			@printf "  bonus\t\t -> $(GREEN)build LEMP stack + adminer and vsftpd server\n$(NONE)"
@@ -39,6 +43,7 @@ help	:
 			@printf "  fclean\t -> $(GREEN)stop and clean containers, volumes, images\n$(NONE)"
 			@printf "  prune\t\t -> $(GREEN)clean all containers, volumes, images in docker\n$(NONE)"
 			@printf "  help\t\t -> $(GREEN)show help\n$(NONE)"
+
 
 all		:	clean
 			@mkdir -p /home/$(LOGIN)/data/wordpress										#CREATE DIR FOR BIND MOUNT
@@ -60,14 +65,17 @@ bonus	:	clean
 
 
 stop	:
+			@$(TEST)
 			@$(DC) -f $(SRCS)/$(DCY) stop												#DOCKER-COMPOSE STOP
 
 start	:
+			@$(TEST)
 			@$(DC) -f $(SRCS)/$(DCY) start												#DOCKER-COMPOSE START
 
 re		:	fclean all
 
 status	:
+			@$(TEST)
 			@printf "\n$(BLUE)$(DC) images\n$(NONE)"									#IMAGES LIST 
 			@2>/dev/null $(DC) -f $(SRCS)/$(DCY) images
 			@printf "\n$(RED)$(DC) containers\n$(NONE)"									#CONTAINERS LIST
@@ -87,15 +95,19 @@ status	:
 			@$(D) network ls | grep lemp || echo -n
 
 attmariadb :
+			@$(TEST)
 			$(DC) -f $(SRCS)/$(DCY) exec mariadb /bin/bash								#ATTACH TO MARIADB
 
 attnginx :
+			@$(TEST)
 			$(DC) -f $(SRCS)/$(DCY) exec nginx /bin/bash								#ATTACH TO NGINX
 
 attphp-fpm :
+			@$(TEST)
 			$(DC) -f $(SRCS)/$(DCY) exec php-fpm /bin/bash								#ATTACH TO PHP-FPM
 
 clean	:
+			@$(TEST)
 			@printf "cleaning..."
 			@2>/dev/null $(DC) -f $(SRCS)/$(DCY) down -v								#STOP AND REMOVE CONTAINERS AND NETWORKS				
 			@sed -i '/$(HOST)/d' /etc/hosts												#DELETE HOST
