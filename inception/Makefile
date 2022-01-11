@@ -6,7 +6,7 @@
 #    By: aviolini <aviolini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/16 10:54:54 by aviolini          #+#    #+#              #
-#    Updated: 2022/01/10 18:33:06 by aviolini         ###   ########.fr        #
+#    Updated: 2022/01/11 14:42:30 by aviolini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,9 +54,10 @@ bonus	:	clean
 			@mkdir -p /home/$(LOGIN)/data/mariadb										#CREATE DIR FOR BIND MOUNT
 			@$(DC) --env-file $(SRCS)/.env -f $(SRCS)/$(DCY) up -d --build --force &&\
 			cat /etc/hosts | grep "$(HOST)" && echo -n ||\
-			echo "$(HOST)" >> /etc/hosts												#DOCKER-COMPOSE UP
-																						@#SEARCH DOMAIN_NAME IN THE HOSTS
-																						@#ADD DOMAIN_NAME TO HOSTS
+			echo "$(HOST)" >> /etc/hosts
+			@$(DC) -f $(SRCS)/$(DCY) exec nginx mv /tmp/index.html /var/www/html/		#ADD index.html
+			@$(DC) -f $(SRCS)/$(DCY) exec nginx mv /tmp/ftp-instr.html /var/www/html/	#ADD ftp-instr.html
+
 
 stop	:
 			@$(DC) -f $(SRCS)/$(DCY) stop												#DOCKER-COMPOSE STOP

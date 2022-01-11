@@ -14,6 +14,12 @@ COPY ["./conf/default", "/etc/nginx/sites-available/default"]
 RUN cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.copy
 COPY ["./conf/nginx.conf","/etc/nginx/nginx.conf"]
 
+############# COPIA PAGINE html
+COPY ["conf/index.html", "/tmp/index.html"]
+RUN chown www-data:www-data /tmp/index.html
+COPY ["conf/ftp-instr.html", "/tmp/ftp-instr.html"]
+RUN chown www-data:www-data /tmp/ftp-instr.html
+
 ############# GENERA IL CERTIFICATO RSA
 RUN mkdir -p ${NGINX_PRIVATE_CERT}
 RUN chmod 700 ${NGINX_PRIVATE_CERT}
