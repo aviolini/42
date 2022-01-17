@@ -1,0 +1,11 @@
+
+
+https://www.youtube.com/watch?v=C7CpfL1p6y0
+https://datatracker.ietf.org/doc/html/rfc791 -> IP
+https://datatracker.ietf.org/doc/html/rfc793 -> TCP
+https://datatracker.ietf.org/doc/html/rfc1918 -> ADDRESS ALLOCATION FOR PRIVATE INTERNETS
+https://datatracker.ietf.org/doc/html/rfc1459 -> IRC
+
+GUIDE
+http://beej.us/guide/ -> http://linguaggioc.altervista.org/dl/GuidaDiBeejAllaProgrammazioneDiRete.pdf
+https://www.geeksforgeeks.org/socket-programming-cc/
