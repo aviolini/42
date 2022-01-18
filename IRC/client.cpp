@@ -1,6 +1,3 @@
-
-
-
 #include "utils.hpp"
 
 #define DEST_IP "127.0.0.1"
@@ -21,14 +18,18 @@ int main(void)
 	memset(dest_addr.sin_zero, '\0', sizeof dest_addr.sin_zero);
 	print_sockaddr_in(dest_addr);
 //CONNECT
-	// std::cout << "Waiting for server.." << std::endl;
 	if (connect(sockfd, (struct sockaddr *)&dest_addr, sizeof dest_addr) < 0)
 		return ret_error("CONNECT ERROR");
-	// std::cout << "connected" << std::endl;
-//SEND MESSAGE
-	char message[] = "Sei connesso al client";
-	send(sockfd, message, strlen(message), 0);
 
+///////////////////////////////////////////////////////
+//READ WELCOME_MESSAGE FROM THE SERVER
+	char buffer[1024]; 
+	read(sockfd, buffer, 1024);
+	std::cout << buffer << std::endl;
+//SEND WELCOME_MESSAGE TO THE SERVER
+	char message[] = "|----------------------|\n|Sei connesso al client|\n|----------------------|";
+	send(sockfd, message, strlen(message), 0);
+///////////////////////////////////////////////////////
 
 	return 0;
 }
