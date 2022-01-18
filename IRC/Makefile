@@ -24,10 +24,20 @@ run		:	re
 			clear
 			@./$(NAME)
 
+server	:	clean												#////////DEL
+			@clang -Wall -Wextra -Werror ex_server.c -o server
+			@./server || echo ""
+
+client	: 	clean												#////////DEL
+			@clang -Wall -Wextra -Werror ex_client.c -o client
+			@./client || echo "" 
+
 %.o		:	%.cpp
 			@$(CXX) $(CXXFLAGS) -c $<
 
 clean	:
+			@rm -f server	
+			@rm -f client
 			@$(RM) $(OBJS)
 
 fclean	:	clean

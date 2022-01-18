@@ -1,3 +1,5 @@
+//https://www.geeksforgeeks.org/socket-programming-cc/
+
 // Server side C/C++ program to demonstrate Socket programming
 #include <unistd.h>
 #include <stdio.h>
@@ -9,6 +11,8 @@
 #define PORT 8080
 int main(int argc, char const *argv[])
 {
+	(void)argc;
+	(void)argv;
     int server_fd, new_socket, valread;
     struct sockaddr_in address;
     int opt = 1;

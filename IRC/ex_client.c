@@ -1,3 +1,4 @@
+//https://www.geeksforgeeks.org/socket-programming-cc/
 
 
 // Client side C/C++ program to demonstrate Socket programming
@@ -10,6 +11,8 @@
    
 int main(int argc, char const *argv[])
 {
+	(void)argc;
+	(void)argv;
     int sock = 0, valread;
     struct sockaddr_in serv_addr;
     char *hello = "Hello from client";
