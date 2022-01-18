@@ -2,9 +2,9 @@
 
 NAME		=	ircserv
 
-SRCS		=	main.cpp
+SRCS		=	main.cpp utils.cpp
 
-INC			=
+INC			=	utils.hpp
 
 OBJS		=	$(SRCS:.cpp=.o)
 
@@ -18,19 +18,19 @@ RM			=	rm -rf
 $(NAME)	:	$(OBJS) $(INC)
 			@$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
-all		:	$(NAME)
+server	:	$(NAME)
+
+rmclient:
+			@rm -f client
+
+client	:	rmclient
+			@rm -rf client
+			@$(CXX) $(CXXFLAGS) client.cpp utils.cpp -o client
+			@./client			
 
 run		:	re
 			clear
 			@./$(NAME)
-
-server	:	clean												#////////DEL
-			@clang -Wall -Wextra -Werror ex_server.c -o server
-			@./server || echo ""
-
-client	: 	clean												#////////DEL
-			@clang -Wall -Wextra -Werror ex_client.c -o client
-			@./client || echo "" 
 
 %.o		:	%.cpp
 			@$(CXX) $(CXXFLAGS) -c $<
@@ -43,6 +43,6 @@ clean	:
 fclean	:	clean
 			@$(RM) $(NAME)
 
-re		:	fclean all	
+re		:	fclean server
 		
 .PHONY : all re clean fclean

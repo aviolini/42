@@ -1,36 +1,10 @@
 
+#include <unistd.h>
+#include "utils.hpp"
 
-#include <iostream>
-#include <string>
-//SOCKET
-#include <sys/socket.h> // int socket(int domain, int type, int protocol)
-#include <errno.h>
-//INET ADDR
-// #include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-//GET PROTOBYNAME
-#include <netdb.h>
-//BIND
-#include <sys/types.h> //int bind(int sockfd, struct sockaddr *my_addr, int addrlen);
 #define MYPORT 3490
+#define BACKLOG 3
 
-int ret_error(std::string s, int err = errno)
-{
-	perror(s.c_str());
-	std::cout << "error: " << err << "\n";
-	return err;
-}
-
-void print_sockaddr_in (struct sockaddr_in my_addr)
-{
-	std::cout << "------PRINT SOCKADDR_IN--------" << std::endl; 
-	std::cout << "SOCKET FAMILY:\t" << my_addr.sin_family << std::endl;
-	std::cout << "SOCKET ADDRESS:\t" << my_addr.sin_addr.s_addr << std::endl;
-	std::cout << "SOCKET PORT:\t" << my_addr.sin_port << std::endl;
-	std::cout << "SOCKET_ADDR LEN:\t" << my_addr.sin_len << std::endl;
-	std::cout << "-------------------------------" << std::endl; 
-}
 
 int main()
 {
@@ -72,7 +46,7 @@ for (int i = 0; i < 12; ++i)
 	if (fd < 0)
 		return ret_error("SOCKET_FD ERROR");
 	else
-		std::cout << "SOCKET_FD" << fd << std::endl;
+		std::cout << "SOCKET_FD: " << fd << std::endl;
 //SOCKADDR_IN
 	struct sockaddr_in my_addr;
 	my_addr.sin_family = AF_INET;
@@ -91,11 +65,17 @@ for (int i = 0; i < 12; ++i)
 //BIND
 	if (bind(fd, (struct sockaddr *)&my_addr, sizeof my_addr ))
 		return ret_error("BIND ERROR");
-//TEST CONNECT
-	if (connect(fd, (struct sockaddr *)&my_addr, sizeof my_addr))
-		return ret_error("CONNECT ERROR");
-
-
-
+//LISTEN
+	if (listen(fd, BACKLOG) < 0)
+		return ret_error("LISTEN ERROR");
+//ACCEPT
+	struct sockaddr_in their_addr; // informazioni sull’indirizzo di chi si connette
+	int sin_size = sizeof(their_addr);
+	int new_fd = accept(fd, (struct sockaddr *) &their_addr, (socklen_t *)&sin_size);
+	if (new_fd < 0)
+		return ret_error("ACCEPT ERROR");
+	else
+		std::cout << "accepted\n";
+	// while(1);
 	return 0;
 }
