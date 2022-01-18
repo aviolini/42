@@ -24,7 +24,11 @@ int main(void)
 	// std::cout << "Waiting for server.." << std::endl;
 	if (connect(sockfd, (struct sockaddr *)&dest_addr, sizeof dest_addr) < 0)
 		return ret_error("CONNECT ERROR");
-	std::cout << "connected" << std::endl;
+	// std::cout << "connected" << std::endl;
+//SEND MESSAGE
+	char message[] = "Sei connesso al client";
+	send(sockfd, message, strlen(message), 0);
+
 
 	return 0;
 }

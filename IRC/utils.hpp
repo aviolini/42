@@ -19,6 +19,8 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 
+//READ
+# include <unistd.h>
 
 int ret_error(std::string s, int err = errno);
 void print_sockaddr_in (struct sockaddr_in my_addr);

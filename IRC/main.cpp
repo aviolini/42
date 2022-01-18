@@ -74,8 +74,14 @@ for (int i = 0; i < 12; ++i)
 	int new_fd = accept(fd, (struct sockaddr *) &their_addr, (socklen_t *)&sin_size);
 	if (new_fd < 0)
 		return ret_error("ACCEPT ERROR");
-	else
-		std::cout << "accepted\n";
-	// while(1);
+	// else
+	// 	std::cout << "accepted\n";
+//READ MESSAGE
+	char buffer[1024]; 
+	read(new_fd, buffer, 1024);
+	std::cout << "MESSAGE: " << buffer << std::endl;
+//SEND MESSAGE
+	char message[] = "Sei connesso al server";
+	send(new_fd, message, strlen(message), 0);
 	return 0;
 }
