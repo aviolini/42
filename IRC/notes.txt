@@ -9,3 +9,4 @@ https://datatracker.ietf.org/doc/html/rfc1459 -> IRC
 GUIDE
 http://beej.us/guide/ -> http://linguaggioc.altervista.org/dl/GuidaDiBeejAllaProgrammazioneDiRete.pdf
 https://www.geeksforgeeks.org/socket-programming-cc/
+https://www.sinte.net/files/help/tecnici.htm

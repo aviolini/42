@@ -9,6 +9,11 @@
 // #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+//INET NTOA
+// #include <sys/socket.h>
+// #include <netinet/in.h>
+// #include <arpa/inet.h>
+
 //GET PROTOBYNAME
 #include <netdb.h>
 //BIND //int bind(int sockfd, struct sockaddr *my_addr, int addrle
@@ -21,6 +26,12 @@
 
 //READ
 # include <unistd.h>
+
+//MEMSET
+#include <string.h>
+
+//PERROR
+#include <stdio.h>
 
 int ret_error(std::string s, int err = errno);
 void print_sockaddr_in (struct sockaddr_in my_addr);
