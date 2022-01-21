@@ -33,6 +33,18 @@
 //PERROR
 #include <stdio.h>
 
+//SIGNAL
+#include <signal.h>
+
+//ADDRINFO
+#include <netdb.h>
+
+//FSTAT
+#include <sys/stat.h>
+
 int ret_error(std::string s, int err = errno);
 void print_sockaddr_in (struct sockaddr_in my_addr);
+void print_addrinfo (struct addrinfo hints);
+void print_fd (struct stat buf);
+
 

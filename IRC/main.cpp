@@ -1,30 +1,21 @@
+//#include <fcntl.h>
+//int fcntl(int fd, int cmd, ... /* arg */ );
+//#include <unistd.h>
+//off_t lseek(int fd, off_t offset, int whence);
 
 #include <unistd.h>
 #include "utils.hpp"
 
 #define MYPORT 3490
 #define BACKLOG 3
-
+#define BUFFER_SIZE 1024
+#define HOST "127.0.0.1"
 
 int main()
 {
 
 /*
-//INET ADDR
-{
-	std::cout << "-------TEST INET_ADDR-----" << std::endl;
-	struct sockaddr_in ina;
-	ina.sin_addr.s_addr = inet_addr("10.12.110.57");
-	if (ina.sin_addr.s_addr < 0)
-		std::cout << "INET_ADDR_ERROR" << std::endl;
-	else
-	{
-		std::cout << "INET_ADDR: " << ina.sin_addr.s_addr << std::endl;
-		std::cout << "-------TEST INET_NTOA-----" << std::endl;
-		char *output_inet_ntoa = inet_ntoa(ina.sin_addr);
-		std::cout << "INET_NTOA: " << output_inet_ntoa << std::endl;
-	}
-}
+
 //GET PROTO BY NAME
 char protocol[12][10] = {"ip","icmp","ggp","tcp", "egp","pup","udp","hmp","xns-idp", "rdp","rvd" };
 for (int i = 0; i < 12; ++i)
@@ -39,6 +30,8 @@ for (int i = 0; i < 12; ++i)
 	}
 }
 */
+
+
 
 //SOCKET
 	std::cout << "-------APERTURA SOCKET-----" << std::endl;
@@ -65,6 +58,23 @@ for (int i = 0; i < 12; ++i)
 //BIND
 	if (bind(fd, (struct sockaddr *)&my_addr, sizeof my_addr ))
 		return ret_error("BIND ERROR");
+//GETADDRINFO
+// struct addrinfo hints;
+// if (getaddrinfo(HOST, 0, &hints, 0) < 0)
+// 	return ret_error("ADDR INFO");
+// print_addrinfo(hints);
+//GETSOCKNAME
+	// struct sockaddr info;
+	// socklen_t s;
+	// if (getsockname(fd, &info, &s) < 0)
+	// 	return ret_error("GET SOCK NAME ERROR");
+	// else
+	// 	print_sockaddr_in(*((struct sockaddr_in *)&info));
+//FSTAT
+	struct stat buf;
+	if (fstat(fd, &buf) < 0)
+		return ret_error("FSTAT ERROR");
+	print_fd(buf);
 //LISTEN
 	if (listen(fd, BACKLOG) < 0)
 		return ret_error("LISTEN ERROR");
@@ -74,16 +84,21 @@ for (int i = 0; i < 12; ++i)
 	int new_fd = accept(fd, (struct sockaddr *) &their_addr, (socklen_t *)&sin_size);
 	if (new_fd < 0)
 		return ret_error("ACCEPT ERROR");
-
-///////////////////////////////////////////////////////
 //SEND WELCOME_MESSAGE TO THE CLIENT
 	char message[] = "|----------------------|\n|Sei connesso al server|\n|----------------------|";
 	send(new_fd, message, strlen(message), 0);
 //READ WELCOME_MESSAGE FROM THE CLIENT
-	char buffer[1024]; 
-	read(new_fd, buffer, 1024);
+	char buffer[BUFFER_SIZE]; 
+	read(new_fd, buffer, BUFFER_SIZE);
 	std::cout << buffer << std::endl;
-///////////////////////////////////////////////////////
-
+//READ SOMETHING FROM THE CLIENT
+	int r;
+	while ((r = read(new_fd, buffer, BUFFER_SIZE)) > 0)
+	{
+		buffer[r] = '\0';
+		write(1, buffer, strlen(buffer));
+	}
+	close(new_fd);
+	close(fd);	
 	return 0;
 }
