@@ -16,7 +16,7 @@ RM			=	rm -rf
 
 
 $(NAME)	:	$(OBJS) $(INC)
-			@$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
+			@$(CXX) $(CXXFLAGS) -I . -o $(NAME) $(OBJS)
 
 server	:	$(NAME)
 
@@ -37,7 +37,7 @@ run		:	re
 			@./$(NAME)
 
 %.o		:	%.cpp
-			@$(CXX) $(CXXFLAGS) -c $<
+			@$(CXX) $(CXXFLAGS) -I . -c $<
 
 clean	:
 			@rm -f server	
