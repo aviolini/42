@@ -42,6 +42,14 @@
 //FSTAT
 #include <sys/stat.h>
 
+//FCNTL
+#include <fcntl.h>
+
+//SELECT
+#include <sys/types.h>
+#include <sys/select.h>
+#include <sys/time.h>
+
 int ret_error(std::string s, int err = errno);
 void print_sockaddr_in (struct sockaddr_in my_addr);
 void print_addrinfo (struct addrinfo hints);

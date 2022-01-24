@@ -1,10 +1,5 @@
-//#include <fcntl.h>
-//int fcntl(int fd, int cmd, ... /* arg */ );
-//#include <unistd.h>
-//off_t lseek(int fd, off_t offset, int whence);
 
-#include <unistd.h>
-#include "utils.hpp"
+#include <utils.hpp>
 
 #define MYPORT 3490
 #define BACKLOG 3
@@ -40,6 +35,9 @@ for (int i = 0; i < 12; ++i)
 		return ret_error("SOCKET_FD ERROR");
 	else
 		std::cout << "SOCKET_FD: " << fd << std::endl;
+//FCNTL
+	// if (fcntl(fd, F_SETFL, O_NONBLOCK) < 0)
+	// 	return ret_error("FCNTL ERROR");
 //SOCKADDR_IN
 	struct sockaddr_in my_addr;
 	my_addr.sin_family = AF_INET;
@@ -78,12 +76,23 @@ for (int i = 0; i < 12; ++i)
 //LISTEN
 	if (listen(fd, BACKLOG) < 0)
 		return ret_error("LISTEN ERROR");
+	// std::cout << "SELECT" << std::endl;
 //ACCEPT
 	struct sockaddr_in their_addr; // informazioni sull’indirizzo di chi si connette
 	int sin_size = sizeof(their_addr);
 	int new_fd = accept(fd, (struct sockaddr *) &their_addr, (socklen_t *)&sin_size);
 	if (new_fd < 0)
 		return ret_error("ACCEPT ERROR");
+// //SELECT
+// 	struct timeval tv;
+// 	tv.tv_sec = 2;
+// 	tv.tv_usec = 500000;
+// 	fd_set readfds;
+// 	FD_ZERO(&readfds);
+// 	FD_SET(fd, &readfds);
+// 	int nfd = 2;
+// 	if ((nfd = select(nfd + 1, &readfds, NULL,NULL,NULL)) < 0)
+// 		return ret_error("SELECT ERROR");
 //SEND WELCOME_MESSAGE TO THE CLIENT
 	char message[] = "|----------------------|\n|Sei connesso al server|\n|----------------------|";
 	send(new_fd, message, strlen(message), 0);

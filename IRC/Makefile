@@ -20,6 +20,10 @@ $(NAME)	:	$(OBJS) $(INC)
 
 server	:	$(NAME)
 
+server1	:	#SIMPLE ONLY-LISTEN-SERVER
+			@$(CXX) $(CXXFLAGS) -I . ./tests/server1.cpp utils.cpp -o server1
+			./server1
+
 rmclient:
 			@rm -f client
 
@@ -38,6 +42,7 @@ run		:	re
 clean	:
 			@rm -f server	
 			@rm -f client
+			@rm -f server?	
 			@$(RM) $(OBJS)
 
 fclean	:	clean
