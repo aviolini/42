@@ -51,10 +51,10 @@ int main()
 	// else
 	// 	print_sockaddr_in(*((struct sockaddr_in *)&info));
 //FSTAT
-	struct stat buf;
-	if (fstat(fd, &buf) < 0)
-		return ret_error("FSTAT ERROR");
-	print_fd(buf);
+	// struct stat buf;
+	// if (fstat(fd, &buf) < 0)
+	// 	return ret_error("FSTAT ERROR");
+	// print_fd(buf);
 //LISTEN
 	if (listen(fd, BACKLOG) < 0)
 		return ret_error("LISTEN ERROR");
@@ -106,10 +106,13 @@ int main()
 							std::cout << "connessione chiusa" << std::endl;
 						close(i);
 						FD_CLR(i, &master);
+						return 0;
 					}
 					else
 					{
-
+						std::cout << "CLIENT: " << buffer;
+						memset(buffer,'\0',BUFFER_SIZE);
+						(void)j;
 						// for (j = 0; j <= fdmax; ++j)
 						// {
 						// 	if (FD_ISSET(j, &master))
@@ -118,8 +121,6 @@ int main()
 						// 				return ret_error("SEND ERROR");
 						// }
 					}
-					std::cout << "SERVER_message: " << buffer << std::endl; 
-					(void)j;
 				}
 			}
 		}

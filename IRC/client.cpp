@@ -22,21 +22,23 @@ int main(void)
 	if (connect(sockfd, (struct sockaddr *)&dest_addr, sizeof dest_addr) < 0)
 		return ret_error("CONNECT ERROR");
 //READ WELCOME_MESSAGE FROM THE SERVER
-	char buffer[BUFFER_SIZE]; 
-	read(sockfd, buffer, BUFFER_SIZE);
-	std::cout << buffer << std::endl;
+	char buffer[BUFFER_SIZE];
+	// read(sockfd, buffer, BUFFER_SIZE);
+	// std::cout << buffer << std::endl;
 //SEND WELCOME_MESSAGE TO THE SERVER
-	char message[] = "|----------------------|\n|Sei connesso al client|\n|----------------------|";
-	send(sockfd, message, strlen(message), 0);
+	// char message[] = "|----------------------|\n|Sei connesso al client|\n|----------------------|";
+	// send(sockfd, message, strlen(message), 0);
 	write(1, "SCRIVI QUALCOSA AL SERVER\n", 26);
 //SEND SOMETHING TO THE SERVER
 	int r;
-	while ((r = read(0, buffer, 1024)) > 0)
+	while ((r = read(0, buffer, BUFFER_SIZE)) > 0)
 	{
 		buffer[r] = '\0';
 		write(sockfd, buffer, strlen(buffer));
 	}
 	write(1, "CHIUSURA CONNESSIONE\n", 21);
+	if (send(sockfd,"CIAO",4,0) < 0)
+		return ret_error("SEND ERROR");
 	write(sockfd, "CHIUSURA CONNESSIONE\n", 21);
 	close(sockfd);
 
