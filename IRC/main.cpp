@@ -6,6 +6,7 @@
 #define HOST "127.0.0.1"
 #define BUFFER_SIZE 256
 
+
 int main()
 {
 
@@ -30,7 +31,7 @@ int main()
 	///////////////////////////////////////////
 	memset(servaddr.sin_zero, '\0', sizeof servaddr.sin_zero);
 	socklen_t servaddrsize = sizeof(servaddr);
-	print_sockaddr_in(servaddr);
+	print_sockaddr_in(&servaddr);
 //SETSOCKOPT
 	int yes = 1;
 	if (setsockopt(fd,SOL_SOCKET,SO_REUSEADDR,&yes,sizeof(int)))
@@ -39,22 +40,37 @@ int main()
 	if (bind(fd, (struct sockaddr *)&servaddr, servaddrsize ))
 		return ret_error("BIND ERROR");
 //GETADDRINFO
-// struct addrinfo hints;
-// if (getaddrinfo(HOST, 0, &hints, 0) < 0)
-// 	return ret_error("ADDR INFO");
-// print_addrinfo(hints);
+	struct addrinfo hints;
+	memset(&hints, '\0', sizeof hints);
+	struct addrinfo *res;
+
+	int ret;
+	if ((ret = getaddrinfo(HOST, 0, &hints, &res)) < 0)
+	{
+		std::cout << gai_strerror(ret) << std::endl;
+		exit(1);
+	}
+	struct addrinfo *temp = res;
+	int x = 0;
+	while (temp)
+	{
+		std::cout << "RES: " << x++ << std::endl;
+		print_addrinfo(temp);
+		temp = temp->ai_next;
+	}
 //GETSOCKNAME
-	// struct sockaddr info;
-	// socklen_t s;
-	// if (getsockname(fd, &info, &s) < 0)
-	// 	return ret_error("GET SOCK NAME ERROR");
-	// else
-	// 	print_sockaddr_in(*((struct sockaddr_in *)&info));
+	struct sockaddr info;
+	memset(&info, '\0', sizeof info);
+	socklen_t s;
+	if (getsockname(fd, &info, &s) < 0)
+		return ret_error("GET SOCK NAME ERROR");
+	else
+		print_sockaddr_in(((struct sockaddr_in *)&info));
 //FSTAT
-	// struct stat buf;
-	// if (fstat(fd, &buf) < 0)
-	// 	return ret_error("FSTAT ERROR");
-	// print_fd(buf);
+	struct stat buf;
+	if (fstat(fd, &buf) < 0)
+		return ret_error("FSTAT ERROR");
+	print_fd(buf);
 //LISTEN
 	if (listen(fd, BACKLOG) < 0)
 		return ret_error("LISTEN ERROR");
