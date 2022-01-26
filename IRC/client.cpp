@@ -1,6 +1,6 @@
 #include "utils.hpp"
 
-#define DEST_IP "127.0.0.1"
+#define DEST_IP "172.16.0.2"
 #define DEST_PORT 3490
 #define BUFFER_SIZE 1024
 
@@ -17,7 +17,7 @@ int main(void)
 	dest_addr.sin_port = htons(DEST_PORT);
 	dest_addr.sin_addr.s_addr = inet_addr(DEST_IP);
 	memset(dest_addr.sin_zero, '\0', sizeof dest_addr.sin_zero);
-	print_sockaddr_in(dest_addr);
+//print_sockaddr_in(dest_addr);
 //CONNECT
 	if (connect(sockfd, (struct sockaddr *)&dest_addr, sizeof dest_addr) < 0)
 		return ret_error("CONNECT ERROR");
@@ -37,9 +37,9 @@ int main(void)
 		write(sockfd, buffer, strlen(buffer));
 	}
 	write(1, "CHIUSURA CONNESSIONE\n", 21);
-	if (send(sockfd,"CIAO",4,0) < 0)
+	if (send(sockfd, "CHIUSURA CONNESSIONE\n", 21,0) < 0)
 		return ret_error("SEND ERROR");
-	write(sockfd, "CHIUSURA CONNESSIONE\n", 21);
+	// write(sockfd, "CHIUSURA CONNESSIONE\n", 21);
 	close(sockfd);
 
 	return 0;

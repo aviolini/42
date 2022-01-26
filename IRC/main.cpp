@@ -18,8 +18,8 @@ int main()
 	else
 		std::cout << "SOCKET_FD: " << fd << std::endl;
 //FCNTL
-	// if (fcntl(fd, F_SETFL, O_NONBLOCK) < 0)
-	// 	return ret_error("FCNTL ERROR");
+	if (fcntl(fd, F_SETFL, O_NONBLOCK) < 0)
+		return ret_error("FCNTL ERROR");
 //SOCKADDR_IN
 	struct sockaddr_in servaddr;
 	servaddr.sin_family = AF_INET;
@@ -36,12 +36,15 @@ int main()
 	int yes = 1;
 	if (setsockopt(fd,SOL_SOCKET,SO_REUSEADDR,&yes,sizeof(int)))
 		return ret_error("SETSOCKOPT ERROR");
+	
 //BIND
 	if (bind(fd, (struct sockaddr *)&servaddr, servaddrsize ))
 		return ret_error("BIND ERROR");
+/*
 //GETADDRINFO
 	struct addrinfo hints;
 	memset(&hints, '\0', sizeof hints);
+	// hints.ai_protocol = 132;
 	struct addrinfo *res;
 
 	int ret;
@@ -71,6 +74,7 @@ int main()
 	if (fstat(fd, &buf) < 0)
 		return ret_error("FSTAT ERROR");
 	print_fd(buf);
+*/
 //LISTEN
 	if (listen(fd, BACKLOG) < 0)
 		return ret_error("LISTEN ERROR");
@@ -103,7 +107,7 @@ int main()
 						return ret_error("ACCEPT ERROR");
 					else
 					{
-						std::cout << "HERE" << std::endl;
+						std::cout << "connesso a: " << inet_ntoa(cliaddr.sin_addr) << std::endl;
 						FD_SET(newfd, &master);
 						if (newfd > fdmax)
 							fdmax = newfd;
@@ -120,7 +124,7 @@ int main()
 							return ret_error("RECV ERROR");
 						if (nbytes == 0)
 							std::cout << "connessione chiusa" << std::endl;
-						close(i);
+						// close(i);
 						FD_CLR(i, &master);
 						return 0;
 					}
@@ -143,7 +147,7 @@ int main()
 
 	}
 
-
+/*
 //ACCEPT
 	// int new_fd = accept(fd, (struct sockaddr *) &their_addr, (socklen_t *)&sin_size);
 	// if (new_fd < 0)
@@ -174,5 +178,6 @@ int main()
 // 	}
 // 	close(new_fd);
 // 	close(fd);	
+*/
 	return 0;
 }
