@@ -98,7 +98,7 @@ int main()
 			return ret_error("SELECT ERROR");
 		for (i = 0; i <= fdmax; ++i)
 		{
-			if (FD_ISSET(i, &read_fds)) // C'E' UN FILE DESRCIPTOR PRONTO PER LA LETTURA
+			if (FD_ISSET(i, &read_fds))
 			{
 				if (i == fd)
 				{
@@ -133,13 +133,13 @@ int main()
 						std::cout << "CLIENT: " << buffer;
 						memset(buffer,'\0',BUFFER_SIZE);
 						(void)j;
-						// for (j = 0; j <= fdmax; ++j)
-						// {
-						// 	if (FD_ISSET(j, &master))
-						// 		if (j != fd && j != i)
-						// 			if (send(j,buffer,nbytes,0) < 0)
-						// 				return ret_error("SEND ERROR");
-						// }
+						for (j = 0; j <= fdmax; ++j)
+						{
+							if (FD_ISSET(j, &master))
+								if (j != fd && j != i)
+									if (send(j,buffer,nbytes,0) < 0)
+										return ret_error("SEND ERROR");
+						}
 					}
 				}
 			}
