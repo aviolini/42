@@ -40,11 +40,10 @@ int main()
 //BIND
 	if (bind(fd, (struct sockaddr *)&servaddr, servaddrsize ))
 		return ret_error("BIND ERROR");
-/*
 //GETADDRINFO
 	struct addrinfo hints;
 	memset(&hints, '\0', sizeof hints);
-	// hints.ai_protocol = 132;
+	hints.ai_protocol = 132;
 	struct addrinfo *res;
 
 	int ret;
@@ -61,6 +60,7 @@ int main()
 		print_addrinfo(temp);
 		temp = temp->ai_next;
 	}
+/*
 //GETSOCKNAME
 	struct sockaddr info;
 	memset(&info, '\0', sizeof info);
@@ -131,8 +131,8 @@ int main()
 					else
 					{
 						std::cout << "CLIENT: " << buffer;
-						memset(buffer,'\0',BUFFER_SIZE);
-						(void)j;
+						// memset(buffer,'\0',BUFFER_SIZE);
+						// (void)j;
 						for (j = 0; j <= fdmax; ++j)
 						{
 							if (FD_ISSET(j, &master))
