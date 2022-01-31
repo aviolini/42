@@ -3,13 +3,13 @@ D		=	docker
 DC		=	$(D)-compose
 
 help	:	test
-			@printf "\nmake\n"
-			@printf "  up\n"
-			@printf "  down\n"
-			@printf "  status\n"
-			@printf "  clean\n"
-			@printf "  fclean\n"
-			@printf "  atts attc1 attc2..\n"
+			@printf "make ─┐\n"
+			@printf "      ├─up\n"
+			@printf "      ├─down\n"
+			@printf "      ├─status\n"
+			@printf "      ├─clean\n"
+			@printf "      ├─fclean\n"
+			@printf "      └─atts attc1 attc2..\n"
 
 up		:	down
 			$(DC) up -d --build --force
@@ -52,7 +52,7 @@ attc4	:
 			$(DC) exec client4 /bin/bash
 
 test	:
-			pidof dockerd >/dev/null 2>&1 &&\
+			@pidof dockerd >/dev/null 2>&1 &&\
 			$(D) version >/dev/null 2>&1 &&\
 			$(DC) version >/dev/null 2>&1 ||\
 			( printf "Install docker, \
