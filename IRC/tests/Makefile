@@ -9,6 +9,7 @@ help		:
 				@printf "make ─┐\n"
 				@printf "      ├─servSimple	-> simple server-client communication\n"
 				@printf "      ├─servSelect	-> server multiclient communication with 'select'\n"
+				@printf "      ├─servPoll	-> server multiclient communication with 'poll'\n"
 				@printf "      └─client		-> client example (nc is better)\n"
 
 
@@ -19,6 +20,10 @@ servSimple	:
 servSelect	:
 				@rm -f serverWithSelect
 				@$(CXX) $(CXXFLAGS) serverWithSelect.cpp utils.cpp -o serverWithSelect
+
+servPoll	:
+				@rm -f serverWithPoll
+				@$(CXX) $(CXXFLAGS) serverWithPoll.cpp utils.cpp -o serverWithPoll
 
 client		:
 				@rm -rf client

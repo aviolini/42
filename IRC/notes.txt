@@ -18,3 +18,5 @@ rfc1459	IRC updated by
 	-> rfc2813 Server protocol
 	-> rfc7194 Default port
 
+$netstat -ant -> per vedere i socket
+$tcpdump src 192.168.1.141 or dst 192.168.1.141 -N -t -> per selezionare e stampare i pacchetti

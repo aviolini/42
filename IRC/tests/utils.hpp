@@ -45,13 +45,24 @@
 //FCNTL
 #include <fcntl.h>
 
+//EXIT
+#include <stdlib.h>
+
 //SELECT
 #include <sys/types.h>
 #include <sys/select.h>
 #include <sys/time.h>
 
-//EXIT
-#include <stdlib.h>
+//POLL
+#include <poll.h> //int poll(struct pollfd *fds, nfds_t nfds, int timeout);
+/*
+struct pollfd {
+        int   fd;         // file descriptor
+        short events;     // requested events
+        short revents;    // returned events
+    };
+*/
+
 
 int ret_error(std::string s, int err = errno);
 void print_sockaddr_in (struct sockaddr_in *my_addr);
