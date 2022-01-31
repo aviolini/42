@@ -1,14 +1,23 @@
 
-#include <utils.hpp>
+#include "utils.hpp"
 
-#define MYPORT 3490
+// #define MYPORT 3490
 #define BACKLOG 3
 #define BUFFER_SIZE 1024
 #define HOST "127.0.0.1"
 
-int main()
+int main(int ac, char **av)
 {
 
+	short myport;
+	if (ac != 2)
+	{
+		myport = 6667;
+		std::cout << "Default port number: " << myport << std::endl;
+	}
+	else
+		myport = atoi(av[1]);
+	
 /*
 
 //GET PROTO BY NAME
@@ -44,11 +53,11 @@ for (int i = 0; i < 12; ++i)
 	///////////////////////////////////////////
 	// my_addr.sin_port = htons(0); 					// sceglie una porta a caso non in uso
 	my_addr.sin_addr.s_addr = htonl(INADDR_ANY); 	// usa il mio indirizzo IP
-	my_addr.sin_port = htons(MYPORT);
+	my_addr.sin_port = htons(myport);
 	// my_addr.sin_addr.s_addr = inet_addr("0.0.0.0");
 	///////////////////////////////////////////
 	memset(my_addr.sin_zero, '\0', sizeof my_addr.sin_zero);
-	print_sockaddr_in(my_addr);
+	print_sockaddr_in(&my_addr);
 //SETSOCKOPT
 	int yes = 1;
 	if (setsockopt(fd,SOL_SOCKET,SO_REUSEADDR,&yes,sizeof(int)))

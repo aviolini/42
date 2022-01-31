@@ -1,15 +1,22 @@
 
 #include "utils.hpp"
 
-#define MYPORT 3490
+// #define MYPORT 3490
 #define BACKLOG 3
 #define HOST "127.0.0.1"
 #define BUFFER_SIZE 256
 
 
-int main()
+int main(int ac, char **av)
 {
-
+	short myport;
+	if (ac != 2)
+	{
+		myport = 6667;
+		std::cout << "Default port number: " << myport << std::endl;
+	}
+	else
+		myport = atoi(av[1]);
 //SOCKET
 	std::cout << "-------APERTURA SOCKET-----" << std::endl;
 	int fd = socket(PF_INET, SOCK_STREAM, 0);
@@ -26,7 +33,7 @@ int main()
 	///////////////////////////////////////////
 	// servaddr.sin_port = htons(0); 					// sceglie una porta a caso non in uso
 	servaddr.sin_addr.s_addr = htonl(INADDR_ANY); 	// usa il mio indirizzo IP
-	servaddr.sin_port = htons(MYPORT);
+	servaddr.sin_port = htons(myport);
 	// servaddr.sin_addr.s_addr = inet_addr("0.0.0.0");
 	///////////////////////////////////////////
 	memset(servaddr.sin_zero, '\0', sizeof servaddr.sin_zero);
@@ -105,14 +112,10 @@ int main()
 					cliaddrsize = sizeof cliaddr;
 					if ((newfd = accept(fd, (struct sockaddr *)&cliaddr, &cliaddrsize)) < 0)
 						return ret_error("ACCEPT ERROR");
-					else
-					{
-						std::cout << "connesso a: " << inet_ntoa(cliaddr.sin_addr) << std::endl;
-						FD_SET(newfd, &master);
-						if (newfd > fdmax)
-							fdmax = newfd;
-						//NUOVA CONNESSIONE
-					}
+					std::cout << "connesso a: " << inet_ntoa(cliaddr.sin_addr) << std::endl;
+					FD_SET(newfd, &master);
+					if (newfd > fdmax)
+						fdmax = newfd;
 				}
 				else
 				{
@@ -124,22 +127,17 @@ int main()
 							return ret_error("RECV ERROR");
 						if (nbytes == 0)
 							std::cout << "connessione chiusa" << std::endl;
-						// close(i);
+						close(i);
 						FD_CLR(i, &master);
 						return 0;
 					}
-					else
+					std::cout << "CLIENT: " << buffer;
+					for (j = 0; j <= fdmax; ++j)
 					{
-						std::cout << "CLIENT: " << buffer;
-						// memset(buffer,'\0',BUFFER_SIZE);
-						// (void)j;
-						for (j = 0; j <= fdmax; ++j)
-						{
-							if (FD_ISSET(j, &master))
-								if (j != fd && j != i)
-									if (send(j,buffer,nbytes,0) < 0)
-										return ret_error("SEND ERROR");
-						}
+						if (FD_ISSET(j, &master))
+							if (j != fd && j != i)
+								if (send(j,buffer,nbytes,0) < 0)
+									return ret_error("SEND ERROR");
 					}
 				}
 			}
