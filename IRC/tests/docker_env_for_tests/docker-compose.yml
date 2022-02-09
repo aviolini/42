@@ -61,7 +61,7 @@ services:
 
 networks:
   irc-net:
-    name: lemp-net
+    name: irc-net
     driver: bridge
     ipam:
      config:
@@ -73,5 +73,5 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /SHARED/IRC
+      device: /root/SHARED/42/IRC
     name: srcs_data

@@ -3,6 +3,7 @@ CXX			=	clang++
 
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
+
 RM			=	rm -rf
 
 help		:
@@ -16,14 +17,20 @@ help		:
 servSimple	:
 				@rm -f serverSimple
 				@$(CXX) $(CXXFLAGS) serverSimple.cpp utils.cpp -o serverSimple		
+				./serverSimple
 
 servSelect	:
 				@rm -f serverWithSelect
 				@$(CXX) $(CXXFLAGS) serverWithSelect.cpp utils.cpp -o serverWithSelect
+# ./ServerWithSelect
 
 servPoll	:
 				@rm -f serverWithPoll
 				@$(CXX) $(CXXFLAGS) serverWithPoll.cpp utils.cpp -o serverWithPoll
+				./serverWithPoll
+
+run			:	servSelect
+				./ServerWithSelect
 
 client		:
 				@rm -rf client

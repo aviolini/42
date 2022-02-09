@@ -4,9 +4,9 @@ RUN echo 'echo -n "$ROLE: " && hostname -I' >> ~/.bashrc
 RUN echo "cd /srcs" >> ~/.bashrc
 
 FROM builder as server_target
-RUN echo "alias server='make -C /srcs run'" >> ~/.bashrc
+RUN echo "alias server='make -C /srcs/tests run'" >> ~/.bashrc
 
 FROM builder as client_target
 RUN apt-get install -y netcat
-RUN echo "alias client='nc server 3490'" >> ~/.bashrc
+RUN echo "alias client='nc server 6667'" >> ~/.bashrc
 
