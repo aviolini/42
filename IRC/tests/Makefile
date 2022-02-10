@@ -8,29 +8,28 @@ RM			=	rm -rf
 
 help		:
 				@printf "make ─┐\n"
-				@printf "      ├─servSimple	-> simple server-client communication\n"
-				@printf "      ├─servSelect	-> server multiclient communication with 'select'\n"
-				@printf "      ├─servPoll	-> server multiclient communication with 'poll'\n"
-				@printf "      └─client		-> client example (nc is better)\n"
+				@printf "      ├─servSimple   -> simple server-client communication\n"
+				@printf "      ├─serverSelect -> server multiclient communication with 'select'\n"
+				@printf "      ├─serverPoll   -> server multiclient communication with 'poll'\n"
+				@printf "      ├─client       -> client example (nc is better)\n"
+				@printf "      └─clean        -> remove binaries\n"
 
-
-servSimple	:
+serverSimple	:
 				@rm -f serverSimple
 				@$(CXX) $(CXXFLAGS) serverSimple.cpp utils.cpp -o serverSimple		
 				./serverSimple
 
-servSelect	:
-				@rm -f serverWithSelect
-				@$(CXX) $(CXXFLAGS) serverWithSelect.cpp utils.cpp -o serverWithSelect
-# ./ServerWithSelect
+serverSelect	:
+				@rm -f serverSelect
+				@$(CXX) $(CXXFLAGS) serverSelect.cpp utils.cpp -o serverSelect
 
-servPoll	:
-				@rm -f serverWithPoll
-				@$(CXX) $(CXXFLAGS) serverWithPoll.cpp utils.cpp -o serverWithPoll
-				./serverWithPoll
+serverPoll	:
+				@rm -f serverPoll
+				@$(CXX) $(CXXFLAGS) serverPoll.cpp utils.cpp -o serverPoll
+				./serverPoll
 
-run			:	servSelect
-				./ServerWithSelect
+run			:	serverSelect
+				./serverSelect
 
 client		:
 				@rm -rf client
@@ -38,7 +37,8 @@ client		:
 
 clean	:
 			@rm -f serverSimple
-			@rm -f serverWithSelect	
+			@rm -f serverSelect	
+			@rm -f serverPoll	
 			@rm -f client
 
 fclean	:	clean
