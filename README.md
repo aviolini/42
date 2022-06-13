@@ -1,6 +1,6 @@
 # 42
 
-[![jaeskim's 42 stats](https://badge42.herokuapp.com/api/stats/aviolini)](https://github.com/JaeSeoKim/badge42)
+This is a collection of my 42-school-projects 
 
 https://en.wikipedia.org/wiki/42_(school)
 
