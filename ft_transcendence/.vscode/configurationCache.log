@@ -1,0 +1,1 @@
+{"buildTargets":["all","all%","clean","close_database","fclean","re","reload","show_database","start","stop","up","up-f"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
