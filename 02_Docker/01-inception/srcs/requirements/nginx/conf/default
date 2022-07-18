@@ -1,0 +1,24 @@
+# Default server configuration
+server {
+	# SSL configuration
+	listen 443 ssl default_server;															#ADDING SETTING
+	
+	ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+	ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+
+	root /var/www/html;
+	index index.html wordpress/index.php index.php;
+
+	server_name nginx_selfsigned;
+
+	location / {
+		autoindex on;
+		try_files $uri $uri/ =404;
+	}
+
+	# pass PHP scripts to FastCGI server
+	location ~ \.php$ {																		#ADDING SETTING
+		include snippets/fastcgi-php.conf;													#ADDING SETTING
+		fastcgi_pass php-fpm:9000;															#ADDING SETTING
+	}
+}

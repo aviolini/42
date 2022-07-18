@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+if [[ "$1" == "off" ]]; then
+    sed -i 's/autoindex\ on/autoindex\ off/g' /etc/nginx/sites-available/default
+	service nginx restart
+else if [[ "$1" == "on" ]]; then 
+    sed -i 's/autoindex\ off/autoindex\ on/g' /etc/nginx/sites-available/default
+	service nginx restart
+else 
+	echo "Non hai inserito l'opzione on o off"
+fi
+fi

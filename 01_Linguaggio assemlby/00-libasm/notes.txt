@@ -1,0 +1,157 @@
+MANDATORY PART COMPLETATA (6/6)
+BONUS PART DA COMPLETARE (2/5)
+
+SYSCALL:
+
+LINUX	:	write   1
+LINUX	:	read    0
+MAC		:	write   0x2000004
+MAC		:	read    0x2000003
+MAC		:	exit    0x2000001
+
+INFO:
+-Differenze tra Linux e Mac:
+--Codici syscalls 
+--Underscorr nella dichiarazione del nome nelle funzioni in Mac 
+--comportamento nella gestione error della syscall 
+--Per l'utilizzo della funzione printf in Linux aggiungere nella compilazione dopo gcc -no-pie
+--Per non avere un segfault con la funzione printf provare a fare un push rbp all'inizio del programma/funzione
+
+JMP
+https://jbwyatt.com/253/emu/asm_tutorial_07.html
+
+https://stackoverflow.com/questions/63188810/debugging-nasm-in-vs-code
+
+COMPILAZIONE MAC:
+//  nasm -fmacho64 ft_strlen.s && gcc main.c ft_strlen.o && ./a.out 
+//nasm -fmacho64 ft_strlen.s &&  nasm -fmacho64 ft_strcpy.s && gcc main.c ft_strcpy.o ft_strlen.o && ./a.out   
+
+COMPILAZIONE LINUX:
+//nasm -f elf64 ft_strlen.s && nasm -f elf64 ft_strcpy.s && gcc ft_strlen.o ft_strcpy.o main.c && ./a.out
+//nasm -f elf64 ft_strlen.s && nasm -f elf64 ft_strcpy2.s && nasm -f elf64 ft_strcmp.s && nasm -f elf64 ft_write.s && gcc -Wall -Wextra -Werror -lc -no-pie *.o main.c && ./a.out 
+
+MALLOC:
+//https://stackoverflow.com/questions/20510132/what-exactly-does-malloc-do-in-assembly
+//mov edi, 40; malloc's first (and only) parameter: number of bytes to allocate
+//extern malloc
+//call malloc
+//; on return, rax points to our newly-allocated memory
+//mov ecx,7; set up a constant
+//mov [rax],ecx; write it into memory
+//mov edx,[rax]; read it back from memory
+//mov eax,edx; copy into return value register
+//ret
+
+
+.ret_error:
+	mov		rdi, rax			; tmp = ret
+	neg		rdi					; tmp = -tmp (invert value for positive errno)
+	call	__errno_location	; ret = &errno (get pointer to errno)
+	mov		[rax], rdi			; *ret = tmp (put return value into errno)
+	mov		rax, -1				; ret = -1
+	ret							; return (ret)
+
+SUBJECT BONUS:
+
+C04
+Exercise 05 : ft_atoi_base
+Exercise 05
+Turn-in directory : ex05/
+Files to turn in : ft_atoi_base.c
+Allowed functions : None
+ft_atoi_base
+• Write a function that converts the initial portion of the string pointed by str to int
+representation.
+• str is in a specific base given as a second parameter.
+• excepted the base rule, the function should work exactly like ft_atoi.
+• If there’s an invalid argument, the function should return 0. Examples of invalid
+arguments :
+◦ base is empty or size of 1;
+◦ base contains the same character twice ;
+◦ base contains + or - or whitespaces;
+• Here’s how it should be prototyped :
+int
+ ft_atoi_base(char *str, char *base);
+
+
+Exercise 03 : ft_atoi
+Turn-in directory : ex03/
+Files to turn in : ft_atoi.c
+Allowed functions : None
+Exercise 03
+ft_atoi
+• Write a function that converts the initial portion of the string pointed by str to its int
+representation
+• The string can start with an arbitray amount of white space (as determined by isspace(3))
+• The string can be followed by an arbitrary amount of + and - signs, - sign will change
+the sign of the int returned based on the number of - is odd or even.
+• Finally the string can be followed by any numbers of the base 10.
+• Your function should read the string until the string stop following the rules and return
+the number found until now.
+• You should not take care of overflow or underflow. result can be undefined in that case.
+• Here’s an example of a program that prints the atoi return value:
+$>./a.out "
+ ---+--+1234ab567"
+-1234
+• Here’s how it should be prototyped :
+int
+ ft_atoi(char *str);
+
+
+C12
+//////////////////////////////////////////////////////////////////////////////////
+Exercice 01 : ft_list_push_front
+Exercise 01
+ft_list_push_front
+Turn-in directory : ex01/
+Files to turn in : ft_list_push_front.c, ft_list.h
+Allowed functions : ft_create_elem
+• Create the function ft_list_push_front which adds a new element of type t_list
+to the beginning of the list.
+• It should assign data to the given argument.
+• If necessary, it’ll update the pointer at the beginning of the list.
+• Here’s how it should be prototyped :
+void
+ ft_list_push_front(t_list **begin_list, void *data);
+///////////////////////////////////////////////////////////////////////////////////
+Exercice 02 : ft_list_size
+Exercise 02
+ft_list_size
+Turn-in directory : ex02/
+Files to turn in : ft_list_size.c, ft_list.h
+Allowed functions : None
+• Create the function ft_list_size which returns the number of elements in the
+list.
+• Here’s how it should be prototyped :
+int ft_list_size(t_list *begin_list);
+////////////////////////////////////////////////////////////////////////////////////
+Exercice 12 : ft_list_remove_if
+Exercise 12
+ft_list_remove_if
+Turn-in directory : ex12/
+Files to turn in : ft_list_remove_if.c, ft_list.h
+Allowed functions : free
+• Create the function ft_list_remove_if which erases off the list all elements whose
+data compared to data_ref with cmp makes cmp to return 0.
+• The data from an element that should be erase, should be freed using free_fct
+• Here’s how it should be prototyped :
+void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
+• Function pointed by cmp and by free_fct will be used as follows :
+(*cmp)(list_ptr->data, data_ref);
+(*free_fct)(list_ptr->data);
+////////////////////////////////////////////////////////////////////////////////////
+Exercice 14 : ft_list_sort
+Exercise 14
+ft_list_sort
+Turn-in directory : ex14/
+Files to turn in : ft_list_sort.c, ft_list.h
+Allowed functions : None
+• Create the function ft_list_sort which sorts the list’s elements by ascending order
+by comparing two elements by comparing their data with a function.
+• Here’s how it should be prototyped :
+void ft_list_sort(t_list **begin_list, int (*cmp)());
+• Function pointed by cmp will be used as follows :
+(*cmp)(list_ptr->data, list_other_ptr->data);
+cmp could be for instance ft_strcmp.
+
+
